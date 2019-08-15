@@ -1,12 +1,93 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const userCollection = require('../controllers/userController');
+const tripCollection = require('../controllers/tripController');
 
 // This file empties the Books collection and inserts the books below
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
+  "mongodb://localhost/switchbak"
 );
+
+
+
+const hostelSeed = [
+    {
+        title: "Zion",
+        location: [-113.0263,37.2982]
+    }
+];
+const tripSeed = [
+    {
+        startDest: [-113.0263,37.2982], 
+        endDest: [-118.5551,36.8879]
+    }
+];
+const userSeed = [
+    {
+        user: {
+            firstName: "James",
+            lastName: "Cutler",
+            email: "jamescutler1111@gmail.com"
+        },
+        hostels: hostelSeed[0],
+        trip: tripSeed[0]
+    }
+];
+
+// const user = new db.User({
+//     firstName: "Jamish",
+//     lastName: "Butler",
+//     email: "jcutlah@gmail.com"
+// });
+// user.save(err => {
+//     console.log('user saved');
+//     if (err) console.error(err);
+//     const trip1 = new db.Trip({
+//         user: user._id
+//     });
+//     trip1.save(err => {
+//         if (err);
+//     })
+// });
+
+db.Hostel
+    .remove({})
+    .then(() => db.Hostel.collection.insertMany(hostelSeed))
+    .then(data => {
+        console.log(data.result);
+        console.log(data.result.length + " hostels inserted");
+        process.exit(0);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });
+
+
+userSeed.forEach(user => {
+    db.User
+        .remove({})
+        .then(() => {
+            userCollection.addUser(user.user, function(response){
+                console.log(response);
+                console.log('meep');
+                tripCollection.addTrip(response._id, user.trip, function(res){
+                    console.log(res);
+                })
+            })
+        })
+        // .then(data => {
+        //     console.log(data);
+
+        //     process.exit(0);
+        // })
+        .catch(err => {
+            console.error(err);
+            process.exit(1);
+        });
+})
 
 const bookSeed = [
   {
@@ -123,14 +204,14 @@ const bookSeed = [
   }
 ];
 
-db.Book
-  .remove({})
-  .then(() => db.Book.collection.insertMany(bookSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+// db.Book
+//   .remove({})
+//   .then(() => db.Book.collection.insertMany(bookSeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });

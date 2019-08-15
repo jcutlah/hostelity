@@ -8,27 +8,25 @@ const tripSchema = new Schema({
             ref: 'Hostel' 
         }
     ],
+    user: {
+        type: String
+    },
+    // destinations: {
+    //     type: {
+    //         type: String, 
+    //         enum: ['MultiPoint'],
+    //         required: true
+    //     },
+    //     coordinates: {
+    //         type: [[Number, Number]],
+    //         required: true
+    //     }
+    // },
     startDest: {
-        type: {
-            type: String, 
-            enum: ['Point'],
-            required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
+        type: [[Number, Number]]
     },
     endDest: {
-        type: {
-            type: String, 
-            enum: ['Point'],
-            required: true
-        },
-        coordinates: {
-            type: [Number],
-            required: true
-        }
+        type: [Number, Number]
     },
     dateAdded: { 
         type: Date, 

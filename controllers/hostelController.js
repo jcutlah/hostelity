@@ -23,6 +23,16 @@ const orm = {
             if (err) console.error(err);
         })
     },
+    getHostel: function(id, callback){
+        console.log(`getting hostel with id ${id}`);
+        db.Hostel.findOne({_id:id})
+        .then(function(hostel){
+            callback(hostel);
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    },
     associateHostelToTrip: function(tripId, hostelId, callback) {
         console.log(`associating hostel w/ id ${hostelId} to trip w/ id ${tripId}`);
         db.Trip.findOneAndUpdate({

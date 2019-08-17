@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const userCollection = require('../controllers/userController');
-const tripCollection = require('../controllers/tripController');
-const hostelCollection = require('../controllers/hostelController');
+const userController = require('../controllers/userController');
+const tripController = require('../controllers/tripController');
+const hostelController = require('../controllers/hostelController');
 
 // This file empties the Books collection and inserts the books below
 
@@ -87,18 +87,18 @@ db.Hostel
                     .then(() => {
                         console.log('users removed')
                         seedData.forEach(seed => {
-                            userCollection.addUser(seed.user, function(response){
+                            userController.addUser(seed.user, function(response){
                                 // console.log(response);
                                 console.log('meep');
-                                tripCollection.addTrip(response._id, seed.trip, function(res){
+                                tripController.addTrip(response._id, seed.trip, function(res){
                                     console.log('derp');
                                     console.log(res);
-                                    tripCollection.associateTripToUser(response._id, res._id, function(user){
+                                    tripController.associateTripToUser(response._id, res._id, function(user){
                                         console.log('trip associated: ');
                                         console.log(user);
-                                        hostelCollection.addHostel(res._id, seed.hostels, function(newHostel){
+                                        hostelController.addHostel(res._id, seed.hostels, function(newHostel){
                                             console.log(newHostel);
-                                            hostelCollection.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                            hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
                                                 console.log(trip);
                                             })
                                             

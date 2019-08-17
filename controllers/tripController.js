@@ -22,7 +22,31 @@ const orm = {
         .then(function(user){
             callback(user);
         })
+    },
+    getAllTrips: function(callback){
+        console.log(`getAllTrips()`);
+        db.User.find({})
+        .then(function(users){
+            console.log('found users');
+            callback(users)
+        })
+        .catch(function(err){
+            console.log(err);
+        });
+    },
+    getTrips: function(userId, callback) {
+        console.log(`getTrips() for userId ${userId}`);
+        db.User.findOne({_id: userId})
+        .populate('trips')
+        .then(function(user){
+            // console.log(user);
+            callback(user)
+        })
+        .catch(function(err){
+            console.log(err);
+        });
     }
-};
+}
+
 
 module.exports = orm;

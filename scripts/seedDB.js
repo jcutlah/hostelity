@@ -93,18 +93,19 @@ db.Hostel
                                 tripCollection.addTrip(response._id, seed.trip, function(res){
                                     console.log('derp');
                                     console.log(res);
-                                    tripCollection.associateTripToUser(response._id, res._id, function(res){
+                                    tripCollection.associateTripToUser(response._id, res._id, function(user){
                                         console.log('trip associated: ');
-                                        console.log(res);
-                                    })
-                                    hostelCollection.addHostel(res._id, seed.hostels, function(res){
-                                        console.log(res);
-
-                                        process.exit(0);
+                                        console.log(user);
+                                        hostelCollection.addHostel(res._id, seed.hostels, function(newHostel){
+                                            console.log(newHostel);
+                                            hostelCollection.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                                console.log(trip);
+                                            })
+                                            
+                                        })
                                     })
                                 })
-                            })
-                            
+                            }) 
                         });
                     })
                     .catch(err => console.log(err));

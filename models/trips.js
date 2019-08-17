@@ -8,9 +8,6 @@ const tripSchema = new Schema({
             ref: 'Hostel' 
         }
     ],
-    user: {
-        type: String
-    },
     // destinations: {
     //     type: {
     //         type: String, 
@@ -23,7 +20,7 @@ const tripSchema = new Schema({
     //     }
     // },
     startDest: {
-        type: [[Number, Number]]
+        type: [Number, Number]
     },
     endDest: {
         type: [Number, Number]

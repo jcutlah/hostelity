@@ -90,8 +90,8 @@ db.Hostel
                     .then(() => {
                         console.log('users removed')
                         seedData.forEach(seed => {
-                            userController.addUser(seed.user, function(response){
-                                // console.log(response);
+                            userController.addUser(seed.user, function(err, response){
+                                console.log(response);
                                 console.log('meep');
                                 tripController.addTrip(response._id, seed.trip, function(res){
                                     console.log('derp');

@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn() {
+export default function Signup() {
     const classes = useStyles();
 
     return (
@@ -69,11 +69,30 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
+                        id="firstname"
+                        label="First Name"
+                        name="firstname"
+                        autoComplete="firstname"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="lastname"
+                        label="Last Name"
+                        name="lastname"
+                        autoComplete="lastname"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
                         id="email"
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus
                     />
                     <TextField
                         variant="outlined"
@@ -86,10 +105,6 @@ export default function SignIn() {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
                     <Button
                         type="submit"
                         fullWidth
@@ -97,17 +112,17 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Create Account
           </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
-              </Link>
-                        </Grid>
+                            </Link>
+                        </Grid> */}
                         <Grid item>
-                            <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Link href="/login" variant="body2">
+                                {"Back to login page"}
                             </Link>
                         </Grid>
                     </Grid>

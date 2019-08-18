@@ -16,11 +16,13 @@ router.route('/signup')
   .post(function(req, res){
       console.log(`request received`);
       console.log(req.body);
-      userController.addUser(req.body,function(err, user){
+      userController.addUser(req.body,function(err, response){
           if (err){
+              console.log(err);
               res.json(err);
           } else {
-              res.json(user);
+              console.log(response);
+              res.json(response);
           }
       })
   })

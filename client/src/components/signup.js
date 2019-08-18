@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,26 +51,34 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const handleFormSubmit = event => {
-    event.preventDefault();
-    console.log(event);
-    const user = {
-        firstName: document.querySelector('#firstname').value,
-        lastName: document.querySelector('#lastname').value,
-        email: document.querySelector('#email').value,
-        password: document.querySelector('#password').value
-    }
-    Axios.post("/api/users/signup", user)
-    .then(function(res){
-        console.log(res.data);
-        window.location = '/';
-    }).catch(function(err){
-        console.log(err);
-    })
-}
 
-export default function Signup() {
+export default function Signup(props) {
     const classes = useStyles();
+    
+    const [firstName, updateFirstName] = useState('');
+    const [lastName, updateLastName] = useState('');
+    const [email, updateEmail] = useState('');
+    const [password, updatePassword] = useState('');
+
+    
+
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(event);
+        const user = {
+            firstName: document.querySelector('#firstname').value,
+            lastName: document.querySelector('#lastname').value,
+            email: document.querySelector('#email').value,
+            password: document.querySelector('#password').value
+        }
+        Axios.post("/api/users/signup", user)
+        .then(function(res){
+            console.log(res.data);
+            window.location = '/';
+        }).catch(function(err){
+            console.log(err);
+        })
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -80,7 +88,7 @@ export default function Signup() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Create New Account
         </Typography>
                 <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
                     <TextField

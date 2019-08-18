@@ -1,12 +1,41 @@
 const db = require('../models/index');
 
 const orm = {
-    addUser: function(user, callback){
+    addUser: function(userInfo, callback){
         console.log('running addUser()');
-        // console.log(user);
-        db.User.create(user, function(err, result){
-            callback(err, result);
-        });
+        console.log(userInfo);
+        // db.User.create(userInfo, function(err, response){
+
+        //     callback(err, response);
+        // });
+        this.getUserByEmail(userInfo.email, function(err, result){
+            // console.log(result);
+            // console.log(err);
+            if (!result){
+                console.log('User not found. Creating user...');
+                db.User.create(userInfo, function(err, response){
+
+                    callback(err, response);
+                });
+            } else {
+                if (err){
+                    console.log(err);
+                } else {
+                    console.log('User found...');
+                    callback(err, {
+                        userExists: true
+                    });
+                }
+            }
+        })
+    },
+    getUserByEmail: function(email, callback){
+        console.log(`getting user with email ${email}`);
+        db.User.findOne({email:email}, function(err, user){
+            console.log(err);
+            console.log(user);
+            callback(err, user);
+        })
     },
     getUser: function(id, callback){
         console.log(`getting user with id ${id}`);

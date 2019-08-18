@@ -13,15 +13,20 @@ mongoose.connect(
   );
 
 // get user by id
-userController.getUser("5d57ea23f3d50274d42a3cde", function(user){
-    console.log(user);
+userController.getUser("5d57ea23f3d50274d42a3cde", function(err, user){
+    console.log('getting user');
+    if (err) {
+        console.log(err)
+    } else {
+        console.log(user);
+    }
 })
 
 // hostelController.getHostel('')
 
 // get all users and find the trips associated with each
 userController.getAllUsers(function(users){
-    console.log(users);
+    // console.log(users);
 
     users.map(user => {
         console.log(user._id);

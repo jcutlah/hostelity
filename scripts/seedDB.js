@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const userCollection = require('../controllers/userController');
-const tripCollection = require('../controllers/tripController');
+const userController = require('../controllers/userController');
+const tripController = require('../controllers/tripController');
+const hostelController = require('../controllers/hostelController');
 
 // This file empties the Books collection and inserts the books below
 
@@ -9,14 +10,33 @@ mongoose.connect(
   process.env.MONGODB_URI ||
   "mongodb://localhost/switchbak"
 );
-
-
+mongoose.set(
+    'useFindAndModify', false
+);
 
 const hostelSeed = [
     {
         title: "Zion",
-        location: [-113.0263,37.2982]
-    }
+        location: {
+            type: "Point",
+            coordinates: [-113.0263,37.2982]
+        }
+    },
+    {
+        title: "Meeps",
+        location: {
+            type: "Point",
+            coordinates: [-114.0263,37.2982]
+        }
+    },
+    {
+        title: "Smeep",
+        location: {
+            type: "Point",
+            coordinates: [-110.0263,37.2982]
+        }
+    },
+    
 ];
 const tripSeed = [
     {
@@ -24,7 +44,7 @@ const tripSeed = [
         endDest: [-118.5551,36.8879]
     }
 ];
-const userSeed = [
+const seedData = [
     {
         user: {
             firstName: "James",
@@ -33,61 +53,70 @@ const userSeed = [
         },
         hostels: hostelSeed[0],
         trip: tripSeed[0]
+    },
+    {
+        user: {
+            firstName: "James",
+            lastName: "Morisson",
+            email: "totesmcgotes@gmail.com"
+        },
+        hostels: hostelSeed[1],
+        trip: tripSeed[0]
+    },
+    {
+        user: {
+            firstName: "Ryan",
+            lastName: "Creveling",
+            email: "yupyeahguy@gmail.com"
+        },
+        hostels: hostelSeed[2],
+        trip: tripSeed[0]
     }
 ];
 
-// const user = new db.User({
-//     firstName: "Jamish",
-//     lastName: "Butler",
-//     email: "jcutlah@gmail.com"
-// });
-// user.save(err => {
-//     console.log('user saved');
-//     if (err) console.error(err);
-//     const trip1 = new db.Trip({
-//         user: user._id
-//     });
-//     trip1.save(err => {
-//         if (err);
-//     })
-// });
-
 db.Hostel
     .remove({})
-    .then(() => db.Hostel.collection.insertMany(hostelSeed))
-    .then(data => {
-        console.log(data.result);
-        console.log(data.result.length + " hostels inserted");
-        process.exit(0);
+    .then(() => {
+        console.log('hostels removed')
+        db.Trip
+            .remove({})
+            .then(() => {
+                console.log('trips removed')
+                db.User
+                    .remove({})
+                    .then(() => {
+                        console.log('users removed')
+                        seedData.forEach(seed => {
+                            userController.addUser(seed.user, function(response){
+                                // console.log(response);
+                                console.log('meep');
+                                tripController.addTrip(response._id, seed.trip, function(res){
+                                    console.log('derp');
+                                    console.log(res);
+                                    tripController.associateTripToUser(response._id, res._id, function(user){
+                                        console.log('trip associated: ');
+                                        console.log(user);
+                                        hostelController.addHostel(res._id, seed.hostels, function(newHostel){
+                                            console.log(newHostel);
+                                            hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                                console.log(trip);
+                                            })
+                                            
+                                        })
+                                    })
+                                })
+                            }) 
+                        });
+                    })
+                    .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+        
     })
     .catch(err => {
         console.error(err);
-        process.exit(1);
     });
 
-
-userSeed.forEach(user => {
-    db.User
-        .remove({})
-        .then(() => {
-            userCollection.addUser(user.user, function(response){
-                console.log(response);
-                console.log('meep');
-                tripCollection.addTrip(response._id, user.trip, function(res){
-                    console.log(res);
-                })
-            })
-        })
-        // .then(data => {
-        //     console.log(data);
-
-        //     process.exit(0);
-        // })
-        .catch(err => {
-            console.error(err);
-            process.exit(1);
-        });
-})
 
 const bookSeed = [
   {
@@ -203,6 +232,7 @@ const bookSeed = [
     date: new Date(Date.now())
   }
 ];
+
 
 // db.Book
 //   .remove({})

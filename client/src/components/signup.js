@@ -60,16 +60,28 @@ export default function Signup(props) {
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
 
-    
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        switch (name) {
+            case 'firstname': updateFirstName(value);
+            break;
+            case 'lastname': updateLastName(value);
+            break;
+            case 'email': updateEmail(value);
+            break;
+            case 'password': updatePassword(value);
+            break;
+        }
+      };
 
     const handleFormSubmit = event => {
         event.preventDefault();
         console.log(event);
         const user = {
-            firstName: document.querySelector('#firstname').value,
-            lastName: document.querySelector('#lastname').value,
-            email: document.querySelector('#email').value,
-            password: document.querySelector('#password').value
+            firstName,
+            lastName,
+            email,
+            password
         }
         Axios.post("/api/users/signup", user)
         .then(function(res){
@@ -100,6 +112,7 @@ export default function Signup(props) {
                         label="First Name"
                         name="firstname"
                         autoComplete="firstname"
+                        onChange={handleInputChange}
                     />
                     <TextField
                         variant="outlined"
@@ -110,6 +123,7 @@ export default function Signup(props) {
                         label="Last Name"
                         name="lastname"
                         autoComplete="lastname"
+                        onChange={handleInputChange}
                     />
                     <TextField
                         variant="outlined"
@@ -120,6 +134,7 @@ export default function Signup(props) {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
+                        onChange={handleInputChange}
                     />
                     <TextField
                         variant="outlined"
@@ -131,6 +146,7 @@ export default function Signup(props) {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={handleInputChange}
                     />
                     <Button
                         type="submit"

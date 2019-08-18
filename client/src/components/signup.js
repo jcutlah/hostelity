@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
 
 function Copyright() {
     return (
@@ -50,6 +51,23 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(event);
+    const user = {
+        firstName: document.querySelector('#firstname').value,
+        lastName: document.querySelector('#lastname').value,
+        email: document.querySelector('#email').value,
+        password: document.querySelector('#password').value
+    }
+    Axios.post("/api/users/signup", user)
+    .then(function(res){
+        console.log(res.data);
+    }).catch(function(err){
+        console.log(err);
+    })
+}
+
 export default function Signup() {
     const classes = useStyles();
 
@@ -63,7 +81,7 @@ export default function Signup() {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"

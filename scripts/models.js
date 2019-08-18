@@ -12,15 +12,23 @@ mongoose.connect(
       'useFindAndModify', false
   );
 
-tripController.getAllTrips(function(users){
-    // console.log(users);
+// get user by id
+userController.getUser("5d57ea23f3d50274d42a3cde", function(user){
+    console.log(user);
+})
+
+// hostelController.getHostel('')
+
+// get all users and find the trips associated with each
+userController.getAllUsers(function(users){
+    console.log(users);
 
     users.map(user => {
         console.log(user._id);
-        tripController.getTrips(user._id, function(userInfo){
-            console.log(userInfo);
+        tripController.getTripsForUser(user._id, function(tripInfo){
+            console.log(tripInfo);
         });
-        process.exit(0);
+        // process.exit(0);
     })
 });
 

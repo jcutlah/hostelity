@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Detail from "./pages/Detail";
 // import NoMatch from "./pages/NoMatch";
 // import Nav from "./components/Nav";
-import Login from './components/login'
-import Map from './components/map'
+import Login from './components/login';
+import Map from './components/map';
+import Signup from './components/signup';
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/signup" component={Signup} />
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           {/* <Route component={NoMatch} /> */}
         </Switch>

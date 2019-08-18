@@ -63,6 +63,7 @@ const handleFormSubmit = event => {
     Axios.post("/api/users/signup", user)
     .then(function(res){
         console.log(res.data);
+        window.location = '/';
     }).catch(function(err){
         console.log(err);
     })

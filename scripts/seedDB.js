@@ -49,7 +49,8 @@ const seedData = [
         user: {
             firstName: "James",
             lastName: "Cutler",
-            email: "jamescutler1111@gmail.com"
+            email: "jamescutler1111@gmail.com",
+            password: "bingbongbing"
         },
         hostels: hostelSeed[0],
         trip: tripSeed[0]
@@ -58,7 +59,8 @@ const seedData = [
         user: {
             firstName: "James",
             lastName: "Morisson",
-            email: "totesmcgotes@gmail.com"
+            email: "totesmcgotes@gmail.com",
+            password: "laughablyinsecure"
         },
         hostels: hostelSeed[1],
         trip: tripSeed[0]
@@ -67,7 +69,8 @@ const seedData = [
         user: {
             firstName: "Ryan",
             lastName: "Creveling",
-            email: "yupyeahguy@gmail.com"
+            email: "yupyeahguy@gmail.com",
+            password: "definitelynotsecure"
         },
         hostels: hostelSeed[2],
         trip: tripSeed[0]

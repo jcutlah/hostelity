@@ -4,13 +4,7 @@ const orm = {
     addUser: function(userInfo, callback){
         console.log('running addUser()');
         console.log(userInfo);
-        // db.User.create(userInfo, function(err, response){
-
-        //     callback(err, response);
-        // });
         this.getUserByEmail(userInfo.email, function(err, result){
-            // console.log(result);
-            // console.log(err);
             if (!result){
                 console.log('User not found. Creating user...');
                 db.User.create(userInfo, function(err, response){

@@ -5,14 +5,13 @@ const strategy = require('./localStrategy');
 passport.serializeUser(function(user, cb) {
     console.log(user);
     console.log('user logged in meep schmeep');
-    cb(null, {
-        id: user._id,
-        loggedIn: true
-    });
+    cb(null, user._id);
 });
     
-passport.deserializeUser(function(id, cb) {
-    db.users.findById(id, function (err, user) {
+passport.deserializeUser(function(user, cb) {
+    console.log(`deserializing user:`);
+    console.log(user);
+    db.User.findById(user, function (err, user) {
         if (err) { return cb(err); }
         cb(null, user);
     });

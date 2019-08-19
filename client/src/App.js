@@ -7,12 +7,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './components/login';
 import Map from './components/map';
 import Signup from './components/signup';
-import Home from './components/Home';
+import Home from './components/dashboard/Home';
+import Navbar from './components/layout/Navbar';
+import "./css/style.css";
 
 function App() {
   return (
     <Router>
       <div>
+
+      <Navbar />
 
         <Switch>
           <Route exact path="/login" component={Login} />

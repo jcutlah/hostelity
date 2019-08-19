@@ -8,6 +8,7 @@ const session = require('express-session');
 
 
 // Define middleware here
+// app.use(require('connect-flash'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({

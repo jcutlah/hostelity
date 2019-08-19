@@ -77,8 +77,29 @@ export default function SignIn() {
         Axios.post("/api/users/login", user)
         .then(function(res){
             console.log(res.data);
-            window.location = '/';
+            // window.location = '/';
         }).catch(function(err){
+            console.log(err);
+        })
+    }
+
+    const getUserInfo = (event) => {
+        event.preventDefault();
+        Axios.get('/api/users')
+        .then(function(res){
+            console.log(res);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+    const logOut = event => {
+        event.preventDefault();
+        Axios.get('api/users/logout')
+        .then(function(res){
+            console.log(res);
+        })
+        .catch(function(err){
             console.log(err);
         })
     }
@@ -144,6 +165,14 @@ export default function SignIn() {
                         </Grid>
                     </Grid>
                 </form>
+            </div>
+            <div>
+                <Link onClick={getUserInfo}href="#">
+                    Test Some Shit
+                </Link>
+                <Link onClick={logOut}href="#">
+                    Log Out
+                </Link>
             </div>
             <Box mt={8}>
                 <Copyright />

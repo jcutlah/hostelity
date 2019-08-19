@@ -4,8 +4,11 @@ const strategy = require('./localStrategy');
 
 passport.serializeUser(function(user, cb) {
     console.log(user);
-    console.log('user meep schmeep');
-    cb(null, user.id);
+    console.log('user logged in meep schmeep');
+    cb(null, {
+        id: user._id,
+        loggedIn: true
+    });
 });
     
 passport.deserializeUser(function(id, cb) {

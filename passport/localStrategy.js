@@ -7,6 +7,7 @@ const localStrategy = new Strategy(
         passwordField: 'password'
     },
     function(username, password, cb) {
+        console.log('local strategy happening!');
       userController.getUserByEmail(username, function(err, user) {
         if (err) { 
             return cb(err); 
@@ -15,6 +16,7 @@ const localStrategy = new Strategy(
             return cb(null, false); 
         }
         if (user.password != password) { 
+            console.log(`password don't match`);
             return cb(null, false); 
         }
         return cb(null, user);

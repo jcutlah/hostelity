@@ -29,6 +29,8 @@ router.route('/signup')
   })
 router.route('/login')
   .post(passport.authenticate('local'), function(req, res) {
+      console.log(`'login request received for:'`);
+      console.log(req.body);
       res.json(req.user.email);
     });
 

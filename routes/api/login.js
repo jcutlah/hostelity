@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
+const passport = require('../../passport');;
 
 // Matches with "/api/hostels"
 router.route("/users")
@@ -26,6 +27,10 @@ router.route('/signup')
           }
       })
   })
+router.route('/login')
+  .post(passport.authenticate('local'), function(req, res) {
+      res.json(req.user.email);
+    });
 
 
 module.exports = router;

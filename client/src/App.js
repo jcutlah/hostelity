@@ -10,6 +10,7 @@ import Signup from './components/signup';
 import Home from './components/dashboard/Home';
 import Navbar from './components/layout/Navbar';
 import "./css/style.css";
+import searchModal from "./components/subcomponent/searchModal";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/map" component={Map} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/searchModal" component={searchModal} />
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           {/* <Route component={NoMatch} /> */}
         </Switch>

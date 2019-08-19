@@ -5,6 +5,8 @@ const orm = {
         console.log('running addUser()');
         console.log(userInfo);
         this.getUserByEmail(userInfo.email, function(err, result){
+            console.log(err);
+            console.log(result);
             if (!result){
                 console.log('User not found. Creating user...');
                 db.User.create(userInfo, function(err, response){

@@ -60,7 +60,7 @@ const seedData = [
             firstName: "James",
             lastName: "Morisson",
             email: "totesmcgotes@gmail.com",
-            password: "laughablyinsecure"
+            password: "passwordinsecure"
         },
         hostels: hostelSeed[1],
         trip: tripSeed[0]
@@ -70,7 +70,7 @@ const seedData = [
             firstName: "Ryan",
             lastName: "Creveling",
             email: "yupyeahguy@gmail.com",
-            password: "definitelynotsecure"
+            password: "hackthisaccount"
         },
         hostels: hostelSeed[2],
         trip: tripSeed[0]

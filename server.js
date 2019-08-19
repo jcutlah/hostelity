@@ -4,30 +4,20 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
-const userController = require('./controllers/userController');
-
-
-// passport.use(new Strategy(
-//     {
-//         usernameField: 'email',
-//         passwordField: 'password'
-//     },
-//     function(username, password, cb) {
-//       userController.getUser(username, function(err, user) {
-//         if (err) { return cb(err); }
-//         if (!user) { return cb(null, false); }
-//         if (user.password != password) { return cb(null, false); }
-//         return cb(null, user);
-//       });
-//     }));
+const session = require('express-session');
 
 
 // Define middleware here
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(require('connect-flash'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+    secret: 'dunbar-dunbar-and-bunwich',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

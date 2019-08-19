@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
 
 function Copyright() {
     return (
@@ -53,6 +54,56 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
     const classes = useStyles();
 
+    const [email, updateEmail] = useState('');
+    const [password, updatePassword] = useState('');
+
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        switch (name) {
+            case 'email': updateEmail(value);
+            break;
+            case 'password': updatePassword(value);
+            break;
+        }
+      };
+
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(event);
+        const user = {
+            email,
+            password
+        }
+        Axios.post("/api/users/login", user)
+        .then(function(res){
+            console.log(res.data);
+            // window.location = '/';
+        }).catch(function(err){
+            console.log(err);
+        })
+    }
+
+    const getUserInfo = (event) => {
+        event.preventDefault();
+        Axios.get('/api/users')
+        .then(function(res){
+            console.log(res);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+    const logOut = event => {
+        event.preventDefault();
+        Axios.get('api/users/logout')
+        .then(function(res){
+            console.log(res);
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -63,7 +114,7 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Sign in
         </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -74,6 +125,7 @@ export default function SignIn() {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={handleInputChange}
                     />
                     <TextField
                         variant="outlined"
@@ -85,11 +137,12 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={handleInputChange}
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
-                    />
+                    /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -112,6 +165,14 @@ export default function SignIn() {
                         </Grid>
                     </Grid>
                 </form>
+            </div>
+            <div>
+                <Link onClick={getUserInfo}href="#">
+                    Test Some Shit
+                </Link>
+                <Link onClick={logOut}href="#">
+                    Log Out
+                </Link>
             </div>
             <Box mt={8}>
                 <Copyright />

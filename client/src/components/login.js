@@ -164,15 +164,27 @@ export default function SignIn() {
                             </Link>
                         </Grid>
                     </Grid>
+                    <Grid container>
+                        <Grid item>
+                            <Link onClick={getUserInfo}href="#" variant="body2">
+                                {"Test Some Shit"}
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link onClick={logOut}href="#" variant="body2">
+                                {"Log Out"}
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link href="/my-path" variant="body2">
+                                {"My Path"}
+                            </Link>
+                        </Grid>
+
+                    </Grid>
                 </form>
             </div>
             <div>
-                <Link onClick={getUserInfo}href="#">
-                    Test Some Shit
-                </Link>
-                <Link onClick={logOut}href="#">
-                    Log Out
-                </Link>
             </div>
             <Box mt={8}>
                 <Copyright />

@@ -14,7 +14,7 @@ router.route("/")
         console.log('user not logged in?');
     }
 
-      res.json({fuck:"off"});
+      res.json(req.session);
   })
 //   .post(userController.addUser);
 

@@ -1,23 +1,40 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Notifications from './Notifications';
 import Trips from './Trips';
+import Axios from 'axios';
 
-class Home extends Component {
-    render() {
-        return (
-           <div className="dashboard container">
-               <div className="row">
-                   <div className="col s12 m6">
-                        <Trips />
-                       <div className="col s12 m5.offset-m1">
-                            <Notifications />
-                       </div>
-                   </div>
-               </div>
-           </div>
-
-        );
+const Home = (props) => {
+    const [trips, setTrips] = useState([]);
+    console.log(`Home component w/ user id ${props.userId}`);
+    const getTrips = (userId) => {
+        if (!trips.length){
+            Axios.get(`/api/trips/${userId}`)
+            .then(response => {
+                console.log(response.data);
+                setTrips(response.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
+    getTrips(props.userId);
+    return (
+        <div className="dashboard container">
+            <div className="row">
+                <div className="col s12 m6">
+                    <Trips 
+                        trips={trips}
+                    />
+                    <div className="col s12 m5.offset-m1">
+                        <Notifications />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    );
 }
+
 
 export default Home;

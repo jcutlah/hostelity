@@ -40,6 +40,7 @@ const hostelSeed = [
 ];
 const tripSeed = [
     {
+        name: "My Stupid Fucking Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     }

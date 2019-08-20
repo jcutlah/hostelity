@@ -13,11 +13,13 @@ import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import SearchBox from './subcomponent/mapsSearch'
 import handleApiLoaded from '../utils/gmAPI'
+import Button from '@material-ui/core/Button';
+
 require("dotenv").config()
 // const google = window.google;
 
 const GMAPKEY = process.env.GMAPS_KEY
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const Marker = ({ text }) => <div>{text}</div>;
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -34,10 +36,10 @@ const useStyles = makeStyles(theme => ({
     },
     extendedIcon: {
         marginRight: theme.spacing(1),
-      },
-      darkDivider: {
-          backgroundColor: 'rgba(0,0,0,0.5)'
-      }
+    },
+    darkDivider: {
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    }
 }));
 function Map(props) {
     const defaultview = {
@@ -56,43 +58,44 @@ function Map(props) {
     });
     /* TxtField*/
     const [values, setValues] = React.useState({
-      name: 'Cat in the Hat',
-      age: '',
-      multiline: 'Controlled',
-      currency: 'EUR',
+        name: 'Cat in the Hat',
+        age: '',
+        multiline: 'Controlled',
+        currency: 'EUR',
     });
-  
+
     const handleChange = name => event => {
-      setValues({ ...values, [name]: event.target.value });
+        setValues({ ...values, [name]: event.target.value });
     };
-    
+
     return (
         // Important! Always set the container height explicitly
         <>
-        <Container fixed className={classes.mapContainer}>
+            <Container fixed className={classes.mapContainer}>
 
-            <div style={{ height: '95vh', width: '100%', marginTop: '3vh', marginBottom: '2vh', float: 'left' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
-                    defaultCenter={defaultview.center}
-                    defaultZoom={defaultview.zoom}
-                    yesIWantToUseGoogleMapApiInternals={true}
-                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+                <div style={{ height: '95vh', width: '100%', marginTop: '3vh', marginBottom: '2vh', float: 'left' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
+                        defaultCenter={defaultview.center}
+                        defaultZoom={defaultview.zoom}
+                        yesIWantToUseGoogleMapApiInternals={true}
+                        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
 
-                >
-                    <AnyReactComponent
-                        lat={69.955413}
-                        lng={30.337844}
-                        text="My Marker"
-                    />
-                </GoogleMapReact>
-            </div>
-            
-        </Container>
-        <div className={classes.searchDiv}>
+                    >
+
+                        <Marker
+                            lat={69.955413}
+                            lng={30.337844}
+                            text="My Marker"
+                        />
+                    </GoogleMapReact>
+                </div>
+
+            </Container>
+            <div className={classes.searchDiv}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
-                    <Divider variant="middle" className={classes.darkDivider}/>
+                    <Divider variant="middle" className={classes.darkDivider} />
 
                     <FormGroup>
 
@@ -114,18 +117,17 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
-                            <FormHelperText>Find your Path!</FormHelperText>
+                        <FormHelperText>Find your Path!</FormHelperText>
 
-                        <br/>
-                       <Fab variant="extended" aria-label="delete" className={classes.fab}>
-        <NavigationIcon className={classes.extendedIcon} />
-        Begin
+                        <br />
+                        <Fab variant="extended" aria-label="delete" className={classes.fab}>
+                            <NavigationIcon className={classes.extendedIcon} />
+                            Begin
       </Fab>
                     </FormGroup>
                 </FormControl>
             </div>
-            <SearchBox></SearchBox>
-            </>
+        </>
     );
 }
 

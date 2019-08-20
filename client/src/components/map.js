@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
-import { mergeClasses } from '@material-ui/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -11,15 +10,13 @@ import TextField from '@material-ui/core/TextField'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
-import SearchBox from './subcomponent/mapsSearch'
 import handleApiLoaded from '../utils/gmAPI'
 import Button from '@material-ui/core/Button';
-
 require("dotenv").config()
 // const google = window.google;
-
-const GMAPKEY = process.env.GMAPS_KEY
+// import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
+const GMAPKEY = process.env.GMAPS_KEY
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,

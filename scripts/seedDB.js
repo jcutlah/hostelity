@@ -40,6 +40,7 @@ const hostelSeed = [
 ];
 const tripSeed = [
     {
+        name: "My Stupid Fucking Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     }
@@ -49,7 +50,8 @@ const seedData = [
         user: {
             firstName: "James",
             lastName: "Cutler",
-            email: "jamescutler1111@gmail.com"
+            email: "jamescutler1111@gmail.com",
+            password: "bingbongbing"
         },
         hostels: hostelSeed[0],
         trip: tripSeed[0]
@@ -58,7 +60,8 @@ const seedData = [
         user: {
             firstName: "James",
             lastName: "Morisson",
-            email: "totesmcgotes@gmail.com"
+            email: "totesmcgotes@gmail.com",
+            password: "passwordinsecure"
         },
         hostels: hostelSeed[1],
         trip: tripSeed[0]
@@ -67,7 +70,8 @@ const seedData = [
         user: {
             firstName: "Ryan",
             lastName: "Creveling",
-            email: "yupyeahguy@gmail.com"
+            email: "yupyeahguy@gmail.com",
+            password: "hackthisaccount"
         },
         hostels: hostelSeed[2],
         trip: tripSeed[0]
@@ -87,8 +91,8 @@ db.Hostel
                     .then(() => {
                         console.log('users removed')
                         seedData.forEach(seed => {
-                            userController.addUser(seed.user, function(response){
-                                // console.log(response);
+                            userController.addUser(seed.user, function(err, response){
+                                console.log(response);
                                 console.log('meep');
                                 tripController.addTrip(response._id, seed.trip, function(res){
                                     console.log('derp');

@@ -51,15 +51,22 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignIn() {
-    const classes = useStyles();
 
+export default function Signup(props) {
+    const classes = useStyles();
+    
+    const [firstName, updateFirstName] = useState('');
+    const [lastName, updateLastName] = useState('');
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
 
     const handleInputChange = event => {
         const { name, value } = event.target;
         switch (name) {
+            case 'firstname': updateFirstName(value);
+            break;
+            case 'lastname': updateLastName(value);
+            break;
             case 'email': updateEmail(value);
             break;
             case 'password': updatePassword(value);
@@ -72,35 +79,16 @@ export default function SignIn() {
         event.preventDefault();
         console.log(event);
         const user = {
+            firstName,
+            lastName,
             email,
             password
         }
-        Axios.post("/api/users/login", user)
+        Axios.post("/api/users/signup", user)
         .then(function(res){
             console.log(res.data);
-            window.location = '/home';
+            window.location = '/';
         }).catch(function(err){
-            console.log(err);
-        })
-    }
-
-    const getUserInfo = (event) => {
-        event.preventDefault();
-        Axios.get('/api/users')
-        .then(function(res){
-            console.log(res);
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-    }
-    const logOut = event => {
-        event.preventDefault();
-        Axios.get('api/users/logout')
-        .then(function(res){
-            console.log(res);
-        })
-        .catch(function(err){
             console.log(err);
         })
     }
@@ -113,9 +101,31 @@ export default function SignIn() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Create New Account
         </Typography>
                 <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="firstname"
+                        label="First Name"
+                        name="firstname"
+                        autoComplete="firstname"
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="lastname"
+                        label="Last Name"
+                        name="lastname"
+                        autoComplete="lastname"
+                        onChange={handleInputChange}
+                    />
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -125,9 +135,7 @@ export default function SignIn() {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus
                         onChange={handleInputChange}
-                        className={"browser-default"}
                     />
                     <TextField
                         variant="outlined"
@@ -141,10 +149,6 @@ export default function SignIn() {
                         autoComplete="current-password"
                         onChange={handleInputChange}
                     />
-                    {/* <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -152,23 +156,21 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
-                    </Button>
+                        Create Account
+          </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
                             </Link>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
-                            <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Link href="/login" variant="body2">
+                                {"Back to login page"}
                             </Link>
                         </Grid>
                     </Grid>
                 </form>
-            </div>
-            <div>
             </div>
             <Box mt={8}>
                 <Copyright />

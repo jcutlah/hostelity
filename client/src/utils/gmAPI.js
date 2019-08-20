@@ -11,8 +11,7 @@ export default
     let Marker = ({ text, lat, lng }) => <div lat={lat} lng={lng}>{text}</div>;
     console.log(maps)
     function placeMarkers() {
-        return (<Marker
-        />)
+        return (<Marker />)
 
     }
     return placeMarkers();

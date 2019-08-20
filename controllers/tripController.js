@@ -23,30 +23,26 @@ const orm = {
             callback(user);
         })
     },
-    getAllTrips: function(callback){
-        console.log(`getAllTrips()`);
-        db.User.find({})
-        .then(function(users){
-            console.log('found users');
-            callback(users)
-        })
-        .catch(function(err){
-            console.log(err);
-        });
-    },
-    getTrips: function(userId, callback) {
+    getTripsForUser: function(userId, callback) {
         console.log(`getTrips() for userId ${userId}`);
         db.User.findOne({_id: userId})
-        .populate('trips')
+        .populate({
+            path: 'trips',
+            model: 'Trip',
+            populate: {
+                path: 'hostels',
+                model: 'Hostel'
+            }
+        })
+        // .populate('trips')
         .then(function(user){
             // console.log(user);
-            callback(user)
+            callback(user.trips)
         })
         .catch(function(err){
             console.log(err);
         });
     }
-}
-
+};
 
 module.exports = orm;

@@ -8,6 +8,7 @@ import Navbar from './components/layout/Navbar';
 import "./css/style.css";
 import SearchModal from "./components/subcomponent/searchModal";
 import Axios from 'axios';
+import NoMatch from './components/noMatch';
 
 function App() {
     // Define hooks (state) variables
@@ -58,7 +59,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/searchModal" component={SearchModal} />
           {/* <Route exact path="/books/:id" component={Detail} /> */}
-          {/* <Route component={NoMatch} /> */}
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>

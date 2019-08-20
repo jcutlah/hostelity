@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Notifications from './Notifications';
 import Trips from './Trips';
 
-class Home extends React.Component {
+class Home extends Component {
     render() {
         return (
            <div className="dashboard container">

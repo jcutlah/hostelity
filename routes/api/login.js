@@ -24,6 +24,7 @@ router.route('/logout')
       console.log("logout request received");
       req.logOut();
       console.log(req.session);
+      res.json(req.session);
   })
 
 // Matches with "/api/users/signup"

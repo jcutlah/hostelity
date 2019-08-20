@@ -14,7 +14,7 @@ router.route("/")
         console.log('user not logged in?');
     }
 
-      res.json({fuck:"off"});
+      res.json(req.session);
   })
 //   .post(userController.addUser);
 
@@ -24,6 +24,7 @@ router.route('/logout')
       console.log("logout request received");
       req.logOut();
       console.log(req.session);
+      res.json(req.session);
   })
 
 // Matches with "/api/users/signup"

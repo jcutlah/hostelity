@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Notifications from './Notifications';
-import Trips from './Trips';
+import Notifications from './dashboard/Notifications';
+import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 
 const Home = (props) => {

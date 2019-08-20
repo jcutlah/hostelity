@@ -153,36 +153,18 @@ export default function SignIn() {
                         className={classes.submit}
                     >
                         Sign In
-          </Button>
+                    </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
                                 Forgot password?
-              </Link>
+                            </Link>
                         </Grid>
                         <Grid item>
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>
-                    </Grid>
-                    <Grid container>
-                        <Grid item>
-                            <Link onClick={getUserInfo}href="#" variant="body2">
-                                {"Test Some Shit"}
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link onClick={logOut}href="#" variant="body2">
-                                {"Log Out"}
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="/my-path" variant="body2">
-                                {"My Path"}
-                            </Link>
-                        </Grid>
-
                     </Grid>
                 </form>
             </div>

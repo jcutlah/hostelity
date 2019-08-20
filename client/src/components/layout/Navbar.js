@@ -38,7 +38,6 @@ const Navbar = (props) => {
                     </ul>
                     :<ul className="right">
                         <li key="signIn"><NavLink to='/login'> Sign in </NavLink> </li>
-                        <li key="signUp"><NavLink to='/signup'> Sign up </NavLink></li>
                     </ul>
                 }
             </div>

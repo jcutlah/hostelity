@@ -28,12 +28,15 @@ function App() {
             .then(response => {
                 console.log(response.data.passport);
                 if (response.data.passport.user){
+                    console.log("setting user ID state");
                     setUserId(response.data.passport.user);
                 }
             })
             .catch(err => {
                 console.log(err);
             })
+        } else {
+            console.log(`User signed in with id ${userId}`);
         }
     }
     isLoggedIn();
@@ -51,7 +54,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
           <Route exact path="/searchModal" component={SearchModal} />
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />

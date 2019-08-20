@@ -78,7 +78,7 @@ export default function SignIn() {
         Axios.post("/api/users/login", user)
         .then(function(res){
             console.log(res.data);
-            window.location = '/';
+            window.location = '/home';
         }).catch(function(err){
             console.log(err);
         })

@@ -13,7 +13,7 @@ import NoMatch from './components/noMatch';
 function App() {
     // Define hooks (state) variables
     const [loggedIn, setLoggedIn] = useState(false);
-    const [userId, setUserId] = useState('');
+    const [userId, setUserId] = useState(null);
     // Define callback 
     const loginCallback = (user) => {
         console.log(`running loginCallback`);
@@ -23,23 +23,18 @@ function App() {
     }
     const isLoggedIn = () => {
         console.log(`Checking if logged in`);
-        Axios.get('/api/users')
-        .then(response => {
-            console.log(response.data.passport);
-            if (response.data.passport.user){
-                setLoggedIn(true);
-                setUserId(response.data.passport.user);
-                loggedIn ? console.log('User logged in') : console.log("user not logged in");
-        console.log(`User id: ${userId}`);
-            } else {
-                setLoggedIn(false);
-                setUserId(''); 
-            }
-            console.log(loggedIn);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        if (!userId){
+            Axios.get('/api/users')
+            .then(response => {
+                console.log(response.data.passport);
+                if (response.data.passport.user){
+                    setUserId(response.data.passport.user);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
     isLoggedIn();
   return (

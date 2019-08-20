@@ -23,14 +23,13 @@ const Navbar = (props) => {
             console.log(err);
         })
     }
-
     return (
         <nav className="nav wrapper grey darken-3">
             <div className="container">
                 <Link to='/' className="brand-logo">
                     switchBak 
                 </Link>
-                { props.isLoggedIn 
+                { props.userId 
                     ?<ul className="right">
                         <li key="home"><NavLink to='/home'> Home </NavLink> </li>
                         <li key="newTrip"><NavLink to='/searchModal'>New Trip</NavLink></li>

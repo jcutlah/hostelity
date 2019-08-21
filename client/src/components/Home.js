@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Trips from './subcomponent/Trips';
 import Axios from 'axios';
+import Profile from './subcomponent/Profile';
 
 const Home = (props) => {
     const [trips, setTrips] = useState([]);
@@ -21,7 +22,8 @@ const Home = (props) => {
     return (
         <div className="dashboard container">
             <div className="row">
-                <div className="col s12 m6">
+                <div className="col s12 m12">
+                    <Profile />
                     <Trips 
                         trips={trips}
                     />
@@ -36,3 +38,5 @@ const Home = (props) => {
 
 
 export default Home;
+
+

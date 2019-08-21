@@ -26,13 +26,14 @@ const Navbar = (props) => {
         <nav className="nav wrapper blue-grey">
             <div className="container">
                 <Link to='/' className="left brand-logo teal-text">
-                    <img src={logo} />
+                    <img src={logo} alt="logo" />
                    
                 </Link>
                 { props.userId 
                     ?<ul className="right">
                         <li key="home"><NavLink to='/home'> Home </NavLink> </li>
                         <li key="newTrip"><NavLink to='/searchModal'>New Trip</NavLink></li>
+                        <li key="myTrips"><NavLink to='/myTrips'>My Trips</NavLink></li>
                         <li key="logOut"><NavLink to='#' onClick={logOut}>Log Out</NavLink></li> 
                         {/* <li key="avatar"><NavLink to='/' className='btn btn-floating orange lighten-1'></NavLink></li> */}
                     </ul>

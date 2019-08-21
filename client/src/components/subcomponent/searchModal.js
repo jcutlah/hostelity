@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 
+
 const display = {
     display: 'block'
   };

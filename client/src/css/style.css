@@ -1,4 +1,28 @@
-.home {
-    font-size: 36px;
+nav {
+    height: 5rem;
+    line-height: 5em;
+}
+
+nav .brand-logo img{ 
+    height: 4rem; 
+}
+
+.BioPic {
+    border-top: 10px solid white;
+    border-bottom: 40px solid white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal {
+    margin-top: 15em;
+}
+
+.modal-content {
+    color: orange;
+}
+
+.MuiInputBase-input {
+ border-bottom: 0px !important;
+ margin: 0px !important;
 }
 

@@ -23,7 +23,6 @@ const Home = (props) => {
         <div className="dashboard container">
             <div className="row">
                 <div className="col s12 m12">
-
                     <Profile />
                     <Trips 
                         trips={trips}

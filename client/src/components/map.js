@@ -12,6 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import handleApiLoaded from '../utils/gmAPI'
 import Button from '@material-ui/core/Button';
+import MapFunctions from '../utils/gmAPI'
 require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -52,17 +53,15 @@ function Map(props) {
         gilad: true,
         jason: false,
         antoine: true,
+        start: '',
+        end: ''
     });
     /* TxtField*/
-    const [values, setValues] = React.useState({
-        name: 'Cat in the Hat',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-    });
 
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
+
+    const handleChange = event => {
+        const { name, value } = event.target;
+        setState({ ...state, [name]: value });
     };
 
     return (
@@ -76,8 +75,8 @@ function Map(props) {
                         defaultCenter={defaultview.center}
                         defaultZoom={defaultview.zoom}
                         yesIWantToUseGoogleMapApiInternals={true}
-                        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-
+                        onGoogleApiLoaded={({ map, maps }) => MapFunctions.handleApiLoaded(map, maps)}
+                        id="myMap"
                     >
 
                         <Marker
@@ -100,8 +99,9 @@ function Map(props) {
                             id="outlined-start"
                             label="Starting Point"
                             className={classes.textField}
-                            value={values.start}
-                            onChange={handleChange('name')}
+                            value={state.start}
+                            name='start'
+                            onChange={handleChange}
                             margin="normal"
                             variant="outlined"
                         />
@@ -109,15 +109,18 @@ function Map(props) {
                             id="outlined-end"
                             label="Final Destination"
                             className={classes.textField}
-                            value={values.end}
-                            onChange={handleChange('name')}
+                            value={state.end}
+                            name='end'
+                            onChange={handleChange}
                             margin="normal"
                             variant="outlined"
                         />
                         <FormHelperText>Find your Path!</FormHelperText>
 
                         <br />
-                        <Fab variant="extended" aria-label="delete" className={classes.fab}>
+                        <Fab onClick={() =>
+                            MapFunctions.handleTripSearch(state.start, state.end)}
+                            variant="extended" aria-label="delete" className={classes.fab}>
                             <NavigationIcon className={classes.extendedIcon} />
                             Begin
       </Fab>

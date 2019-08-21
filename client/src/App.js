@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './components/login';
 import Map from './components/map';
 import Signup from './components/signup';
-import Home from './components/Home';
+import Home from './components/home';
 import Navbar from './components/subcomponent/Navbar';
 import "./css/style.css";
 import SearchModal from "./components/subcomponent/searchModal";
+import myTrips from "./components/myTrips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
 
@@ -56,6 +57,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
           <Route exact path="/searchModal" component={SearchModal} />
+          <Route exact path="/myTrips" component={myTrips} />
           {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />
         </Switch>

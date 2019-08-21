@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Notifications from './dashboard/Notifications';
 import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 
@@ -27,7 +26,6 @@ const Home = (props) => {
                         trips={trips}
                     />
                     <div className="col s12 m5.offset-m1">
-                        <Notifications />
                     </div>
                 </div>
             </div>

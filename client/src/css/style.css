@@ -7,10 +7,25 @@ nav .brand-logo img{
     height: 4rem; 
 }
 
+.Profile {
+    background-image: url("./bench.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0px 0px 3px 3px;
+}
+
 .BioPic {
-    border-top: 10px solid white;
-    border-bottom: 40px solid white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 25px solid white;
+    border-bottom: 25px solid white; 
+    box-shadow: 0 42px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 25px 0 rgb(0, 0, 0);
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 3px;
+}
+
+.userName, .memberSince {
+    font-size: 1.5em;
+    margin-top: 4.5em;
 }
 
 .modal {
@@ -26,3 +41,22 @@ nav .brand-logo img{
  margin: 0px !important;
 }
 
+.myTrip, .trip {
+    padding: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    background: ghostwhite;
+    margin-top: 2%;
+    border-radius: 3px;
+    color: teal;
+}
+
+.myTripContent {
+}
+
+.myTripContent h5 {
+    color: orange;
+}
+.myTripContent h6 {
+    color: teal;
+}

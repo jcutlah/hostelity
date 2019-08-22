@@ -7,8 +7,9 @@ const Trips = (props) => {
             {props.trips.map(trip => {
                 return (
                     <div key={trip._id} className="trip-summary">
-                        <div className="card grey-text-darken-3">
-                            <p className="card-title">{trip.name}</p>
+                        <div className="trip grey-text-darken-3">
+                            <p className="tripTitle">{trip.name}</p>
+                            <div class="divider"></div>
                             <span className="grey-text"> {trip.startDest} </span>
                             <span className="grey-text">{trip.endDest}</span>
                         </div>

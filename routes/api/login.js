@@ -16,8 +16,8 @@ router.route("/")
 
       res.json(req.session);
   })
-// Matches with "/api/users/:id"
-router.route("/:id")
+// Matches with "/api/users/id/:id"
+router.route("/id/:id")
   .get(function(req, res){
       console.log(`get request made to /api/users/:id`);
     //   console.log(res);

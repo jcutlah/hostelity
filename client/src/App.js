@@ -59,7 +59,6 @@ function App() {
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
           <Route exact path="/searchModal" component={SearchModal} />
           <Route exact path="/myTrips" render={(props) => <MyTrips {...props} userId={userId}/>} />
-          {/* <Route exact path="/books/:id" component={Detail} /> */}
           <Route component={NoMatch} />
         </Switch>
       </div>

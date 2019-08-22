@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import Trips from './subcomponent/Trips';
 
 const MyTrips = (props) => {
-    console.log(props.userId);
+    console.log(`MyTrips component w/ user id ${props.userId}`);
     const [user, setUser] = useState(null);
     const getUserData = (userId) => {
         if (!user) {
@@ -17,14 +18,16 @@ const MyTrips = (props) => {
                 })
         }
     }
-    if (!user) {
+    if (props.userId) {
         getUserData(props.userId);
-        return (null);
     }
 
     return (
         <div className="myTrip container">
-            <div className="myTripContent">
+            <Trips 
+                trips={user ? user.trips : []}
+            />
+            {/* <div className="myTripContent">
                 <h5> { JSON.stringify(user) } </h5>
                 <br>
                 </br>
@@ -43,7 +46,7 @@ const MyTrips = (props) => {
                     <h6> Date To: </h6>
                     <p> End date </p>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

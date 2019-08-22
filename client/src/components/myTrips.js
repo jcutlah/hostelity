@@ -10,6 +10,7 @@ const MyTrips = (props) => {
                 .then(response => {
                     console.log(response.data);
                     setUser(response.data);
+
                 })
                 .catch(err => {
                     console.log(err);
@@ -18,12 +19,15 @@ const MyTrips = (props) => {
     }
     if (!user) {
         getUserData(props.userId);
+        return (null);
     }
+
     return (
         <div className="myTrip container">
             <div className="myTripContent">
-                <h5> { user ? user.firstName : "Meep"} </h5>
-                <br></br>
+                <h5> { JSON.stringify(user) } </h5>
+                <br>
+                </br>
             </div>
             <div className="row">
             <div className="divider"> </div>

@@ -7,7 +7,7 @@ import Home from './components/Home';
 import Navbar from './components/subcomponent/Navbar';
 import "./css/style.css";
 import Search from "./components/subcomponent/Search";
-import MyTrips from "./components/myTrips";
+import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
 
@@ -58,7 +58,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/myTrips" render={(props) => <MyTrips {...props} userId={userId}/>} />
+          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId}/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

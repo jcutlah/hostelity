@@ -45,12 +45,12 @@ const tripSeed = [
         endDest: [-118.5551,36.8879]
     },
     {
-        name: "My Stupid Fucking Trip",
+        name: "My Stupid Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     },
     {
-        name: "My Cliche As Fuck Trip",
+        name: "My Cliche Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     }
@@ -70,9 +70,9 @@ const seedData = [
     {
         user: {
             firstName: "James",
-            lastName: "Morisson",
+            lastName: "Morrison",
             email: "totesmcgotes@gmail.com",
-            password: "passwordinsecure",
+            password: "insecure",
             avatar: "https://placebeard.it/300x180"
         },
         hostels: hostelSeed[1],

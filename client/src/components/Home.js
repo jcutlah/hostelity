@@ -29,7 +29,7 @@ const Home = (props) => {
             <Profile
                 user={user ? user : {}}
             />
-                        {/* <Avatar /> */ }
+                        <Avatar /> 
     <div className="row">
         <div className="tripz container">
             <div className="col s12">
@@ -41,7 +41,6 @@ const Home = (props) => {
     </div>
         </div >
     )
-
 }
 
 export default Home;

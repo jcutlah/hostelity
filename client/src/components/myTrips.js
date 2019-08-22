@@ -27,26 +27,6 @@ const MyTrips = (props) => {
             <Trips 
                 trips={user ? user.trips : []}
             />
-            {/* <div className="myTripContent">
-                <h5> { JSON.stringify(user) } </h5>
-                <br>
-                </br>
-            </div>
-            <div className="row">
-            <div className="divider"> </div>
-                <div className="col s4">
-                    <h6> Location: </h6>
-                    <p> Location name w/ link </p>
-                </div>
-                <div className="col s4">
-                    <h6> Date From: </h6>
-                    <p> Start date </p>
-                </div>
-                <div className="col s4">
-                    <h6> Date To: </h6>
-                    <p> End date </p>
-                </div>
-            </div> */}
         </div>
     )
 }

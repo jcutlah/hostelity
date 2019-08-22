@@ -1,3 +1,8 @@
+.body {
+    padding: 0;
+    margin: 0;
+}
+
 nav {
     height: 5rem;
     line-height: 5em;
@@ -14,10 +19,6 @@ nav .brand-logo img{
     border-top: .4rem solid white;
     border-bottom: .4rem solid orange;
     padding: 0;
-}
-
-.tripz {
-    background: gray;
 }
 
 .BioPic {
@@ -54,7 +55,7 @@ nav .brand-logo img{
 }
 
 .modal {
-    margin-top: 15em;
+    margin-top: 10em;
 }
 
 .modal-content {
@@ -70,22 +71,7 @@ nav .brand-logo img{
     padding: 1%;
     margin-left: auto;
     margin-right: auto;
-    background: white;
     margin-top: 2%;
-    border-radius: 3px;
-    color: teal;
+    border-radius: 5px;
+    color: #455A64;
 }
-
-.myTripContent {
-}
-
-.myTripContent h5 {
-    color: orange;
-}
-.myTripContent h6 {
-    color: teal;
-}
-
-/* .container {
-    display: flex;
-} */ 

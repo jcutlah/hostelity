@@ -22,7 +22,7 @@ const Navbar = (props) => {
         })
     }
     return (
-        <nav className="nav wrapper blue-grey">
+        <nav className="nav wrapper blue-grey darken-2">
             <div className="container">
                 <Link to='/home' className="left brand-logo">
                     <img src='/assets/images/switchBakLogo.png' alt="logo" />

@@ -10,8 +10,6 @@ import TextField from '@material-ui/core/TextField'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
-import handleApiLoaded from '../utils/gmAPI'
-import Button from '@material-ui/core/Button';
 import MapFunctions from '../utils/gmAPI'
 require("dotenv").config()
 // const google = window.google;

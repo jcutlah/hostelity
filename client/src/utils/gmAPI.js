@@ -16,13 +16,15 @@ const MapFunctions = {
 
         try {
             var CORSerror = 'https://cors-anywhere.herokuapp.com/'
-            const response = await axios.get(CORSerror + 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + start + end + '&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ', { headers: { 'access-control-allow-origin': true } })
+            const response = await axios.get(CORSerror + 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + start + '&' + end + '&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ', { headers: { 'access-control-allow-origin': true } })
 
             console.log(response)
-            var lat = response.data.lat
-            var lng = response.data.lng
+            var origin = {
+                lat: response.data.results[0].lat,
+                lng: response.data.results[0].lng
+            }
             var request = {
-                location: new google.maps.LatLng(lat, lng),
+                location: new google.maps.LatLng(origin.lat, origin.lng),
                 radius: '50',
                 type: ['lodging']
             };
@@ -53,7 +55,6 @@ const MapFunctions = {
         })
 
         var waypts = [];
-        console.log(start, end)
         var checkboxArray = { options: [start, end] };
         for (var i = 0; i < checkboxArray.length; i++) {
             if (checkboxArray.options[i].selected) {
@@ -61,9 +62,10 @@ const MapFunctions = {
                     location: checkboxArray[i].value,
                     stopover: true
                 });
+                console.log(checkboxArray[i])
+
             }
         }
-
 
         directionsService.route({
             origin: start,

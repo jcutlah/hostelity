@@ -24,24 +24,28 @@ const orm = {
         })
     },
     getTripsForUser: function(userId, callback) {
-        console.log(`getTrips() for userId ${userId}`);
-        db.User.findOne({_id: userId})
-        .populate({
-            path: 'trips',
-            model: 'Trip',
-            populate: {
-                path: 'hostels',
-                model: 'Hostel'
-            }
-        })
-        // .populate('trips')
-        .then(function(user){
-            // console.log(user);
-            callback(user.trips)
-        })
-        .catch(function(err){
-            console.log(err);
-        });
+        if (userId !== "null"){
+            console.log(`getTrips() for userId ${userId}`);
+            db.User.findOne({_id: userId}, "-password")
+            .populate({
+                path: 'trips',
+                model: 'Trip',
+                populate: {
+                    path: 'hostels',
+                    model: 'Hostel'
+                }
+            })
+            // .populate('trips')
+            .then(function(user){
+                // console.log(user);
+                callback(user)
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+        } else {
+            callback({errorMessage: "user id not present"});
+        }
     }
 };
 

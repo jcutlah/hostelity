@@ -17,6 +17,7 @@ require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
+
 const GMAPKEY = process.env.GMAPS_KEY
 const useStyles = makeStyles(theme => ({
     root: {
@@ -118,13 +119,19 @@ function Map(props) {
                         <FormHelperText>Find your Path!</FormHelperText>
 
                         <br />
-                        <Fab onClick={() =>
-                            MapFunctions.handleTripSearch(state.start, state.end)}
+                        <Fab onClick={() => {
+                            MapFunctions.handleTripSearch(state.start, state.end)
+                            MapFunctions.calculateAndDisplayRoute(state.start, state.end)
+                        }
+
+                        }
+
                             variant="extended" aria-label="delete" className={classes.fab}>
                             <NavigationIcon className={classes.extendedIcon} />
                             Begin
       </Fab>
                     </FormGroup>
+                    <div id='directions-panel'></div>
                 </FormControl>
             </div>
         </>

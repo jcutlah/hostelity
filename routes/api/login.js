@@ -16,6 +16,21 @@ router.route("/")
 
       res.json(req.session);
   })
+// Matches with "/api/users/id/:id"
+router.route("/id/:id")
+  .get(function(req, res){
+      console.log(`get request made to /api/users/:id`);
+    //   console.log(res);
+    if (req.isAuthenticated()){
+        userController.getUser(req.params.id, function(err, user){
+            if (err) throw err;
+            res.json(user);
+        })
+    } else {
+        console.log('user not logged in. Denied');
+        res.json({error: "User not logged in"});
+    }
+  })
 //   .post(userController.addUser);
 
 // Matches with "/api/users/logout"

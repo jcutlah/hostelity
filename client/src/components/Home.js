@@ -4,40 +4,34 @@ import Axios from 'axios';
 import Profile from './subcomponent/Profile';
 
 const Home = (props) => {
-    // const [users, setUser] = useState([]);
-    const [trips, setTrips] = useState([]);
+    const [user, setUser] = useState(null);
     console.log(`Home component w/ user id ${props.userId}`);
-    const getTrips = (userId) => {
-        if (!trips.length) {
+    const getUserData = (userId) => {
+        if (!user) {
             Axios.get(`/api/trips/${userId}`)
                 .then(response => {
                     console.log(response.data);
-                    setTrips(response.data);
+                    setUser(response.data);
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
     }
-    // const getUser = (userId) => {
-    //     Axios.get(`/api/users/${userId}`)
-    //         .then(response => {
-    //             console.log(response.data);
-    //             setUser(response.data);
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }
-    // getUser(props.users);
-    getTrips(props.userId);
+    if(props.userId){
+        console.log('user id present, getting trips for this user...');
+        getUserData(props.userId);
+    };
+    console.log(user);
     return (
         <div className="dashboard container">
             <div className="row">
                 <div className="col s12 m12">
-                    <Profile />
+                    <Profile 
+                        user={user ? user : {}} 
+                    />
                     <Trips
-                        trips={trips}
+                        trips={user ? user.trips : []}
                     />
                     <div className="col s12 m5.offset-m1">
                     </div>

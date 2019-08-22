@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from './components/login';
 import Map from './components/map';
 import Signup from './components/signup';
-import Home from './components/home';
+import Home from './components/Home';
 import Navbar from './components/subcomponent/Navbar';
 import "./css/style.css";
 import SearchModal from "./components/subcomponent/searchModal";
-import myTrips from "./components/myTrips";
+import MyTrips from "./components/myTrips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
 
@@ -18,17 +18,18 @@ function App() {
     // Define callback 
     const loginCallback = (user) => {
         console.log(`running loginCallback`);
-        setLoggedIn(user.isLoggedIn);
+        // setLoggedIn(user.isLoggedIn);
         setUserId(user.id);
         
     }
     const isLoggedIn = () => {
         console.log(`Checking if logged in`);
         if (!userId){
+            console.log('No user id present');
             Axios.get('/api/users')
             .then(response => {
                 console.log(response.data.passport);
-                if (response.data.passport.user){
+                if (response.data.passport){
                     console.log("setting user ID state");
                     setUserId(response.data.passport.user);
                 }
@@ -57,8 +58,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
           <Route exact path="/searchModal" component={SearchModal} />
-          <Route exact path="/myTrips" component={myTrips} />
-          {/* <Route exact path="/books/:id" component={Detail} /> */}
+          <Route exact path="/myTrips" render={(props) => <MyTrips {...props} userId={userId}/>} />
           <Route component={NoMatch} />
         </Switch>
       </div>

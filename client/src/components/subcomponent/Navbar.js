@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import logo from './switchBakLogo.png';
 
 const Navbar = (props) => {
     const logOut = event => {
@@ -26,7 +25,7 @@ const Navbar = (props) => {
         <nav className="nav wrapper blue-grey">
             <div className="container">
                 <Link to='/' className="left brand-logo teal-text">
-                    <img src={logo} alt="logo" />
+                    <img src='/assets/images/switchBakLogo.png' alt="logo" />
                    
                 </Link>
                 { props.userId 

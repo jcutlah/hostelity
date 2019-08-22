@@ -8,9 +8,11 @@ const Trips = (props) => {
                 return (
                     <div key={trip._id} className="trip-summary">
                         <div className="trip grey-text-darken-3">
-                            <p className="tripTitle">{trip.name}</p>
+                            <p className="tripTitle orange-text">{trip.name}</p>
                             <div className="divider"></div>
+                            <p> Start: </p>
                             <span className="grey-text"> {trip.startDest} </span>
+                            <p> End: </p>
                             <span className="grey-text">{trip.endDest}</span>
                         </div>
                     </div>

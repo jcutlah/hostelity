@@ -11,22 +11,46 @@ nav .brand-logo img{
     background-image: url("/assets/images/bench.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 0px 0px 3px 3px;
+    border-top: .4rem solid white;
+    border-bottom: .4rem solid orange;
+    padding: 0;
+}
+
+.tripz {
+    background: gray;
 }
 
 .BioPic {
-    border-top: 25px solid white;
-    border-bottom: 25px solid white; 
-    box-shadow: 0 42px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 25px 0 rgb(0, 0, 0);
-    margin-top: 5%;
-    margin-bottom: 5%;
-    border-radius: 3px;
-    max-width: 250px;
+    border-top: 15px solid white;
+    border-bottom: 15px solid white; 
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    /* box-shadow: 0 42px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 25px 0 rgb(0, 0, 0); */
+    border-radius: 6px;
+    max-width: 150px;
+    min-width: 150px;
+    min-height: 150px; 
+    margin-top: 1.5rem;
 }
 
-.userName, .memberSince {
-    font-size: 1.5em;
-    margin-top: 4.5em;
+.Bio {
+    padding: 0;
+}
+
+.userName {
+    font-size: 24px;
+    font-weight: bold;
+    color: orange;
+    padding: 0;
+    margin: 0;
+}
+
+.memberSince {
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
 }
 
 .modal {
@@ -46,7 +70,7 @@ nav .brand-logo img{
     padding: 1%;
     margin-left: auto;
     margin-right: auto;
-    background: ghostwhite;
+    background: white;
     margin-top: 2%;
     border-radius: 3px;
     color: teal;
@@ -61,3 +85,7 @@ nav .brand-logo img{
 .myTripContent h6 {
     color: teal;
 }
+
+/* .container {
+    display: flex;
+} */ 

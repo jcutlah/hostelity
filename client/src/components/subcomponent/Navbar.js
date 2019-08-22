@@ -22,19 +22,17 @@ const Navbar = (props) => {
         })
     }
     return (
-        <nav className="nav wrapper blue-grey">
+        <nav className="nav wrapper blue-grey darken-2">
             <div className="container">
-                <Link to='/' className="left brand-logo teal-text">
+                <Link to='/home' className="left brand-logo">
                     <img src='/assets/images/switchBakLogo.png' alt="logo" />
-                   
                 </Link>
                 { props.userId 
                     ?<ul className="right">
                         <li key="home"><NavLink to='/home'> Home </NavLink> </li>
-                        <li key="newTrip"><NavLink to='/searchModal'>New Trip</NavLink></li>
+                        <li key="newTrip"><NavLink to='/search'>New Trip</NavLink></li>
                         <li key="myTrips"><NavLink to='/myTrips'>My Trips</NavLink></li>
                         <li key="logOut"><NavLink to='#' onClick={logOut}>Log Out</NavLink></li> 
-                        {/* <li key="avatar"><NavLink to='/' className='btn btn-floating orange lighten-1'></NavLink></li> */}
                     </ul>
                 
                     :<ul className="right">

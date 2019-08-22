@@ -9,7 +9,7 @@ const display = {
     display: 'none'
   };
   
-  class SearchModal extends React.Component {
+  class Search extends React.Component {
     constructor(props) {
       super(props);
       this.toggle = this.toggle.bind(this);
@@ -61,4 +61,4 @@ const display = {
   
 //   ReactDOM.render(<SearchModal />, document.getElementById("root"));
 
-  export default SearchModal;
+  export default Search;

@@ -6,7 +6,7 @@ import Signup from './components/signup';
 import Home from './components/Home';
 import Navbar from './components/subcomponent/Navbar';
 import "./css/style.css";
-import SearchModal from "./components/subcomponent/searchModal";
+import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/myTrips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
@@ -57,7 +57,7 @@ function App() {
           <Route exact path="/map" component={Map} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
-          <Route exact path="/searchModal" component={SearchModal} />
+          <Route exact path="/search" component={Search} />
           <Route exact path="/myTrips" render={(props) => <MyTrips {...props} userId={userId}/>} />
           <Route component={NoMatch} />
         </Switch>

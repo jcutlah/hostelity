@@ -1,77 +1,99 @@
 .body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 nav {
-    height: 5rem;
-    line-height: 5em;
+  height: 5rem;
+  line-height: 5em;
 }
 
-nav .brand-logo img{ 
-    height: 4rem; 
+nav .brand-logo img {
+  height: 4rem;
 }
 
 .Profile {
-    background-image: url("/assets/images/bench.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-top: .4rem solid white;
-    border-bottom: .4rem solid orange;
-    padding: 0;
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top: 0.4rem solid orange;
+  border-bottom: 0.4rem solid orange;
+  padding: 0;
 }
 
 .BioPic {
-    border-top: 15px solid white;
-    border-bottom: 15px solid white; 
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    /* box-shadow: 0 42px 38px 0 rgba(0, 0, 0, 0.2), 0 6px 25px 0 rgb(0, 0, 0); */
-    border-radius: 6px;
-    max-width: 150px;
-    min-width: 150px;
-    min-height: 150px; 
-    margin-top: 1.5rem;
+  display: inline-block;
+  position: relative;
+  left: 0;
+  max-width: 275px;
+  border-color: white;
+  border-width: 5px;
+  border-style: solid;
+  margin: auto;
+  margin-top: 1.5rem;
 }
 
+/**********************************************************
+      * If a caption is supplied the image needs a little space 
+      * at the bottom to include the caption within the frame
+      ***********************************************************/
+/* img.hasCaption {
+        padding-bottom: 50px;
+      }
+      
+      figcaption {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 16px;
+        background-color: white;
+        text-align: center;
+        color: blue;
+        font-family: 'Reenie Beanie', cursive;
+        font-size: 30px;
+        padding: 10px;
+      }
+} */
+
 .Bio {
-    padding: 0;
+  padding: 0;
 }
 
 .userName {
-    font-size: 24px;
-    font-weight: bold;
-    color: orange;
-    padding: 0;
-    margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: orange;
+  padding: 0;
+  margin: 0;
 }
 
 .memberSince {
-    font-size: 16px;
-    color: white;
-    font-weight: bold;
-    padding: 0;
-    margin: 0;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
 }
 
 .modal {
-    margin-top: 10em;
+  margin-top: 10em;
 }
 
 .modal-content {
-    color: orange;
+  color: orange;
 }
 
 .MuiInputBase-input {
- border-bottom: 0px !important;
- margin: 0px !important;
+  border-bottom: 0px !important;
+  margin: 0px !important;
 }
 
-.myTrip, .trip {
-    padding: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    border-radius: 5px;
-    color: #455A64;
+.myTrip,
+.trip {
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  border-radius: 5px;
+  color: #455a64;
 }

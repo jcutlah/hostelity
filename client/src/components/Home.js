@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 import Profile from './subcomponent/Profile';
-import Avatar from './subcomponent/Avatar';
 
 const Home = (props) => {
     const [user, setUser] = useState(null);
@@ -29,16 +28,15 @@ const Home = (props) => {
             <Profile
                 user={user ? user : {}}
             />
-                        <Avatar /> 
-    <div className="row">
-        <div className="tripz container">
-            <div className="col s12">
-                <Trips
-                    trips={user ? user.trips : []}
-                />
+            <div className="row">
+                <div className="tripz container">
+                    <div className="col s12">
+                        <Trips
+                            trips={user ? user.trips : []}
+                        />
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
         </div >
     )
 }

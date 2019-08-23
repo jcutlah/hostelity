@@ -9,14 +9,8 @@ const Profile = (props) => {
                 </div>
                 <div className="col s12 Bio">
                     <p className="userName"> {props.user.firstName} {props.user.lastName} </p>
-                    <p className="memberSince white-text"> Member since: </p>
-                    <p className="memberSince">
-                        {props.user.dateAdded}
-                    </p>
+                    <p className="memberSince white-text"> Member since: {props.user.dateAdded} </p>
                 </div>
-
-
-
             </div>
         </div>
     )

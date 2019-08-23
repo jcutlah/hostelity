@@ -29,10 +29,10 @@ const Navbar = (props) => {
                 </Link>
                 { props.userId 
                     ?<ul className="right">
-                        <li key="home"><NavLink to='/home'> Home </NavLink> </li>
-                        <li key="newTrip"><NavLink to='/search'>New Trip</NavLink></li>
-                        <li key="my-trips"><NavLink to='/my-trips'>My Trips</NavLink></li>
-                        <li key="logOut"><NavLink to='#' onClick={logOut}>Log Out</NavLink></li> 
+                        <li key="home"><NavLink to='/home'><i class="material-icons">home</i></NavLink></li>
+                        <li key="newTrip"><NavLink to='/search'><i class="material-icons">search</i></NavLink></li>
+                        <li key="my-trips"><NavLink to='/my-trips'><i class="material-icons">airport_shuttle</i></NavLink></li>
+                        <li key="logOut"><NavLink to='#' onClick={logOut}><i class="material-icons">exit_to_app</i></NavLink></li> 
                     </ul>
                 
                     :<ul className="right">

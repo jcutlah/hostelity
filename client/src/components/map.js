@@ -1,36 +1,150 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container'
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import TextField from '@material-ui/core/TextField'
+import NavigationIcon from '@material-ui/icons/Navigation';
+import Fab from '@material-ui/core/Fab';
+import Divider from '@material-ui/core/Divider';
+import MapFunctions from '../utils/gmAPI'
+require("dotenv").config()
+// const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
+const Marker = ({ text }) => <div>{text}</div>;
 
-const MarkerComponent = ({ text }) => <div>{text}</div>;
+const GMAPKEY = process.env.GMAPS_KEY
+const useStyles = makeStyles(theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    mapContainer: {
+        float: 'left !important'
+    },
+    searchDiv: {
+        position: 'absolute',
+        top: '5vh !important',
+        right: '5vh !important',
+        width: '20vw !important',
+        float: 'right !important'
+    },
+    extendedIcon: {
+        marginRight: theme.spacing(1),
+    },
+    darkDivider: {
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    }
+}));
+function Map(props) {
 
-class Map extends Component {
-    static defaultProps = {
+    useEffect(function () {
+        return <GoogleMapReact />
+    }, [GoogleMapReact])
+
+
+    const defaultview = {
         center: {
-            lat: 59.95,
-            lng: 30.33
+            lat: 37,
+            lng: -90
         },
-        zoom: 9
+        zoom: 4.5
     };
 
-    render() {
-        return (
-            // Important! Always set the container height explicitly
-            <div style={{ height: '100vh', width: '100%' }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ' }}
-                    defaultCenter={this.props.center}
-                    defaultZoom={this.props.zoom}
-                >
-                    <MarkerComponent
-                        lat={59.955413}
-                        lng={30.337844}
-                        text="My Marker"
-                    />
-                </GoogleMapReact>
+    const classes = useStyles()
+    const [state, setState] = React.useState({
+        gilad: true,
+        jason: false,
+        antoine: true,
+        map: {},
+        start: '',
+        end: ''
+    });
+    /* TxtField*/
+
+
+    const handleChange = event => {
+        const { name, value } = event.target;
+        setState({ ...state, [name]: value });
+    };
+
+    return (
+        // Important! Always set the container height explicitly
+        <>
+            <Container fixed className={classes.mapContainer}>
+
+                <div style={{ height: '95vh', width: '100%', marginTop: '3vh', marginBottom: '2vh', float: 'left' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
+                        defaultCenter={defaultview.center}
+                        defaultZoom={defaultview.zoom}
+                        yesIWantToUseGoogleMapApiInternals={true}
+                        onGoogleApiLoaded={({ map, maps }) => {
+                            MapFunctions.handleApiLoaded(map, maps)
+                            setState({ ...state, map: map })
+                        }}
+                        id="myMap"
+                    >
+
+                        <Marker
+                            lat={69.955413}
+                            lng={30.337844}
+                            text="My Marker"
+                        />
+                    </GoogleMapReact>
+                </div>
+
+            </Container>
+            <div className={classes.searchDiv}>
+                <FormControl component="fieldset">
+                    <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
+                    <Divider variant="middle" className={classes.darkDivider} />
+
+                    <FormGroup>
+
+                        <TextField
+                            id="outlined-start"
+                            label="Starting Point"
+                            className={classes.textField}
+                            value={state.start}
+                            name='start'
+                            onChange={handleChange}
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <TextField
+                            id="outlined-end"
+                            label="Final Destination"
+                            className={classes.textField}
+                            value={state.end}
+                            name='end'
+                            onChange={handleChange}
+                            margin="normal"
+                            variant="outlined"
+                        />
+                        <FormHelperText>Find your Path!</FormHelperText>
+
+                        <br />
+                        <Fab onClick={() => {
+                            // MapFunctions.handleTripSearch(state.map, state.start, state.end)
+
+                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end)
+                        }
+
+                        }
+
+                            variant="extended" aria-label="delete" className={classes.fab}>
+                            <NavigationIcon className={classes.extendedIcon} />
+                            Begin
+      </Fab>
+                    </FormGroup>
+                    <div id='directions-panel'></div>
+                </FormControl>
             </div>
-        );
-    }
+        </>
+    );
 }
 
-export default Map;
+export default Map

@@ -17,24 +17,15 @@ mongoose.set(
 const hostelSeed = [
     {
         title: "Zion",
-        location: {
-            type: "Point",
-            coordinates: [-113.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     {
         title: "Meeps",
-        location: {
-            type: "Point",
-            coordinates: [-114.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     {
         title: "Smeep",
-        location: {
-            type: "Point",
-            coordinates: [-110.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     
 ];
@@ -64,7 +55,7 @@ const seedData = [
             password: "bingbongbing",
             avatar: '/assets/images/hockeyJersey.jpg'
         },
-        hostels: hostelSeed[0],
+        hostels: [hostelSeed[0], hostelSeed[1]],
         trip: tripSeed[0]
     },
     {
@@ -75,7 +66,7 @@ const seedData = [
             password: "insecure",
             avatar: "https://placebeard.it/300x180"
         },
-        hostels: hostelSeed[1],
+        hostels: [hostelSeed[1]],
         trip: tripSeed[1]
     },
     {
@@ -86,7 +77,7 @@ const seedData = [
             password: "hackthisaccount",
             avatar: "https://placebeard.it/300x180"
         },
-        hostels: hostelSeed[2],
+        hostels: [hostelSeed[2]],
         trip: tripSeed[2]
     }
 ];
@@ -114,12 +105,14 @@ db.Hostel
                                     tripController.associateTripToUser(response._id, res._id, function(user){
                                         console.log('trip associated: ');
                                         console.log(user);
-                                        hostelController.addHostel(res._id, seed.hostels, function(newHostel){
-                                            console.log(newHostel);
-                                            hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
-                                                console.log(trip);
+                                        seed.hostels.forEach(hostel => {
+                                            hostelController.addHostel(res._id, hostel, function(newHostel){
+                                                console.log(newHostel);
+                                                hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                                    console.log(trip);
+                                                })
+                                                
                                             })
-                                            
                                         })
                                     })
                                 })

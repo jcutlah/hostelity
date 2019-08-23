@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import Avatar from 'react-avatar-edit'
 
-class App extends React.Component {
+class Avateezy extends Component {
 
   constructor(props) {
     super(props)
@@ -39,6 +39,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App /> , document.getElementById('root'))
-
-export default Avatar;
+export default Avateezy;

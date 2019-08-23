@@ -9,7 +9,7 @@ const display = {
     display: 'none'
   };
   
-  class SearchModal extends React.Component {
+  class Search extends React.Component {
     constructor(props) {
       super(props);
       this.toggle = this.toggle.bind(this);
@@ -28,7 +28,7 @@ const display = {
     render() {
       var modal = [];
       modal.push(
-        <div className="modal" style={this.state.toggle ? display : hide}>
+        <div key="doop" className="modal" style={this.state.toggle ? display : hide}>
         <div className="modal-content">
           <h4>Plan your trip</h4>
           <div className="input-field">
@@ -61,4 +61,4 @@ const display = {
   
 //   ReactDOM.render(<SearchModal />, document.getElementById("root"));
 
-  export default SearchModal;
+  export default Search;

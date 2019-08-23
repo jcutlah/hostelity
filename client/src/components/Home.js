@@ -9,38 +9,37 @@ const Home = (props) => {
     const getUserData = (userId) => {
         if (!user) {
             Axios.get(`/api/trips/${userId}`)
-                .then(response => {
-                    console.log(response.data);
-                    setUser(response.data);
+                .then(userInfo => {
+                    console.log(userInfo.data);
+                    setUser(userInfo.data);
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
     }
-    if(props.userId){
+    if (props.userId) {
         console.log('user id present, getting trips for this user...');
         getUserData(props.userId);
     };
     console.log(user);
     return (
-        <div className="dashboard container">
-            <div className="row">
-                <div className="col s12 m12">
-                    <Profile 
-                        user={user ? user : {}} 
-                    />
-                    <Trips
-                        trips={user ? user.trips : []}
-                    />
-                    <div className="col s12 m5.offset-m1">
-                    </div>
-                </div>
+        <div className="profileHeader">
+            <Profile
+                user={user ? user : {}}
+            />
+    <div className="row">
+        <div className="tripz container">
+            <div className="col s12">
+                <Trips
+                    trips={user ? user.trips : []}
+                />
             </div>
         </div>
+    </div>
+        </div >
     )
+}
 
-    }
-
-    export default Home;
+export default Home;
 

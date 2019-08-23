@@ -8,17 +8,6 @@ const tripSchema = new Schema({
             ref: 'Hostel' 
         }
     ],
-    // destinations: {
-    //     type: {
-    //         type: String, 
-    //         enum: ['MultiPoint'],
-    //         required: true
-    //     },
-    //     coordinates: {
-    //         type: [[Number, Number]],
-    //         required: true
-    //     }
-    // },
     name: {
         type: String,
         required: true

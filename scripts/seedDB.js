@@ -17,24 +17,15 @@ mongoose.set(
 const hostelSeed = [
     {
         title: "Zion",
-        location: {
-            type: "Point",
-            coordinates: [-113.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     {
         title: "Meeps",
-        location: {
-            type: "Point",
-            coordinates: [-114.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     {
         title: "Smeep",
-        location: {
-            type: "Point",
-            coordinates: [-110.0263,37.2982]
-        }
+        location: [-113.0263,37.2982]
     },
     
 ];
@@ -45,12 +36,12 @@ const tripSeed = [
         endDest: [-118.5551,36.8879]
     },
     {
-        name: "My Stupid Fucking Trip",
+        name: "My Stupid Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     },
     {
-        name: "My Cliche As Fuck Trip",
+        name: "My Cliche Trip",
         startDest: [-113.0263,37.2982], 
         endDest: [-118.5551,36.8879]
     }
@@ -64,19 +55,19 @@ const seedData = [
             password: "bingbongbing",
             avatar: '/assets/images/hockeyJersey.jpg'
         },
-        hostels: hostelSeed[0],
-        trip: tripSeed[0]
+        hostels: [hostelSeed[0], hostelSeed[1]],
+        trips: [tripSeed[0], tripSeed[1]]
     },
     {
         user: {
             firstName: "James",
-            lastName: "Morisson",
+            lastName: "Morrison",
             email: "totesmcgotes@gmail.com",
-            password: "passwordinsecure",
+            password: "insecure",
             avatar: "https://placebeard.it/300x180"
         },
-        hostels: hostelSeed[1],
-        trip: tripSeed[1]
+        hostels: [hostelSeed[1]],
+        trips: [tripSeed[1]]
     },
     {
         user: {
@@ -86,8 +77,8 @@ const seedData = [
             password: "hackthisaccount",
             avatar: "https://placebeard.it/300x180"
         },
-        hostels: hostelSeed[2],
-        trip: tripSeed[2]
+        hostels: [hostelSeed[2]],
+        trips: [tripSeed[2]]
     }
 ];
 
@@ -108,18 +99,22 @@ db.Hostel
                                 if (err) throw err;
                                 console.log(response);
                                 console.log('meep');
-                                tripController.addTrip(response._id, seed.trip, function(res){
-                                    console.log('derp');
-                                    console.log(res);
-                                    tripController.associateTripToUser(response._id, res._id, function(user){
-                                        console.log('trip associated: ');
-                                        console.log(user);
-                                        hostelController.addHostel(res._id, seed.hostels, function(newHostel){
-                                            console.log(newHostel);
-                                            hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
-                                                console.log(trip);
+                                seed.trips.forEach(trip => {
+                                    tripController.addTrip(response._id, trip, function(res){
+                                        console.log('derp');
+                                        console.log(res);
+                                        tripController.associateTripToUser(response._id, res._id, function(user){
+                                            console.log('trip associated: ');
+                                            console.log(user);
+                                            seed.hostels.forEach(hostel => {
+                                                hostelController.addHostel(res._id, hostel, function(newHostel){
+                                                    console.log(newHostel);
+                                                    hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                                        console.log(trip);
+                                                    })
+                                                    
+                                                })
                                             })
-                                            
                                         })
                                     })
                                 })

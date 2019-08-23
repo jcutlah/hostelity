@@ -56,7 +56,7 @@ const seedData = [
             avatar: '/assets/images/hockeyJersey.jpg'
         },
         hostels: [hostelSeed[0], hostelSeed[1]],
-        trip: tripSeed[0]
+        trips: [tripSeed[0], tripSeed[1]]
     },
     {
         user: {
@@ -67,7 +67,7 @@ const seedData = [
             avatar: "https://placebeard.it/300x180"
         },
         hostels: [hostelSeed[1]],
-        trip: tripSeed[1]
+        trips: [tripSeed[1]]
     },
     {
         user: {
@@ -78,7 +78,7 @@ const seedData = [
             avatar: "https://placebeard.it/300x180"
         },
         hostels: [hostelSeed[2]],
-        trip: tripSeed[2]
+        trips: [tripSeed[2]]
     }
 ];
 
@@ -99,19 +99,21 @@ db.Hostel
                                 if (err) throw err;
                                 console.log(response);
                                 console.log('meep');
-                                tripController.addTrip(response._id, seed.trip, function(res){
-                                    console.log('derp');
-                                    console.log(res);
-                                    tripController.associateTripToUser(response._id, res._id, function(user){
-                                        console.log('trip associated: ');
-                                        console.log(user);
-                                        seed.hostels.forEach(hostel => {
-                                            hostelController.addHostel(res._id, hostel, function(newHostel){
-                                                console.log(newHostel);
-                                                hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
-                                                    console.log(trip);
+                                seed.trips.forEach(trip => {
+                                    tripController.addTrip(response._id, trip, function(res){
+                                        console.log('derp');
+                                        console.log(res);
+                                        tripController.associateTripToUser(response._id, res._id, function(user){
+                                            console.log('trip associated: ');
+                                            console.log(user);
+                                            seed.hostels.forEach(hostel => {
+                                                hostelController.addHostel(res._id, hostel, function(newHostel){
+                                                    console.log(newHostel);
+                                                    hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
+                                                        console.log(trip);
+                                                    })
+                                                    
                                                 })
-                                                
                                             })
                                         })
                                     })

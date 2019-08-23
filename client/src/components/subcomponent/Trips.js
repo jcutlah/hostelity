@@ -12,7 +12,7 @@ const Trips = (props) => {
                     <div key={trip._id} className="tripSummary">
                         <div className="trip grey-text-darken-3">
                             <h4 className="tripTitle orange-text">{trip.name}</h4>
-                            <div className="divider"></div>
+                            {/* <div className="divider"></div> */}
                             <h5> Start: </h5>
                             <span className="grey-text"> {trip.startDest} </span>
                             <h5> End: </h5>

@@ -9,7 +9,6 @@ const Hostels = (props) => {
                     <div key={hostel._id} className="tripSummary">
                         <div className="trip grey-text-darken-3">
                             <h4 className="tripTitle orange-text">{hostel.title}</h4>
-                            <div className="divider"></div>
                             <h5> Location: </h5>
                             <span className="grey-text"> 
                             <p>

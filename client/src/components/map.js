@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
@@ -39,6 +39,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 function Map(props) {
+
+    useEffect(function () {
+        return <GoogleMapReact />
+    }, [GoogleMapReact])
+
+
     const defaultview = {
         center: {
             lat: 37,
@@ -52,6 +58,7 @@ function Map(props) {
         gilad: true,
         jason: false,
         antoine: true,
+        map: {},
         start: '',
         end: ''
     });
@@ -74,7 +81,10 @@ function Map(props) {
                         defaultCenter={defaultview.center}
                         defaultZoom={defaultview.zoom}
                         yesIWantToUseGoogleMapApiInternals={true}
-                        onGoogleApiLoaded={({ map, maps }) => MapFunctions.handleApiLoaded(map, maps)}
+                        onGoogleApiLoaded={({ map, maps }) => {
+                            MapFunctions.handleApiLoaded(map, maps)
+                            setState({ ...state, map: map })
+                        }}
                         id="myMap"
                     >
 
@@ -118,8 +128,9 @@ function Map(props) {
 
                         <br />
                         <Fab onClick={() => {
-                            MapFunctions.handleTripSearch(state.start, state.end)
-                            MapFunctions.calculateAndDisplayRoute(state.start, state.end)
+                            // MapFunctions.handleTripSearch(state.map, state.start, state.end)
+
+                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end)
                         }
 
                         }

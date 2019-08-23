@@ -9,9 +9,9 @@ const Home = (props) => {
     const getUserData = (userId) => {
         if (!user) {
             Axios.get(`/api/trips/${userId}`)
-                .then(response => {
-                    console.log(response.data);
-                    setUser(response.data);
+                .then(userInfo => {
+                    console.log(userInfo.data);
+                    setUser(userInfo.data);
                 })
                 .catch(err => {
                     console.log(err);

@@ -7,15 +7,7 @@ const hostelSchema = new Schema({
         required: true 
     },
     location: {
-        type: {
-            type: String, 
-            enum: ['Point'],
-            // required: true
-        },
-        coordinates: {
-            type: [Number, Number],
-            required: true
-        }
+        type: [Number, Number]
     },
     dateAdded: { 
         type: Date, 

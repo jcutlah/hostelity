@@ -13,9 +13,9 @@ const Trips = (props) => {
                         <div className="trip grey-text-darken-3">
                             <h4 className="tripTitle orange-text">{trip.name}</h4>
                             {/* <div className="divider"></div> */}
-                            <h5> Start: </h5>
+                            <h6> Start: </h6>
                             <span className="grey-text"> {trip.startDest} </span>
-                            <h5> End: </h5>
+                            <h6> End: </h6>
                             <span className="grey-text">{trip.endDest}</span>
                             <Hostels 
                                 hostels={trip.hostels}

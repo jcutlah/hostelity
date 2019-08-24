@@ -7,9 +7,9 @@ const Hostels = (props) => {
             {props.hostels.map(hostel => {
                 return (
                     <div key={hostel._id} className="tripSummary">
-                        <div className="trip grey-text-darken-3">
-                            <h4 className="tripTitle orange-text">{hostel.title}</h4>
-                            <h5> Location: </h5>
+                            <h6>Place:</h6>
+                            <span className="tripTitle grey-text">{hostel.title}</span>
+                            <h6> Location: </h6>
                             <span className="grey-text"> 
                             <p>
                                 { hostel.location[0] }
@@ -19,7 +19,6 @@ const Hostels = (props) => {
                             </p>
                             </span>
                         </div>
-                    </div>
                 )
             })}
         </div>

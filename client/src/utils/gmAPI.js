@@ -7,7 +7,7 @@ const MapFunctions = {
 
 
 
-    handleTripSearch: async (map, startString, endString, start, end) => {
+    handleTripSearch: async (map, startString, endString, start, end, stops) => {
         // console.log("Fuego")
         try {
             const response = await axios.get(`/api/maps/textsearch/${startString}/${endString}`);
@@ -17,50 +17,64 @@ const MapFunctions = {
             var south
             var east
             var west
-            var service;
+            var request;
             var CORSerror = `https://cors-anywhere.herokuapp.com/`
 
-            function setBounds() {
-                console.log(start.lat())
-                if (start.lat() > end.lat()) {
-                    north = start.lat()
-                    south = end.lat()
-                } else {
-                    north = end.lng()
-                    south = start.lng()
-                }
-                if (start.lng() > end.lng()) {
-                    east = start.lng()
-                    west = end.lng()
-                } else {
-                    east = end.lng()
-                    west = start.lng()
-                }
-                return (north, south, east, west)
+            // function setBounds() {
+            //     console.log(start.lat())
+            //     if (start.lat() > end.lat()) {
+            //         north = start.lat()
+            //         south = end.lat()
+            //     } else {
+            //         north = end.lat()
+            //         south = start.lat()
+            //     }
+            //     if (start.lng() > end.lng()) {
+            //         east = start.lng()
+            //         west = end.lng()
+            //     } else {
+            //         east = end.lng()
+            //         west = start.lng()
+            //     }
+            //     return (north, south, east, west)
+            // }
+            // setBounds()
+            for (var i = 0; i < stops.length; i++) {
+                console.log(stops[i])
             }
-            setBounds()
-            var request = {
-                bounds: { north: north, south: south, east: east, west: west },
-                type: ['lodging']
+            function createRequest() {
+                return request = {
 
-            };
+                    bounds: { north: north, south: south, east: east, west: west },
+                    type: ['lodging'],
+                    keywords: ['hostel', 'hotel']
+
+                };
+
+            }
+            createRequest()
             console.log(request)
 
-            function callback(results, status) {
-                console.log(results)
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    var service = new google.maps.places.PlacesService(map);
-                    for (var i = 0; i < results.length; i++) {
-                        var request = {
-                            placeId: results[i].place_id
+            var searchBitch = () => {
+                function callback(results, status) {
+                    console.log(results)
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        var service = new google.maps.places.PlacesService(map);
+                        for (var i = 0; i < results.length; i++) {
+                            var request = {
+                                placeId: results[i].place_id
+                            }
+                            var marker = new google.maps.Marker({
+                                position: (results[i].lat, results[i].lng),
+                                title: "Hello World!"
+                            });
+                            marker.setMap(map);
+
                         }
                         service.getDetails(request)
 
-                    }
-                } else console.log("nearbySearch:" + status);
-            }
-
-            var searchBitch = () => {
+                    } else console.log("nearbySearch:" + status);
+                }
                 console.log("Running nearbySearch Method")
                 // console.log(service.nearbySearch)
                 service.nearbySearch(request, callback)
@@ -88,7 +102,7 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: (map, start, end, directionsService, directionsDisplay) => {
+    calculateAndDisplayRoute: (map, start, end, stops, directionsService, directionsDisplay) => {
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer()
         // directionsDisplay.setMap()
@@ -143,7 +157,7 @@ const MapFunctions = {
                     summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                     summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
 
-                    MapFunctions.handleTripSearch(map, startString, endString, start, end)
+                    MapFunctions.handleTripSearch(map, startString, endString, start, end, stops)
                 }
                 directionsDisplay.setMap(map);
 

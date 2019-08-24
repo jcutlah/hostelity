@@ -11,6 +11,8 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
+import inputField from '../components/subcomponent/InputField'
+import { array } from 'prop-types';
 require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -37,6 +39,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: 'rgba(0,0,0,0.5)'
     }
 }));
+
 function Map(props) {
 
     useEffect(function () {
@@ -54,18 +57,21 @@ function Map(props) {
 
     const classes = useStyles()
     const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: true,
         map: {},
         start: '',
-        end: ''
+        end: '',
+        stops: []
     });
     /* TxtField*/
 
 
     const handleChange = event => {
         const { name, value } = event.target;
+        var a = state.stops.map(stop => {
+            if (stop.key === name) {
+                stop[name] = value
+            }
+        })
         setState({ ...state, [name]: value });
     };
 
@@ -83,6 +89,7 @@ function Map(props) {
                         onGoogleApiLoaded={({ map, maps }) => {
                             MapFunctions.handleApiLoaded(map, maps)
                             setState({ ...state, map: map })
+
                         }}
                         id="myMap"
                     >
@@ -113,6 +120,7 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
+
                         <TextField
                             id="outlined-end"
                             label="Final Destination"
@@ -123,15 +131,18 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
+
+                        <Fab onClick={() => {
+                            //ADD ANOTHER FIELD///
+                        }} />
                         <FormHelperText>Find your Path!</FormHelperText>
 
                         <br />
                         <Fab onClick={() => {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
 
-                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end)
+                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
                         }
-
                         }
 
                             variant="extended" aria-label="delete" className={classes.fab}>

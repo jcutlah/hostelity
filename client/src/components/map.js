@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
@@ -16,7 +16,6 @@ require("dotenv").config()
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
 
-const GMAPKEY = process.env.GMAPS_KEY
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,

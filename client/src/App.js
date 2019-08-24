@@ -14,35 +14,42 @@ import Grid from '@material-ui/core/Grid';
 import Header from './components/subcomponent/Header';
 
 function App() {
-  // Define hooks (state) variables
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
-  // Define callback 
-  const loginCallback = (user) => {
-    console.log(`running loginCallback`);
-    // setLoggedIn(user.isLoggedIn);
-    setUserId(user.id);
-
-  }
-  const isLoggedIn = () => {
-    console.log(`Checking if logged in`);
-    if (!userId) {
-      console.log('No user id present');
-      Axios.get('/api/users')
-        .then(response => {
-          console.log(response.data.passport);
-          if (response.data.passport) {
-            console.log("setting user ID state");
-            setUserId(response.data.passport.user);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        })
-    } else {
-      console.log(`User signed in with id ${userId}`);
+    // Define hooks (state) variables
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [userId, setUserId] = useState(null);
+    // Define callback 
+    const loginCallback = (user) => {
+        console.log(`running loginCallback`);
+        // setLoggedIn(user.isLoggedIn);
+        setUserId(user.id);
+        
     }
-  }
+    const isLoggedIn = () => {
+        // console.log(`Checking if logged in`);
+        if (!userId){
+            // console.log('No user id present');
+            Axios.get('/api/users')
+            .then(response => {
+                console.log(response.data.passport);
+                if (response.data.passport){
+                    // console.log("setting user ID state");
+                    setUserId(response.data.passport.user);
+                } else {
+                    console.log('sending user to login page');
+                    // console.log(window.location.pathname);
+                    if (window.location.pathname !== '/login'){
+                        window.location = '/login';
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } else {
+            console.log(`User signed in with id ${userId}`);
+        }
+    }
+  
   isLoggedIn();
   return (
     <Router>
@@ -72,7 +79,8 @@ function App() {
       </Grid>
 
     </Router>
-  );
+  )
+  
 }
 
 export default App;

@@ -1,44 +1,44 @@
 import React from 'react';
 
 const display = {
-    display: 'block'
-  };
-  const hide = {
-    display: 'none'
-  };
-  
-  class Search extends React.Component {
-    constructor(props) {
-      super(props);
-      this.toggle = this.toggle.bind(this);
-  
-      this.state = {
-        toggle: true
-      }
+  display: 'block'
+};
+const hide = {
+  display: 'none'
+};
+
+class Search extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+
+    this.state = {
+      toggle: true
     }
-  
-    toggle(event) {
-      this.setState(prevState => ({
-        toggle: !prevState.toggle
-      }));
-    }
-  
-    render() {
-      var modal = [];
-      modal.push(
-        <div key="doop" className="modal" style={this.state.toggle ? display : hide}>
+  }
+
+  toggle(event) {
+    this.setState(prevState => ({
+      toggle: !prevState.toggle
+    }));
+  }
+
+  render() {
+    var modal = [];
+    modal.push(
+      <div key="doop" className="modal" style={this.state.toggle ? display : hide}>
         <div className="modal-content">
           <h4>Plan your trip</h4>
           <div className="input-field">
-              <input placeholder="Where do you want to begin your trip?">
+            <input placeholder="Where do you want to begin your trip?">
 
-              </input>
+            </input>
           </div>
 
           <div className="input-field">
-              <input placeholder="Where do you want to end your trip?">
+            <input placeholder="Where do you want to end your trip?">
 
-              </input>
+            </input>
           </div>
 
         </div>
@@ -48,15 +48,15 @@ const display = {
           <button className="btn" onClick={this.toggle}>submit</button>
         </div>
       </div>
-      );
-      return (
-        <div>
-          {modal}
-        </div>
-      );
-    }
+    );
+    return (
+      <div>
+        {modal}
+      </div>
+    );
   }
-  
+}
+
 //   ReactDOM.render(<SearchModal />, document.getElementById("root"));
 
-  export default Search;
+export default Search;

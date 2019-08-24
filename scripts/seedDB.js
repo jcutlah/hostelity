@@ -52,7 +52,7 @@ const seedData = [
             firstName: "James",
             lastName: "Cutler",
             email: "jamescutler1111@gmail.com",
-            password: "bingbongbing",
+            password: "jcut",
             avatar: '/assets/images/hockeyJersey.jpg'
         },
         hostels: [hostelSeed[0], hostelSeed[1]],

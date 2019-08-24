@@ -6,7 +6,7 @@ function NoMatch() {
       <div className="row justify-content-center">
         <div className="col-md-12">
           <div className="jumbotron text-center">
-            <h1>Sorry brew! I think you're a touch off the beaten path.<br />Go on back the way ya came now!</h1>
+            <h1>Sorry brewski! I think you're a touch off the beaten path.<br />Go on back the way ya came now!</h1>
             <h1>
               <span role="img" aria-label="Face With Rolling Eyes Emoji">
                 🙄

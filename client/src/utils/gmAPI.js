@@ -10,9 +10,11 @@ const MapFunctions = {
     handleTripSearch: async (map, startString, endString, start, end) => {
         // console.log("Fuego")
         try {
-            var CORSerror = `https://cors-anywhere.herokuapp.com/`
-            const response = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/textsearch/json?query=origin=${startString}&destination=${endString}&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
-            const response2 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?locationbias=circle:2000@${start.lat},${start.lng}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            // var CORSerror = `https://cors-anywhere.herokuapp.com/`
+            // const response = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/textsearch/json?query=origin=${startString}&destination=${endString}&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            // const response2 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?locationbias=circle:2000@`+start.lat()+`,${start.lng()}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            const response = await axios.get(`/api/maps/textsearch/${startString}/${endString}`);
+            const response2 = await axios.get(`/api/maps/autocomplete/${start.lat()}/${start.lng()}`);
 
             var places = []
 
@@ -24,6 +26,7 @@ const MapFunctions = {
             console.log(places, start.lat)
 
         } catch (error) {
+            console.log('meep start error');
             console.log(error)
         }
         // console.log(start, end)

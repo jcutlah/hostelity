@@ -10,18 +10,57 @@ const MapFunctions = {
     handleTripSearch: async (map, startString, endString, start, end) => {
         // console.log("Fuego")
         try {
-            var CORSerror = `https://cors-anywhere.herokuapp.com/`
-            const response = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/textsearch/json?query=origin=${startString}&destination=${endString}&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
-            const response2 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?locationbias=circle:2000@${start.lat},${start.lng}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            var north
+            var south
+            var east
+            var west
+            function setBounds(start, end) {
 
+                if (start.lat() > end.lat()) {
+                    north = start.lat()
+                    south = end.lat()
+                } else {
+                    north = end.lng()
+                    south = start.lng()
+                }
+                if (start.lng() > end.lng()) {
+                    east = start.lng()
+                    west = end.lng()
+                } else {
+                    east = end.lng()
+                    west = start.lng()
+                }
+                return (north, south, east, west)
+            }
+            setBounds(start, end)
+            var service;
+            var CORSerror = `https://cors-anywhere.herokuapp.com/`
+            var request = {
+                query: 'lodging',
+                fields: ['name', 'geometry', 'lodging'],
+                locationBias: { north: north, south: south, east: east, west: west }
+
+            };
+            console.log(request)
+            var service = new google.maps.places.PlacesService(map);
+            // const response = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/textsearch/json?query=origin=${startString}&destination=${endString}&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            const response2 = await service.nearbySearch(request, function (results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    return console.log(response2, results)
+                }
+                else {
+                    console.log(status)
+                }
+            })
+            // const response2 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?type=lodging&locationbias=circle:2000@${start.lat()},${start.lng()}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+            // const response3 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${endString}type=lodging&locationbias=circle:2000@${end.lat},${end.lng}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
             var places = []
 
-            console.log(response, response2)
-            for (var i = 0; i < response.data.results.length; i++) {
-                places.push(response.data.results[i])
+            // for (var i = 0; i < response.data.results.length; i++) {
+            //     places.push(response.data.results[i])
 
-            }
-            console.log(places, start.lat)
+            // }
+            // console.log(places)
 
         } catch (error) {
             console.log(error)
@@ -29,13 +68,7 @@ const MapFunctions = {
         // console.log(start, end)
     },
 
-
-
-
-
-
-
-
+    //Make and display Routes//
     calculateAndDisplayRoute: (map, start, end, directionsService, directionsDisplay) => {
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer()

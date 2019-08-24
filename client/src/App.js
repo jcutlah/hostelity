@@ -23,15 +23,21 @@ function App() {
         
     }
     const isLoggedIn = () => {
-        console.log(`Checking if logged in`);
+        // console.log(`Checking if logged in`);
         if (!userId){
-            console.log('No user id present');
+            // console.log('No user id present');
             Axios.get('/api/users')
             .then(response => {
                 console.log(response.data.passport);
                 if (response.data.passport){
-                    console.log("setting user ID state");
+                    // console.log("setting user ID state");
                     setUserId(response.data.passport.user);
+                } else {
+                    console.log('sending user to login page');
+                    // console.log(window.location.pathname);
+                    if (window.location.pathname !== '/login'){
+                        window.location = '/login';
+                    }
                 }
             })
             .catch(err => {

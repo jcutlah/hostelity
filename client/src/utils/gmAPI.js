@@ -78,6 +78,7 @@ const MapFunctions = {
 
             // }
         } catch (error) {
+            console.log('meep start error');
             console.log(error)
         }
         // console.log(start, end)

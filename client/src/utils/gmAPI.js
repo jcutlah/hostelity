@@ -10,6 +10,8 @@ const MapFunctions = {
     handleTripSearch: async (map, startString, endString, start, end) => {
         // console.log("Fuego")
         try {
+            const response = await axios.get(`/api/maps/textsearch/${startString}/${endString}`);
+            const response2 = await axios.get(`/api/maps/autocomplete/${start.lat()}/${start.lng()}`);
             var service = new google.maps.places.PlacesService(map);
             var north
             var south

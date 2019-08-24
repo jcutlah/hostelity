@@ -10,12 +10,16 @@ const MapFunctions = {
     handleTripSearch: async (map, startString, endString, start, end) => {
         // console.log("Fuego")
         try {
+            var service = new google.maps.places.PlacesService(map);
             var north
             var south
             var east
             var west
-            function setBounds(start, end) {
+            var service;
+            var CORSerror = `https://cors-anywhere.herokuapp.com/`
 
+            function setBounds() {
+                console.log(start.lat())
                 if (start.lat() > end.lat()) {
                     north = start.lat()
                     south = end.lat()
@@ -32,40 +36,52 @@ const MapFunctions = {
                 }
                 return (north, south, east, west)
             }
-            setBounds(start, end)
-            var service;
-            var CORSerror = `https://cors-anywhere.herokuapp.com/`
+            setBounds()
             var request = {
-                query: 'lodging',
-                fields: ['name', 'geometry', 'lodging'],
-                locationBias: { north: north, south: south, east: east, west: west }
+                bounds: { north: north, south: south, east: east, west: west },
+                type: ['lodging']
 
             };
             console.log(request)
-            var service = new google.maps.places.PlacesService(map);
-            // const response = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/textsearch/json?query=origin=${startString}&destination=${endString}&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
-            const response2 = await service.nearbySearch(request, function (results, status) {
+
+            function callback(results, status) {
+                console.log(results)
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    return console.log(response2, results)
-                }
-                else {
-                    console.log(status)
-                }
-            })
-            // const response2 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?type=lodging&locationbias=circle:2000@${start.lat()},${start.lng()}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
-            // const response3 = await axios.get(CORSerror + `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${endString}type=lodging&locationbias=circle:2000@${end.lat},${end.lng}&radius=500&key=AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ`, { headers: { 'access-control-allow-origin': true } })
+                    var service = new google.maps.places.PlacesService(map);
+                    for (var i = 0; i < results.length; i++) {
+                        var request = {
+                            placeId: results[i].place_id
+                        }
+                        service.getDetails(request)
+
+                    }
+                } else console.log("nearbySearch:" + status);
+            }
+
+            var searchBitch = () => {
+                console.log("Running nearbySearch Method")
+                // console.log(service.nearbySearch)
+                service.nearbySearch(request, callback)
+                // service.nearbySearch(request, function (results, status) {
+                //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+                //         return console.log(results)
+                //     }
+                //     else {
+                //         console.log("error" + status)
+                //     }
+                // })
+            }
             var places = []
 
             // for (var i = 0; i < response.data.results.length; i++) {
             //     places.push(response.data.results[i])
 
             // }
-            // console.log(places)
-
         } catch (error) {
             console.log(error)
         }
         // console.log(start, end)
+        searchBitch()
     },
 
     //Make and display Routes//
@@ -123,6 +139,7 @@ const MapFunctions = {
                     summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
                     summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                     summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+
                     MapFunctions.handleTripSearch(map, startString, endString, start, end)
                 }
                 directionsDisplay.setMap(map);

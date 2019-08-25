@@ -75,3 +75,7 @@ nav .brand-logo img{
     border-radius: 5px;
     color: #455A64;
 }
+
+input[type="text"] {
+    padding-left: 10px!important;
+}

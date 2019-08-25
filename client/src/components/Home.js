@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 import Profile from './subcomponent/Profile';
+import Grid from '@material-ui/core/Grid';
+
+
 
 const Home = (props) => {
     const [user, setUser] = useState(null);
@@ -24,20 +27,30 @@ const Home = (props) => {
     };
     console.log(user);
     return (
-        <div className="profileHeader">
-            <Profile
-                user={user ? user : {}}
-            />
-    <div className="row">
-        <div className="tripz container">
-            <div className="col s12">
-                <Trips
-                    trips={user ? user.trips : []}
-                />
-            </div>
-        </div>
-    </div>
-        </div >
+            <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
+                <Grid item xs={12}>
+                    <Profile
+                        user={user ? user : {}}
+                    />
+                </Grid>
+                <Grid item xs={10} spacing={5}>
+                    <div className="tripz container">
+                        <div className="col s12">
+                            <Trips
+                                trips={user ? user.trips : []}
+                            />
+                            <br></br>
+                            <Trips
+                                trips={user ? user.trips : []}
+                            />
+                            <br></br>
+                            <Trips
+                                trips={user ? user.trips : []}
+                            />
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
     )
 }
 

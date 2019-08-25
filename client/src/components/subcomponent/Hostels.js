@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const Hostels = (props) => {
     console.log(props);
@@ -7,19 +8,27 @@ const Hostels = (props) => {
             {props.hostels.map(hostel => {
                 return (
                     <div key={hostel._id} className="tripSummary">
-                        <div className="trip grey-text-darken-3">
-                            <h4 className="tripTitle orange-text">{hostel.title}</h4>
-                            <div className="divider"></div>
-                            <h5> Location: </h5>
-                            <span className="grey-text"> 
-                            <p>
-                                { hostel.location[0] }
-                            </p>
-                            <p>
-                                { hostel.location[1] }
-                            </p>
-                            </span>
-                        </div>
+
+                        <Typography align="center" variant="h6" gutterBottom>
+                            Place name:
+                         </Typography>
+                    
+                        <Typography align="center" component="p">
+                            {hostel.title}
+                        </Typography>
+                       
+
+                        <Typography variant="h6" gutterBottom>
+                            Location:
+                        </Typography>
+
+                        <Typography component="p">
+                            {hostel.location[0]}
+
+                            {hostel.location[1]}
+                        </Typography>
+                       
+
                     </div>
                 )
             })}

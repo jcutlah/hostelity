@@ -21,71 +21,61 @@ const MapFunctions = {
             var request;
             var CORSerror = `https://cors-anywhere.herokuapp.com/`
 
-            // function setBounds() {
-            //     console.log(start.lat())
-            //     if (start.lat() > end.lat()) {
-            //         north = start.lat()
-            //         south = end.lat()
-            //     } else {
-            //         north = end.lat()
-            //         south = start.lat()
-            //     }
-            //     if (start.lng() > end.lng()) {
-            //         east = start.lng()
-            //         west = end.lng()
-            //     } else {
-            //         east = end.lng()
-            //         west = start.lng()
-            //     }
-            //     return (north, south, east, west)
-            // }
-            // setBounds()
             for (var i = 0; i < stops.length; i++) {
                 console.log(stops[i])
             }
             function createRequest() {
-                return request = {
+                var requestsForPoints = []
+                for (var i = 0; i < stops.length; i++) {
+                    requestsForPoints.push({
 
-                    bounds: { north: north, south: south, east: east, west: west },
-                    type: ['lodging'],
-                    keywords: ['hostel', 'hotel']
+                        location: stops[i].location,
+                        type: ['lodging'],
+                        keywords: ['hostel', 'hotel']
+
+                    })
                 }
+                return console.log(requestsForPoints)
             }
             createRequest()
-            console.log(request)
 
-            var searchBitch = () => {
-                function callback(results, status) {
-                    console.log(results)
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        var service = new google.maps.places.PlacesService(map);
-                        for (var i = 0; i < results.length; i++) {
-                            var request = {
-                                placeId: results[i].place_id
-                            }
-                            var marker = new google.maps.Marker({
-                                position: (results[i].lat, results[i].lng),
-                                title: "Hello World!"
-                            });
-                            marker.setMap(map);
-
+            function callback(results, status) {
+                console.log(results)
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var service = new google.maps.places.PlacesService(map);
+                    console.log('getting place data for random-ass, fucking places along route')
+                    for (var i = 0; i < results.length; i++) {
+                        var request = {
+                            placeId: results[i].place_id
                         }
-                        service.getDetails(request)
+                        var marker = new google.maps.Marker({
+                            position: (results[i].lat, results[i].lng),
+                            title: "Hello World!"
+                        });
+                        marker.setMap(map);
+                        // console.log(request);
+                        // COMMENTED THIS OUT TO BE SAFE - THE CHROME DEV CONSOLE WAS GIVING US WARNINGS "OVER_QUERY_LIMIT" - ...DIDN'T WANT US TO OVERWHELM OUR API LIMITS...
+                        // service.getDetails(request, function(place, status){
+                        //     console.log(status);
+                        //     console.log(place);
+                        // }
+                    }
+                    service.getDetails(request)
 
-                    } else console.log("nearbySearch:" + status);
-                }
-                console.log("Running nearbySearch Method")
-                // console.log(service.nearbySearch)
-                service.nearbySearch(request, callback)
-                // service.nearbySearch(request, function (results, status) {
-                //     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                //         return console.log(results)
-                //     }
-                //     else {
-                //         console.log("error" + status)
-                //     }
-                // })
+                } else console.log("nearbySearch:" + status);
             }
+            console.log("Running nearbySearch Method")
+            // console.log(service.nearbySearch)
+            service.nearbySearch(request, callback)
+            // service.nearbySearch(request, function (results, status) {
+            //     if (status === google.maps.places.PlacesServiceStatus.OK) {
+            //         return console.log(results)
+            //     }
+            //     else {
+            //         console.log("error" + status)
+            //     }
+            // })
+
             var places = []
 
             // for (var i = 0; i < response.data.results.length; i++) {
@@ -97,7 +87,7 @@ const MapFunctions = {
             console.log(error)
         }
         // console.log(start, end)
-        console.log(searchBitch, searchBitch())
+        console.log("done")
     },
 
     //Make and display Routes//
@@ -156,7 +146,7 @@ const MapFunctions = {
                     var endString = route.legs[i].end_address
                     var start = route.legs[i].start_location
                     var end = route.legs[i].end_location
-                    MapFunctions.handleTripSearch(map, startString, endString, start, end, stops)
+                    MapFunctions.handleTripSearch(map, startString, endString, start, end, wps)
                 }
                 directionsDisplay.setMap(map);
 

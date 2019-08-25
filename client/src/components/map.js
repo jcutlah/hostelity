@@ -73,7 +73,7 @@ function Map(props) {
     return (
         // Important! Always set the container height explicitly
         <>
-            <Container fixed center>
+            <Container fixed>
             <div className={classes.searchDiv}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>

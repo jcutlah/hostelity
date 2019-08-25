@@ -1,30 +1,45 @@
 import React from 'react';
 import Hostels from './Hostels';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(3, 2),
+    },
+}));
 
 const Trips = (props) => {
     console.log(props);
+    const classes = useStyles();
     return (
-        <div className="tripList section">
+        <Paper className={classes.root}>
             {props.trips.map(trip => {
                 console.log(trip);
                 console.log(trip.hostels);
                 return (
                     <div key={trip._id} className="tripSummary">
-                        <div className="trip grey-text-darken-3">
-                            <h4 className="tripTitle orange-text">{trip.name}</h4>
-                            {/* <div className="divider"></div> */}
-                            <h6> Start: </h6>
-                            <span className="grey-text"> {trip.startDest} </span>
-                            <h6> End: </h6>
-                            <span className="grey-text">{trip.endDest}</span>
-                            <Hostels 
-                                hostels={trip.hostels}
-                            />
-                        </div>
+                        <Typography variant="h5" component="h3">
+                            {trip.name}
+                        </Typography>
+                        <Typography component="p">
+                            Start:
+                        {trip.startDest}
+                        </Typography>
+                        <Typography component="p">
+                            End:
+                           {trip.endDest}
+                        </Typography>
+                        <Hostels
+                            hostels={trip.hostels}
+                        />
                     </div>
+
                 )
             })}
-        </div>
+        </Paper>
     )
 }
 

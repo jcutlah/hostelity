@@ -3,6 +3,8 @@ import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 import Profile from './subcomponent/Profile';
 import Grid from '@material-ui/core/Grid';
+import CssBaseLine from '@material-ui/core/CssBaseLine';
+
 
 
 const Home = (props) => {
@@ -26,22 +28,25 @@ const Home = (props) => {
     };
     console.log(user);
     return (
-        <Grid container direction="row" justify="center" alignItems="center">
-        <Grid item xs={12}> 
-                <Profile
-                    user={user ? user : {}}
-                />
-             </Grid>
-             <Grid item xs={6}>
-                <div className="tripz container">
-                    <div className="col s12">
-                        <Trips
-                            trips={user ? user.trips : []}
-                        />
+        <React.Fragment>
+            <CssBaseLine />
+            <Grid container direction="row" justify="center" alignItems="center">
+                <Grid item xs={8}>
+                    <Profile
+                        user={user ? user : {}}
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <div className="tripz container">
+                        <div className="col s12">
+                            <Trips
+                                trips={user ? user.trips : []}
+                            />
+                        </div>
                     </div>
-                </div>
+                </Grid>
             </Grid>
-         </Grid>
+        </React.Fragment>
     )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 
 const Navbar = (props) => {
@@ -22,6 +23,8 @@ const Navbar = (props) => {
             })
     }
     return (
+        <Grid container>
+        <Grid item xs={8}>
         <nav className="nav navTop navBottom">
             <div className="navLinks">
                 {props.userId
@@ -45,6 +48,8 @@ const Navbar = (props) => {
                 }
             </div>
         </nav>
+        </Grid>
+        </Grid>
     )
 }
 

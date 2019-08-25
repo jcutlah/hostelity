@@ -10,7 +10,6 @@ import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
-import Grid from '@material-ui/core/Grid';
 import Header from './components/subcomponent/Header';
 
 function App() {
@@ -53,18 +52,13 @@ function App() {
   isLoggedIn();
   return (
     <Router>
-      <Grid container direction="row" justify="center" alignItems="center">
-        <Grid item xs={12}>
+      <>
           <Header />
-        </Grid>
-        <Grid item xs={12}>
           <Navbar
             loginCallback={loginCallback}
             isLoggedIn={loggedIn}
             userId={userId}
           />
-
-        </Grid>
 
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -76,7 +70,7 @@ function App() {
           <Route component={NoMatch} />
         </Switch>
 
-      </Grid>
+      </>
 
     </Router>
   )

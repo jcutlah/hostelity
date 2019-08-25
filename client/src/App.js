@@ -10,6 +10,7 @@ import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
+import Header from './components/subcomponent/Header';
 
 function App() {
     // Define hooks (state) variables
@@ -47,29 +48,33 @@ function App() {
             console.log(`User signed in with id ${userId}`);
         }
     }
-    isLoggedIn();
+  
+  isLoggedIn();
   return (
     <Router>
-      <div>
-
-      <Navbar 
-        loginCallback={loginCallback} 
-        isLoggedIn={loggedIn}
-        userId={userId}
-      />
+      <>
+          <Header />
+          <Navbar
+            loginCallback={loginCallback}
+            isLoggedIn={loggedIn}
+            userId={userId}
+          />
 
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/home" render={(props) => <Home {...props} userId={userId}/>} />
+          <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId}/>} />
+          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
           <Route component={NoMatch} />
         </Switch>
-      </div>
+
+      </>
+
     </Router>
-  );
+  )
+  
 }
 
 export default App;

@@ -11,6 +11,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
+import { flexbox, fontSize } from '@material-ui/system';
 require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -18,17 +19,17 @@ const Marker = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     mapContainer: {
-        float: 'left !important'
+ 
     },
     searchDiv: {
-        position: 'absolute',
-        top: '5vh !important',
-        right: '5vh !important',
-        width: '20vw !important',
-        float: 'right !important'
+        position: 'relative',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        width: '50vw',
+        marginTop: '25vw',
     },
     extendedIcon: {
         marginRight: theme.spacing(1),
@@ -49,7 +50,7 @@ function Map(props) {
             lat: 37,
             lng: -90
         },
-        zoom: 4.5
+        zoom: 1
     };
 
     const classes = useStyles()
@@ -72,30 +73,7 @@ function Map(props) {
     return (
         // Important! Always set the container height explicitly
         <>
-            <Container fixed className={classes.mapContainer}>
-
-                <div style={{ height: '95vh', width: '100%', marginTop: '3vh', marginBottom: '2vh', float: 'left' }}>
-                    <GoogleMapReact
-                        bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
-                        defaultCenter={defaultview.center}
-                        defaultZoom={defaultview.zoom}
-                        yesIWantToUseGoogleMapApiInternals={true}
-                        onGoogleApiLoaded={({ map, maps }) => {
-                            MapFunctions.handleApiLoaded(map, maps)
-                            setState({ ...state, map: map })
-                        }}
-                        id="myMap"
-                    >
-
-                        <Marker
-                            lat={69.955413}
-                            lng={30.337844}
-                            text="My Marker"
-                        />
-                    </GoogleMapReact>
-                </div>
-
-            </Container>
+            <Container fixed center>
             <div className={classes.searchDiv}>
                 <FormControl component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
@@ -123,7 +101,7 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
-                        <FormHelperText>Find your Path!</FormHelperText>
+                        {/* <FormHelperText>Find your Path!</FormHelperText> */}
 
                         <br />
                         <Fab onClick={() => {
@@ -142,6 +120,31 @@ function Map(props) {
                     <div id='directions-panel'></div>
                 </FormControl>
             </div>
+            </Container>
+            <Container className={classes.mapContainer}>
+                <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom:'20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
+                        defaultCenter={defaultview.center}
+                        defaultZoom={defaultview.zoom}
+                        yesIWantToUseGoogleMapApiInternals={true}
+                        onGoogleApiLoaded={({ map, maps }) => {
+                            MapFunctions.handleApiLoaded(map, maps)
+                            setState({ ...state, map: map })
+                        }}
+                        id="myMap"
+                    >
+
+                        <Marker
+                            lat={69.955413}
+                            lng={30.337844}
+                            text="My Marker"
+                        />
+                    </GoogleMapReact>
+                </div>
+
+            </Container>
+
         </>
     );
 }

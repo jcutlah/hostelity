@@ -66,7 +66,12 @@ function Map(props) {
         var oldStops = state.stops;
         var newStops;
         var thisStop = {
-            [name]: value
+            [name]: value,
+
+        }
+        if (name === "start" || name === "end"){
+            setState({ ...state, [name]:value });
+            return;
         }
         if (state.stops.length) {
             oldStops.forEach((stop, i) => {
@@ -147,7 +152,7 @@ function Map(props) {
                         <Fab onClick={() => {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
 
-                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end)
+                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
                         }
 
                         }

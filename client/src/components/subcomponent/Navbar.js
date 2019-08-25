@@ -1,46 +1,55 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+
 
 const Navbar = (props) => {
     const logOut = event => {
         event.preventDefault();
         console.log('logging out');
         Axios.get('/api/users/logout')
-        .then(function(res){
-            console.log(res);
-            // setLoggedIn(false);
-            props.loginCallback({
-                isLoggedIn: false,
-                id: null
+            .then(function (res) {
+                console.log(res);
+                // setLoggedIn(false);
+                props.loginCallback({
+                    isLoggedIn: false,
+                    id: null
+                })
+                window.location = "/login";
             })
-            window.location = "/login";
-        })
-        .catch(function(err){
-            console.log(err);
-        })
+            .catch(function (err) {
+                console.log(err);
+            })
     }
     return (
-        <nav className="nav wrapper blue-grey darken-2">
-            <div className="container">
-                <Link to='/home' className="left brand-logo">
-                    <img src='/assets/images/switchBakLogo.png' alt="logo" />
-                </Link>
-                { props.userId 
-                    ?<ul className="right">
-                        <li key="home"><NavLink to='/home'> Home </NavLink> </li>
-                        <li key="newTrip"><NavLink to='/search'>New Trip</NavLink></li>
-                        <li key="my-trips"><NavLink to='/my-trips'>My Trips</NavLink></li>
-                        <li key="logOut"><NavLink to='#' onClick={logOut}>Log Out</NavLink></li> 
+        <Grid container>
+        <Grid item xs={4}>
+        <nav className="nav navTop navBottom">
+            <div className="navLinks">
+                {props.userId
+                    ? <ul className="nav">
+
+                        <li key="home"><Link to='/home'><i className="material-icons" style={{ fontSize: 30 }}>home</i></Link></li>
+
+                        <li key="newTrip"><Link to='/map'><i className="material-icons" style={{ fontSize: 30 }}>search</i></Link></li>
+
+                        <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li>
+
+                        <li key="logOut"><Link to='#' onClick={logOut}><i className="material-icons" style={{ fontSize: 30 }}>exit_to_app</i></Link></li>
+
+
                     </ul>
-                
-                    :<ul className="right">
-                        <li key="signIn"><NavLink to='/login'> Sign in </NavLink> </li>
+
+                    : <ul className="loggedOutLinks">
+                        <li key="signIn"><Link to='/login'> Sign in </Link> </li>
                     </ul>
+
                 }
             </div>
         </nav>
+        </Grid>
+        </Grid>
     )
 }
 

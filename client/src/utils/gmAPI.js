@@ -48,9 +48,7 @@ const MapFunctions = {
                     bounds: { north: north, south: south, east: east, west: west },
                     type: ['lodging'],
                     keywords: ['hostel', 'hotel']
-
-                };
-
+                }
             }
             createRequest()
             console.log(request)
@@ -102,61 +100,60 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: (map, start, end, stops, directionsService, directionsDisplay) => {
+    calculateAndDisplayRoute: async (map, start, end, stops) => {
+        console.log(stops);
+        console.log(start);
+        const wps = stops.map(stop => {
+            for (let key in stop) {
+                if (parseInt(key) > 0) {
+                    return {
+                        location: stop[`${parseInt(key)}waypoint`],
+                        stopover: true
+                    }
+                }
+            }
+        });
+        console.log('display route meep');
+        console.log(wps);
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer()
         // directionsDisplay.setMap()
         directionsService.route({
             origin: start,
             destination: end,
+            waypoints: wps,
+            optimizeWaypoints: true,
             travelMode: 'DRIVING'
-        }, function (response, status) {
+        }, await function (response, status) {
             if (status === 'OK') {
                 directionsDisplay.setDirections(response)
             } else {
                 console.log('Directions request failed due to ' + status)
             }
         })
-        // Load Waypoints //
-        var waypts = [];
-        var checkboxArray = { options: [start, end] };
-        for (var i = 0; i < checkboxArray.length; i++) {
-            if (checkboxArray.options[i].selected) {
-                waypts.push({
-                    location: checkboxArray[i].value,
-                    stopover: true
-                });
-                console.log(checkboxArray[i])
 
-            }
-        }
+        // Actual Route/Directions Service Rendering: //
 
         directionsService.route({
             origin: start,
             destination: end,
-            waypoints: waypts,
+            waypoints: wps,
             optimizeWaypoints: true,
             travelMode: 'DRIVING'
         }, function (response, status) {
+            // Checking Status of response //
             if (status === 'OK') {
+                // Setting map's directions to response values //
                 directionsDisplay.setDirections(response);
+                // Choosing the first route to display: //
                 var route = response.routes[0];
-                var summaryPanel = document.getElementById('directions-panel');
-                summaryPanel.innerHTML = '';
                 // For each route, display summary information.
                 for (var i = 0; i < route.legs.length; i++) {
-                    var routeSegment = i + 1;
                     console.log(route.legs[i])
                     var startString = route.legs[i].start_address
                     var endString = route.legs[i].end_address
                     var start = route.legs[i].start_location
                     var end = route.legs[i].end_location
-                    summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                        '</b><br>';
-                    summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-                    summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                    summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-
                     MapFunctions.handleTripSearch(map, startString, endString, start, end, stops)
                 }
                 directionsDisplay.setMap(map);

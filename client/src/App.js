@@ -10,6 +10,7 @@ import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
+import Header from './components/subcomponent/Header';
 
 function App() {
   // Define hooks (state) variables
@@ -35,9 +36,9 @@ function App() {
           } else {
             console.log('sending user to login page');
             // console.log(window.location.pathname);
-            // if (window.location.pathname !== '/login'){
-            //     window.location = '/login';
-            // }
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+              window.location = '/login';
+            }
           }
         })
         .catch(err => {
@@ -47,11 +48,12 @@ function App() {
       console.log(`User signed in with id ${userId}`);
     }
   }
+
   isLoggedIn();
   return (
     <Router>
-      <div>
-
+      <>
+        <Header />
         <Navbar
           loginCallback={loginCallback}
           isLoggedIn={loggedIn}
@@ -67,9 +69,12 @@ function App() {
           <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
           <Route component={NoMatch} />
         </Switch>
-      </div>
+
+      </>
+
     </Router>
-  );
+  )
+
 }
 
 export default App;

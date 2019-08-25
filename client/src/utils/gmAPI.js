@@ -55,7 +55,7 @@ const MapFunctions = {
                         var request = {
                             placeId: results[i].place_id
                         }
-                        console.log(request);
+                        // console.log(request);
                         // COMMENTED THIS OUT TO BE SAFE - THE CHROME DEV CONSOLE WAS GIVING US WARNINGS "OVER_QUERY_LIMIT" - ...DIDN'T WANT US TO OVERWHELM OUR API LIMITS...
                         // service.getDetails(request, function(place, status){
                         //     console.log(status);

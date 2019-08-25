@@ -99,6 +99,8 @@ function Map(props) {
     }
     const addInput = () => {
         console.log("addInput running");
+        var newId;
+        
         ReactDOM.render(
             <TextField
                 label="Waypoint"
@@ -108,8 +110,7 @@ function Map(props) {
                 onChange={handleChange}
             />, document.getElementById(`waypoint${state.inputId}`)
         )
-        var newId = state.inputId + 1
-        setState({...state, inputId: newId});
+        setState({...state, inputId: 1});
     }
     console.log(state);
     return (

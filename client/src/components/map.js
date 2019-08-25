@@ -44,9 +44,9 @@ const useStyles = makeStyles(theme => ({
 }));
 function Map(props) {
     
-    useEffect(function () {
-        return <GoogleMapReact />
-    }, [GoogleMapReact])
+    // useEffect(function () {
+    //     return <GoogleMapReact />
+    // }, [GoogleMapReact])
 
 
     const defaultview = {
@@ -99,7 +99,7 @@ function Map(props) {
     }
     const addInput = () => {
         console.log("addInput running");
-        var newId;
+        var newId = state.inputId + 1;
         
         ReactDOM.render(
             <TextField
@@ -110,7 +110,7 @@ function Map(props) {
                 onChange={handleChange}
             />, document.getElementById(`waypoint${state.inputId}`)
         )
-        setState({...state, inputId: 1});
+        setState({...state, inputId: newId});
     }
     console.log(state);
     return (

@@ -23,11 +23,19 @@ const MyTrips = (props) => {
     }
 
     return (
+        <>
         <div className="myTrip container">
             <Trips 
                 trips={user ? user.trips : []}
             />
         </div>
+
+        <div className="myTrip container">
+            <Trips 
+                trips={user ? user.trips : []}
+            />
+        </div>
+        </>
     )
 }
 

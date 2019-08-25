@@ -101,11 +101,11 @@ li {
   width: 100%;
 }
 
-@media (min-width: 767px) {
+/* @media (min-width: 767px) {
   .Profile {
-    /* margin-top:7.5em; */
+    margin-top:7.5em;
   }
-}
+} */
 
 .BioPic {
   max-width: 220px;

@@ -44,9 +44,9 @@ const useStyles = makeStyles(theme => ({
 }));
 function Map(props) {
     
-    useEffect(function () {
-        return <GoogleMapReact />
-    }, [GoogleMapReact])
+    // useEffect(function () {
+    //     return <GoogleMapReact />
+    // }, [GoogleMapReact])
 
 
     const defaultview = {
@@ -99,6 +99,8 @@ function Map(props) {
     }
     const addInput = () => {
         console.log("addInput running");
+        var newId = state.inputId + 1;
+        
         ReactDOM.render(
             <TextField
                 label="Waypoint"
@@ -108,7 +110,6 @@ function Map(props) {
                 onChange={handleChange}
             />, document.getElementById(`waypoint${state.inputId}`)
         )
-        var newId = state.inputId + 1
         setState({...state, inputId: newId});
     }
     console.log(state);
@@ -117,7 +118,7 @@ function Map(props) {
         <Paper className={classes.root}>
             <Container fixed>
             <div className={classes.searchDiv}>
-                <FormControl fullWidth="true" component="fieldset">
+                <FormControl fullWidth={true} component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                     <Divider variant="middle" className={classes.darkDivider} />
 

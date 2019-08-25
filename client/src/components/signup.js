@@ -87,7 +87,7 @@ export default function Signup(props) {
         Axios.post("/api/users/signup", user)
         .then(function(res){
             console.log(res.data);
-            window.location = '/';
+            window.location = '/login';
         }).catch(function(err){
             console.log(err);
         })

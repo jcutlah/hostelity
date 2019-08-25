@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 function Map(props) {
-
+    
     useEffect(function () {
         return <GoogleMapReact />
     }, [GoogleMapReact])
@@ -54,21 +54,39 @@ function Map(props) {
 
     const classes = useStyles()
     const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: true,
         map: {},
         start: '',
-        end: ''
+        end: '',
+        stops: []
     });
-    /* TxtField*/
-
 
     const handleChange = event => {
         const { name, value } = event.target;
-        setState({ ...state, [name]: value });
-    };
-
+        var usedThisStop = false;
+        var oldStops = state.stops;
+        var newStops;
+        var thisStop = {
+            [name]: value
+        }
+        if (state.stops.length) {
+            oldStops.forEach((stop, i) => {
+                if (stop[name]){
+                    oldStops[i] = thisStop;
+                    usedThisStop = true;
+                }
+            });
+            if (!usedThisStop){
+                newStops = [...oldStops, thisStop];
+                setState({ ...state, stops: newStops });
+            } else {
+                setState({ ...state, stops: oldStops });
+            }
+        } else {
+            newStops = [thisStop];
+            setState({ ...state, stops: newStops });
+        }
+    }
+    console.log(state);
     return (
         // Important! Always set the container height explicitly
         <>
@@ -107,7 +125,7 @@ function Map(props) {
                             id="outlined-start"
                             label="Starting Point"
                             className={classes.textField}
-                            value={state.start}
+                            // value={state.start}
                             name='start'
                             onChange={handleChange}
                             margin="normal"
@@ -117,7 +135,7 @@ function Map(props) {
                             id="outlined-end"
                             label="Final Destination"
                             className={classes.textField}
-                            value={state.end}
+                            // value={state.end}
                             name='end'
                             onChange={handleChange}
                             margin="normal"
@@ -144,6 +162,7 @@ function Map(props) {
             </div>
         </>
     );
+    
 }
 
 export default Map

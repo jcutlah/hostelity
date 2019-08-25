@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Button from "@material-ui/core/Button";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField'
@@ -11,6 +12,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
+import ReactDOM from 'react-dom';
 require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -35,6 +37,9 @@ const useStyles = makeStyles(theme => ({
     },
     darkDivider: {
         backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    button: {
+        margin: theme.spacing(1)
     }
 }));
 function Map(props) {
@@ -57,7 +62,8 @@ function Map(props) {
         map: {},
         start: '',
         end: '',
-        stops: []
+        stops: [],
+        inputId: 1
     });
 
     const handleChange = event => {
@@ -90,6 +96,20 @@ function Map(props) {
             newStops = [thisStop];
             setState({ ...state, stops: newStops });
         }
+    }
+    const addInput = () => {
+        console.log("addInput running");
+        ReactDOM.render(
+            <TextField
+                label="Waypoint"
+                name={`${state.inputId}waypoint`}
+                margin="normal"
+                variant="outlined"
+                onChange={handleChange}
+            />, document.getElementById(`waypoint${state.inputId}`)
+        )
+        var newId = state.inputId + 1
+        setState({...state, inputId: newId});
     }
     console.log(state);
     return (
@@ -136,6 +156,24 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
+                        <div id="waypoint1">
+                        </div>
+                        <div id="waypoint2">
+                        </div>
+                        <div id="waypoint3">
+                        </div>
+                        <div id="waypoint4">
+                        </div>
+                        <div id="waypoint5">
+                        </div>
+                        <div id="waypoint6">
+                        </div>
+                        <div id="waypoint7">
+                        </div>
+                        <div id="waypoint8">
+                        </div>
+                        <div id="waypoint9">
+                        </div>
                         <TextField
                             id="outlined-end"
                             label="Final Destination"
@@ -146,6 +184,12 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
+                        <Button
+                            className={classes.button}
+                            onClick={addInput}>
+                            Add Waypoint
+                            </Button>
+
                         <FormHelperText>Find your Path!</FormHelperText>
 
                         <br />

@@ -56,10 +56,11 @@ const MapFunctions = {
                             placeId: results[i].place_id
                         }
                         console.log(request);
-                        service.getDetails(request, function(place, status){
-                            console.log(status);
-                            console.log(place);
-                        })
+                        // COMMENTED THIS OUT TO BE SAFE - THE CHROME DEV CONSOLE WAS GIVING US WARNINGS "OVER_QUERY_LIMIT" - ...DIDN'T WANT US TO OVERWHELM OUR API LIMITS...
+                        // service.getDetails(request, function(place, status){
+                        //     console.log(status);
+                        //     console.log(place);
+                        // })
 
                     }
                 } else console.log("nearbySearch:" + status);
@@ -97,9 +98,13 @@ const MapFunctions = {
         console.log(stops);
         console.log(start);
         const wps = stops.map(stop => {
-            return {
-                location: stop['end'],
-                stopover: true
+            for (let key in stop){
+                if (parseInt(key) > 0){
+                    return {
+                        location: stop[`${parseInt(key)}waypoint`],
+                        stopover: true
+                    }
+                }
             }
         });
         console.log('display route meep');

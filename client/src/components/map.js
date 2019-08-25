@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Button from "@material-ui/core/Button";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField'
@@ -11,7 +12,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
-import { flexbox, fontSize } from '@material-ui/system';
+import ReactDOM from 'react-dom';
 require("dotenv").config()
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -36,10 +37,13 @@ const useStyles = makeStyles(theme => ({
     },
     darkDivider: {
         backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    button: {
+        margin: theme.spacing(1)
     }
 }));
 function Map(props) {
-
+    
     useEffect(function () {
         return <GoogleMapReact />
     }, [GoogleMapReact])
@@ -55,21 +59,59 @@ function Map(props) {
 
     const classes = useStyles()
     const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: true,
         map: {},
         start: '',
-        end: ''
+        end: '',
+        stops: [],
+        inputId: 1
     });
-    /* TxtField*/
-
 
     const handleChange = event => {
         const { name, value } = event.target;
-        setState({ ...state, [name]: value });
-    };
+        var usedThisStop = false;
+        var oldStops = state.stops;
+        var newStops;
+        var thisStop = {
+            [name]: value,
 
+        }
+        if (name === "start" || name === "end"){
+            setState({ ...state, [name]:value });
+            return;
+        }
+        if (state.stops.length) {
+            oldStops.forEach((stop, i) => {
+                if (stop[name]){
+                    oldStops[i] = thisStop;
+                    usedThisStop = true;
+                }
+            });
+            if (!usedThisStop){
+                newStops = [...oldStops, thisStop];
+                setState({ ...state, stops: newStops });
+            } else {
+                setState({ ...state, stops: oldStops });
+            }
+        } else {
+            newStops = [thisStop];
+            setState({ ...state, stops: newStops });
+        }
+    }
+    const addInput = () => {
+        console.log("addInput running");
+        ReactDOM.render(
+            <TextField
+                label="Waypoint"
+                name={`${state.inputId}waypoint`}
+                margin="normal"
+                variant="outlined"
+                onChange={handleChange}
+            />, document.getElementById(`waypoint${state.inputId}`)
+        )
+        var newId = state.inputId + 1
+        setState({...state, inputId: newId});
+    }
+    console.log(state);
     return (
         // Important! Always set the container height explicitly
         <>
@@ -85,29 +127,53 @@ function Map(props) {
                             id="outlined-start"
                             label="Starting Point"
                             className={classes.textField}
-                            value={state.start}
+                            // value={state.start}
                             name='start'
                             onChange={handleChange}
                             margin="normal"
                             variant="outlined"
                         />
+                        <div id="waypoint1">
+                        </div>
+                        <div id="waypoint2">
+                        </div>
+                        <div id="waypoint3">
+                        </div>
+                        <div id="waypoint4">
+                        </div>
+                        <div id="waypoint5">
+                        </div>
+                        <div id="waypoint6">
+                        </div>
+                        <div id="waypoint7">
+                        </div>
+                        <div id="waypoint8">
+                        </div>
+                        <div id="waypoint9">
+                        </div>
                         <TextField
                             id="outlined-end"
                             label="Final Destination"
                             className={classes.textField}
-                            value={state.end}
+                            // value={state.end}
                             name='end'
                             onChange={handleChange}
                             margin="normal"
                             variant="outlined"
                         />
-                        {/* <FormHelperText>Find your Path!</FormHelperText> */}
+                        <Button
+                            className={classes.button}
+                            onClick={addInput}>
+                            Add Waypoint
+                            </Button>
+
+                        <FormHelperText>Find your Path!</FormHelperText>
 
                         <br />
                         <Fab onClick={() => {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
 
-                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end)
+                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
                         }
 
                         }
@@ -147,6 +213,7 @@ function Map(props) {
 
         </>
     );
+    
 }
 
 export default Map

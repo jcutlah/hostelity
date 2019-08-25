@@ -1,8 +1,11 @@
 @media (max-width: 767px) {
   .navBottom {
     bottom: 0;
+    margin-bottom: 1rem;
     width: 100%;
     border-top: 0.1rem solid orange;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -15,32 +18,41 @@
   }
 }
 
-.header {
-  display: flex;
-  background: #465964;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  height: 4rem;
-  border-bottom: 0.1rem solid orange;
-  align-items: center;
+html {
+  padding: 0;
+  margin: 0;
 }
 
-@media (max-width: 767px) {
-  .header {
-    justify-content: center;
-  }
+body {
+  padding: 0;
+  margin: 0;
+  background: rgba(63, 63, 63, 0.295);
+ 
 }
+
+.header {
+  display: flex;
+  /* background: #465964; */
+  position: fixed;
+  z-index: 1;
+  /* height: 4.5rem; */
+  border-bottom: 0.2rem solid orange;
+  align-items: center;
+  width: 100%;
+}
+
 
 @media (min-width: 767px) {
   .header {
-    height: 8.5rem;
+    height: 5.5rem;
   }
 }
 
 nav {
   position: fixed;
   z-index: 1;
+  padding: 0;
+  margin: 0;
 }
 
 ul {
@@ -49,16 +61,10 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: #465964;
-  height: 3rem;
+  justify-content: flex-end;
+  background: transparent;
 }
-li {
-  display: flex;
-  flex-direction: row;
 
-}
 
 li a {
   display: block;
@@ -67,7 +73,12 @@ li a {
 }
 
 li a:hover {
-  background-color: #111;
+  background-color: orange;
+  color: white;
+}
+
+li {
+  width: 100px;
 }
 
 .brand-logo img {
@@ -76,7 +87,7 @@ li a:hover {
 
 @media (min-width: 767px) {
   .brand-logo img {
-    width: 250px;
+    width: 180px;
   }
 }
 
@@ -85,18 +96,19 @@ li a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 1rem;
-  margin-top: 3.5em;
-  border-bottom: 0.1rem solid orange;
+  margin-top: 5.5em;
+  border-bottom: 0.1rem solid rgba(83, 211, 204, 0.945);;
+  width: 100%;
 }
 
 @media (min-width: 767px) {
   .Profile {
-    margin-top:7.5em;
+    /* margin-top:7.5em; */
   }
 }
 
 .BioPic {
-  max-width: 200px;
+  max-width: 220px;
   border-color: white;
   border-width: 5px;
   border-style: solid;
@@ -128,19 +140,12 @@ li a:hover {
 }
 
 .MuiInputBase-input {
-<<<<<<< HEAD
   border-bottom: 0px !important;
   margin: 0px !important;
 }
 
-.myTrip,
-.trip {
-  padding: 1%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2%;
-  border-radius: 5px;
-  color: #455a64;
+intput[type="text"] {
+  padding-left: 10px!important;
 }
 
 .MuiFormControl-root {
@@ -150,23 +155,4 @@ li a:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
 }
-=======
- border-bottom: 0px !important;
- margin: 0px !important;
-}
-
-.myTrip, .trip {
-    padding: 1%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    border-radius: 5px;
-    color: #455A64;
-}
-
-input[type="text"] {
-    padding-left: 10px!important;
-}
->>>>>>> 92d84d435212e0e951ed90aad5e1c025522e7995

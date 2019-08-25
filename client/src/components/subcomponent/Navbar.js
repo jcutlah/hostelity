@@ -24,7 +24,7 @@ const Navbar = (props) => {
     }
     return (
         <Grid container>
-        <Grid item xs={8}>
+        <Grid item xs={4}>
         <nav className="nav navTop navBottom">
             <div className="navLinks">
                 {props.userId

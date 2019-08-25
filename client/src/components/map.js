@@ -13,7 +13,7 @@ import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
 import ReactDOM from 'react-dom';
-require("dotenv").config()
+import Paper from '@material-ui/core/Paper';
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -114,10 +114,10 @@ function Map(props) {
     console.log(state);
     return (
         // Important! Always set the container height explicitly
-        <>
+        <Paper className={classes.root}>
             <Container fixed>
             <div className={classes.searchDiv}>
-                <FormControl component="fieldset">
+                <FormControl fullWidth="true" component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                     <Divider variant="middle" className={classes.darkDivider} />
 
@@ -167,9 +167,9 @@ function Map(props) {
                             Add Waypoint
                             </Button>
 
-                        <FormHelperText>Find your Path!</FormHelperText>
+                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
 
-                        <br />
+                        <br /> */}
                         <Fab onClick={() => {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
 
@@ -181,7 +181,8 @@ function Map(props) {
                             variant="extended" aria-label="delete" className={classes.fab}>
                             <NavigationIcon className={classes.extendedIcon} />
                             Begin
-      </Fab>
+                        </Fab>
+ 
                     </FormGroup>
                     <div id='directions-panel'></div>
                 </FormControl>
@@ -211,7 +212,7 @@ function Map(props) {
 
             </Container>
 
-        </>
+        </Paper>
     );
     
 }

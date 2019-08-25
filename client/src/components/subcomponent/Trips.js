@@ -21,20 +21,31 @@ const Trips = (props) => {
                 console.log(trip.hostels);
                 return (
                     <div key={trip._id} className="tripSummary">
-                        <Typography variant="h5" component="h3">
+                        <Typography variant="h5" component="h3" align="center">
                             {trip.name}
                         </Typography>
-                        <Typography component="p">
-                            Start:
-                        {trip.startDest}
-                        </Typography>
-                        <Typography component="p">
-                            End:
-                           {trip.endDest}
-                        </Typography>
+                        <hr></hr>
                         <Hostels
                             hostels={trip.hostels}
                         />
+
+                        <Typography variant="h6" gutterBottom>
+                            Start:
+                         </Typography>
+                       
+                        <Typography component="p">
+                            {trip.startDest}
+                        </Typography>
+                      
+
+                        <Typography variant="h6" gutterBottom>
+                            End:
+                        </Typography>
+                        
+
+                        <Typography component="p">
+                            {trip.endDest}
+                        </Typography>
                     </div>
 
                 )

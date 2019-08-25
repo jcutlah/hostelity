@@ -50,11 +50,16 @@ const MapFunctions = {
                 console.log(results)
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
                     var service = new google.maps.places.PlacesService(map);
+                    console.log('getting place data for random-ass, fucking places along route')
                     for (var i = 0; i < results.length; i++) {
                         var request = {
                             placeId: results[i].place_id
                         }
-                        service.getDetails(request)
+                        console.log(request);
+                        service.getDetails(request, function(place, status){
+                            console.log(status);
+                            console.log(place);
+                        })
 
                     }
                 } else console.log("nearbySearch:" + status);
@@ -88,15 +93,27 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: (map, start, end, directionsService, directionsDisplay) => {
+    calculateAndDisplayRoute: async (map, start, end, stops) => {
+        console.log(stops);
+        console.log(start);
+        const wps = stops.map(stop => {
+            return {
+                location: stop['end'],
+                stopover: true
+            }
+        });
+        console.log('display route meep');
+        console.log(wps);
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer()
         // directionsDisplay.setMap()
         directionsService.route({
             origin: start,
             destination: end,
+            waypoints: wps,
+            optimizeWaypoints: true,
             travelMode: 'DRIVING'
-        }, function (response, status) {
+        }, await function (response, status) {
             if (status === 'OK') {
                 directionsDisplay.setDirections(response)
             } else {
@@ -120,7 +137,7 @@ const MapFunctions = {
         directionsService.route({
             origin: start,
             destination: end,
-            waypoints: waypts,
+            waypoints: wps,
             optimizeWaypoints: true,
             travelMode: 'DRIVING'
         }, function (response, status) {

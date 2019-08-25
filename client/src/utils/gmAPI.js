@@ -9,6 +9,7 @@ const MapFunctions = {
 
     handleTripSearch: async (map, startString, endString, start, end, stops) => {
         // console.log("Fuego")
+        const google = window.google
         try {
             const response = await axios.get(`/api/maps/textsearch/${startString}/${endString}`);
             const response2 = await axios.get(`/api/maps/autocomplete/${start.lat()}/${start.lng()}`);
@@ -96,11 +97,12 @@ const MapFunctions = {
             console.log(error)
         }
         // console.log(start, end)
-        searchBitch()
+        console.log(searchBitch, searchBitch())
     },
 
     //Make and display Routes//
     calculateAndDisplayRoute: async (map, start, end, stops) => {
+        const google = window.google
         console.log(stops);
         console.log(start);
         const wps = stops.map(stop => {
@@ -165,13 +167,9 @@ const MapFunctions = {
     },
     handleApiLoaded: (map, maps, LatLng) => {
         // use map and maps objects
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer(
-            {
-                map: map
-            });
 
-        return (directionsService, directionsDisplay)
+
+        return console.log("API Loaded")
     }
 
 }

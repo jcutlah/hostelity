@@ -118,7 +118,7 @@ function Map(props) {
         <Paper className={classes.root}>
             <Container fixed>
             <div className={classes.searchDiv}>
-                <FormControl fullWidth="true" component="fieldset">
+                <FormControl fullWidth={true} component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                     <Divider variant="middle" className={classes.darkDivider} />
 

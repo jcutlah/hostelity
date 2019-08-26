@@ -31,7 +31,7 @@ const hostelSeed = [
 ];
 const tripSeed = [
     {
-        name: "My Lame Ass Trip",
+        name: "The Trip That I'll Really Want To Forget, But Will Never Forget",
         startDest: {
             location: [-113.0263,37.2982], 
             name: 'Kings Canyon, NP'
@@ -52,7 +52,7 @@ const tripSeed = [
         ]
     },
     {
-        name: "My Stupid Trip",
+        name: "My Spiritual Journey Trip",
         startDest: {
             location: [-113.0263,37.2982], 
             name: 'Kings Canyon, NP'
@@ -73,7 +73,7 @@ const tripSeed = [
         ]
     },
     {
-        name: "My Cliche Trip",
+        name: "My Fun But Cliche Trip",
         startDest: {
             location: [-113.0263,37.2982], 
             name: 'Kings Canyon, NP'

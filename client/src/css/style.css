@@ -26,7 +26,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background: rgba(63, 63, 63, 0.295);
+  /* background: rgba(63, 63, 63, 0.295); */
  
 }
 
@@ -83,6 +83,14 @@ li {
 
 .brand-logo img {
   width: 125px;
+}
+
+.MuiFormControl-root {
+    width: 100%;
+}
+
+#form-top {
+    display: none;
 }
 
 @media (min-width: 767px) {

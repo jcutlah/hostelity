@@ -56,52 +56,85 @@ export default function SignIn() {
 
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
+    const [loginError, updateLoginError] = useState({
+        username: false,
+        password: false
+    });
 
     const handleInputChange = event => {
         const { name, value } = event.target;
         switch (name) {
-            case 'email': updateEmail(value);
-            break;
-            case 'password': updatePassword(value);
-            break;
+            case 'email': 
+                updateLoginError({
+                    ...loginError,
+                    username: false
+                })
+                updateEmail(value);
+                break;
+            case 'password': 
+                updateLoginError({
+                    ...loginError,
+                    password: false
+                })
+                updatePassword(value);
+                break;
             default: return;
         }
       };
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        console.log(event);
+        // console.log(event);
         const user = {
             email,
             password
         }
         Axios.post("/api/users/login", user)
         .then(function(res){
-            console.log(res.data);
-            window.location = '/home';
+            // console.log('Not an error!!!!!')
+            // console.log(res.data);
+            if (res.data.passport.user){
+                window.location = '/home';
+            }
+            if (res.data.flash){
+                // console.log(res.data.flash);
+                // console.log(typeof res.data.flash.error);
+                const flash = [];
+                for (let i of res.data.flash.error){
+                    flash.push(i);
+                }
+                // console.log(res.data.flash.error);
+                switch (flash[flash.length-1]){
+                    case "Missing credentials":
+                        updateLoginError({
+                            username: true,
+                            password: true
+                        });
+                        break;
+                    case "Not a user":
+                        updateLoginError({
+                            username: true,
+                            password: false
+                        });
+                        break;
+                    case "Incorrect password":
+                        updateLoginError({
+                            username: false,
+                            password: true
+                        });
+                        break;
+                    default:
+                        return false;
+                }
+            } else {
+                window.location = '/home';
+            }
         }).catch(function(err){
             console.log(err);
-        })
-    }
-
-    const getUserInfo = (event) => {
-        event.preventDefault();
-        Axios.get('/api/users')
-        .then(function(res){
-            console.log(res);
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-    }
-    const logOut = event => {
-        event.preventDefault();
-        Axios.get('api/users/logout')
-        .then(function(res){
-            console.log(res);
-        })
-        .catch(function(err){
-            console.log(err);
+            updateLoginError({
+                username: false,
+                password: false
+            });
         })
     }
 
@@ -128,6 +161,7 @@ export default function SignIn() {
                         autoFocus
                         onChange={handleInputChange}
                         className={"browser-default"}
+                        error={loginError.username}
                     />
                     <TextField
                         variant="outlined"
@@ -139,6 +173,7 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        error={loginError.password}
                         onChange={handleInputChange}
                     />
                     {/* <FormControlLabel
@@ -156,9 +191,9 @@ export default function SignIn() {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            {/* <Link href="#" variant="body2">
                                 Forgot password?
-                            </Link>
+                            </Link> */}
                         </Grid>
                         <Grid item>
                             <Link href="/signup" variant="body2">

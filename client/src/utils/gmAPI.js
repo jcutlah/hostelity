@@ -24,18 +24,36 @@ const MapFunctions = {
             for (var i = 0; i < stops.length; i++) {
                 console.log(stops[i])
             }
-            function createRequest() {
+            const useRequests = (requests) => {
+                console.log(requests)
+                var service = new google.maps.places.PlacesService(map);
+
+                var detailsCallback = (place, status) => {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        console.log(place);
+                    } else {
+                        console.log(status)
+                    }
+                }
+
+                for (var i = 0; i < requests.length; i++) {
+
+                    // Gets details on locations once the data has been received: //
+                    service.getDetails(requests[i], detailsCallback)
+                }
+
+
+            }
+            const createRequest = () => {
                 var requestsForPoints = []
                 for (var i = 0; i < stops.length; i++) {
                     requestsForPoints.push({
-
                         location: stops[i].location,
                         type: ['lodging'],
                         keywords: ['hostel', 'hotel']
-
                     })
                 }
-                return console.log(requestsForPoints)
+                return useRequests(requestsForPoints)
             }
             createRequest()
 
@@ -48,11 +66,7 @@ const MapFunctions = {
                         var request = {
                             placeId: results[i].place_id
                         }
-                        var marker = new google.maps.Marker({
-                            position: (results[i].lat, results[i].lng),
-                            title: "Hello World!"
-                        });
-                        marker.setMap(map);
+
                         // console.log(request);
                         // COMMENTED THIS OUT TO BE SAFE - THE CHROME DEV CONSOLE WAS GIVING US WARNINGS "OVER_QUERY_LIMIT" - ...DIDN'T WANT US TO OVERWHELM OUR API LIMITS...
                         // service.getDetails(request, function(place, status){

@@ -11,9 +11,11 @@ const localStrategy = new Strategy(
         console.log('local strategy happening!');
       userController.getUserByEmail(username, function(err, user) {
         if (err) { 
+            console.log('error happened');
             return done(err); 
         }
-        if (!user) { 
+        if (!user) {
+            console.log(`${username} not a user`)
             return done(null, false, { message: "Not a user"}); 
         }
         if (user.password != password) { 

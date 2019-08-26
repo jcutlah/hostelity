@@ -31,7 +31,7 @@ const orm = {
         console.log(`getting user with email ${email}`);
         db.User.findOne({email:email.toLowerCase()}, function(err, user){
             console.log(err);
-            console.log(user);
+            console.log(`error: ${user}`);
             callback(err, user);
         })
     },

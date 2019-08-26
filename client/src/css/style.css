@@ -89,6 +89,10 @@ li {
     width: 100%;
 }
 
+#form-top {
+    display: none;
+}
+
 @media (min-width: 767px) {
   .brand-logo img {
     width: 180px;

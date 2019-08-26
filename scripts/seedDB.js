@@ -99,7 +99,7 @@ const seedData = [
         user: {
             firstName: "James",
             lastName: "Cutler",
-            email: "jamescutler1111@gmail.com",
+            email: "Jamescutler1111@gmail.com",
             password: "jcut",
             avatar: '/assets/images/hockeyJersey.jpg'
         },

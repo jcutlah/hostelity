@@ -9,7 +9,9 @@ const orm = {
             console.log(result);
             if (!result){
                 console.log('User not found. Creating user...');
-                db.User.create(userInfo, function(err, response){
+                console.log(userInfo);
+                let newUser = {...userInfo, email: userInfo.email.toLowerCase()}
+                db.User.create(newUser, function(err, response){
 
                     callback(err, response);
                 });

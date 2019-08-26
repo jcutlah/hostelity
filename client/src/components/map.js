@@ -14,6 +14,8 @@ import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
 import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
+
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -24,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     },
     mapContainer: {
  
+    },
+    link: {
+        margin: theme.spacing(1),
     },
     searchDiv: {
         position: 'relative',
@@ -116,7 +121,7 @@ function Map(props) {
                     <Divider variant="middle" className={classes.darkDivider} />
 
                     <FormGroup>
-
+                        <div className="form-inputs">
                         <TextField
                             id="outlined-start"
                             label="Starting Point"
@@ -246,8 +251,15 @@ function Map(props) {
                             <NavigationIcon className={classes.extendedIcon} />
                             Begin
                         </Fab>
- 
+                        </div>
                     </FormGroup>
+                    <div id="form-bottom">
+                        <Link 
+                            href={""} className={classes.link}
+                        >
+                            New Search
+                        </Link>
+                    </div>
                     <div id='directions-panel'></div>
                 </FormControl>
             </div>

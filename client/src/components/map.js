@@ -53,6 +53,11 @@ function Map(props) {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
 
+    useEffect(function(){
+        return () => {
+            document.querySelector('#form-top').setAttribute('style','display:none');
+        }
+    })
 
     const defaultview = {
         center: {
@@ -116,6 +121,13 @@ function Map(props) {
         <Paper className={classes.root}>
             <Container fixed>
             <div className={classes.searchDiv}>
+            <div id="form-top">
+                        <Link 
+                            href={""} className={classes.link}
+                        >
+                            New Search
+                        </Link>
+                    </div>
                 <FormControl fullWidth={true} component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                     <Divider variant="middle" className={classes.darkDivider} />
@@ -241,7 +253,7 @@ function Map(props) {
                         <br /> */}
                         <Fab onClick={() => {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
-
+                            document.querySelector('#form-top').setAttribute('style','display:block');
                             MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
                         }
 
@@ -253,13 +265,7 @@ function Map(props) {
                         </Fab>
                         </div>
                     </FormGroup>
-                    <div id="form-bottom">
-                        <Link 
-                            href={""} className={classes.link}
-                        >
-                            New Search
-                        </Link>
-                    </div>
+                    
                     <div id='directions-panel'></div>
                 </FormControl>
             </div>

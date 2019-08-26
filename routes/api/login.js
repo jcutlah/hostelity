@@ -64,26 +64,29 @@ router.route('/signup')
 
 // Matches with "/api/users/login"
 router.route('/login')
-  .post(passport.authenticate('local', /*{
-    successRedirect: "/api/users/login/meep",
-    failureRedirect: "/api/users/login/meep",
-    // failureFlash: true
-}*/),
+  .post(passport.authenticate('local', {
+    successRedirect: '/api/users/login/meep',
+    failureRedirect: '/api/users/login/derp',
+    failureFlash: true
+  }),
   function(req, res) {
-      console.log(`'login request received for:'`);
-      console.log(req.session);
+    //   console.log(`'login request received for:'`);
+    //   console.log(req.session);
       res.json(req.session);
     });
 router.route('/login/meep')
 .get(function(req, res){
-    console.log('success redirect...')
-    console.log(req.session);
+    // console.log(req);
+    // console.log('success redirect...')
+    // console.log(req.session);
+    res.json(req.session);
 })
-//   .post(passport.authenticate('local'), function(req, res) {
-//       console.log(`'login request received for:'`);
-//       console.log(req.body);
-//       res.json(req.user.email);
-//     });
-
+router.route('/login/derp')
+.get(function(req, res){
+    // console.log('failure redirect...')
+    // console.log(req);
+    // console.log(req.session);
+    res.json(req.session);
+})
 
 module.exports = router;

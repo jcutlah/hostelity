@@ -34,7 +34,7 @@ const Trips = (props) => {
                          </Typography>
                        
                         <Typography component="p">
-                            {trip.startDest}
+                            {trip.startDest.name}
                         </Typography>
                       
 
@@ -44,7 +44,7 @@ const Trips = (props) => {
                         
 
                         <Typography component="p">
-                            {trip.endDest}
+                            {trip.endDest.name}
                         </Typography>
                     </div>
 

@@ -63,20 +63,21 @@ export default function SignIn() {
 
     const handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name, value);
         switch (name) {
             case 'email': 
+                updateEmail(value);
                 updateLoginError({
                     ...loginError,
                     username: false
                 })
-                updateEmail(value);
                 break;
             case 'password': 
+                updatePassword(value);
                 updateLoginError({
                     ...loginError,
                     password: false
                 })
-                updatePassword(value);
                 break;
             default: return;
         }

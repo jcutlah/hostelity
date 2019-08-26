@@ -63,10 +63,11 @@ function Map(props) {
         start: '',
         end: '',
         stops: [],
-        inputId: 1
+        inputId: 0
     });
 
     const handleChange = event => {
+        console.log(state);
         const { name, value } = event.target;
         var usedThisStop = false;
         var oldStops = state.stops;
@@ -98,19 +99,11 @@ function Map(props) {
         }
     }
     const addInput = () => {
+        console.log(state);
         console.log("addInput running");
         var newId = state.inputId + 1;
-        
-        ReactDOM.render(
-            <TextField
-                label="Waypoint"
-                name={`${state.inputId}waypoint`}
-                margin="normal"
-                variant="outlined"
-                onChange={handleChange}
-            />, document.getElementById(`waypoint${state.inputId}`)
-        )
         setState({...state, inputId: newId});
+
     }
     console.log(state);
     return (
@@ -134,24 +127,94 @@ function Map(props) {
                             margin="normal"
                             variant="outlined"
                         />
-                        <div id="waypoint1">
-                        </div>
-                        <div id="waypoint2">
-                        </div>
-                        <div id="waypoint3">
-                        </div>
-                        <div id="waypoint4">
-                        </div>
-                        <div id="waypoint5">
-                        </div>
-                        <div id="waypoint6">
-                        </div>
-                        <div id="waypoint7">
-                        </div>
-                        <div id="waypoint8">
-                        </div>
-                        <div id="waypoint9">
-                        </div>
+                        { state.inputId >= 1 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`1waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 2 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`2waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 3 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`3waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 4 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`4waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 5 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`5waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 6 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`6waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 7 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`7waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
+                        { state.inputId >= 8 ?
+                            <TextField
+                                className={classes.textField}
+                                label="Waypoint"
+                                name={`8waypoint`}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={handleChange}
+                            /> :
+                            <div></div>
+                        }
                         <TextField
                             id="outlined-end"
                             label="Final Destination"

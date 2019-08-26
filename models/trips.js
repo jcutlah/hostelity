@@ -13,11 +13,31 @@ const tripSchema = new Schema({
         required: true
     },
     startDest: {
-        type: [Number, Number]
+        name: {
+            type: String
+        },
+        location: {
+            type: [Number, Number]
+        }
     },
     endDest: {
-        type: [Number, Number]
+        name: {
+            type: String
+        },
+        location: {
+            type: [Number, Number]
+        }
     },
+    wayPoints: [
+        {
+            location: {
+                type: [Number, Number]
+            },
+            name: {
+                type: String
+            } 
+        }
+    ],
     dateAdded: { 
         type: Date, 
         default: Date.now 

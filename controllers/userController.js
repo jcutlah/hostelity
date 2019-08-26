@@ -29,7 +29,7 @@ const orm = {
     },
     getUserByEmail: function(email, callback){
         console.log(`getting user with email ${email}`);
-        db.User.findOne({email:email}, function(err, user){
+        db.User.findOne({email:email.toLowerCase()}, function(err, user){
             console.log(err);
             console.log(user);
             callback(err, user);

@@ -32,18 +32,66 @@ const hostelSeed = [
 const tripSeed = [
     {
         name: "My Lame Ass Trip",
-        startDest: [-113.0263,37.2982], 
-        endDest: [-118.5551,36.8879]
+        startDest: {
+            location: [-113.0263,37.2982], 
+            name: 'Kings Canyon, NP'
+        },
+        endDest: {
+            location: [-118.5551,36.8879],
+            name: 'Zion, NP'
+        },
+        wayPoints: [
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            },
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            }
+        ]
     },
     {
         name: "My Stupid Trip",
-        startDest: [-113.0263,37.2982], 
-        endDest: [-118.5551,36.8879]
+        startDest: {
+            location: [-113.0263,37.2982], 
+            name: 'Kings Canyon, NP'
+        },
+        endDest: {
+            location: [-118.5551,36.8879],
+            name: 'Zion, NP'
+        },
+        wayPoints: [
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            },
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            }
+        ]
     },
     {
         name: "My Cliche Trip",
-        startDest: [-113.0263,37.2982], 
-        endDest: [-118.5551,36.8879]
+        startDest: {
+            location: [-113.0263,37.2982], 
+            name: 'Kings Canyon, NP'
+        },
+        endDest: {
+            location: [-118.5551,36.8879],
+            name: 'Zion, NP'
+        },
+        wayPoints: [
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            },
+            {
+                location: [-118.5551,36.8879],
+                name: 'Zion, NP'
+            }
+        ]
     }
 ];
 const seedData = [
@@ -67,7 +115,7 @@ const seedData = [
             avatar: "https://placebeard.it/300x180"
         },
         hostels: [hostelSeed[1]],
-        trips: [tripSeed[1]]
+        trips: [tripSeed[1], tripSeed[0], tripSeed[2]]
     },
     {
         user: {

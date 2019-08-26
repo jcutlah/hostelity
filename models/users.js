@@ -8,7 +8,7 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        default: 'meep'
+        default: 'https://placebeard.it/300x180'
     },
     firstName: {
         type: String,

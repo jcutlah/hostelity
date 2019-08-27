@@ -94,7 +94,7 @@ export default function SignIn() {
         .then(function(res){
             // console.log('Not an error!!!!!')
             // console.log(res.data);
-            if (res.data.passport.user){
+            if (res.data.passport){
                 window.location = '/home';
             }
             if (res.data.flash){

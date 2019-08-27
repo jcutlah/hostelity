@@ -7,13 +7,6 @@ import Grid from '@material-ui/core/Grid';
 
 
 const Home = (props) => {
-    useEffect(() => {
-        const abortController = new AbortController();
-
-        return function cleanup() {
-            abortController.abort();
-        }
-    }, [])
     const [user, setUser] = useState(null);
     console.log(`Home component w/ user id ${props.userId}`);
     const getUserData = (userId) => {

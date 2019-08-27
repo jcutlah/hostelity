@@ -30,7 +30,7 @@ function App() {
             Axios.get('/api/users')
             .then(response => {
                 console.log(response.data.passport);
-                if (response.data.passport.user){
+                if (response.data.passport){
                     // console.log(response.data.passport);
                     // console.log("setting user ID state");
                     setUserId(response.data.passport.user);

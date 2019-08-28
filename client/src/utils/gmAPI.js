@@ -1,31 +1,74 @@
 import React from 'react'
 import axios from "axios";
 
-const google = window.google
-let Marker = ({ text, lat, lng }) => <div lat={lat} lng={lng}>{text}</div>;
 const MapFunctions = {
-
-
-
-    handleTripSearch: async (map, start, end, stops) => {
+    handleTripSearch: async (map, start, end, stops, s, e) => {
         const google = window.google
         try {
-            // const response = await axios.get(`/api/maps/textsearch/${startString}/${endString}`);
-            const response2 = await axios.get(`/api/maps/autocomplete/${start.lat()}/${start.lng()}`);
-            // var CORSerror = `https://cors-anywhere.herokuapp.com/`
 
+            //USING REQUESTS DEFINED BELOW: 
             const useRequests = async (requests) => {
                 console.log(requests)
                 var service = new google.maps.places.PlacesService(map);
-                // Defining what to do with data: 
+                var markers = []
+                // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-
+                    console.log(results)
                     var logData = (res) => {
-                        console.log(res)
+                        // console.log(res)
+                        for (var i = 0; i < res.length; i++) {
+                            var checkPhotos = () => {
+                                if (res[i].photos) {
+                                    return (res[i].photos[0].getUrl({ maxWidth: 50, maxHeight: 50 }))
+                                } else {
+                                    return null
+                                }
+                            }
+                            var data = {
+                                id: res[i].place_id,
+                                position: res[i].geometry.location,
+                                map: map,
+                                title: res[i].name,
+                                rating: res[i].rating,
+                                photoUrl: checkPhotos()
+                            }
+
+                            markers.push(data)
+                        }
+                        markers.forEach(function (markerData) {
+                            var databaseHostel = '2'
+                            if (markerData.id === databaseHostel) {
+                                //SPECIAL MARKER
+                            } else {
+                                var checkPhotoAgain = () => {
+                                    if (markerData.photoUrl) {
+                                        return markerData.photoUrl
+                                    } else {
+                                        return ' '
+                                    }
+                                }
+
+                                var infowindow = new google.maps.InfoWindow({
+                                    content: `<div>${markerData.title}</div>` + `<br>` + `<img src=${checkPhotoAgain()}/>` +
+                                        `<div>${markerData.rating}</div>`
+                                });
+
+                                var marker = new google.maps.Marker({
+                                    position: markerData.position,
+                                    map: markerData.map,
+                                    title: markerData.title
+                                });
+
+                                return marker.addListener('click', function () {
+                                    infowindow.open(map, marker);
+                                });
+                            }
+
+
+                        })
                     }
                     //Checking status of response
                     return (status === google.maps.places.PlacesServiceStatus.OK) ? logData(results) : console.log(status);
-
                 }
                 requests.forEach((req) => {
                     console.log(req.location)
@@ -35,12 +78,21 @@ const MapFunctions = {
                     }
                     // service.findPlaceFromQuery(request, placesCallback)
                     return service.textSearch(request, placesCallback);
-
                 })
             }
-
-            const createRequest = (stops) => {
+            // CREATE REQUESTS FOR ALL POINTS:
+            const createRequest = (s, start, stops, end, e) => {
                 var requestsForPoints = []
+                requestsForPoints.push({
+                    location: s,
+                    type: ['lodging'],
+                    keywords: ['hostel', 'hotel']
+                })
+                requestsForPoints.push({
+                    location: e,
+                    type: ['lodging'],
+                    keywords: ['hostel', 'hotel']
+                })
                 for (var i = 0; i < stops.length; i++) {
                     requestsForPoints.push({
                         location: stops[i].location,
@@ -51,7 +103,7 @@ const MapFunctions = {
                 return useRequests(requestsForPoints)
             }
 
-            createRequest(stops)
+            createRequest(s, start, stops, end, e)
 
             // function callback(results, status) {
             //     console.log(results)
@@ -119,19 +171,19 @@ const MapFunctions = {
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer()
         // directionsDisplay.setMap()
-        directionsService.route({
-            origin: start,
-            destination: end,
-            waypoints: wps,
-            optimizeWaypoints: true,
-            travelMode: 'DRIVING'
-        }, await function (response, status) {
-            if (status === 'OK') {
-                directionsDisplay.setDirections(response)
-            } else {
-                console.log('Directions request failed due to ' + status)
-            }
-        })
+        // directionsService.route({
+        //     origin: start,
+        //     destination: end,
+        //     waypoints: wps,
+        //     optimizeWaypoints: true,
+        //     travelMode: 'DRIVING'
+        // }, await function (response, status) {
+        //     if (status === 'OK') {
+        //         directionsDisplay.setDirections(response)
+        //     } else {
+        //         console.log('Directions request failed due to ' + status)
+        //     }
+        // })
 
         // Actual Route/Directions Service Rendering: //
 
@@ -141,20 +193,71 @@ const MapFunctions = {
             waypoints: wps,
             optimizeWaypoints: true,
             travelMode: 'DRIVING'
-        }, function (response, status) {
+        }, await function (response, status) {
             // Checking Status of response //
             if (status === 'OK') {
+                //Create variables to check if map needs to be updated
+                var isMapped = false
+                var legData = []
                 // Setting map's directions to response values //
-                directionsDisplay.setDirections(response);
                 // Choosing the first route to display: //
                 var route = response.routes[0];
                 // For each route, display summary information.
-                var start = route.legs[0].start_location
-                var end = route.legs[1].end_location
-                MapFunctions.handleTripSearch(map, start, end, wps)
+                var start = route.legs[0].start_location;
+                var end = route.legs[route.legs.length - 1].end_location;
+                var s = route.legs[0].start_address
+                var e = route.legs[route.legs.length - 1].end_address
+                // Format Leg Data: 
+                for (var i = 0; i < route.legs.length; i++) {
+                    console.log(route.legs[i])
+                    if (i === (route.legs.length - 1)) {
+                        var name1 = route.legs[i].start_address
+                        var lat1 = route.legs[i].start_location.lat
+                        var lng1 = route.legs[i].start_location.lng
+                        var time1 = route.legs[i].duration.text;
+                        var distance1 = route.legs[i].distance.text;
+                        legData.push({
+                            name: name1,
+                            location: [lat1, lng1],
+                            time: time1,
+                            distance: distance1
+                        })
+                        var name = route.legs[i].end_address
+                        var lat = route.legs[i].end_location.lat
+                        var lng = route.legs[i].end_location.lng
+                        var time = route.legs[i].duration.text;
+                        var distance = route.legs[i].distance.text;
 
-                directionsDisplay.setMap(map);
-
+                    } else {
+                        var name = route.legs[i].start_address
+                        var lat = route.legs[i].start_location.lat
+                        var lng = route.legs[i].start_location.lng
+                        var time = route.legs[i].duration.text;
+                        var distance = route.legs[i].distance.text;
+                    }
+                    // Push data to legData array:
+                    legData.push({
+                        name: name,
+                        location: [lat, lng],
+                        time: time,
+                        distance: distance
+                    })
+                    // ADD IMAGE GRAB - RC
+                }
+                if (!isMapped) {
+                    directionsDisplay.setDirections(response);
+                    directionsDisplay.setMap(map);
+                    isMapped = true;
+                } else if (isMapped) {
+                    directionsDisplay.setMap(map)
+                    directionsDisplay.setDirections(response)
+                    window.setState({
+                        ...this.state, map: map
+                    })
+                    console.log(route.legs)
+                }
+                console.log(legData)
+                MapFunctions.handleTripSearch(map, start, end, wps, s, e)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

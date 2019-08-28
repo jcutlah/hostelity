@@ -33,7 +33,7 @@ body {
 .header {
   display: flex;
   /* background: #465964; */
-  position: fixed;
+  position: static;
   z-index: 1;
   /* height: 4.5rem; */
   border-bottom: 0.2rem solid orange;

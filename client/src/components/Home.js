@@ -13,7 +13,7 @@ const Home = (props) => {
         if (!user) {
             Axios.get(`/api/trips/${userId}`)
                 .then(userInfo => {
-                    console.log(userInfo.data);
+                    // console.log(userInfo.data);
                     setUser(userInfo.data);
                 })
                 .catch(err => {
@@ -25,7 +25,7 @@ const Home = (props) => {
         console.log('user id present, getting trips for this user...');
         getUserData(props.userId);
     };
-    console.log(user);
+    // console.log(user);
     return (
             <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
                 <Grid item xs={12}>

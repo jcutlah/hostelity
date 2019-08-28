@@ -15,14 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 
 const Trips = (props) => {
-    console.log(typeof props.trips);
-    props.trips.length ? 
-        console.log(typeof props.trips) :
-        console.log('meep meep');
-    
     const classes = useStyles();
-    
-
     return (
         <Paper className={classes.root}>
             {console.log(typeof props.trips)}

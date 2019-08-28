@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const Hostels = (props) => {
-    console.log(props);
+    // console.log(props);
     return (
         <div className="tripList section">
             {props.hostels.map(hostel => {

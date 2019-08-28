@@ -251,11 +251,10 @@ function Map(props) {
                                 {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
                         <br /> */}
                                 <Fab onClick={() => {
-                                    // MapFunctions.handleTripSearch(state.map, state.start, state.end)
+                                    // (state.map) ? console.log(state.map) : console.log("not here")
                                     document.querySelector('#form-top').setAttribute('style', 'display:block');
                                     MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
                                 }
-
                                 }
 
                                     variant="extended" aria-label="delete" className={classes.fab}>

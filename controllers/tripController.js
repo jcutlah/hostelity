@@ -31,8 +31,12 @@ const orm = {
                 path: 'trips',
                 model: 'Trip',
                 populate: {
-                    path: 'hostels',
-                    model: 'Hostel'
+                    path: 'waypoints',
+                    model: 'Waypoint',
+                    populate: {
+                        path: 'hostels',
+                        model: 'Hostel'
+                    }
                 }
             })
             // .populate('trips')

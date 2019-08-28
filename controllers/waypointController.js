@@ -33,6 +33,21 @@ const orm = {
             console.log(err);
         });
     },
+    getAllWaypointsInTrip: function(tripId, callback){
+        console.log(`Getting all waypoints for trip with id ${tripId}`);
+        db.Trip.findOne({_id: tripId})
+        .populate({
+            path: 'waypoints',
+            model: 'Waypoint'
+        })
+        .then(function(trip){
+            console.log(trip.waypoints);
+            callback(trip.waypoints)
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    },
     associateWaypointToTrip: function(tripId, waypointId, callback) {
         console.log(`associating waypoint w/ id ${waypointId} to trip w/ id ${tripId}`);
         db.Trip.findOneAndUpdate({

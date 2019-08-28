@@ -7,20 +7,13 @@ import Grid from '@material-ui/core/Grid';
 
 
 const Home = (props) => {
-    useEffect(() => {
-        const abortController = new AbortController();
-
-        return function cleanup() {
-            abortController.abort();
-        }
-    }, [])
     const [user, setUser] = useState(null);
     console.log(`Home component w/ user id ${props.userId}`);
     const getUserData = (userId) => {
         if (!user) {
             Axios.get(`/api/trips/${userId}`)
                 .then(userInfo => {
-                    console.log(userInfo.data);
+                    // console.log(userInfo.data);
                     setUser(userInfo.data);
                 })
                 .catch(err => {
@@ -32,7 +25,7 @@ const Home = (props) => {
         console.log('user id present, getting trips for this user...');
         getUserData(props.userId);
     };
-    console.log(user);
+    // console.log(user);
     return (
             <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
                 <Grid item xs={12}>

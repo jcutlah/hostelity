@@ -2,16 +2,16 @@ const db = require('../models/index');
 
 
 const orm = {
-    addHostel: function(tripId, hostel, callback){
+    addHostel: function(hostel, callback){
         console.log('running addHostel()');
         console.log(hostel);
-        // console.log(tripId);
+        // console.log(waypointId);
         db.Hostel.create(hostel)
         .then(function(result) {
             console.log(result._id);
             console.log('hostel meep');
-            // return db.Trip.findOneAndUpdate({
-            //     _id: tripId
+            // return db.Waypoint.findOneAndUpdate({
+            //     _id: waypointId
             // }, {$push: {hostels:result._id}});
             callback(result);
         })
@@ -33,13 +33,13 @@ const orm = {
             console.log(err);
         });
     },
-    associateHostelToTrip: function(tripId, hostelId, callback) {
-        console.log(`associating hostel w/ id ${hostelId} to trip w/ id ${tripId}`);
-        db.Trip.findOneAndUpdate({
-            _id: tripId
+    associateHostelToWaypoint: function(waypointId, hostelId, callback) {
+        console.log(`associating hostel w/ id ${hostelId} to waypoint w/ id ${waypointId}`);
+        db.Waypoint.findOneAndUpdate({
+            _id: waypointId
         }, {$push: {hostels:hostelId}})
-        .then(function(trip){
-            callback(trip);
+        .then(function(waypoint){
+            callback(waypoint);
         })
     }
 };

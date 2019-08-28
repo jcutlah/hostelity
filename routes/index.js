@@ -1,9 +1,19 @@
 const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
+const authRoutes = require('./auth');
 
+
+router.use('/api/*', function(req, res, next){
+    console.log('api route hit');
+    console.log(req.user);
+    req.user ? next() : res.status(403).send("You must be logged in to access this api").end();
+    console.log('after user meep');
+    // next();
+});
 // API Routes
 router.use("/api", apiRoutes);
+router.use("/auth", authRoutes);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {

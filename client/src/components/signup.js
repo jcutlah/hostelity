@@ -84,7 +84,7 @@ export default function Signup(props) {
             email,
             password
         }
-        Axios.post("/api/users/signup", user)
+        Axios.post("/auth/users/signup", user)
         .then(function(res){
             console.log(res.data);
             window.location = '/login';

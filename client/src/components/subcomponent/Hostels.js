@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const Hostels = (props) => {
-    console.log(props);
+    // console.log(props);
     return (
         <div className="tripList section">
             {props.hostels.map(hostel => {
@@ -16,19 +16,7 @@ const Hostels = (props) => {
                         <Typography align="center" component="p">
                             {hostel.title}
                         </Typography>
-                       
-
-                        <Typography variant="h6" gutterBottom>
-                            Location:
-                        </Typography>
-
-                        <Typography component="p">
-                            {hostel.location[0]}
-
-                            {hostel.location[1]}
-                        </Typography>
-                       
-
+                        <hr></hr>
                     </div>
                 )
             })}

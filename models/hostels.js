@@ -9,6 +9,15 @@ const hostelSchema = new Schema({
     location: {
         type: [Number, Number]
     },
+    address: {
+        type: String
+    },
+    placeId: {
+        type: String
+    },
+    imageUrl: {
+        type: String
+    },
     dateAdded: { 
         type: Date, 
         default: Date.now 

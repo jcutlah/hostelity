@@ -5,7 +5,7 @@ const returnDate = (date) => {
     const dateAdded = new Date(parseInt(date));
     console.log(dateAdded);
     const month = dateAdded.getMonth() + 1;
-    const day = dateAdded.getDay();
+    const day = dateAdded.getDate();
     const year = dateAdded.getFullYear();
     return `${month}/${day}/${year}`;
 }

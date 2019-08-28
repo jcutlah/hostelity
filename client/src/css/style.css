@@ -17,6 +17,9 @@
     margin-top: 3%;
   }
 }
+.map-container .MuiPaper-root {
+    margin-top: calc(-22vw);
+}
 
 html {
   padding: 0;

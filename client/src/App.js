@@ -27,20 +27,25 @@ function App() {
     // console.log(`Checking if logged in`);
     if (!userId) {
       // console.log('No user id present');
-      Axios.get('/api/users')
+      Axios.get('/auth/users')
         .then(response => {
           console.log(response.data.passport);
           if (response.data.passport) {
             // console.log(response.data.passport);
             // console.log("setting user ID state");
-            setUserId(response.data.passport.user);
-          } else {
-            console.log('sending user to login page');
-            // console.log(window.location.pathname);
-            // if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
-            //   window.location = '/login';
-            // }
+            if (response.data.passport.user) {
+              setUserId(response.data.passport.user);
+            } else {
+              console.log('sending user to login page');
+              // console.log(window.location.pathname);
+              if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+                window.location = '/login';
+              }
+            }
+            // console.log('meep');
+
           }
+
         })
         .catch(err => {
           console.log(err);
@@ -48,35 +53,36 @@ function App() {
     } else {
       console.log(`User signed in with id ${userId}`);
     }
-
   }
 
-  isLoggedIn();
-  return (
-    <Router>
-      <>
-        <Header />
-        <Navbar
-          loginCallback={loginCallback}
-          isLoggedIn={loggedIn}
-          userId={userId}
-        />
+}
+
+isLoggedIn();
+return (
+  <Router>
+    <>
+      <Header />
+      <Navbar
+        loginCallback={loginCallback}
+        isLoggedIn={loggedIn}
+        userId={userId}
+      />
 
 
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/map" component={Map} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
-          <Route component={NoMatch} />
-        </Switch>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/map" component={Map} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
+        <Route component={NoMatch} />
+      </Switch>
 
-      </>
+    </>
 
-    </Router>
-  )
+  </Router>
+)
 
 }
 

@@ -3,6 +3,7 @@ const db = require("../models");
 const userController = require('../controllers/userController');
 const tripController = require('../controllers/tripController');
 const hostelController = require('../controllers/hostelController');
+const WaypointController = require("../controllers/waypointController");
 
 // This file empties the Books collection and inserts the books below
 
@@ -16,83 +17,85 @@ mongoose.set(
 
 const hostelSeed = [
     {
-        title: "Zion",
-        location: [-113.0263,37.2982]
+        title: "North Yellowstone Lodge & Hostel",
+        location: [-113.0263,37.2982],
+        address: "1083 US-89, Gardiner, MT 59030",
+        placeId: "asd98f7asd98f7as0d9f7d",
+        imageUrl: "https://media-cdn.tripadvisor.com/media/photo-p/05/cb/3d/d3/north-yellowstone-lodge.jpg"
     },
     {
-        title: "Meeps",
-        location: [-113.0263,37.2982]
+        title: "Cafe Soleíl",
+        location: [-113.0263,37.2982],
+        address: "205 Zion Park Blvd, Springdale, UT 84767",
+        placeId: "asd98f7asd98f7as0d9f7d",
+        imageUrl: "https://media-cdn.tripadvisor.com/media/photo-s/08/8f/99/ad/cafe-soleil.jpg"
     },
     {
-        title: "Smeep",
-        location: [-113.0263,37.2982]
-    },
-    
+        title: "Monterey Hostel",
+        location: [-113.0263,37.2982],
+        address: "778 Hawthorne St, Monterey, CA 93940",
+        placeId: "asd98f7asd98f7as0d9f7d",
+        imageUrl: "https://media-cdn.tripadvisor.com/media/photo-p/05/cb/3d/d3/north-yellowstone-lodge.jpg"
+    }
 ];
+const waypointSeed = [
+    {
+        name: "Yellowstone, NP, USA",
+        tripIndex: 0,
+        location: [-118.5551,36.8879],
+        imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
+    },
+    {
+        name: "Springdale, UT, USA",
+        location: [-118.5551,36.8879],
+        tripIndex: 0,
+        imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
+    },
+    {
+        name: "Big Sur, CA",
+        tripIndex: 2,
+        location: [-118.5551,36.8879],
+        imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
+    }
+]
 const tripSeed = [
     {
         name: "The Trip That I'll Really Want To Forget, But Will Never Forget",
-        startDest: {
-            location: [-113.0263,37.2982], 
-            name: 'Kings Canyon, NP'
-        },
-        endDest: {
-            location: [-118.5551,36.8879],
-            name: 'Zion, NP'
-        },
-        wayPoints: [
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            },
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            }
-        ]
-    },
-    {
-        name: "My Spiritual Journey Trip",
-        startDest: {
-            location: [-113.0263,37.2982], 
-            name: 'Kings Canyon, NP'
-        },
-        endDest: {
-            location: [-118.5551,36.8879],
-            name: 'Zion, NP'
-        },
-        wayPoints: [
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            },
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            }
-        ]
-    },
-    {
-        name: "My Fun But Cliche Trip",
-        startDest: {
-            location: [-113.0263,37.2982], 
-            name: 'Kings Canyon, NP'
-        },
-        endDest: {
-            location: [-118.5551,36.8879],
-            name: 'Zion, NP'
-        },
-        wayPoints: [
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            },
-            {
-                location: [-118.5551,36.8879],
-                name: 'Zion, NP'
-            }
-        ]
+        start: "Yellowstone, NP, USA",
+        end: "Big Sur, CA, USA"
     }
+    // {
+    //     name: "My Spiritual Journey Trip",
+    //     startDest: {
+    //         location: [-113.0263,37.2982], 
+    //         name: 'Kings Canyon, NP'
+    //     },
+    //     endDest: {
+    //         location: [-118.5551,36.8879],
+    //         name: 'Zion, NP'
+    //     }
+    // },
+    // {
+    //     name: "My Fun But Cliche Trip",
+    //     startDest: {
+    //         location: [-113.0263,37.2982], 
+    //         name: 'Kings Canyon, NP'
+    //     },
+    //     endDest: {
+    //         location: [-118.5551,36.8879],
+    //         name: 'Zion, NP'
+    //     },
+    //     wayPoints: [
+    //         {
+    //             location: [-118.5551,36.8879],
+    //             name: 'Zion, NP'
+    //         },
+    //         {
+    //             location: [-118.5551,36.8879],
+    //             name: 'Zion, NP'
+    //         }
+    //     ]
+    // }
 ];
 const seedData = [
     {
@@ -103,8 +106,9 @@ const seedData = [
             password: "jcut",
             avatar: '/assets/images/hockeyJersey.jpg'
         },
-        hostels: [hostelSeed[0], hostelSeed[1]],
-        trips: [tripSeed[0], tripSeed[1]]
+        hostels: [hostelSeed[0], hostelSeed[1], hostelSeed[2]],
+        trips: [tripSeed[0]],
+        waypoints: [waypointSeed[0],waypointSeed[1],waypointSeed[2]]
     },
     {
         user: {
@@ -115,7 +119,8 @@ const seedData = [
             avatar: "https://placebeard.it/300x180"
         },
         hostels: [hostelSeed[1]],
-        trips: [tripSeed[1], tripSeed[0], tripSeed[2]]
+        trips: [tripSeed[0]],
+        waypoints: [waypointSeed[0],waypointSeed[1],waypointSeed[2]]
     },
     {
         user: {
@@ -126,7 +131,8 @@ const seedData = [
             avatar: "https://placebeard.it/300x180"
         },
         hostels: [hostelSeed[2]],
-        trips: [tripSeed[2]]
+        trips: [tripSeed[0]],
+        waypoints: [waypointSeed[0],waypointSeed[1],waypointSeed[2]]
     }
 ];
 
@@ -141,33 +147,45 @@ db.Hostel
                 db.User
                     .remove({})
                     .then(() => {
-                        console.log('users removed')
-                        seedData.forEach(seed => {
-                            userController.addUser(seed.user, function(err, response){
-                                if (err) throw err;
-                                console.log(response);
-                                console.log('meep');
-                                seed.trips.forEach(trip => {
-                                    tripController.addTrip(response._id, trip, function(res){
-                                        console.log('derp');
-                                        console.log(res);
-                                        tripController.associateTripToUser(response._id, res._id, function(user){
-                                            console.log('trip associated: ');
-                                            console.log(user);
-                                            seed.hostels.forEach(hostel => {
-                                                hostelController.addHostel(res._id, hostel, function(newHostel){
-                                                    console.log(newHostel);
-                                                    hostelController.associateHostelToTrip(res._id, newHostel._id, function(trip){
-                                                        console.log(trip);
+                        db.Waypoint
+                        .remove({})
+                        .then(() => {
+                            console.log('waypoints removed')
+                            console.log('users removed')
+                            seedData.forEach(seed => {
+                                userController.addUser(seed.user, function(err, response){
+                                    if (err) throw err;
+                                    console.log(response);
+                                    console.log('meep');
+                                    seed.trips.forEach(trip => {
+                                        tripController.addTrip(response._id, trip, function(res){
+                                            console.log('derp');
+                                            console.log(res);
+                                            tripController.associateTripToUser(response._id, res._id, function(user){
+                                                console.log('trip associated: ');
+                                                console.log(user);
+                                                seed.waypoints.forEach((waypoint, i) => {
+                                                    WaypointController.addWaypoint(waypoint, function(newWaypoint){
+                                                        console.log(newWaypoint);
+                                                        WaypointController.associateWaypointToTrip(res._id, newWaypoint._id, function(trip){
+                                                            console.log('waypoint associated: ');
+                                                            console.log(trip);
+                                                            hostelController.addHostel(seed.hostels[i], function(newHostel){
+                                                                console.log(newHostel);
+                                                                hostelController.associateHostelToWaypoint(newWaypoint._id, newHostel._id, function(waypoint){
+                                                                    console.log(waypoint);
+                                                                })
+                                                            })
+                                                        })
                                                     })
-                                                    
                                                 })
                                             })
                                         })
                                     })
-                                })
-                            }) 
-                        });
+                                }) 
+                            });
+                        })
+                        .catch(err => console.log(err));
                     })
                     .catch(err => console.log(err));
             })

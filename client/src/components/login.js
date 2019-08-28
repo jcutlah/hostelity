@@ -63,20 +63,21 @@ export default function SignIn() {
 
     const handleInputChange = event => {
         const { name, value } = event.target;
+        console.log(name, value);
         switch (name) {
             case 'email': 
+                updateEmail(value);
                 updateLoginError({
                     ...loginError,
                     username: false
                 })
-                updateEmail(value);
                 break;
             case 'password': 
+                updatePassword(value);
                 updateLoginError({
                     ...loginError,
                     password: false
                 })
-                updatePassword(value);
                 break;
             default: return;
         }
@@ -89,12 +90,14 @@ export default function SignIn() {
             email,
             password
         }
-        Axios.post("/api/users/login", user)
+        Axios.post("/auth/users/login", user)
         .then(function(res){
             // console.log('Not an error!!!!!')
             // console.log(res.data);
-            if (res.data.passport.user){
-                window.location = '/home';
+            if (res.data.passport){
+                res.data.passport.user ?
+                window.location = '/home':
+                console.log('User not found');
             }
             if (res.data.flash){
                 // console.log(res.data.flash);

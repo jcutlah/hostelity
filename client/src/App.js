@@ -55,35 +55,36 @@ function App() {
     }
   }
 
+
+
+  isLoggedIn();
+  return (
+    <Router>
+      <>
+        <Header />
+        <Navbar
+          loginCallback={loginCallback}
+          isLoggedIn={loggedIn}
+          userId={userId}
+        />
+
+
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/map" component={Map} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
+          <Route component={NoMatch} />
+        </Switch>
+
+      </>
+
+    </Router>
+  )
 }
 
-isLoggedIn();
-return (
-  <Router>
-    <>
-      <Header />
-      <Navbar
-        loginCallback={loginCallback}
-        isLoggedIn={loggedIn}
-        userId={userId}
-      />
 
-
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/map" component={Map} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
-        <Route component={NoMatch} />
-      </Switch>
-
-    </>
-
-  </Router>
-)
-
-}
 
 export default App;

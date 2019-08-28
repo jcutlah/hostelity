@@ -95,7 +95,9 @@ export default function SignIn() {
             // console.log('Not an error!!!!!')
             // console.log(res.data);
             if (res.data.passport){
-                window.location = '/home';
+                res.data.passport.user ?
+                window.location = '/home':
+                console.log('User not found');
             }
             if (res.data.flash){
                 // console.log(res.data.flash);

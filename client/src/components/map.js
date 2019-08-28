@@ -21,6 +21,9 @@ import Link from '@material-ui/core/Link';
 const Marker = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles(theme => ({
+    map: {
+        marginTop: 'calc(-23vw)'
+    },
     root: {
         flexGrow: 1
     },
@@ -118,6 +121,7 @@ function Map(props) {
     console.log(state);
     return (
         // Important! Always set the container height explicitly
+        <div className="map-container">
         <Paper className={classes.root}>
             <Container fixed>
             <div className={classes.searchDiv}>
@@ -295,6 +299,7 @@ function Map(props) {
             </Container>
 
         </Paper>
+        </div>
     );
     
 }

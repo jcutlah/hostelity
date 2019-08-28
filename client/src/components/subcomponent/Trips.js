@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Waypoints from './Waypoints';
-import Axios from 'axios';
-
-
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,9 +10,22 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const deepLoop = (iterable) => {
+    iterable.map(item => {
+        console.log(item.waypoints);
+        item.waypoints.map(waypoint => {
+            console.log(waypoint);
+            waypoint.hostels.map(hostel => {
+                console.log(hostel);
+            })
+        })
+    }) 
+    
+}
 
 const Trips = (props) => {
     const classes = useStyles();
+    props.trips ? deepLoop(props.trips) : console.log('meep');
     return (
         <Paper className={classes.root}>
             {console.log(typeof props.trips)}

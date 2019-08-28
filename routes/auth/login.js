@@ -16,10 +16,10 @@ router.route("/")
 
       res.json(req.session);
   })
-// Matches with "/api/users/id/:id"
+// Matches with "/auth/users/id/:id"
 router.route("/id/:id")
   .get(function(req, res){
-      console.log(`get request made to /api/users/:id`);
+      console.log(`get request made to /auth/users/:id`);
     //   console.log(res);
     if (req.isAuthenticated()){
         userController.getUser(req.params.id, function(err, user){
@@ -33,7 +33,7 @@ router.route("/id/:id")
   })
 //   .post(userController.addUser);
 
-// Matches with "/api/users/logout"
+// Matches with "/auth/users/logout"
 router.route('/logout')
   .get(function(req, res){
       console.log("logout request received");
@@ -42,7 +42,7 @@ router.route('/logout')
       res.json(req.session);
   })
 
-// Matches with "/api/users/signup"
+// Matches with "/auth/users/signup"
 router.route('/signup')
   .get(function(req, res){
       console.log(req.data);
@@ -62,11 +62,11 @@ router.route('/signup')
   });
 
 
-// Matches with "/api/users/login"
+// Matches with "/auth/users/login"
 router.route('/login')
   .post(passport.authenticate('local', {
-    successRedirect: '/api/users/login/meep',
-    failureRedirect: '/api/users/login/derp',
+    successRedirect: '/auth/users/login/meep',
+    failureRedirect: '/auth/users/login/derp',
     failureFlash: true
   }),
   function(req, res) {

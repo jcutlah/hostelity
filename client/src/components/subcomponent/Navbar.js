@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const logOut = event => {
         event.preventDefault();
         console.log('logging out');
-        Axios.get('/api/users/logout')
+        Axios.get('/auth/users/logout')
             .then(function (res) {
                 console.log(res);
                 // setLoggedIn(false);

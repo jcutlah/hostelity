@@ -90,7 +90,7 @@ export default function SignIn() {
             email,
             password
         }
-        Axios.post("/api/users/login", user)
+        Axios.post("/auth/users/login", user)
         .then(function(res){
             // console.log('Not an error!!!!!')
             // console.log(res.data);

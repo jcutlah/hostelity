@@ -27,20 +27,25 @@ function App() {
         // console.log(`Checking if logged in`);
         if (!userId){
             // console.log('No user id present');
-            Axios.get('/api/users')
+            Axios.get('/auth/users')
             .then(response => {
                 console.log(response.data.passport);
                 if (response.data.passport){
                     // console.log(response.data.passport);
                     // console.log("setting user ID state");
-                    setUserId(response.data.passport.user);
-                } else {
-                    console.log('sending user to login page');
-                    // console.log(window.location.pathname);
-                    if (window.location.pathname !== '/login' && window.location.pathname !== '/signup'){
-                        window.location = '/login';
+                    if(response.data.passport.user){
+                        setUserId(response.data.passport.user);
+                    } else {
+                        console.log('sending user to login page');
+                        // console.log(window.location.pathname);
+                        if (window.location.pathname !== '/login' && window.location.pathname !== '/signup'){
+                            window.location = '/login';
+                        }
                     }
-                }
+                    // console.log('meep');
+                    
+                } 
+                
             })
             .catch(err => {
                 console.log(err);

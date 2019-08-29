@@ -80,7 +80,7 @@ function Map(props) {
     });
 
     const handleChange = event => {
-        console.log(state);
+        // console.log(state);
         const { name, value } = event.target;
         var usedThisStop = false;
         var oldStops = state.stops;
@@ -112,13 +112,13 @@ function Map(props) {
         }
     }
     const addInput = () => {
-        console.log(state);
-        console.log("addInput running");
+        // console.log(state);
+        // console.log("addInput running");
         var newId = state.inputId + 1;
         setState({...state, inputId: newId});
 
     }
-    console.log(state);
+    // console.log(state);
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
@@ -132,6 +132,7 @@ function Map(props) {
                             New Search
                         </Link>
                     </div>
+                <form onSubmit={(e)=>{e.preventDefault()}}>
                 <FormControl fullWidth={true} component="fieldset">
                     <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                     <Divider variant="middle" className={classes.darkDivider} />
@@ -259,10 +260,8 @@ function Map(props) {
                             // MapFunctions.handleTripSearch(state.map, state.start, state.end)
                             document.querySelector('#form-top').setAttribute('style','display:block');
                             MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
-                        }
-
-                        }
-
+                        }}
+                            type="submit"
                             variant="extended" aria-label="delete" className={classes.fab}>
                             <NavigationIcon className={classes.extendedIcon} />
                             Begin
@@ -272,6 +271,7 @@ function Map(props) {
                     
                     <div id='directions-panel'></div>
                 </FormControl>
+                </form>
             </div>
             </Container>
             <Container className={classes.mapContainer}>

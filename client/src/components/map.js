@@ -283,26 +283,18 @@ function Map(props) {
 
                                     {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
                         <br /> */}
-                                    <Fab onClick={() => {
-                                        var i = 0;
-                                        if (i === 0) {
+                                    <Fab
+                                        onClick={() => {
                                             document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
-                                            i++
-                                        } else {
-                                            setState({ ...state, map: originalMap })
                                             MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
 
                                         }
-                                        // (state.start && state.end) ? console.log(state.map + 'Map exists') : console.log(state.map + /n/ + 'Fresh Start')
-
-                                    }
-                                    }
-
+                                        }
                                         variant="extended" aria-label="delete" className={classes.fab}>
                                         <NavigationIcon className={classes.extendedIcon} />
                                         Begin
                         </Fab>
+
                                 </div>
                             </FormGroup>
 

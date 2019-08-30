@@ -18,21 +18,30 @@ mongoose.set(
 const hostelSeed = [
     {
         title: "North Yellowstone Lodge & Hostel",
-        location: [-113.0263,37.2982],
+        location: {
+            type: "Point",
+            coordinates: [-110.82,45.15]
+        },
         address: "1083 US-89, Gardiner, MT 59030",
         placeId: "asd98f7asd98f7as0d9f7d",
         imageUrl: "https://media-cdn.tripadvisor.com/media/photo-p/05/cb/3d/d3/north-yellowstone-lodge.jpg"
     },
     {
         title: "Cafe Soleíl",
-        location: [-113.0263,37.2982],
+        location: {
+            type: "Point",
+            coordinates: [-113.289886,37.175026]
+        },
         address: "205 Zion Park Blvd, Springdale, UT 84767",
         placeId: "asd98f7asd98f7as0d9f7d",
         imageUrl: "https://media-cdn.tripadvisor.com/media/photo-s/08/8f/99/ad/cafe-soleil.jpg"
     },
     {
         title: "Monterey Hostel",
-        location: [-113.0263,37.2982],
+        location: {
+            type: "Point",
+            coordinates: [-113.0263,37.2982]
+        },
         address: "778 Hawthorne St, Monterey, CA 93940",
         placeId: "asd98f7asd98f7as0d9f7d",
         imageUrl: "https://media-cdn.tripadvisor.com/media/photo-p/05/cb/3d/d3/north-yellowstone-lodge.jpg"
@@ -42,19 +51,28 @@ const waypointSeed = [
     {
         name: "Yellowstone, NP, USA",
         tripIndex: 0,
-        location: [-118.5551,36.8879],
+        location: {
+            type: "Point",
+            coordinates: [-111.104187,44.662251]
+        },
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     },
     {
         name: "Springdale, UT, USA",
-        location: [-118.5551,36.8879],
+        location: {
+            type: "Point",
+            coordinates: [-112.998596,37.188900],
+        }, 
         tripIndex: 0,
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     },
     {
         name: "Big Sur, CA",
         tripIndex: 2,
-        location: [-118.5551,36.8879],
+        location: {
+            type: "Point",
+            coordinates: [-121.894676,36.600239],
+        },
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     }
 ]

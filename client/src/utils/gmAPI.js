@@ -4,21 +4,7 @@ var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
 var legData = []
-// const infoWindow = (props)=>{
-//     return (<div>
-//         <div>{props.title}</div>
-//        {props.img ?  <img src={props.img}></img> : <div>No image provided </div>}
-//        <div>{props.rating}</div>
-//        <button onClick={() =>  console.log(markerData.place_id) }} value={props.place_id}>Add to your trip!</button>
-//     id: props.place_id,
-//     position: res[i].geometry.location,
-//     map: map,
-//     title: res[i].name,
-//     rating: res[i].rating,
-//     place_id: res[i].place_id,
-//     photoUrl: checkPhotos()
-//     </div>)
-// }
+
 const MapFunctions = {
     handleTripSearch: (map) => {
         const google = window.google

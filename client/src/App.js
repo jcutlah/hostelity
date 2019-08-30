@@ -13,58 +13,61 @@ import NoMatch from './components/noMatch';
 import Header from './components/subcomponent/Header';
 
 function App() {
-    // Define hooks (state) variables
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [userId, setUserId] = useState(null);
-    // Define callback 
-    const loginCallback = (user) => {
-        console.log(`running loginCallback`);
-        // setLoggedIn(user.isLoggedIn);
-        setUserId(user.id);
-        
+  // Define hooks (state) variables
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  // Define callback 
+  const loginCallback = (user) => {
+    console.log(`running loginCallback`);
+    // setLoggedIn(user.isLoggedIn);
+    setUserId(user.id);
+
+  }
+  const isLoggedIn = () => {
+    // console.log(`Checking if logged in`);
+    if (!userId) {
+      // console.log('No user id present');
+      Axios.get('/auth/users')
+        .then(response => {
+          console.log(response.data.passport);
+          if (response.data.passport) {
+            // console.log(response.data.passport);
+            // console.log("setting user ID state");
+            if (response.data.passport.user) {
+              setUserId(response.data.passport.user);
+            } else {
+              console.log('sending user to login page');
+              // console.log(window.location.pathname);
+              if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+                window.location = '/login';
+              }
+            }
+            // console.log('meep');
+
+          }
+
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    } else {
+      console.log(`User signed in with id ${userId}`);
     }
-    const isLoggedIn = () => {
-        // console.log(`Checking if logged in`);
-        if (!userId){
-            // console.log('No user id present');
-            Axios.get('/auth/users')
-            .then(response => {
-                console.log(response.data.passport);
-                if (response.data.passport){
-                    // console.log(response.data.passport);
-                    // console.log("setting user ID state");
-                    if(response.data.passport.user){
-                        setUserId(response.data.passport.user);
-                    } else {
-                        console.log('sending user to login page');
-                        // console.log(window.location.pathname);
-                        if (window.location.pathname !== '/login' && window.location.pathname !== '/signup'){
-                            window.location = '/login';
-                        }
-                    }
-                    // console.log('meep');
-                    
-                } 
-                
-            })
-            .catch(err => {
-                console.log(err);
-            })
-        } else {
-            console.log(`User signed in with id ${userId}`);
-        }
-    }
-  
+  }
+
+
+
   isLoggedIn();
   return (
     <Router>
       <>
-          <Header />
-          <Navbar
-            loginCallback={loginCallback}
-            isLoggedIn={loggedIn}
-            userId={userId}
-          />
+        <Header />
+        <Navbar
+          loginCallback={loginCallback}
+          isLoggedIn={loggedIn}
+          userId={userId}
+        />
+
 
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -80,7 +83,8 @@ function App() {
 
     </Router>
   )
-  
 }
+
+
 
 export default App;

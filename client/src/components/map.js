@@ -16,6 +16,7 @@ import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 
+
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     mapContainer: {
- 
+
     },
     link: {
         margin: theme.spacing(1),
@@ -51,14 +52,14 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 function Map(props) {
-    
+    var originalMap = {}
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
 
-    useEffect(function(){
+    useEffect(function () {
         return () => {
-            document.querySelector('#form-top').setAttribute('style','display:none');
+            document.querySelector('#form-top').setAttribute('style', 'display:none');
         }
     })
 
@@ -76,9 +77,17 @@ function Map(props) {
         start: '',
         end: '',
         stops: [],
+        hostels: [],
+
         inputId: 0
     });
-
+    const newSearch = (e) => {
+        //Setting state *and stuff*
+        // if (name === "start" || name === "end") {
+        //     setState({ ...state, [name]: value });
+        //     return;
+        // }
+    }
     const handleChange = event => {
         // console.log(state);
         const { name, value } = event.target;
@@ -89,18 +98,18 @@ function Map(props) {
             [name]: value,
 
         }
-        if (name === "start" || name === "end"){
-            setState({ ...state, [name]:value });
+        if (name === "start" || name === "end") {
+            setState({ ...state, [name]: value });
             return;
         }
         if (state.stops.length) {
             oldStops.forEach((stop, i) => {
-                if (stop[name]){
+                if (stop[name]) {
                     oldStops[i] = thisStop;
                     usedThisStop = true;
                 }
             });
-            if (!usedThisStop){
+            if (!usedThisStop) {
                 newStops = [...oldStops, thisStop];
                 setState({ ...state, stops: newStops });
             } else {
@@ -115,193 +124,217 @@ function Map(props) {
         // console.log(state);
         // console.log("addInput running");
         var newId = state.inputId + 1;
-        setState({...state, inputId: newId});
+        setState({ ...state, inputId: newId });
 
     }
-    // console.log(state);
+    function infoWindowOpen(event) {
+        if (!event.target.closest('.hostelButton')) {
+            var data = {
+                title: event.target.getAttribute('data-title'),
+                location: event.target.getAttribute('data-location'),
+                address: event.target.getAttribute('data-address'),
+                placeId: event.target.id,
+                imageUrl: event.target.getAttribute('data-imageUrl')
+            }
+
+            return console.log(data)
+        } else {
+            return console.log("nah dude")
+        }
+
+    }
+    document.addEventListener('click', function (event) {
+
+        infoWindowOpen(event)
+    })
+    console.log(state);
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
-        <Paper className={classes.root}>
-            <Container fixed>
-            <div className={classes.searchDiv}>
-            <div id="form-top">
-                        <Link 
-                            href={""} className={classes.link}
-                        >
-                            New Search
+            <Paper className={classes.root}>
+                <Container fixed>
+                    <div className={classes.searchDiv}>
+                        <div id="form-top">
+                            <Link
+                                href={""} className={classes.link}
+                            >
+                                New Search
                         </Link>
-                    </div>
-                <form onSubmit={(e)=>{e.preventDefault()}}>
-                <FormControl fullWidth={true} component="fieldset">
-                    <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
-                    <Divider variant="middle" className={classes.darkDivider} />
+                        </div>
+                        <form onSubmit={(e) => { e.preventDefault() }}>
+                            <FormControl fullWidth={true} component="fieldset">
+                                <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
+                                <Divider variant="middle" className={classes.darkDivider} />
 
-                    <FormGroup>
-                        <div className="form-inputs">
-                        <TextField
-                            id="outlined-start"
-                            label="Starting Point"
-                            className={classes.textField}
-                            // value={state.start}
-                            name='start'
-                            onChange={handleChange}
-                            margin="normal"
-                            variant="outlined"
-                        />
-                        { state.inputId >= 1 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`1waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 2 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`2waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 3 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`3waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 4 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`4waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 5 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`5waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 6 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`6waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 7 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`7waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        { state.inputId >= 8 ?
-                            <TextField
-                                className={classes.textField}
-                                label="Waypoint"
-                                name={`8waypoint`}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={handleChange}
-                            /> :
-                            <div></div>
-                        }
-                        <TextField
-                            id="outlined-end"
-                            label="Final Destination"
-                            className={classes.textField}
-                            // value={state.end}
-                            name='end'
-                            onChange={handleChange}
-                            margin="normal"
-                            variant="outlined"
-                        />
-                        <Button
-                            className={classes.button}
-                            onClick={addInput}>
-                            Add Waypoint
+                                <FormGroup>
+                                    <div className="form-inputs">
+                                        <TextField
+                                            id="outlined-start"
+                                            label="Starting Point"
+                                            className={classes.textField}
+                                            // value={state.start}
+                                            name='start'
+                                            onChange={handleChange}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                        {state.inputId >= 1 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`1waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 2 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`2waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 3 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`3waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 4 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`4waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 5 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`5waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 6 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`6waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 7 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`7waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 8 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`8waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        <TextField
+                                            id="outlined-end"
+                                            label="Final Destination"
+                                            className={classes.textField}
+                                            // value={state.end}
+                                            name='end'
+                                            onChange={handleChange}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                        <Button
+                                            className={classes.button}
+                                            onClick={addInput}>
+                                            Add Waypoint
                             </Button>
 
-                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
-
+                                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
                         <br /> */}
-                        <Fab onClick={() => {
-                            // MapFunctions.handleTripSearch(state.map, state.start, state.end)
-                            document.querySelector('#form-top').setAttribute('style','display:block');
-                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
-                        }}
-                            type="submit"
-                            variant="extended" aria-label="delete" className={classes.fab}>
-                            <NavigationIcon className={classes.extendedIcon} />
-                            Begin
+
+                                        <Fab
+                                            onClick={() => {
+                                                document.querySelector('#form-top').setAttribute('style', 'display:block');
+                                                MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
+
+                                            }
+                                            }
+                                            variant="extended" aria-label="delete" className={classes.fab}>
+                                            <NavigationIcon className={classes.extendedIcon} />
+                                            Begin
                         </Fab>
-                        </div>
-                    </FormGroup>
-                    
-                    <div id='directions-panel'></div>
-                </FormControl>
-                </form>
-            </div>
-            </Container>
-            <Container className={classes.mapContainer}>
-                <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom:'20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
-                    <GoogleMapReact
-                        bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
-                        defaultCenter={defaultview.center}
-                        defaultZoom={defaultview.zoom}
-                        yesIWantToUseGoogleMapApiInternals={true}
-                        onGoogleApiLoaded={({ map, maps }) => {
-                            MapFunctions.handleApiLoaded(map, maps)
-                            setState({ ...state, map: map })
-                        }}
-                        id="myMap"
-                    >
 
-                        <Marker
-                            lat={69.955413}
-                            lng={30.337844}
-                            text="My Marker"
-                        />
-                    </GoogleMapReact>
-                </div>
+                                    </div>
+                                </FormGroup>
 
-            </Container>
+                                <div id='directions-panel'></div>
+                            </FormControl>
+                        </form>
+                    </div>
+                </Container>
+                <Container className={classes.mapContainer}>
+                    <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
+                        <GoogleMapReact
+                            bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
+                            defaultCenter={defaultview.center}
+                            defaultZoom={defaultview.zoom}
+                            yesIWantToUseGoogleMapApiInternals={true}
+                            onGoogleApiLoaded={({ map, maps }) => {
+                                originalMap = map;
+                                MapFunctions.handleApiLoaded(map, maps)
+                                setState({ ...state, map: map })
+                            }}
+                            id="myMap"
 
-        </Paper>
+                        >
+
+                            <Marker
+                                lat={69.955413}
+                                lng={30.337844}
+                                text="My Marker"
+                            />
+                        </GoogleMapReact>
+                    </div>
+
+                </Container>
+
+            </Paper>
         </div>
     );
-    
+
 }
 
 export default Map

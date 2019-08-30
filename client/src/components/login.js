@@ -49,6 +49,13 @@ const useStyles = makeStyles(theme => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    formErrorMessage: {
+        display: 'block',
+        color: 'red'
+    },
+    formNonErrorMessage: {
+        display: 'none'
+    }
 }));
 
 export default function SignIn() {
@@ -58,7 +65,8 @@ export default function SignIn() {
     const [password, updatePassword] = useState('');
     const [loginError, updateLoginError] = useState({
         username: false,
-        password: false
+        password: false,
+        missingCred: false
     });
 
     const handleInputChange = event => {
@@ -69,14 +77,16 @@ export default function SignIn() {
                 updateEmail(value);
                 updateLoginError({
                     ...loginError,
-                    username: false
+                    username: false,
+                    missingCred: false
                 })
                 break;
             case 'password': 
                 updatePassword(value);
                 updateLoginError({
                     ...loginError,
-                    password: false
+                    password: false,
+                    missingCred: false
                 })
                 break;
             default: return;
@@ -110,20 +120,22 @@ export default function SignIn() {
                 switch (flash[flash.length-1]){
                     case "Missing credentials":
                         updateLoginError({
-                            username: true,
-                            password: true
+                            ...loginError,
+                            missingCred: true
                         });
                         break;
                     case "Not a user":
                         updateLoginError({
                             username: true,
-                            password: false
+                            password: false,
+                            missingCred: false
                         });
                         break;
                     case "Incorrect password":
                         updateLoginError({
                             username: false,
-                            password: true
+                            password: true,
+                            missingCred: false
                         });
                         break;
                     default:
@@ -164,8 +176,12 @@ export default function SignIn() {
                         autoFocus
                         onChange={handleInputChange}
                         className={"browser-default"}
-                        error={loginError.username}
+                        error={loginError.username || loginError.missingCred}
                     />
+                    <div className={loginError.username ?
+                        classes.formErrorMessage :
+                        classes.formNonErrorMessage }
+                    >Wrong fucking username</div>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -176,13 +192,17 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        error={loginError.password}
+                        error={loginError.password || loginError.missingCred}
                         onChange={handleInputChange}
                     />
-                    {/* <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    /> */}
+                    <div className={loginError.password ?
+                        classes.formErrorMessage :
+                        classes.formNonErrorMessage }
+                    >Wrong fucking password</div>
+                    <div className={loginError.missingCred ?
+                        classes.formErrorMessage :
+                        classes.formNonErrorMessage }
+                    >You are missing fucking credentials!!!</div>
                     <Button
                         type="submit"
                         fullWidth

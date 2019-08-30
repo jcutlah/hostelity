@@ -89,7 +89,7 @@ function Map(props) {
         // }
     }
     const handleChange = event => {
-        console.log(state);
+        // console.log(state);
         const { name, value } = event.target;
         var usedThisStop = false;
         var oldStops = state.stops;
@@ -121,8 +121,8 @@ function Map(props) {
         }
     }
     const addInput = () => {
-        console.log(state);
-        console.log("addInput running");
+        // console.log(state);
+        // console.log("addInput running");
         var newId = state.inputId + 1;
         setState({ ...state, inputId: newId });
 
@@ -161,145 +161,148 @@ function Map(props) {
                                 New Search
                         </Link>
                         </div>
-                        <FormControl fullWidth={true} component="fieldset">
-                            <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
-                            <Divider variant="middle" className={classes.darkDivider} />
+                        <form onSubmit={(e) => { e.preventDefault() }}>
+                            <FormControl fullWidth={true} component="fieldset">
+                                <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
+                                <Divider variant="middle" className={classes.darkDivider} />
 
-                            <FormGroup>
-                                <div className="form-inputs">
-                                    <TextField
-                                        id="outlined-start"
-                                        label="Starting Point"
-                                        className={classes.textField}
-                                        // value={state.start}
-                                        name='start'
-                                        onChange={handleChange}
-                                        margin="normal"
-                                        variant="outlined"
-                                    />
-                                    {state.inputId >= 1 ?
+                                <FormGroup>
+                                    <div className="form-inputs">
                                         <TextField
+                                            id="outlined-start"
+                                            label="Starting Point"
                                             className={classes.textField}
-                                            label="Waypoint"
-                                            name={`1waypoint`}
+                                            // value={state.start}
+                                            name='start'
+                                            onChange={handleChange}
                                             margin="normal"
                                             variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 2 ?
+                                        />
+                                        {state.inputId >= 1 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`1waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 2 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`2waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 3 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`3waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 4 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`4waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 5 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`5waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 6 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`6waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 7 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`7waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
+                                        {state.inputId >= 8 ?
+                                            <TextField
+                                                className={classes.textField}
+                                                label="Waypoint"
+                                                name={`8waypoint`}
+                                                margin="normal"
+                                                variant="outlined"
+                                                onChange={handleChange}
+                                            /> :
+                                            <div></div>
+                                        }
                                         <TextField
+                                            id="outlined-end"
+                                            label="Final Destination"
                                             className={classes.textField}
-                                            label="Waypoint"
-                                            name={`2waypoint`}
+                                            // value={state.end}
+                                            name='end'
+                                            onChange={handleChange}
                                             margin="normal"
                                             variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 3 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`3waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 4 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`4waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 5 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`5waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 6 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`6waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 7 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`7waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    {state.inputId >= 8 ?
-                                        <TextField
-                                            className={classes.textField}
-                                            label="Waypoint"
-                                            name={`8waypoint`}
-                                            margin="normal"
-                                            variant="outlined"
-                                            onChange={handleChange}
-                                        /> :
-                                        <div></div>
-                                    }
-                                    <TextField
-                                        id="outlined-end"
-                                        label="Final Destination"
-                                        className={classes.textField}
-                                        // value={state.end}
-                                        name='end'
-                                        onChange={handleChange}
-                                        margin="normal"
-                                        variant="outlined"
-                                    />
-                                    <Button
-                                        className={classes.button}
-                                        onClick={addInput}>
-                                        Add Waypoint
+                                        />
+                                        <Button
+                                            className={classes.button}
+                                            onClick={addInput}>
+                                            Add Waypoint
                             </Button>
 
-                                    {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
+                                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
                         <br /> */}
-                                    <Fab
-                                        onClick={() => {
-                                            document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                            MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
 
-                                        }
-                                        }
-                                        variant="extended" aria-label="delete" className={classes.fab}>
-                                        <NavigationIcon className={classes.extendedIcon} />
-                                        Begin
+                                        <Fab
+                                            onClick={() => {
+                                                document.querySelector('#form-top').setAttribute('style', 'display:block');
+                                                MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
+
+                                            }
+                                            }
+                                            variant="extended" aria-label="delete" className={classes.fab}>
+                                            <NavigationIcon className={classes.extendedIcon} />
+                                            Begin
                         </Fab>
 
-                                </div>
-                            </FormGroup>
+                                    </div>
+                                </FormGroup>
 
-                            <div id='directions-panel'></div>
-                        </FormControl>
+                                <div id='directions-panel'></div>
+                            </FormControl>
+                        </form>
                     </div>
                 </Container>
                 <Container className={classes.mapContainer}>

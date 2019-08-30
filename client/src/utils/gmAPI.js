@@ -68,12 +68,12 @@ const MapFunctions = {
                                     `<br>` +
                                     `<img src=${checkPhotoAgain()}/>` +
                                     `<div>${markerData.rating}</div>` +
-                                    `<button type="buttton" className="hostelButton" 
+                                    `<div class="buttonWrapper"><button type="button" className="hostelButton" 
                                         data-title='${markerData.title}'
                                         data-location='${[markerData.position.lat(), markerData.position.lng()]}'
                                         data-address='${markerData.address}'
                                         data-imageUrl='${markerData.photoUrl}'
-                                        id=${markerData.place_id}>Add to Trip</button>`;
+                                        id=${markerData.place_id}>Add to Trip</button></div>`;
 
                                 //Add content to information window for each marker:
                                 var infowindow = new google.maps.InfoWindow({

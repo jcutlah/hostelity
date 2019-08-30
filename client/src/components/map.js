@@ -59,7 +59,7 @@ function Map(props) {
     // }, [GoogleMapReact])
     const setHostels = (hostel) => {
         let hostels = [...state.hostels, hostel];
-        console.log(hostels);
+        // console.log(hostels);
         setState({
             ...state, hostels
         })
@@ -77,8 +77,9 @@ function Map(props) {
                         placeId: event.target.id,
                         imageUrl: event.target.getAttribute('data-imageUrl')
                     }
-                    console.log(data)
+                    // console.log(data)
                     setHostels(data);
+                    event.target.setAttribute('style','display: none');
                 } 
             });
             document.querySelector('#form-top').setAttribute('style', 'display:none');

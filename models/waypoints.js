@@ -8,6 +8,10 @@ const wpSchema = new Schema({
             ref: 'Hostel' 
         }
     ],
+    trip: {
+        type: Schema.Types.ObjectId,
+        ref: 'Trips'
+    },
     name: {
         type: String,
         required: true
@@ -17,7 +21,16 @@ const wpSchema = new Schema({
         required: true
     },
     location: {
-        type: [Number, Number]
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+            index: true
+        }
     },
     imageUrl: {
         type: String
@@ -27,6 +40,7 @@ const wpSchema = new Schema({
         default: Date.now 
     }
 });
+wpSchema.index({ 'location': '2dsphere' }, { background: false });
 
 const Waypoint = mongoose.model("Waypoint", wpSchema);
 

@@ -54,7 +54,39 @@ const orm = {
             _id: tripId
         }, {$push: {waypoints:waypointId}})
         .then(function(trip){
-            callback(trip);
+            db.Waypoint.findOneAndUpdate({
+                _id: waypointId
+            }, {$push: {trip:tripId}})
+            .then(function(waypoint){
+                callback(trip);
+            })
+        })
+        
+    },
+    findClosestWaypointToHostel: function(tripId, hostLngLat, maxDistance, callback) {
+        console.log('finding closest waypoint to hostel');
+        db.Waypoint.find({
+            trip: tripId,
+            location: {
+                $nearSphere: {
+                $geometry: {
+                    type: 'Point',
+                    coordinates: [hostLngLat[0],hostLngLat[1]]
+                },
+                $maxDistance: maxDistance
+                }
+            }
+        })
+        .then(function(result){
+            console.log('success!');
+            console.log(result);
+            callback(result);
+        })
+        .catch(function(err){
+            console.log(err);
+            callback({
+                error: "waypoint not found"
+            });
         })
     }
 };

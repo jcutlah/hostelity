@@ -51,18 +51,40 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1)
     }
 }));
+
 function Map(props) {
     var originalMap = {}
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
+    const setHostels = (hostel) => {
+        let hostels = [...state.hostels, hostel];
+        // console.log(hostels);
+        setState({
+            ...state, hostels
+        })
+    }
 
     useEffect(function () {
+        
         return () => {
+            document.addEventListener('click', function (event) {
+                if (event.target.getAttribute('classname') === "hostelButton"){
+                    let data = {
+                        title: event.target.getAttribute('data-title'),
+                        location: event.target.getAttribute('data-location'),
+                        address: event.target.getAttribute('data-address'),
+                        placeId: event.target.id,
+                        imageUrl: event.target.getAttribute('data-imageUrl')
+                    }
+                    // console.log(data)
+                    setHostels(data);
+                    event.target.setAttribute('style','display: none');
+                } 
+            });
             document.querySelector('#form-top').setAttribute('style', 'display:none');
         }
     })
-
     const defaultview = {
         center: {
             lat: 37,
@@ -127,26 +149,6 @@ function Map(props) {
         setState({ ...state, inputId: newId });
 
     }
-    function infoWindowOpen(event) {
-        if (!event.target.closest('.hostelButton')) {
-            var data = {
-                title: event.target.getAttribute('data-title'),
-                location: event.target.getAttribute('data-location'),
-                address: event.target.getAttribute('data-address'),
-                placeId: event.target.id,
-                imageUrl: event.target.getAttribute('data-imageUrl')
-            }
-
-            return console.log(data)
-        } else {
-            return console.log("nah dude")
-        }
-
-    }
-    document.addEventListener('click', function (event) {
-
-        infoWindowOpen(event)
-    })
     console.log(state);
     return (
         // Important! Always set the container height explicitly
@@ -161,7 +163,9 @@ function Map(props) {
                                 New Search
                         </Link>
                         </div>
-                        <form onSubmit={(e) => { e.preventDefault() }}>
+                        <form onSubmit={(e) => { 
+                            e.preventDefault(); 
+                            }}>
                             <FormControl fullWidth={true} component="fieldset">
                                 <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                                 <Divider variant="middle" className={classes.darkDivider} />
@@ -282,9 +286,6 @@ function Map(props) {
                                             Add Waypoint
                             </Button>
 
-                                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
-                        <br /> */}
-
                                         <Fab
                                             onClick={() => {
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
@@ -292,6 +293,7 @@ function Map(props) {
 
                                             }
                                             }
+                                            type="submit"
                                             variant="extended" aria-label="delete" className={classes.fab}>
                                             <NavigationIcon className={classes.extendedIcon} />
                                             Begin

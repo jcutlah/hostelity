@@ -4,21 +4,7 @@ var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
 var legData = []
-// const infoWindow = (props)=>{
-//     return (<div>
-//         <div>{props.title}</div>
-//        {props.img ?  <img src={props.img}></img> : <div>No image provided </div>}
-//        <div>{props.rating}</div>
-//        <button onClick={() =>  console.log(markerData.place_id) }} value={props.place_id}>Add to your trip!</button>
-//     id: props.place_id,
-//     position: res[i].geometry.location,
-//     map: map,
-//     title: res[i].name,
-//     rating: res[i].rating,
-//     place_id: res[i].place_id,
-//     photoUrl: checkPhotos()
-//     </div>)
-// }
+
 const MapFunctions = {
     handleTripSearch: (map) => {
         const google = window.google
@@ -82,12 +68,12 @@ const MapFunctions = {
                                     `<br>` +
                                     `<img src=${checkPhotoAgain()}/>` +
                                     `<div>${markerData.rating}</div>` +
-                                    `<button type="buttton" className="hostelButton" 
+                                    `<div class="buttonWrapper"><button type="button" className="hostelButton" 
                                         data-title='${markerData.title}'
                                         data-location='${[markerData.position.lat(), markerData.position.lng()]}'
                                         data-address='${markerData.address}'
                                         data-imageUrl='${markerData.photoUrl}'
-                                        id=${markerData.place_id}>Add to Trip</button>`;
+                                        id=${markerData.place_id}>Add to Trip</button></div>`;
 
                                 //Add content to information window for each marker:
                                 var infowindow = new google.maps.InfoWindow({

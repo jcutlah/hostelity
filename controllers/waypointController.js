@@ -50,18 +50,12 @@ const orm = {
     },
     associateWaypointToTrip: function(tripId, waypointId, callback) {
         console.log(`associating waypoint w/ id ${waypointId} to trip w/ id ${tripId}`);
-        db.Trip.findOneAndUpdate({
-            _id: tripId
-        }, {$push: {waypoints:waypointId}})
-        .then(function(trip){
-            db.Waypoint.findOneAndUpdate({
-                _id: waypointId
-            }, {$push: {trip:tripId}})
-            .then(function(waypoint){
-                callback(trip);
-            })
+        db.Waypoint.findOneAndUpdate({
+            _id: waypointId
+        }, {$push: {trip:tripId}})
+        .then(function(waypoint){
+            callback(waypoint);
         })
-        
     },
     findClosestWaypointToHostel: function(tripId, hostLngLat, maxDistance, callback) {
         console.log('finding closest waypoint to hostel');
@@ -77,17 +71,17 @@ const orm = {
                 }
             }
         })
-        .then(function(result){
-            console.log('success!');
-            console.log(result);
-            callback(result);
-        })
-        .catch(function(err){
-            console.log(err);
-            callback({
-                error: "waypoint not found"
-            });
-        })
+            .then(function(waypoint){
+                console.log('success!');
+                console.log(waypoint);
+                callback(waypoint);
+            })
+            .catch(function(err){
+                console.log(err);
+                callback({
+                    error: "waypoint not found"
+                });
+            })
     }
 };
 

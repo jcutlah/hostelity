@@ -34,7 +34,7 @@ const Trips = (props) => {
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Typography variant="h5" component="h3" align="center">
-                            {trip.name}
+                            {trip.name}   <span><a href={`/map/${trip._id}`}>Edit this Trip</a></span>
                         </Typography>
                         <hr></hr>
 

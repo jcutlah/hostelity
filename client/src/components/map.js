@@ -180,17 +180,24 @@ function Map(props) {
                         <div id="form-top">
                             <Link
                                 href={""} className={classes.link}
-                            >
-                                New Search
-                        </Link>
+                            ><Fab
+                                variant="extended" aria-label="delete" className={classes.fab}>
+                                    New Search</Fab>
+                            </Link>
+                            <br />
+                            <Link
+                                href={"javascript:;"} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                            ><Fab
+                                variant="extended" aria-label="delete" onClick={saveTrip} className={classes.fab}>Save your Trip!</Fab>
 
+
+                            </Link>
 
                         </div>
-                        <Link
-                            href={"javascript:;"} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
-                        >
-                            Save your Trip!
-                            </Link>
+
+
+
+
                         <form
                             className={state.trip.waypoints ? classes.hiddenForm : classes.showForm}
                             onSubmit={(e) => { e.preventDefault() }} >

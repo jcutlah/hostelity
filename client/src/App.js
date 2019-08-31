@@ -44,6 +44,10 @@ function App() {
             }
             // console.log('meep');
 
+          } else {
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+                window.location = '/login';
+              }
           }
 
         })

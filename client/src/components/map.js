@@ -15,6 +15,7 @@ import MapFunctions from '../utils/gmAPI'
 import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
+import Axios from 'axios';
 
 
 // const google = window.google;
@@ -49,19 +50,25 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1)
+    },
+    hiddenForm: {
+        display: 'none !important'
+    },
+    showForm: {
+        display: 'block'
     }
 }));
 function Map(props) {
-    var originalMap = {}
+
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
 
-    useEffect(function () {
-        return () => {
-            document.querySelector('#form-top').setAttribute('style', 'display:none');
-        }
-    })
+    // useEffect(function () {
+    //     return () => {
+    //         document.querySelector('#form-top').setAttribute('style', 'display:none');
+    //     }
+    // })
 
     const defaultview = {
         center: {
@@ -74,11 +81,12 @@ function Map(props) {
     const classes = useStyles()
     const [state, setState] = React.useState({
         map: {},
+        trip: {},
         start: '',
         end: '',
         stops: [],
         hostels: [],
-
+        waypoints: [],
         inputId: 0
     });
     const newSearch = (e) => {
@@ -129,6 +137,7 @@ function Map(props) {
     }
     function infoWindowOpen(event) {
         if (!event.target.closest('.hostelButton')) {
+            console.log(state.waypoints)
             var data = {
                 title: event.target.getAttribute('data-title'),
                 location: event.target.getAttribute('data-location'),
@@ -143,10 +152,24 @@ function Map(props) {
         }
 
     }
-    document.addEventListener('click', function (event) {
 
+    document.addEventListener('click', function (event) {
         infoWindowOpen(event)
     })
+    const saveTrip = () => {
+        Axios.post('/api/trips', state.trip).then(function (res) {
+            console.log(res)
+        })
+        // var waypoints = state.trip.waypoints
+        // console.log(waypoints)
+        // var saveData = {
+        //     waypoints: waypoints,
+        //     start: state.start,
+        //     end: state.end,
+        //     name: 'My *Super FUCKING* Trip!'
+        // }
+        // console.log(saveData)
+    }
     console.log(state);
     return (
         // Important! Always set the container height explicitly
@@ -160,8 +183,17 @@ function Map(props) {
                             >
                                 New Search
                         </Link>
+
+
                         </div>
-                        <form onSubmit={(e) => { e.preventDefault() }}>
+                        <Link
+                            href={"javascript:;"} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                        >
+                            Save your Trip!
+                            </Link>
+                        <form
+                            className={state.trip.waypoints ? classes.hiddenForm : classes.showForm}
+                            onSubmit={(e) => { e.preventDefault() }} >
                             <FormControl fullWidth={true} component="fieldset">
                                 <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
                                 <Divider variant="middle" className={classes.darkDivider} />
@@ -286,11 +318,28 @@ function Map(props) {
                         <br /> */}
 
                                         <Fab
-                                            onClick={() => {
+                                            type="submit"
+                                            onClick={async () => {
+
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                                MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops)
+                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops, function (routeLegs, start, end) {
+                                                    console.log(routeLegs);
+                                                    var newTrip = {
+                                                        waypoints: routeLegs,
+                                                        start: start,
+                                                        end: end,
+                                                        name: 'My Super Trip!'
+                                                    }
+
+                                                    ///loop through leg data, use logic to add waypoints to state.waypoints, and add leg data to state.trip
+
+                                                    //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
+                                                    setState({ ...state, trip: newTrip })
+                                                    console.log(state.waypoints)
+                                                })
 
                                             }
+
                                             }
                                             variant="extended" aria-label="delete" className={classes.fab}>
                                             <NavigationIcon className={classes.extendedIcon} />
@@ -313,7 +362,7 @@ function Map(props) {
                             defaultZoom={defaultview.zoom}
                             yesIWantToUseGoogleMapApiInternals={true}
                             onGoogleApiLoaded={({ map, maps }) => {
-                                originalMap = map;
+
                                 MapFunctions.handleApiLoaded(map, maps)
                                 setState({ ...state, map: map })
                             }}

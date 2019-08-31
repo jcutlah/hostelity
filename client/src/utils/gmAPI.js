@@ -4,23 +4,13 @@ var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
 var legData = []
-// const infoWindow = (props)=>{
-//     return (<div>
-//         <div>{props.title}</div>
-//        {props.img ?  <img src={props.img}></img> : <div>No image provided </div>}
-//        <div>{props.rating}</div>
-//        <button onClick={() =>  console.log(markerData.place_id) }} value={props.place_id}>Add to your trip!</button>
-//     id: props.place_id,
-//     position: res[i].geometry.location,
-//     map: map,
-//     title: res[i].name,
-//     rating: res[i].rating,
-//     place_id: res[i].place_id,
-//     photoUrl: checkPhotos()
-//     </div>)
-// }
+
 const MapFunctions = {
+    checkLegs: () => {
+        return (legData.length) ? legData : 'No waypoints'
+    },
     handleTripSearch: (map) => {
+
         const google = window.google
         try {
             //USING REQUESTS DEFINED BELOW: 
@@ -40,7 +30,7 @@ const MapFunctions = {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    return (res[i].photos[0].getUrl({ maxWidth: 50, maxHeight: 50 }))
+                                    return (res[i].photos[0].getUrl({ maxWidth: 80, maxHeight: 'auto' }))
                                 } else {
                                     return null
                                 }
@@ -76,11 +66,12 @@ const MapFunctions = {
                                     }
                                 }
 
-                                console.log(markerData)
+
                                 var contentString =
                                     `<div>${markerData.title}</div>` +
                                     `<br>` +
                                     `<img src=${checkPhotoAgain()}/>` +
+                                    `<br>` +
                                     `<div>${markerData.rating}</div>` +
                                     `<button type="buttton" className="hostelButton" 
                                         data-title='${markerData.title}'
@@ -116,7 +107,7 @@ const MapFunctions = {
                 }
                 // REQUESTS LOOP: 
                 requests.forEach((req, i) => {
-                    console.log(req)
+
                     var latLng = req.location
                     var rad = req.radius
                     var request = {
@@ -137,7 +128,7 @@ const MapFunctions = {
                 var requestsForPoints = []
                 var startLatLng = new google.maps.LatLng(legData[0].location[0](), legData[0].location[1]())
                 var endLatLng = new google.maps.LatLng(legData[legData.length - 1].location[0](), legData[legData.length - 1].location[1]())
-                console.log(legData[0].location[0](), legData[0].location[1]())
+
                 requestsForPoints.push({
                     location: startLatLng,
                 })
@@ -163,7 +154,7 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: async (map, start, end, stops) => {
+    calculateAndDisplayRoute: async (map, start, end, stops, callback) => {
         const google = window.google
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -216,33 +207,41 @@ const MapFunctions = {
                 routeMarkers.push(response.geocoded_waypoints[i])
             }
             if (status === 'OK') {
-                //Create variables to check if map needs to be updated
-
-                // Setting map's directions to response values //
-                // Choosing the first route to display: //
                 var route = response.routes[0];
+                //Grab waypoint data and save to state:
+
+
                 // Format Leg Data: 
                 console.log(route.legs)
                 for (var i = 0; i < route.legs.length; i++) {
                     console.log(route.legs[i])
+                    var startPoint;
+                    var endPoint;
                     if (i === (route.legs.length - 1)) {
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat
                         var lng1 = route.legs[i].start_location.lng
                         var time1 = route.legs[i].duration.text;
                         var distance1 = route.legs[i].distance.text;
-                        legData.push({
+                        startPoint = {
                             name: name1,
                             location: [lat1, lng1],
                             time: time1,
                             distance: distance1
-                        })
+                        }
+                        legData.push(startPoint)
+
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat
                         var lng = route.legs[i].end_location.lng
                         var time = route.legs[i].duration.text;
                         var distance = route.legs[i].distance.text;
-
+                        endPoint = {
+                            name: name,
+                            location: [lat, lng],
+                            time: time,
+                            distance: distance,
+                        }
                     } else {
                         var name = route.legs[i].start_address
                         var lat = route.legs[i].start_location.lat
@@ -262,8 +261,10 @@ const MapFunctions = {
 
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setMap(map);
+
                 console.log(legData)
                 MapFunctions.handleTripSearch(map)
+                callback(legData, startPoint, endPoint)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -274,6 +275,9 @@ const MapFunctions = {
 
 
         return console.log("API Loaded")
+    },
+    loadATrip: () => {
+
     }
 
 }

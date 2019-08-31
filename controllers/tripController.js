@@ -2,7 +2,7 @@ const db = require('../models/index');
 
 
 const orm = {
-    addTrip: function(userId, trip, callback){
+    addTrip: function(trip, callback){
         console.log('running trip()');
         console.log(trip);
         db.Trip.create(trip)
@@ -50,6 +50,14 @@ const orm = {
         } else {
             callback({errorMessage: "user id not present"});
         }
+    },
+    updateTripWithWaypoint: function(tripId, waypointId, callback){
+        db.Trip.findOneAndUpdate({
+            _id: tripId
+        }, {$push: {waypoints:waypointId}})
+            .then(function(trip){
+                callback(trip);
+            })
     }
 };
 

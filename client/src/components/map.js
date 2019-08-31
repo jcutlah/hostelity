@@ -58,18 +58,39 @@ const useStyles = makeStyles(theme => ({
         display: 'block'
     }
 }));
+
 function Map(props) {
 
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
+    const setHostels = (hostel) => {
+        let hostels = [...state.hostels, hostel];
+        // console.log(hostels);
+        setState({
+            ...state, hostels
+        })
+    }
 
-    // useEffect(function () {
-    //     return () => {
-    //         document.querySelector('#form-top').setAttribute('style', 'display:none');
-    //     }
-    // })
+    useEffect(function () {
 
+        return () => {
+            document.addEventListener('click', function (event) {
+                if (event.target.getAttribute('classname') === "hostelButton") {
+                    let data = {
+                        title: event.target.getAttribute('data-title'),
+                        location: event.target.getAttribute('data-location'),
+                        address: event.target.getAttribute('data-address'),
+                        placeId: event.target.id,
+                        imageUrl: event.target.getAttribute('data-imageUrl')
+                    }
+                    // console.log(data)
+                    setHostels(data);
+                    event.target.setAttribute('style', 'display: none');
+                }
+            });
+        }
+    })
     const defaultview = {
         center: {
             lat: 37,
@@ -180,24 +201,25 @@ function Map(props) {
                         <div id="form-top">
                             <Link
                                 href={""} className={classes.link}
-                            ><Fab
-                                variant="extended" aria-label="delete" className={classes.fab}>
-                                    New Search</Fab>
+                            >
+                                <Fab
+                                    variant="extended" aria-label="delete" className={classes.fab}>
+                                    New Search
+                                </Fab>
                             </Link>
                             <br />
+
                             <Link
                                 href={"javascript:;"} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
-                            ><Fab
-                                variant="extended" aria-label="delete" onClick={saveTrip} className={classes.fab}>Save your Trip!</Fab>
+                            >
+                                <Fab
+                                    variant="extended" aria-label="delete" onClick={saveTrip} className={classes.fab}>Save your Trip!
+                                </Fab>
 
 
                             </Link>
 
                         </div>
-
-
-
-
                         <form
                             className={state.trip.waypoints ? classes.hiddenForm : classes.showForm}
                             onSubmit={(e) => { e.preventDefault() }} >
@@ -321,9 +343,6 @@ function Map(props) {
                                             Add Waypoint
                             </Button>
 
-                                        {/* <FormHelperText text- align='center'>Find your Path!</FormHelperText>
-                        <br /> */}
-
                                         <Fab
                                             type="submit"
                                             onClick={async () => {
@@ -348,6 +367,7 @@ function Map(props) {
                                             }
 
                                             }
+                                            type="submit"
                                             variant="extended" aria-label="delete" className={classes.fab}>
                                             <NavigationIcon className={classes.extendedIcon} />
                                             Begin

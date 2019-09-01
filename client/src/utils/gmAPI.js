@@ -204,10 +204,11 @@ const MapFunctions = {
             travelMode: 'DRIVING'
         }, await function (response, status) {
             // Checking Status of response //
-            for (var i = 0; i < response.geocoded_waypoints.length; i++) {
-                routeMarkers.push(response.geocoded_waypoints[i])
-            }
+            console.log(response);
             if (status === 'OK') {
+                for (var i = 0; i < response.geocoded_waypoints.length; i++) {
+                    routeMarkers.push(response.geocoded_waypoints[i])
+                }
                 var route = response.routes[0];
                 //Grab waypoint data and save to state:
 
@@ -220,7 +221,7 @@ const MapFunctions = {
                     console.log(route.legs[i])
                     var startPoint;
                     var endPoint;
-                    if (i === (route.legs.length - 1)) {
+                    if (i !== (route.legs.length - 1)) {
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()
@@ -229,10 +230,11 @@ const MapFunctions = {
                         startPoint = {
                             name: name1,
                             location: [lat1, lng1],
-                            time: time1,
-                            distance: distance1
+                            time: i === 0 ? "0 hours": time1,
+                            distance: i === 0 ? "0 mi" : distance1
                         }
-                        legData.push(startPoint)
+                        console.log(startPoint);
+                        legData.push(startPoint);
 
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
@@ -245,20 +247,21 @@ const MapFunctions = {
                             time: time,
                             distance: distance,
                         }
+                        legData.push(endPoint)
                     } else {
-                        var name = route.legs[i].start_address
-                        var lat = route.legs[i].start_location.lat()
-                        var lng = route.legs[i].start_location.lng()
+                        var name = route.legs[i].end_address
+                        var lat = route.legs[i].end_location.lat()
+                        var lng = route.legs[i].end_location.lng()
                         var time = route.legs[i].duration.text;
                         var distance = route.legs[i].distance.text;
+                        legData.push({
+                            name: name,
+                            location: [lat, lng],
+                            time: time,
+                            distance: distance
+                        })
                     }
                     // Push data to legData array:
-                    legData.push({
-                        name: name,
-                        location: [lat, lng],
-                        time: time,
-                        distance: distance,
-                    })
                     // ADD IMAGE GRAB - RC
                 }
 
@@ -267,7 +270,7 @@ const MapFunctions = {
 
                 console.log(legData)
                 MapFunctions.handleTripSearch(map)
-                callback(legData, startPoint, endPoint)
+                callback(legData, route.legs[0].start_address, route.legs[route.legs.length -1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

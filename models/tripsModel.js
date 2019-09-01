@@ -18,6 +18,10 @@ const tripSchema = new Schema({
         type: String,
         required: true
     },
+    totalMileage: {
+        type: Number,
+        required: true
+    },
     dateAdded: { 
         type: Date, 
         default: Date.now 

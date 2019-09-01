@@ -10,15 +10,8 @@ const orm = {
         .then(function(result) {
             console.log(result);
             console.log('waypoint meep');
-            // return db.Trip.findOneAndUpdate({
-            //     _id: tripId
-            // }, {$push: {waypoints:result._id}});
             callback(result);
         })
-        // .then(function(result){
-        //     console.log(result);
-        //     callback(result);
-        // })
         .catch(err => {
             if (err) console.error(err);
         })

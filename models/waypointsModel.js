@@ -20,6 +20,10 @@ const wpSchema = new Schema({
         type: Number,
         required: true
     },
+    distanceToWaypoint: {
+        type: Number,
+        required: true
+    },
     location: {
         type: {
             type: String,

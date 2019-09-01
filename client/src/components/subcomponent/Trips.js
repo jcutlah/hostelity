@@ -10,31 +10,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const deepLoop = (iterable) => {
-    iterable.map(item => {
-        console.log(item.waypoints);
-        item.waypoints.map(waypoint => {
-            console.log(waypoint);
-            waypoint.hostels.map(hostel => {
-                console.log(hostel);
-            })
-        })
-    }) 
-    
-}
-
 const Trips = (props) => {
     const classes = useStyles();
-    props.trips ? deepLoop(props.trips) : console.log('meep');
     return (
         <Paper className={classes.root}>
-            {console.log(typeof props.trips)}
+            {/* {console.log(typeof props.trips)} */}
             {props.trips.map(trip => {
 
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Typography variant="h5" component="h3" align="center">
-                            {trip.name}
+                            {trip.name}   <span><a href={`/map/${trip._id}`}>Edit this Trip</a></span>
                         </Typography>
                         <hr></hr>
 

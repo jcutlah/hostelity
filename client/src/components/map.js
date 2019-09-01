@@ -356,7 +356,7 @@ function Map(props) {
 
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
-                                                    console.log(state.waypoints)
+                                                    // console.log(state.waypoints)
                                                 })
 
                                             }

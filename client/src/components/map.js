@@ -208,7 +208,7 @@ function Map(props) {
                                 href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
                             >
                                 <Fab
-                                    variant="extended" aria-label="delete" onClick={saveTrip} className={classes.fab}>Save your Trip!
+                                    variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
                                 </Fab>
 
 

@@ -55,6 +55,7 @@ const waypointSeed = [
             type: "Point",
             coordinates: [-111.104187,44.662251]
         },
+        distanceToWaypoint: 357,
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     },
     {
@@ -64,6 +65,7 @@ const waypointSeed = [
             coordinates: [-112.998596,37.188900],
         }, 
         tripIndex: 0,
+        distanceToWaypoint: 432,
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     },
     {
@@ -73,6 +75,7 @@ const waypointSeed = [
             type: "Point",
             coordinates: [-121.894676,36.600239],
         },
+        distanceToWaypoint: 186,
         imageUrl: 'https://media.deseretdigital.com/file/985f0f3546?crop%3Dtop%3A0%7Cleft%3A0%7Cwidth%3A640%7Cheight%3A420%26resize%3Dwidth%3A640%26order%3Dresize%2Ccrop%26c%3D14%26a%3D1dc0fe20',
     }
 ]
@@ -80,7 +83,8 @@ const tripSeed = [
     {
         name: "The Trip That I'll Really Want To Forget, But Will Never Forget",
         start: "Yellowstone, NP, USA",
-        end: "Big Sur, CA, USA"
+        end: "Big Sur, CA, USA",
+        totalMileage: 789
     }
     // {
     //     name: "My Spiritual Journey Trip",
@@ -176,7 +180,7 @@ db.Hostel
                                     console.log(response);
                                     console.log('meep');
                                     seed.trips.forEach(trip => {
-                                        tripController.addTrip(response._id, trip, function(res){
+                                        tripController.addTrip(trip, function(res){
                                             console.log('derp');
                                             console.log(res);
                                             tripController.associateTripToUser(response._id, res._id, function(user){

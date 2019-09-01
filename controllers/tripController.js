@@ -33,6 +33,11 @@ const orm = {
                 populate: {
                     path: 'waypoints',
                     model: 'Waypoint',
+                    options: {
+                        sort: {
+                            'tripIndex': 1
+                        }
+                    },
                     populate: {
                         path: 'hostels',
                         model: 'Hostel'

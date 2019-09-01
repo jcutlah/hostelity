@@ -23,16 +23,11 @@ db.Hostel
             .remove({})
             .then(() => {
                 console.log('trips removed')
-                db.User
+                db.Waypoint
                     .remove({})
                     .then(() => {
-                        db.Waypoint
-                        .remove({})
-                        .then(() => {
-                            console.log('waypoints removed')
-                            console.log('users removed');
-                            process.exit(0);
-                        });
+                        console.log('waypoints removed')
+                        process.exit(0);
                     });
                 });
             });

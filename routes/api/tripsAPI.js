@@ -21,6 +21,8 @@ router.route("/:id")
     router.route("/")
         .post(function(req, res){
             console.log("post request made to /api/trips");
+            console.log(req.body);
+            console.log(req.body.waypoints[0].location.lat());
             res.json({message: "success, boyyyeeeee!!!"});
             // tripController.addTrip(req.body, function(trip){
             //     tripController.associateTripToUser(req.params.id, trip._id, function(user){

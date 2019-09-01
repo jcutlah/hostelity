@@ -1,6 +1,6 @@
 module.exports = {
-  User: require('./users'),
+  User: require('./usersModel'),
   Trip: require('./tripsModel'),
   Hostel: require('./hostelsModel'),
-  Waypoint: require('./waypoints')
+  Waypoint: require('./waypointsModel')
 };

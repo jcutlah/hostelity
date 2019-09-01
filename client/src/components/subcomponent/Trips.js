@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 
 const Trips = (props) => {
     const classes = useStyles();
-    props.trips ? deepLoop(props.trips) : console.log('meep');
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}

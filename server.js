@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(session({
     secret: 'dunbar-dunbar-and-bunwich',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {_expire: 3600000}
 }))
 app.use(passport.initialize());
 app.use(passport.session());

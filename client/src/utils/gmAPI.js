@@ -21,10 +21,10 @@ const MapFunctions = {
 
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-                    console.log(results)
+                    // console.log(results)
                     //After results are checked on line 76:
                     var logData = (res) => {
-                        console.log(res)
+                        // console.log(res)
                         // Organizing the data for hostel markers:
                         for (var i = 0; i < res.length; i++) {
                             //Checking if theres a photo for each res:
@@ -125,9 +125,10 @@ const MapFunctions = {
             }
             // CREATE REQUESTS FOR ALL POINTS:
             const createRequest = () => {
+                console.log(legData);
                 var requestsForPoints = []
-                var startLatLng = new google.maps.LatLng(legData[0].location[0](), legData[0].location[1]())
-                var endLatLng = new google.maps.LatLng(legData[legData.length - 1].location[0](), legData[legData.length - 1].location[1]())
+                var startLatLng = new google.maps.LatLng(legData[0].location[0], legData[0].location[1])
+                var endLatLng = new google.maps.LatLng(legData[legData.length - 1].location[0], legData[legData.length - 1].location[1])
 
                 requestsForPoints.push({
                     location: startLatLng,
@@ -136,7 +137,7 @@ const MapFunctions = {
                     location: endLatLng
                 })
                 for (var i = 1; i < legData.length - 1; i++) {
-                    var thisLatLng = new google.maps.LatLng(legData[i].location[0](), legData[i].location[1]())
+                    var thisLatLng = new google.maps.LatLng(legData[i].location[0], legData[i].location[1])
                     requestsForPoints.push({
                         location: thisLatLng,
                     })
@@ -203,37 +204,41 @@ const MapFunctions = {
             travelMode: 'DRIVING'
         }, await function (response, status) {
             // Checking Status of response //
-            for (var i = 0; i < response.geocoded_waypoints.length; i++) {
-                routeMarkers.push(response.geocoded_waypoints[i])
-            }
+            console.log(response);
             if (status === 'OK') {
+                for (var i = 0; i < response.geocoded_waypoints.length; i++) {
+                    routeMarkers.push(response.geocoded_waypoints[i])
+                }
                 var route = response.routes[0];
                 //Grab waypoint data and save to state:
 
 
                 // Format Leg Data: 
                 console.log(route.legs)
+                console.log(route.legs[0].start_location.lat());
                 for (var i = 0; i < route.legs.length; i++) {
+                    console.log(route.legs[i])
                     console.log(route.legs[i])
                     var startPoint;
                     var endPoint;
-                    if (i === (route.legs.length - 1)) {
+                    if (i !== (route.legs.length - 1)) {
                         var name1 = route.legs[i].start_address
-                        var lat1 = route.legs[i].start_location.lat
-                        var lng1 = route.legs[i].start_location.lng
+                        var lat1 = route.legs[i].start_location.lat()
+                        var lng1 = route.legs[i].start_location.lng()
                         var time1 = route.legs[i].duration.text;
                         var distance1 = route.legs[i].distance.text;
                         startPoint = {
                             name: name1,
                             location: [lat1, lng1],
-                            time: time1,
-                            distance: distance1
+                            time: i === 0 ? "0 hours": time1,
+                            distance: i === 0 ? "0 mi" : distance1
                         }
-                        legData.push(startPoint)
+                        console.log(startPoint);
+                        legData.push(startPoint);
 
                         var name = route.legs[i].end_address
-                        var lat = route.legs[i].end_location.lat
-                        var lng = route.legs[i].end_location.lng
+                        var lat = route.legs[i].end_location.lat()
+                        var lng = route.legs[i].end_location.lng()
                         var time = route.legs[i].duration.text;
                         var distance = route.legs[i].distance.text;
                         endPoint = {
@@ -242,20 +247,21 @@ const MapFunctions = {
                             time: time,
                             distance: distance,
                         }
+                        legData.push(endPoint)
                     } else {
-                        var name = route.legs[i].start_address
-                        var lat = route.legs[i].start_location.lat
-                        var lng = route.legs[i].start_location.lng
+                        var name = route.legs[i].end_address
+                        var lat = route.legs[i].end_location.lat()
+                        var lng = route.legs[i].end_location.lng()
                         var time = route.legs[i].duration.text;
                         var distance = route.legs[i].distance.text;
+                        legData.push({
+                            name: name,
+                            location: [lat, lng],
+                            time: time,
+                            distance: distance
+                        })
                     }
                     // Push data to legData array:
-                    legData.push({
-                        name: name,
-                        location: [lat, lng],
-                        time: time,
-                        distance: distance,
-                    })
                     // ADD IMAGE GRAB - RC
                 }
 
@@ -264,7 +270,7 @@ const MapFunctions = {
 
                 console.log(legData)
                 MapFunctions.handleTripSearch(map)
-                callback(legData, startPoint, endPoint)
+                callback(legData, route.legs[0].start_address, route.legs[route.legs.length -1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

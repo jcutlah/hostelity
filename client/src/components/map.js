@@ -107,16 +107,9 @@ function Map(props) {
         end: '',
         stops: [],
         hostels: [],
-        waypoints: [],
         inputId: 0
     });
-    const newSearch = (e) => {
-        //Setting state *and stuff*
-        // if (name === "start" || name === "end") {
-        //     setState({ ...state, [name]: value });
-        //     return;
-        // }
-    }
+
     const handleChange = event => {
         // console.log(state);
         const { name, value } = event.target;
@@ -158,7 +151,7 @@ function Map(props) {
     }
     function infoWindowOpen(event) {
         if (!event.target.closest('.hostelButton')) {
-            console.log(state.waypoints)
+            // console.log(state.waypoints)
             var data = {
                 title: event.target.getAttribute('data-title'),
                 location: event.target.getAttribute('data-location'),
@@ -167,7 +160,7 @@ function Map(props) {
                 imageUrl: event.target.getAttribute('data-imageUrl')
             }
 
-            return console.log(data)
+            // return console.log(data)
         } else {
             return console.log("nah dude")
         }
@@ -177,7 +170,8 @@ function Map(props) {
     document.addEventListener('click', function (event) {
         infoWindowOpen(event)
     })
-    const saveTrip = () => {
+    const saveTrip = (event) => {
+        event.preventDefault();
         Axios.post('/api/trips', state.trip).then(function (res) {
             console.log(res)
         })
@@ -191,7 +185,7 @@ function Map(props) {
         // }
         // console.log(saveData)
     }
-    console.log(state);
+    // console.log(state);
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
@@ -200,7 +194,8 @@ function Map(props) {
                     <div className={classes.searchDiv}>
                         <div id="form-top">
                             <Link
-                                href={""} className={classes.link}
+                                href={""} 
+                                className={classes.link}
                             >
                                 <Fab
                                     variant="extended" aria-label="delete" className={classes.fab}>
@@ -210,7 +205,7 @@ function Map(props) {
                             <br />
 
                             <Link
-                                href={"javascript:;"} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                                href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
                             >
                                 <Fab
                                     variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
@@ -361,7 +356,7 @@ function Map(props) {
 
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
-                                                    console.log(state.waypoints)
+                                                    // console.log(state.waypoints)
                                                 })
 
                                             }

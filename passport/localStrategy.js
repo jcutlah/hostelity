@@ -19,14 +19,10 @@ const localStrategy = new Strategy(
             console.log(`${username} not a user`)
             return done(null, false, { message: "Not a user"}); 
         }
-        // if (user.password != password) { 
-        //     console.log(`password don't match`);
-        //     return done(null, false, { message: "Incorrect password"}); 
-        // }
         bcrypt.compare(password, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                console.log("authenicated");
+                console.log("authenticated");
                 return done(null, user);
             } else {
                 // password is incorrect <<<<< WHAT TO DO

@@ -11,7 +11,7 @@ import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
 import Header from './components/subcomponent/Header';
-
+import LoadMap from './components/loadMap';
 function App() {
   // Define hooks (state) variables
   const [loggedIn, setLoggedIn] = useState(false);
@@ -46,8 +46,8 @@ function App() {
 
           } else {
             if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
-                window.location = '/login';
-              }
+              window.location = '/login';
+            }
           }
 
         })
@@ -76,6 +76,7 @@ function App() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
+          <Route exact path="/map/:id" component={LoadMap} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
           <Route exact path="/search" component={Search} />

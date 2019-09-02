@@ -200,7 +200,7 @@ function Map(props) {
                     <div className={classes.searchDiv}>
                         <div id="form-top">
                             <Link
-                                href={""} 
+                                href={""}
                                 className={classes.link}
                             >
                                 <Fab
@@ -349,7 +349,7 @@ function Map(props) {
                                             onClick={async () => {
 
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, state.stops, function (routeLegs, start, end) {
+                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, function (routeLegs, start, end) {
                                                     console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,

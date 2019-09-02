@@ -11,7 +11,7 @@ const Waypoints = (props) => {
             {props.waypoints.map((waypoint, i) => {
                 console.log(waypoint);
                 return (
-                    <Grid container spacing={3}>
+                    <Grid key={`waypoint-${i}`} container spacing={3}>
 
                         <Grid item xs={8}>
                             <div key={waypoint._id} className="tripSummary">

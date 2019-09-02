@@ -9,8 +9,7 @@ const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
-    handleTripSearch: (map, hostels) => {
-
+    handleTripSearch: (map, hostelIds) => {
         const google = window.google
         try {
             //USING REQUESTS DEFINED BELOW: 
@@ -54,9 +53,12 @@ const MapFunctions = {
                         markers.forEach(function (markerData) {
                             var databaseHostel = '2'
                             //Checking if marker exists in database (pseudocoded rn):
-                            if (markerData.id === databaseHostel) {
+                            if (hostelIds.indexOf(markerData.id) !== -1) {
+                                console.log(markerData.id);
+                                console.log(hostelIds);
+                            }
                                 //SPECIAL MARKER
-                            } else {
+                             else {
                                 //If marker is not in database, make sure there's a photo in the marker's object of data:
                                 var checkPhotoAgain = () => {
                                     if (markerData.photoUrl) {
@@ -156,7 +158,7 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: async (map, start, end, waypointsKnown, stops, callback) => {
+    calculateAndDisplayRoute: async (map, start, end, waypointsKnown, stops, hostelIds, callback) => {
         const google = window.google
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -165,7 +167,8 @@ const MapFunctions = {
         })
 
         if (globalMarkers.length > 1) {
-            console.log(globalMarkers, routeMarkers)
+            console.log(globalMarkers);
+            console.log(routeMarkers);
             globalMarkers.forEach(function (marker) {
                 marker.setMap(null)
             })
@@ -274,7 +277,7 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, [])
+                MapFunctions.handleTripSearch(map, hostelIds)
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);

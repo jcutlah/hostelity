@@ -193,6 +193,7 @@ function LoadMap(props) {
             .then(res => {
                 var data = res.data
                 console.log(res.data);
+                const hostelIds = [];
                 trip = {
                     start: data.waypoints[0].name,
                     end: data.waypoints[data.waypoints.length - 1].name,
@@ -205,9 +206,12 @@ function LoadMap(props) {
                             stopover: true
                         })
                     }
+                    wp.hostels.forEach(hostel => {
+                        hostelIds.push(hostel.placeId);
+                    })
                 })
                 console.log(trip)
-                MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, function (data, startAddress, endAddress) {
+                MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, hostelIds, function (data, startAddress, endAddress) {
                     console.log(data, startAddress, endAddress)
                 })
             })

@@ -6,13 +6,14 @@ const Hostels = (props) => {
     return (
         <div className="tripList section">
             {props.hostels.map(hostel => {
+                console.log(hostel)
                 return (
                     <div key={hostel._id} className="tripSummary">
 
                         <Typography align="center" variant="h6" gutterBottom>
                             Place name:
                          </Typography>
-                    
+
                         <Typography align="center" component="p">
                             {hostel.title}
                         </Typography>

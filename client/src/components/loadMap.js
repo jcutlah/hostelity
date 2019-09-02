@@ -24,7 +24,7 @@ const Marker = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles(theme => ({
     map: {
-        marginTop: 'calc(-23vw)'
+        marginTop: 'none'
     },
     root: {
         flexGrow: 1
@@ -36,11 +36,11 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
     },
     searchDiv: {
-        position: 'relative',
+        position: 'static',
         marginRight: 'auto',
         marginLeft: 'auto',
         width: '50vw',
-        marginTop: '25vw',
+        marginTop: '2vw',
     },
     extendedIcon: {
         marginRight: theme.spacing(1),
@@ -206,7 +206,7 @@ function LoadMap(props) {
     }
     return (
         // Important! Always set the container height explicitly
-        <div className="map-container">
+        <div className="loadmap-container">
             <Paper className={classes.root}>
                 <Container className={classes.mapContainer}>
                     <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>

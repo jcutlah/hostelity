@@ -1,25 +1,64 @@
 @media (max-width: 767px) {
   .navBottom {
     bottom: 0;
-    margin-bottom: 1rem;
+    height: 4%;
     width: 100%;
+    padding-top: .5vh;
     border-top: 0.1rem solid orange;
     display: flex;
+    background-color: rgb(41, 53, 43); 
     justify-content: space-between;
+  }
+  .loadmap-container .MuiPaper-root {
+    position: relative;
+    top: calc(18vw);
+    padding-bottom: 1vh;
+  }
+  .brand-logo img {
+    margin-left: -7%;
+    width: 125px;
+  } 
+  .header {
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 68%, rgb(41, 53, 43) 68%);
+
   }
 }
 
 @media (min-width: 767px) {
+  .header {
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
+
+  }
+  .brand-logo img {
+    margin-left: 40%;
+    width: 180px;
+  }
   .navTop {
     top: 0;
     right: 0;
     width: 50%;
     margin-top: 3%;
   }
+  .map-container .MuiPaper-root {
+    position: relative;
+    top: calc(-15vw);
+  }
+  .loadmap-container .MuiPaper-root {
+    position: relative;
+    top: calc(7vw);
+    padding-bottom: 5vh;
+}
+.header {
+  height: 5.5rem;
 }
 .map-container .MuiPaper-root {
-    margin-top: calc(-22vw);
+  position: relative;
+  top: calc(-12.5vw);
 }
+}
+
+
+
 
 html {
   padding: 0;
@@ -36,29 +75,27 @@ body {
 .header {
   display: flex;
   /* background: #465964; */
-  position: static;
+  position: fixed;
   z-index: 1;
   /* height: 4.5rem; */
   border-bottom: 0.2rem solid orange;
   align-items: center;
   width: 100%;
+  z-index: 2
 }
 
 
-@media (min-width: 767px) {
-  .header {
-    height: 5.5rem;
-  }
-}
 
 nav {
   position: fixed;
   z-index: 1;
   padding: 0;
   margin: 0;
+  z-index: 3 !important
 }
 
 ul {
+  
   display: flex;
   list-style-type: none;
   margin: 0;
@@ -66,12 +103,13 @@ ul {
   overflow: hidden;
   justify-content: flex-end;
   background: transparent;
+ 
 }
 
 
 li a {
   display: block;
-  color: rgba(83, 211, 204, 0.945);
+  color: rgba(255, 255, 255, 0.945);
   text-decoration: none;
 }
 
@@ -84,9 +122,7 @@ li {
   width: 100px;
 }
 
-.brand-logo img {
-  width: 125px;
-}
+
 
 .MuiFormControl-root {
     width: 100%;
@@ -96,16 +132,21 @@ li {
     display: none;
 }
 
-@media (min-width: 767px) {
-  .brand-logo img {
-    width: 180px;
-  }
-}
 
+.ProfileContent {
+  height: 100%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-radius: 3px;
+  background-color: rgba(43, 46, 43, 0.6)
+}
 .Profile {
   background-image: url("/assets/images/bench.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 40vh;
   padding: 1rem;
   margin-top: 5.5em;
   border-bottom: 0.1rem solid rgba(83, 211, 204, 0.945);;
@@ -119,6 +160,7 @@ li {
 } */
 
 .BioPic {
+  border-radius: 2px;
   max-width: 220px;
   border-color: white;
   border-width: 5px;

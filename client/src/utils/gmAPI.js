@@ -21,7 +21,7 @@ const MapFunctions = {
 
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-                    // console.log(results)
+                    console.log(results)
                     //After results are checked on line 76:
                     var logData = (res) => {
                         // console.log(res)
@@ -221,7 +221,7 @@ const MapFunctions = {
                     console.log(route.legs[i])
                     var startPoint;
                     var endPoint;
-                    if (i !== (route.legs.length - 1)) {
+                    if (i === 0 || i !== (route.legs.length - 1) && route.legs.length > 1) {
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()

@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-
+import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
@@ -67,27 +67,41 @@ const Trips = (props) => {
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>
                             <CardContent>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h5" component="h3" align="center">
+                                            {trip.name}
+                                            <br />
+                                        </Typography>
+                                        <hr></hr>
+                                    </Grid>
 
-                                <Typography variant="h5" component="h3" align="center">
-                                    {trip.name}
-                                    <br />
+                                    <Grid align="center" item xs={12}>
+                                        <Typography align="center" className="stat" variant="h6" gutterBottom>
 
-                                </Typography>
-                                <hr></hr>
+                                            {trip.waypoints[0].name}
+                                            <br />
+                                            <span className={classes.pos}>...</span>
+                                            <br />
+                                            {trip.waypoints[trip.waypoints.length - 1].name}
+                                        </Typography>
+                                    </Grid>
 
-                                <Typography className="stat" variant="h6" gutterBottom>
-                                    Start: &nbsp; <span className={classes.pos}>{trip.waypoints[0].name}</span>
-                                    <br />
-                                    End:&nbsp; <span className={classes.pos}>{trip.waypoints[trip.waypoints.length - 1].name}</span>
-                                </Typography>
+                                    <Grid item xs={12}>
+                                        <Typography align="right" variant="h6">
+                                            Your Hostel Situation...
+                        </Typography>
+                                        <Waypoints
+                                            waypoints={trip.waypoints}
+                                        />
 
-                                <Waypoints
-                                    waypoints={trip.waypoints}
-                                />
+                                    </Grid>
+                                </Grid>
                             </CardContent>
                             <CardActions>
                                 <a className={classes.editLink} href={`/map/${trip._id}`}> <Button size="small">Edit this Trip</Button></a>
                             </CardActions>
+
                         </Card>
 
                     </div>

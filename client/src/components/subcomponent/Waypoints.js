@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Hostels from './Hostels';
-
+import Grid from '@material-ui/core/Grid'
 const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
 
 const Waypoints = (props) => {
@@ -11,24 +11,29 @@ const Waypoints = (props) => {
             {props.waypoints.map((waypoint, i) => {
                 console.log(waypoint);
                 return (
-                    <div key={waypoint._id} className="tripSummary">
+                    <Grid container spacing={3}>
 
-                        <Typography align="center" variant="h6" gutterBottom>
-                            {wpIndex[i]}
-                        </Typography>
+                        <Grid item xs={8}>
+                            <div key={waypoint._id} className="tripSummary">
+                                <hr></hr>
+                                <Typography align="left" variant="h6" gutterBottom>
+                                    {wpIndex[i]}
+                                </Typography>
+                                <Typography align="left" component="p">
+                                    {waypoint.name}
+                                    <br />
+                                    {waypoint.location.coordinates[0]}, {waypoint.location.coordinates[1]}
+                                    <br />
 
-                        <Typography align="center" component="p">
-                            {waypoint.name}
-                            <br />
-                            {waypoint.location.coordinates[0]}, {waypoint.location.coordinates[1]}
-                            <br />
-                        </Typography>
-                        <hr></hr>
+                                </Typography>
 
-                        <Hostels hostels={waypoint.hostels} />
+                            </div>
+                        </Grid>
+                        <Grid item xs={4}>
 
-
-                    </div>
+                            <span align="center"><Hostels hostels={waypoint.hostels} /></span>
+                        </Grid>
+                    </Grid>
                 )
             })}
         </div>

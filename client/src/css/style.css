@@ -63,6 +63,15 @@
 }
 }
 
+.stat {
+  width: fit-content;
+  padding-right: 5px;
+  margin-top: -10px !important;
+  margin-bottom: -10px !important;
+  margin-left: -10vh;
+  height: auto;
+  text-align: center;  
+}
 
 
 

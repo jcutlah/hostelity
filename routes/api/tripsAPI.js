@@ -29,14 +29,15 @@ router.route("/:id")
             console.log("post request made to /api/trips");
             console.log(req.body);
             let totalDistance = 0;
-            const waypoints = req.body.waypoints;
+            const waypoints = req.body.trip.waypoints;
+            const trip = req.body.trip;
             waypoints.forEach(point => {
                 totalDistance += parseInt(point.distance);
             })
             console.log(totalDistance);
             const tripObject = {
-                start: req.body.start.name,
-                end: req.body.end.name,
+                start: trip.start.name,
+                end: trip.end.name,
                 name: "My Journey",
                 totalMileage: totalDistance
             }

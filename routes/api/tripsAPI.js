@@ -7,7 +7,7 @@ router.route("/:id")
     .get(function(req, res){
         console.log(`get request made to /api/trips/:id`)
         //   console.log(res);
-        tripController.getTripsForUser(req.params.id, function(trips){
+        tripController.getTripById(req.params.id, function(trips){
             res.json(trips);
         });
     })
@@ -19,6 +19,12 @@ router.route("/:id")
     })
     
     router.route("/")
+        .get(function(req, res){
+            console.log('get request made to /api/trips');
+            tripController.getTripsForUser(req.user, function(trips){
+                res.json(trips);
+            });
+        })
         .post(function(req, res){
             console.log("post request made to /api/trips");
             console.log(req.body);

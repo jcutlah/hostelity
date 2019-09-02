@@ -23,6 +23,25 @@ const orm = {
             callback(user);
         })
     },
+    getTripById: function(tripId, callback) {
+        db.Trip.findOne({_id: tripId})
+        .populate({
+            path: 'waypoints',
+            model: 'Waypoint',
+            options: {
+                sort: {
+                    'tripIndex': 1
+                }
+            }
+        })
+        .then(function(trip){
+            callback(trip);
+        })
+        .catch(function(err){
+            console.log(err);
+            callback(err);
+        })
+    },
     getTripsForUser: function(userId, callback) {
         if (userId !== "null"){
             console.log(`getTrips() for userId ${userId}`);
@@ -33,6 +52,11 @@ const orm = {
                 populate: {
                     path: 'waypoints',
                     model: 'Waypoint',
+                    options: {
+                        sort: {
+                            'tripIndex': 1
+                        }
+                    },
                     populate: {
                         path: 'hostels',
                         model: 'Hostel'

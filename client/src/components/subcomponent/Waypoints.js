@@ -5,7 +5,7 @@ import Hostels from './Hostels';
 const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
 
 const Waypoints = (props) => {
-    // console.log(props);
+    // console.log(props.waypoints);
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {

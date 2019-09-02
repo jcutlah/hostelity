@@ -57,7 +57,8 @@ const orm = {
     },
     findClosestWaypointToHostel: function(tripId, hostLngLat, maxDistance, callback) {
         console.log('finding closest waypoint to hostel');
-        db.Waypoint.find({
+        console.log(hostLngLat);
+        db.Waypoint.findOne({
             trip: tripId,
             location: {
                 $nearSphere: {
@@ -71,7 +72,7 @@ const orm = {
         })
             .then(function(waypoint){
                 console.log('success!');
-                console.log(waypoint);
+                // console.log(waypoint);
                 callback(waypoint);
             })
             .catch(function(err){

@@ -24,7 +24,7 @@ const MapFunctions = {
                     // console.log(results)
                     //After results are checked on line 76:
                     var logData = (res) => {
-                        // console.log(res)
+                        console.log(res)
                         // Organizing the data for hostel markers:
                         for (var i = 0; i < res.length; i++) {
                             //Checking if theres a photo for each res:
@@ -123,25 +123,26 @@ const MapFunctions = {
                     return service.textSearch(request, placesCallback);
                 })
             }
+
             // CREATE REQUESTS FOR ALL POINTS:
             const createRequest = () => {
                 console.log(legData);
                 var requestsForPoints = []
                 var startLatLng = new google.maps.LatLng(legData[0].location[0], legData[0].location[1])
                 var endLatLng = new google.maps.LatLng(legData[legData.length - 1].location[0], legData[legData.length - 1].location[1])
-
                 requestsForPoints.push({
                     location: startLatLng,
                 })
                 requestsForPoints.push({
                     location: endLatLng
                 })
-                for (var i = 1; i < legData.length - 1; i++) {
+                for (var i = 0; i < legData.length - 1; i++) {
                     var thisLatLng = new google.maps.LatLng(legData[i].location[0], legData[i].location[1])
                     requestsForPoints.push({
                         location: thisLatLng,
                     })
                 }
+                console.log(requestsForPoints)
                 return useRequests(requestsForPoints)
             }
             createRequest()
@@ -155,7 +156,7 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: async (map, start, end, stops, callback) => {
+    calculateAndDisplayRoute: async (map, start, end, waypointsKnown, stops, callback) => {
         const google = window.google
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -174,21 +175,25 @@ const MapFunctions = {
             directionsDisplay.setMap(null)
 
         }
-
+        var wps;
 
 
         console.log(stops);
         console.log(start);
-        const wps = stops.map(stop => {
-            for (let key in stop) {
-                if (parseInt(key) > 0) {
-                    return {
-                        location: stop[`${parseInt(key)}waypoint`],
-                        stopover: true
+        if (waypointsKnown) {
+            wps = stops.map(stop => {
+                for (let key in stop) {
+                    if (parseInt(key) > 0) {
+                        return {
+                            location: stop[`${parseInt(key)}waypoint`],
+                            stopover: true
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            wps = stops
+        }
         console.log('display route meep');
         console.log(wps);
 
@@ -221,7 +226,8 @@ const MapFunctions = {
                     console.log(route.legs[i])
                     var startPoint;
                     var endPoint;
-                    if (i !== (route.legs.length - 1)) {
+
+                    if (i == 0 || i !== (route.legs.length - 1) && route.legs.length > 1) {
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()
@@ -230,12 +236,11 @@ const MapFunctions = {
                         startPoint = {
                             name: name1,
                             location: [lat1, lng1],
-                            time: i === 0 ? "0 hours": time1,
+                            time: i === 0 ? "0 hours" : time1,
                             distance: i === 0 ? "0 mi" : distance1
                         }
                         console.log(startPoint);
                         legData.push(startPoint);
-
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
@@ -270,7 +275,7 @@ const MapFunctions = {
 
                 console.log(legData)
                 MapFunctions.handleTripSearch(map)
-                callback(legData, route.legs[0].start_address, route.legs[route.legs.length -1].end_address)
+                callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

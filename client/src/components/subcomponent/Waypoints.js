@@ -9,25 +9,24 @@ const Waypoints = (props) => {
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
-                // console.log(waypoint);
+                console.log(waypoint);
                 return (
                     <div key={waypoint._id} className="tripSummary">
 
                         <Typography align="center" variant="h6" gutterBottom>
                             {wpIndex[i]}
-                         </Typography>
-                    
+                        </Typography>
+
                         <Typography align="center" component="p">
                             {waypoint.name}
+                            <br />
+                            {waypoint.location.coordinates[0]}, {waypoint.location.coordinates[1]}
+                            <br />
                         </Typography>
-                       
-
-                        <Typography variant="h6" gutterBottom>
-                            Location: {waypoint.location[0]}, {waypoint.location[1]}
-                        </Typography>
+                        <hr></hr>
 
                         <Hostels hostels={waypoint.hostels} />
-                       
+
 
                     </div>
                 )

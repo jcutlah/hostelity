@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(11),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -73,7 +73,7 @@ export default function SignIn() {
         const { name, value } = event.target;
         console.log(name, value);
         switch (name) {
-            case 'email': 
+            case 'email':
                 updateEmail(value);
                 updateLoginError({
                     ...loginError,
@@ -81,7 +81,7 @@ export default function SignIn() {
                     missingCred: false
                 })
                 break;
-            case 'password': 
+            case 'password':
                 updatePassword(value);
                 updateLoginError({
                     ...loginError,
@@ -91,7 +91,7 @@ export default function SignIn() {
                 break;
             default: return;
         }
-      };
+    };
 
     const handleFormSubmit = event => {
         event.preventDefault();
@@ -101,56 +101,56 @@ export default function SignIn() {
             password
         }
         Axios.post("/auth/users/login", user)
-        .then(function(res){
-            // console.log('Not an error!!!!!')
-            // console.log(res.data);
-            if (res.data.passport){
-                res.data.passport.user ?
-                window.location = '/home':
-                console.log('User not found');
-            }
-            if (res.data.flash){
-                // console.log(res.data.flash);
-                // console.log(typeof res.data.flash.error);
-                const flash = [];
-                for (let i of res.data.flash.error){
-                    flash.push(i);
+            .then(function (res) {
+                // console.log('Not an error!!!!!')
+                // console.log(res.data);
+                if (res.data.passport) {
+                    res.data.passport.user ?
+                        window.location = '/home' :
+                        console.log('User not found');
                 }
-                // console.log(res.data.flash.error);
-                switch (flash[flash.length-1]){
-                    case "Missing credentials":
-                        updateLoginError({
-                            ...loginError,
-                            missingCred: true
-                        });
-                        break;
-                    case "Not a user":
-                        updateLoginError({
-                            username: true,
-                            password: false,
-                            missingCred: false
-                        });
-                        break;
-                    case "Incorrect password":
-                        updateLoginError({
-                            username: false,
-                            password: true,
-                            missingCred: false
-                        });
-                        break;
-                    default:
-                        return false;
+                if (res.data.flash) {
+                    // console.log(res.data.flash);
+                    // console.log(typeof res.data.flash.error);
+                    const flash = [];
+                    for (let i of res.data.flash.error) {
+                        flash.push(i);
+                    }
+                    // console.log(res.data.flash.error);
+                    switch (flash[flash.length - 1]) {
+                        case "Missing credentials":
+                            updateLoginError({
+                                ...loginError,
+                                missingCred: true
+                            });
+                            break;
+                        case "Not a user":
+                            updateLoginError({
+                                username: true,
+                                password: false,
+                                missingCred: false
+                            });
+                            break;
+                        case "Incorrect password":
+                            updateLoginError({
+                                username: false,
+                                password: true,
+                                missingCred: false
+                            });
+                            break;
+                        default:
+                            return false;
+                    }
+                } else {
+                    window.location = '/home';
                 }
-            } else {
-                window.location = '/home';
-            }
-        }).catch(function(err){
-            console.log(err);
-            updateLoginError({
-                username: false,
-                password: false
-            });
-        })
+            }).catch(function (err) {
+                console.log(err);
+                updateLoginError({
+                    username: false,
+                    password: false
+                });
+            })
     }
 
     return (
@@ -180,7 +180,7 @@ export default function SignIn() {
                     />
                     <div className={loginError.username ?
                         classes.formErrorMessage :
-                        classes.formNonErrorMessage }
+                        classes.formNonErrorMessage}
                     >Wrong fucking username</div>
                     <TextField
                         variant="outlined"
@@ -197,11 +197,11 @@ export default function SignIn() {
                     />
                     <div className={loginError.password ?
                         classes.formErrorMessage :
-                        classes.formNonErrorMessage }
+                        classes.formNonErrorMessage}
                     >Wrong fucking password</div>
                     <div className={loginError.missingCred ?
                         classes.formErrorMessage :
-                        classes.formNonErrorMessage }
+                        classes.formNonErrorMessage}
                     >You are missing fucking credentials!!!</div>
                     <Button
                         type="submit"

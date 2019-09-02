@@ -64,27 +64,34 @@ function Map(props) {
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
-    const setHostels = (hostel) => {
-        let hostels = [...state.hostels, hostel];
-        // console.log(hostels);
-        setState({
-            ...state, hostels
-        })
-    }
+    
+    // const setHostels = (hostel) => {
+    //     let hostels = [...state.hostels, hostel];
+    //     // console.log(hostels);
+    //     console.log(state);
+    //     setState({
+    //         ...state, hostels
+    //     })
+    // }
 
     useEffect(function () {
         return () => {
             document.addEventListener('click', function (event) {
                 if (event.target.getAttribute('classname') === "hostelButton") {
+                    let coords = event.target.getAttribute('data-location').split(',');
+
                     let data = {
                         title: event.target.getAttribute('data-title'),
-                        location: event.target.getAttribute('data-location'),
+                        location: {
+                            type: "Point",
+                            coordinates: [parseFloat(coords[1]),parseFloat(coords[0])]
+                        },
                         address: event.target.getAttribute('data-address'),
                         placeId: event.target.id,
                         imageUrl: event.target.getAttribute('data-imageUrl')
                     }
-                    // console.log(data)
-                    setHostels(data);
+                    console.log(data)
+                    setHostels([...hostels, data]);
                     event.target.setAttribute('style', 'display: none');
                 }
             });
@@ -105,9 +112,9 @@ function Map(props) {
         start: '',
         end: '',
         stops: [],
-        hostels: [],
         inputId: 0
     });
+    const [hostels, setHostels] = React.useState([])
 
     const handleChange = event => {
         // console.log(state);
@@ -171,7 +178,7 @@ function Map(props) {
     })
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', {trip: state.trip, hostels: state.hostels}).then(function (res) {
+        Axios.post('/api/trips', {trip: state.trip, hostels: hostels}).then(function (res) {
             console.log(res)
         })
         // var waypoints = state.trip.waypoints

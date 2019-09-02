@@ -15,6 +15,36 @@ mongoose.set(
     'useFindAndModify', false
 );
 
+const seedData = [
+    {
+        user: {
+            firstName: "James",
+            lastName: "Cutler",
+            email: "Jamescutler1111@gmail.com",
+            password: "jcut",
+            avatar: '/assets/images/hockeyJersey.jpg'
+        }
+    },
+    {
+        user: {
+            firstName: "James",
+            lastName: "Morrison",
+            email: "totesmcgotes@gmail.com",
+            password: "insecure",
+            avatar: "https://placebeard.it/300x180"
+        }
+    },
+    {
+        user: {
+            firstName: "Ryan",
+            lastName: "Creveling",
+            email: "yupyeahguy@gmail.com",
+            password: "hackthisaccount",
+            avatar: "https://placebeard.it/300x180"
+        }
+    }
+];
+
 db.Hostel
     .remove({})
     .then(() => {
@@ -27,8 +57,17 @@ db.Hostel
                     .remove({})
                     .then(() => {
                         console.log('waypoints removed')
-                        process.exit(0);
+                        db.User
+                        .remove({})
+                        .then(() => {
+                            seedData.forEach(seed => {
+                                userController.addUser(seed.user, function(err, response){
+                                    if (err) throw err;
+                                    console.log(response);
+                                });
+                            });
+                        });
                     });
                 });
             });
-
+      

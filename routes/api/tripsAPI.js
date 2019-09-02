@@ -25,33 +25,35 @@ router.route("/")
             res.json(trips);
         });
     })
-    .post(function (req, res) {
-        console.log("post request made to /api/trips");
-        console.log(req.body);
-        let totalDistance = 0;
-        const waypoints = req.body.waypoints;
-        waypoints.forEach(point => {
-            totalDistance += parseInt(point.distance);
-        })
-        console.log(totalDistance);
-        const tripObject = {
-            start: req.body.start.name,
-            end: req.body.end.name,
-            name: "My Journey",
-            totalMileage: totalDistance
-        }
-        tripController.addTrip(tripObject, function (trip) {
-            const tripId = trip._id;
-            console.log(tripId);
-            waypoints.forEach((point, i) => {
-                let waypoint = {
-                    name: point.name,
-                    trip: tripId,
-                    tripIndex: i,
-                    distanceToWaypoint: parseInt(point.distance),
-                    location: {
-                        type: "Point",
-                        coordinates: [point.location[1], point.location[0]]
+      .post(function(req, res){
+          console.log("post request made to /api/trips");
+          console.log(req.body);
+          let totalDistance = 0;
+          const waypoints = req.body.trip.waypoints;
+          const trip = req.body.trip;
+          waypoints.forEach(point => {
+              totalDistance += parseInt(point.distance);
+          })
+          console.log(totalDistance);
+          const tripObject = {
+              start: trip.start.name,
+              end: trip.end.name,
+              name: "My Journey",
+              totalMileage: totalDistance
+          }
+          tripController.addTrip(tripObject, function(trip){
+              const tripId = trip._id;
+              console.log(tripId);
+              waypoints.forEach((point, i) => {
+                  let waypoint = {
+                      name: point.name,
+                      trip: tripId,
+                      tripIndex: i,
+                      distanceToWaypoint: parseInt(point.distance),
+                      location: {
+                          type: "Point",
+                          coordinates: [point.location[1],point.location[0]]
+                      }
 
                     }
                 }

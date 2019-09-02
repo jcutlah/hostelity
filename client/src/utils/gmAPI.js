@@ -21,7 +21,7 @@ const MapFunctions = {
 
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-                    // console.log(results)
+                    console.log(results)
                     //After results are checked on line 76:
                     var logData = (res) => {
                         console.log(res)

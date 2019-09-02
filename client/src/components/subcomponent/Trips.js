@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Waypoints from './Waypoints';
+import Axios from 'axios'
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -12,6 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const Trips = (props) => {
     const classes = useStyles();
+
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}
@@ -20,7 +23,10 @@ const Trips = (props) => {
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Typography variant="h5" component="h3" align="center">
-                            {trip.name}   <span><a href={`/map/${trip._id}`}>Edit this Trip</a></span>
+                            {trip.name}
+                            <br />
+
+                            <span><a href={`/map/${trip._id}`}>Edit this Trip</a></span>
                         </Typography>
                         <hr></hr>
 

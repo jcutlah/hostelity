@@ -73,7 +73,6 @@ function Map(props) {
     }
 
     useEffect(function () {
-
         return () => {
             document.addEventListener('click', function (event) {
                 if (event.target.getAttribute('classname') === "hostelButton") {
@@ -172,7 +171,7 @@ function Map(props) {
     })
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', state.trip).then(function (res) {
+        Axios.post('/api/trips', {trip: state.trip, hostels: state.hostels}).then(function (res) {
             console.log(res)
         })
         // var waypoints = state.trip.waypoints

@@ -41,6 +41,9 @@ const orm = {
         .then(function(waypoint){
             callback(waypoint);
         })
+        .catch(err => {
+            console.log(err);
+        })
     }
 };
 

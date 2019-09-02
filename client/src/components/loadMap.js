@@ -18,22 +18,10 @@ import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 
 
-function displayTrip(map) {
-    const google = window.google
-    var directionsService = new google.maps.DirectionsService()
-    var directionsDisplay = new google.maps.DirectionsRenderer()
+// const google = window.google;
+// import { makeStyles } from '@material-ui/core/styles';
+const Marker = ({ text }) => <div>{text}</div>;
 
-    directionsService.route({
-        origin: 'boston',
-        destination: 'new york',
-        waypoints: [],
-        optimizeWaypoints: true,
-        travelMode: 'DRIVING'
-    }, function (response, status) {
-        directionsDisplay.setDirections(response);
-        directionsDisplay.setMap(map);
-    })
-};
 const useStyles = makeStyles(theme => ({
     map: {
         marginTop: 'calc(-23vw)'
@@ -71,13 +59,38 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const LoadMap = (props) => {
-    const state = {
-        trip: {}
-    };
-    Axios.get(`/api/trips/${props.match.params.id}`)
-        .then(res => console.log(res.data))
-        .catch(err => console.log(err))
+function LoadMap(props) {
+
+    // useEffect(function () {
+    //     return <GoogleMapReact />
+    // }, [GoogleMapReact])
+    const setHostels = (hostel) => {
+        let hostels = [...state.hostels, hostel];
+        // console.log(hostels);
+        setState({
+            ...state, hostels
+        })
+    }
+
+    useEffect(function () {
+
+        return () => {
+            document.addEventListener('click', function (event) {
+                if (event.target.getAttribute('classname') === "hostelButton") {
+                    let data = {
+                        title: event.target.getAttribute('data-title'),
+                        location: event.target.getAttribute('data-location'),
+                        address: event.target.getAttribute('data-address'),
+                        placeId: event.target.id,
+                        imageUrl: event.target.getAttribute('data-imageUrl')
+                    }
+                    // console.log(data)
+                    setHostels(data);
+                    event.target.setAttribute('style', 'display: none');
+                }
+            });
+        }
+    })
     const defaultview = {
         center: {
             lat: 37,
@@ -87,16 +100,114 @@ const LoadMap = (props) => {
     };
 
     const classes = useStyles()
+    const [state, setState] = React.useState({
+        map: {},
+        trip: {},
+        start: '',
+        end: '',
+        stops: [],
+        hostels: [],
+        inputId: 0
+    });
 
-    console.log(props)
+    const handleChange = event => {
+        // console.log(state);
+        const { name, value } = event.target;
+        var usedThisStop = false;
+        var oldStops = state.stops;
+        var newStops;
+        var thisStop = {
+            [name]: value,
 
+        }
+        if (name === "start" || name === "end") {
+            setState({ ...state, [name]: value });
+            return;
+        }
+        if (state.stops.length) {
+            oldStops.forEach((stop, i) => {
+                if (stop[name]) {
+                    oldStops[i] = thisStop;
+                    usedThisStop = true;
+                }
+            });
+            if (!usedThisStop) {
+                newStops = [...oldStops, thisStop];
+                setState({ ...state, stops: newStops });
+            } else {
+                setState({ ...state, stops: oldStops });
+            }
+        } else {
+            newStops = [thisStop];
+            setState({ ...state, stops: newStops });
+        }
+    }
+    const addInput = () => {
+        // console.log(state);
+        // console.log("addInput running");
+        var newId = state.inputId + 1;
+        setState({ ...state, inputId: newId });
 
+    }
+    function infoWindowOpen(event) {
+        if (!event.target.closest('.hostelButton')) {
+            // console.log(state.waypoints)
+            var data = {
+                title: event.target.getAttribute('data-title'),
+                location: event.target.getAttribute('data-location'),
+                address: event.target.getAttribute('data-address'),
+                placeId: event.target.id,
+                imageUrl: event.target.getAttribute('data-imageUrl')
+            }
+
+            // return console.log(data)
+        } else {
+            return console.log("nah dude")
+        }
+
+    }
+
+    document.addEventListener('click', function (event) {
+        infoWindowOpen(event)
+    })
+    const saveTrip = (event) => {
+        event.preventDefault();
+        Axios.post('/api/trips', state.trip).then(function (res) {
+            console.log(res)
+        })
+        // var waypoints = state.trip.waypoints
+        // console.log(waypoints)
+        // var saveData = {
+        //     waypoints: waypoints,
+        //     start: state.start,
+        //     end: state.end,
+        //     name: 'My *Super FUCKING* Trip!'
+        // }
+        // console.log(saveData)
+    }
+    // console.log(state);
+    var trip = {}
+
+    const getTripData = (map) => {
+        Axios.get(`/api/trips/${props.match.params.id}`)
+            .then(res => {
+                var data = res.data
+                trip = {
+                    start: data.waypoints[0].name,
+                    end: data.waypoints[data.waypoints.length - 1].name,
+                    stops: []
+                }
+                console.log(trip)
+                MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, function (data, startAddress, endAddress) {
+                    console.log(data, startAddress, endAddress)
+                })
+            })
+            .catch(err => console.log(err))
+    }
     return (
-        <div>
-            <div>TRIP:</div>
-            <div></div>
-            <div style={{ height: '100vh', width: '100%' }}>
-                <br />
+        // Important! Always set the container height explicitly
+        <div className="map-container">
+            <Paper className={classes.root}>
                 <Container className={classes.mapContainer}>
                     <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
                         <GoogleMapReact
@@ -105,55 +216,20 @@ const LoadMap = (props) => {
                             defaultZoom={defaultview.zoom}
                             yesIWantToUseGoogleMapApiInternals={true}
                             onGoogleApiLoaded={({ map, maps }) => {
-                                MapFunctions.calculateAndDisplayRoute(map, 'boston', 'los angeles', true, [], function (data, startAddress, endAddress) {
-                                    console.log(data, startAddress, endAddress)
-                                })
+                                getTripData(map)
                             }}
                             id="myMap"
-
                         >
-
                         </GoogleMapReact>
+
                     </div>
 
                 </Container>
-                <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ' }}
-                    defaultCenter={{ lat: 37.44, lng: -90 }}
-                    defaultZoom=''
-                    onGoogleApiLoaded={({ map, maps }) => {
 
-                    }}
-                >
-                </GoogleMapReact>
-
-            </div>
+            </Paper>
         </div>
-    )
+    );
+
 }
-// const LoadMap = (props) => {
-
-//     const getTripInfo = () => {
-//         Axios.get(`/api/trips/${props.tripId}`)
-//             .then(tripInfo => {
-//                 console.log(tripInfo)
-
-//             })
-
-//             .catch(err => {
-//                 return console.log(err)
-
-//             })
-
-//     }
-//     if (props.match.params.id)
-//         var tripStuff = getTripInfo()
-
-//     return (
-//         <div>{tripStuff}</div>
-//     )
-
-// }
-
 
 export default LoadMap

@@ -7,9 +7,8 @@ router.route("/:id")
     .get(function (req, res) {
         console.log(`get request made to /api/trips/:id`)
         //   console.log(res);
-        tripController.getTripsForUser(req.user, req.params.id, function (trips) {
-            console.log(trips)
-            res.json(trips)
+        tripController.getTripById(req.params.id, function (trips) {
+            res.json(trips);
         });
     })
     .put(function (req, res) {
@@ -20,6 +19,12 @@ router.route("/:id")
     })
 
 router.route("/")
+    .get(function (req, res) {
+        console.log('get request made to /api/trips');
+        tripController.getTripsForUser(req.user, function (trips) {
+            res.json(trips);
+        });
+    })
     .post(function (req, res) {
         console.log("post request made to /api/trips");
         console.log(req.body);
@@ -47,6 +52,7 @@ router.route("/")
                     location: {
                         type: "Point",
                         coordinates: [point.location[1], point.location[0]]
+
                     }
                 }
                 waypointController.addWaypoint(waypoint, function (wp) {

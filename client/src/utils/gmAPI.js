@@ -175,12 +175,12 @@ const MapFunctions = {
             directionsDisplay.setMap(null)
 
         }
-        var wps;
+        var wps = [];
 
 
         console.log(stops);
         console.log(start);
-        if (waypointsKnown) {
+        if (!waypointsKnown) {
             wps = stops.map(stop => {
                 for (let key in stop) {
                     if (parseInt(key) > 0) {
@@ -227,7 +227,7 @@ const MapFunctions = {
                     var startPoint;
                     var endPoint;
 
-                    if (i == 0 || i !== (route.legs.length - 1) && route.legs.length > 1) {
+                    if (i === 0 || i !== (route.legs.length - 1) && route.legs.length > 1) {
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()

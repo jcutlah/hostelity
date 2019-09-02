@@ -76,7 +76,7 @@ function App() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
-          <Route exact path="/map/:id" render={(props) => <LoadMap {...props} userId={userId} />} />
+          <Route exact path="/map/:id" component={LoadMap} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
           <Route exact path="/search" component={Search} />

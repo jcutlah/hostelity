@@ -31,7 +31,12 @@ const orm = {
         db.Trip.findOne({_id: tripId})
         .populate({
             path: 'waypoints',
-            model: 'Waypoint'
+            model: 'Waypoint',
+            options: {
+                sort: {
+                    tripIndex: -1
+                }
+            }
         })
         .then(function(trip){
             console.log(trip.waypoints);

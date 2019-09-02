@@ -11,7 +11,7 @@ const Home = (props) => {
     console.log(`Home component w/ user id ${props.userId}`);
     const getUserData = (userId) => {
         if (!user) {
-            Axios.get(`/api/trips/${userId}`)
+            Axios.get(`/api/trips`)
                 .then(userInfo => {
                     // console.log(userInfo.data);
                     setUser(userInfo.data);

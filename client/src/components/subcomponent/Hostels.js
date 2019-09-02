@@ -5,10 +5,10 @@ const Hostels = (props) => {
     // console.log(props);
     return (
         <div className="tripList section">
-            {props.hostels.map(hostel => {
+            {props.hostels.map((hostel, i) => {
                 console.log(hostel)
                 return (
-                    <div>
+                    <div key={`hostel-${i}`}>
 
                         <hr></hr>
                         <Card>

@@ -9,6 +9,12 @@
     background-color: rgb(41, 53, 43); 
     justify-content: space-between;
   }
+  ul.nav {
+      justify-content: center;
+  }
+  .navLinks {
+      width: 100%;
+  }
   .loadmap-container .MuiPaper-root {
     position: relative;
     top: calc(18vw);
@@ -206,7 +212,7 @@ li {
   margin: 0px !important;
 }
 
-intput[type="text"] {
+input[type="text"] {
   padding-left: 10px!important;
 }
 
@@ -217,4 +223,8 @@ intput[type="text"] {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.material-icons {
+    display: block;
+    text-align: center;
 }

@@ -4,6 +4,7 @@
     height: 4%;
     width: 100%;
     padding-top: .5vh;
+    padding-bottom: .75vh;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 
@@ -62,7 +63,16 @@
   top: calc(-12.5vw);
 }
 }
-
+.hostelLink {
+  text-decoration: none;
+  color: black
+}
+.distanceData {
+  font-size: .85em;
+}
+.locationData {
+  font-size: .75em;
+}
 .stat {
   width: fit-content;
   padding-right: 5px;

@@ -44,7 +44,9 @@ const MapFunctions = {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    return (res[i].photos[0].getUrl({ maxWidth: 80, maxHeight: 'auto' }))
+                                    console.log(res[i].photos[0])
+                                    var thisImg = (res[i].photos[0].getUrl({ maxWidth: 150, maxHeight: 'auto' }))
+                                    return thisImg
                                 } else {
                                     return null
                                 }
@@ -288,7 +290,11 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
+<<<<<<< HEAD
                 MapFunctions.handleTripSearch(map, hostelIds)
+=======
+                MapFunctions.handleTripSearch(map)
+>>>>>>> d92e837ba33f32fe254544fe300fbf3e6d19409d
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);

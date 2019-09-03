@@ -24,7 +24,7 @@ const Navbar = (props) => {
     }
     return (
         <Grid container>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
         <nav className="nav navTop navBottom">
             <div className="navLinks">
                 {props.userId
@@ -34,7 +34,7 @@ const Navbar = (props) => {
 
                         <li key="newTrip"><Link to='/map'><i className="material-icons" style={{ fontSize: 30 }}>search</i></Link></li>
 
-                        <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li>
+                        {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 
                         <li key="logOut"><Link to='javascript:;' onClick={logOut}><i className="material-icons" style={{ fontSize: 30 }}>exit_to_app</i></Link></li>
 
@@ -42,7 +42,7 @@ const Navbar = (props) => {
                     </ul>
 
                     : <ul className="loggedOutLinks">
-                        <li key="signIn"><Link to='/login'> Sign in </Link> </li>
+                        <li key="signIn"><Link to='/login'>Log In</Link> </li>
                     </ul>
 
                 }

@@ -38,7 +38,7 @@ const Waypoints = (props) => {
                 var thisLng = parseFloat(newStr1)
 
                 return (
-                    <Grid container spacing={3}>
+                    <Grid key={`waypoint-${i}`} container spacing={3}>
 
                         <Grid item xs={8}>
                             <div key={waypoint._id} className="tripSummary">

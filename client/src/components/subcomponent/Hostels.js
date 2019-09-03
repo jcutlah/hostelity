@@ -20,7 +20,7 @@ const Hostels = (props) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
                 console.log(hostel)
                 return (
-                    <div>
+                    <div key={`hostel-${i}`}>
 
                         <hr></hr>
                         <Card>

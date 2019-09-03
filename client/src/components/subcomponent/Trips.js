@@ -58,11 +58,12 @@ const Trips = (props) => {
             })
             .catch(err => console.log(err))
     }
+
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}
             {props.trips.map(trip => {
-
+                console.log(trip)
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>
@@ -89,7 +90,7 @@ const Trips = (props) => {
 
                                     <Grid item xs={12}>
                                         <Typography align="right" variant="h6">
-                                            Your Hostel Situation...
+                                            Your Lodging Situation...
                         </Typography>
                                         <Waypoints
                                             waypoints={trip.waypoints}

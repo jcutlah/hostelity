@@ -9,7 +9,7 @@ const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
-    handleTripSearch: (map, hostels) => {
+    handleTripSearch: (map) => {
 
         const google = window.google
         try {
@@ -30,7 +30,9 @@ const MapFunctions = {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    return (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
+                                    console.log(res[i].photos[0])
+                                    var thisImg = (res[i].photos[0].getUrl({ maxWidth: 150, maxHeight: 'auto' }))
+                                    return thisImg
                                 } else {
                                     return null
                                 }
@@ -70,14 +72,14 @@ const MapFunctions = {
                                 var contentString =
                                     `<div>${markerData.title}</div>` +
                                     `<br>` +
-                                    `<img src=${checkPhotoAgain()}/>` +
+                                    `<img src=${markerData.photoUrl}/>` +
                                     `<br>` +
                                     `<div>${markerData.rating}</div>` +
                                     `<div class="buttonWrapper"><button type="button" className="hostelButton" 
-                                        data-title="${markerData.title}"
-                                        data-location="${[markerData.position.lat(),markerData.position.lng()]}"
-                                        data-address="${markerData.address}"
-                                        data-imageUrl="${markerData.photoUrl}"
+                                        data-title='${markerData.title}'
+                                        data-location='${[markerData.position.lat(), markerData.position.lng()]}'
+                                        data-address='${markerData.address}'
+                                        data-imageUrl='${markerData.photoUrl}'
                                         id=${markerData.place_id}>Add to Trip</button></div>`;
 
                                 //Add content to information window for each marker:
@@ -274,7 +276,7 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, [])
+                MapFunctions.handleTripSearch(map)
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);

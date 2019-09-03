@@ -218,7 +218,7 @@ export default function SignIn() {
                                 Forgot password?
                             </Link> */}
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} align="center">
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>

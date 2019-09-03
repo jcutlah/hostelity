@@ -90,7 +90,7 @@ const Trips = (props) => {
 
                                     <Grid item xs={12}>
                                         <Typography align="right" variant="h6">
-                                            Your Hostel Situation...
+                                            Your Lodging Situation...
                         </Typography>
                                         <Waypoints
                                             waypoints={trip.waypoints}

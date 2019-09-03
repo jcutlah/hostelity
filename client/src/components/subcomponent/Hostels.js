@@ -16,7 +16,7 @@ const Hostels = (props) => {
     const classes = useStyles()
     return (
         <div className="tripList section">
-            {props.hostels.map(hostel => {
+            {props.hostels.map((hostel, i) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
                 console.log(hostel)
                 return (

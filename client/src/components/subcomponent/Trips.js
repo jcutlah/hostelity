@@ -64,11 +64,13 @@ const Trips = (props) => {
             {/* {console.log(typeof props.trips)} */}
             {props.trips.map(trip => {
                 console.log(trip)
+
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>
                             <CardContent>
                                 <Grid container spacing={3}>
+
                                     <Grid item xs={12}>
                                         <Typography variant="h5" component="h3" align="center">
                                             {trip.name}
@@ -91,12 +93,12 @@ const Trips = (props) => {
                                     <Grid item xs={12}>
                                         <Typography align="right" variant="h6">
                                             Your Lodging Situation...
-                        </Typography>
+                                        </Typography>
                                         <Waypoints
                                             waypoints={trip.waypoints}
                                         />
-
                                     </Grid>
+
                                 </Grid>
                             </CardContent>
                             <CardActions>

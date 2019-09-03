@@ -11,14 +11,17 @@ var useStyles = makeStyles(theme => ({
         paddingTop: '56.25%', // 16:9
     },
 }));
+var thisUrl;
+
 const Hostels = (props) => {
     // console.log(props);
-    const classes = useStyles()
+
     return (
         <div className="tripList section">
             {props.hostels.map((hostel, i) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
-                console.log(hostel)
+                const classes = useStyles()
+
                 return (
                     <div key={`hostel-${i}`}>
 
@@ -27,15 +30,17 @@ const Hostels = (props) => {
                             <CardMedia
                                 className={classes.media}
                                 image={hostel.imageUrl}
-                                title="Paella dish"
+                                title={hostel.title}
                             />
                             <div key={hostel._id} className="tripSummary">
 
                                 <Typography align="center" variant="h6" gutterBottom>
                                     <Typography align="center" component="p">
-                                        {hostel.title}
+                                        <Button><a target='_blank' href={thisAddressSearch}>{hostel.title}</a></Button>
                                         <br />
-                                        <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="right">{hostel.address}</a></Button>
+                                        <Typography>{hostel.address}</Typography>
+                                        <br />
+                                        <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="right">Get Directions</a></Button>
 
                                     </Typography>
                                 </Typography>

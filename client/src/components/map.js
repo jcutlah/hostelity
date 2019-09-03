@@ -349,7 +349,7 @@ function Map(props) {
                                             onClick={async () => {
 
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, function (routeLegs, start, end) {
+                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end) {
                                                     console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,

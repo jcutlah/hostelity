@@ -18,6 +18,21 @@ const MapFunctions = {
                 var markers = []
                 var service = new google.maps.places.PlacesService(map);
 
+                const makeMarkerHTML = (markerData, saved) => {
+                    let contentString =
+                        `<div>${markerData.title}</div>` +
+                        `<br>` +
+                        `<img src=${markerData.photoUrl ? markerData.photoUrl : ''}/>` +
+                        `<br>` +
+                        `<div>${markerData.rating} out of 5</div>` +
+                        `<div class="buttonWrapper"><button type="button" className="${!saved ? 'hostelButton' : 'removeHostel'}" 
+                            data-title="${markerData.title}"
+                            data-location="${[markerData.position.lat(),markerData.position.lng()]}"
+                            data-address="${markerData.address}"
+                            data-imageUrl="${markerData.photoUrl ? markerData.photoUrl : ''}"
+                            id=${markerData.place_id}>${!saved ? 'Add to Trip' : 'Remove from Trip'}</button></div>`;
+                    return contentString;
+                }
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
                     console.log(results)
@@ -50,15 +65,19 @@ const MapFunctions = {
                             markers.push(data)
                         }
                         //Looping through markers[] to collect/apply Information Window Content:
+                        let isSaved = false;
                         markers.forEach(function (markerData) {
-                            var databaseHostel = '2'
+                            // console.log(markerData);
+                            // var databaseHostel = '2'
+                            isSaved = false;
                             //Checking if marker exists in database (pseudocoded rn):
                             if (hostelIds.indexOf(markerData.id) !== -1) {
-                                console.log(markerData.id);
-                                console.log(hostelIds);
+                                console.log(markerData);
+                                // console.log(hostelIds);
+                                isSaved = true;
                             }
                                 //SPECIAL MARKER
-                             else {
+                            //  else {
                                 //If marker is not in database, make sure there's a photo in the marker's object of data:
                                 var checkPhotoAgain = () => {
                                     if (markerData.photoUrl) {
@@ -68,38 +87,30 @@ const MapFunctions = {
                                     }
                                 }
 
-
-                                var contentString =
-                                    `<div>${markerData.title}</div>` +
-                                    `<br>` +
-                                    `<img src=${checkPhotoAgain()}/>` +
-                                    `<br>` +
-                                    `<div>${markerData.rating}</div>` +
-                                    `<div class="buttonWrapper"><button type="button" className="hostelButton" 
-                                        data-title="${markerData.title}"
-                                        data-location="${[markerData.position.lat(),markerData.position.lng()]}"
-                                        data-address="${markerData.address}"
-                                        data-imageUrl="${markerData.photoUrl}"
-                                        id=${markerData.place_id}>Add to Trip</button></div>`;
-
                                 //Add content to information window for each marker:
                                 var infowindow = new google.maps.InfoWindow({
-                                    content: contentString
+                                    // content: contentString
+                                    content: makeMarkerHTML(markerData, isSaved)
                                 });
-
+                                // console.log(isSaved);
                                 //Create marker with all data
                                 var marker = new google.maps.Marker({
                                     position: markerData.position,
                                     map: markerData.map,
-                                    title: markerData.title
+                                    title: markerData.title,
+                                    icon: isSaved? "/assets/images/hostelIconBlack.png" : "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"
                                 });
+                                if (isSaved){
+                                    console.log(marker);
+                                }
+                                
                                 // Adding marker to global array of finished markers:
                                 globalMarkers.push(marker)
 
                                 return marker.addListener('click', function () {
                                     infowindow.open(map, marker);
                                 });
-                            }
+                            
 
 
                         })

@@ -234,20 +234,20 @@ const MapFunctions = {
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()
                         var time1 = route.legs[i].duration.text;
-                        var distance1 = route.legs[i].distance.text;
+                        var distance1 = parseFloat(route.legs[i].distance.value / 1609);
                         startPoint = {
                             name: name1,
                             location: [lat1, lng1],
                             time: i === 0 ? "0 hours" : time1,
-                            distance: i === 0 ? "0 mi" : distance1
+                            distance: i === 0 ? 0 : distance1
                         }
                         console.log(startPoint);
                         legData.push(startPoint);
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
-                        var time = route.legs[i].duration.text;
-                        var distance = route.legs[i].distance.text;
+                        var time = route.legs[i].duration.value;
+                        var distance = parseFloat(route.legs[i].distance.value / 1609);
                         endPoint = {
                             name: name,
                             location: [lat, lng],
@@ -259,8 +259,9 @@ const MapFunctions = {
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
-                        var time = route.legs[i].duration.text;
-                        var distance = route.legs[i].distance.text;
+                        var time = route.legs[i].duration.value;
+                        var distance = parseFloat(route.legs[i].distance.value / 1609);
+
                         legData.push({
                             name: name,
                             location: [lat, lng],

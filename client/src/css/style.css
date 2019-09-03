@@ -56,6 +56,10 @@
   top: calc(-12.5vw);
 }
 }
+.hostelLink {
+  text-decoration: none;
+  color: black
+}
 .distanceData {
   font-size: .85em;
 }

@@ -56,7 +56,12 @@
   top: calc(-12.5vw);
 }
 }
-
+.distanceData {
+  font-size: .85em;
+}
+.locationData {
+  font-size: .75em;
+}
 .stat {
   width: fit-content;
   padding-right: 5px;

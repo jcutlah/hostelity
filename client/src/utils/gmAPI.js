@@ -30,7 +30,7 @@ const MapFunctions = {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    return (res[i].photos[0].getUrl({ maxWidth: 80, maxHeight: 'auto' }))
+                                    return (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
                                 } else {
                                     return null
                                 }

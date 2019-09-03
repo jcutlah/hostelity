@@ -58,11 +58,12 @@ const Trips = (props) => {
             })
             .catch(err => console.log(err))
     }
+
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}
             {props.trips.map(trip => {
-
+                console.log(trip)
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>

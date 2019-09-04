@@ -10,7 +10,8 @@ const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
-    handleTripSearch: (map, hostelIds) => {
+    handleTripSearch: (map, hostelIds, waypoints) => {
+        console.log(waypoints);
         const google = window.google
         try {
             //USING REQUESTS DEFINED BELOW: 
@@ -41,7 +42,27 @@ const MapFunctions = {
                     var logData = (res) => {
                         // console.log(res)
                         // Organizing the data for hostel markers:
+                        const distanceFormula = (x1,y1,x2,y2) => {
+                            let sq1 = Math.pow((x1-y1),2);
+                            let sq2 = Math.pow((x2-y2),2);
+                            return Math.sqrt(sq1+sq2);
+                        }
                         for (var i = 0; i < res.length; i++) {
+                            let result = res[i];
+                            let tooFar = true;
+                            const resultLatLng = [result.geometry.location.lat(),result.geometry.location.lng()];
+                            waypoints.forEach(pnt => {
+                                // console.log(pnt.location);
+                                // console.log(resultLatLng);
+                                let degrees = distanceFormula(pnt.location[0],resultLatLng[0],pnt.location[1],resultLatLng[1])
+                                // console.log(degrees);
+                                degrees > 1 && tooFar ? tooFar = true : tooFar = false
+                                // console.log("should be number of degrees, since those are the decimal units of lat/long.")
+                            })
+                            if (tooFar){
+                                // console.log(result)
+                                continue
+                            }
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
@@ -122,6 +143,7 @@ const MapFunctions = {
                     if(google.maps.places.PlacesServiceStatus.OK){
                         console.log(results);
                     }
+                    
                     return (status === google.maps.places.PlacesServiceStatus.OK) ? logData(results) : console.log(status);
                 }
                 // REQUESTS LOOP: 
@@ -142,6 +164,14 @@ const MapFunctions = {
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
                     // console.log(globalArray)
+                    let newRequest = {...request, location: newLocation}
+                    Axios.post(`/api/google/text-search`, newRequest)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
                     return service.textSearch(request, placesCallback);
                 })
             }
@@ -306,7 +336,7 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, hostelIds)
+                MapFunctions.handleTripSearch(map, hostelIds, legData)
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);

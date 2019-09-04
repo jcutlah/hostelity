@@ -20,8 +20,9 @@ const Hostels = (props) => {
         <div className="tripList section">
             {props.hostels.map((hostel, i) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
+                var thisHostelSearch = 'https://www.google.com/search?q=' + hostel.title.replace(' ', '+')
                 const classes = useStyles()
-
+                console.log(hostel)
                 return (
                     <div key={`hostel-${i}`}>
 
@@ -36,7 +37,7 @@ const Hostels = (props) => {
 
                                 <Typography align="center" variant="h6" gutterBottom>
                                     <Typography align="center" component="p">
-                                        <Button><a target='_blank' href={thisAddressSearch}>{hostel.title}</a></Button>
+                                        <Button><a target='_blank' className="hostelLink" href={thisHostelSearch}>{hostel.title}</a></Button>
                                         <br />
                                         <Typography>{hostel.address}</Typography>
                                         <br />

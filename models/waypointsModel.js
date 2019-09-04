@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const wpSchema = new Schema({
     hostels: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'Hostel' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Hostel'
         }
     ],
     trip: {
@@ -22,7 +22,11 @@ const wpSchema = new Schema({
     },
     distanceToWaypoint: {
         type: Number,
-        required: true
+        required: false
+    },
+    timeToWaypoint: {
+        type: String,
+        required: false
     },
     location: {
         type: {
@@ -39,9 +43,9 @@ const wpSchema = new Schema({
     imageUrl: {
         type: String
     },
-    dateAdded: { 
-        type: Date, 
-        default: Date.now 
+    dateAdded: {
+        type: Date,
+        default: Date.now
     }
 });
 wpSchema.index({ 'location': '2dsphere' }, { background: false });

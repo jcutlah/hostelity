@@ -23,9 +23,6 @@ var calculateDistanceInMiles = (i) => {
 }
 const Waypoints = (props) => {
     // console.log(props.waypoints);
-
-
-
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
@@ -34,12 +31,9 @@ const Waypoints = (props) => {
                 var str1 = waypoint.location.coordinates[1]
                 var newStr = str.toString().substring(0, 5)
                 var newStr1 = str1.toString().substring(0, 5)
-                var thisLat = parseFloat(newStr)
-                var thisLng = parseFloat(newStr1)
                 console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={3}>
-
                         <Grid item xs={6}>
                             <div key={waypoint._id} className="tripSummary">
                                 <hr></hr>
@@ -51,15 +45,14 @@ const Waypoints = (props) => {
                                     <br />
                                     <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
                                     <br />
+                                    <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
+                                    <br />
                                     <span className='locationData'>{newStr}, {newStr1}</span>
                                     <br />
-
                                 </Typography>
-
                             </div>
                         </Grid>
                         <Grid item xs={6}>
-
                             <span align="center"><Hostels hostels={waypoint.hostels} /></span>
                         </Grid>
                     </Grid>

@@ -28,11 +28,13 @@ router.route("/")
     })
     .post(function (req, res) {
         console.log("post request made to /api/trips");
-        // console.log(req.body);
+        console.log(req.body);
         let totalDistance = 0;
+
         const waypoints = req.body.trip.waypoints;
         const trip = req.body.trip;
         const hostels = req.body.hostels;
+
         waypoints.forEach(point => {
             totalDistance += point.distance;
         })
@@ -47,11 +49,13 @@ router.route("/")
             const tripId = trip._id;
             console.log(tripId);
             waypoints.forEach((point, i) => {
+                console.log(point)
                 let waypoint = {
                     name: point.name,
                     trip: tripId,
                     tripIndex: i,
                     distanceToWaypoint: parseInt(point.distance),
+                    timeToWaypoint: point.time,
                     location: {
                         type: "Point",
                         coordinates: [point.location[1], point.location[0]]

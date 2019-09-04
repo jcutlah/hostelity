@@ -22,6 +22,7 @@ const MapFunctions = {
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
                     console.log(results)
+
                     //After results are checked on line 76:
                     var logData = (res) => {
                         console.log(res)
@@ -30,7 +31,7 @@ const MapFunctions = {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    console.log(res[i].photos[0])
+                                    // console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 150, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
@@ -60,14 +61,13 @@ const MapFunctions = {
                                 //SPECIAL MARKER
                             } else {
                                 //If marker is not in database, make sure there's a photo in the marker's object of data:
-                                var checkPhotoAgain = () => {
-                                    if (markerData.photoUrl) {
-                                        return markerData.photoUrl
-                                    } else {
-                                        return ' '
-                                    }
-                                }
-
+                                // var checkPhotoAgain = () => {
+                                //     if (markerData.photoUrl) {
+                                //         return markerData.photoUrl
+                                //     } else {
+                                //         return ' '
+                                //     }
+                                // }
 
                                 var contentString =
                                     `<div>${markerData.title}</div>` +
@@ -109,7 +109,13 @@ const MapFunctions = {
                 }
                 // REQUESTS LOOP: 
                 requests.forEach((req, i) => {
-
+                    var lat = req.location.lat()
+                    var lng = req.location.lng()
+                    var sw = (lat - 5, lng - 5)
+                    var ne = (lat + 5, lng + 5)
+                    var bounds = new google.maps.LatLngBounds()
+                    bounds.extend(req.location)
+                    console.log(bounds)
                     var latLng = req.location
                     var rad = req.radius
                     var request = {
@@ -138,7 +144,7 @@ const MapFunctions = {
                 requestsForPoints.push({
                     location: endLatLng
                 })
-                for (var i = 0; i < legData.length - 1; i++) {
+                for (var i = 1; i < legData.length - 1; i++) {
                     var thisLatLng = new google.maps.LatLng(legData[i].location[0], legData[i].location[1])
                     requestsForPoints.push({
                         location: thisLatLng,
@@ -171,17 +177,12 @@ const MapFunctions = {
             globalMarkers.forEach(function (marker) {
                 marker.setMap(null)
             })
-            routeMarkers.forEach(function (marker) {
-                marker.setMap(null)
-            })
+
             directionsDisplay.setMap(null)
 
         }
         var wps = [];
 
-
-        console.log(stops);
-        console.log(start);
         if (!waypointsKnown) {
             wps = stops.map(stop => {
                 for (let key in stop) {
@@ -211,7 +212,7 @@ const MapFunctions = {
             travelMode: 'DRIVING'
         }, await function (response, status) {
             // Checking Status of response //
-            console.log(response);
+
             if (status === 'OK') {
                 for (var i = 0; i < response.geocoded_waypoints.length; i++) {
                     routeMarkers.push(response.geocoded_waypoints[i])
@@ -221,11 +222,9 @@ const MapFunctions = {
 
 
                 // Format Leg Data: 
-                console.log(route.legs)
-                console.log(route.legs[0].start_location.lat());
+
                 for (var i = 0; i < route.legs.length; i++) {
-                    console.log(route.legs[i])
-                    console.log(route.legs[i])
+
                     var startPoint;
                     var endPoint;
 

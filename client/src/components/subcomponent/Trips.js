@@ -14,24 +14,29 @@ import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
+        fontFamily: 'Amatic SC, cursive'
     },
     card: {
         minWidth: 275,
         boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
         paddingTop: '30px',
-        marginBottom: '20px'
+        marginBottom: '20px',
+
     },
     bullet: {
         display: 'inline-block',
         margin: '0 2px',
         transform: 'scale(0.8)',
+
     },
     title: {
         fontSize: 14,
+
     },
     pos: {
         marginBottom: 12,
         fontSize: 14,
+
 
     },
     editLink: {
@@ -42,12 +47,14 @@ const useStyles = makeStyles(theme => ({
         height: '4vh !important',
         width: 'auto'
     },
-    cardContent: {
+    card: {
         background: 'url(/assets/images/paper-background.jpg)',
-
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
+        fontFamily: 'Amatic SC, cursive'
+
+
     }
 }));
 
@@ -78,8 +85,8 @@ const Trips = (props) => {
                 console.log(trip)
 
                 return (
-                    <div key={trip._id} className="tripSummary">
-                        <Card className={classes.card}>
+                    <Card className={classes.card}>
+                        <div key={trip._id} className="tripSummary">
 
                             <CardContent className={classes.cardContent}>
                                 <Grid container spacing={3}>
@@ -122,8 +129,8 @@ const Trips = (props) => {
                                 <a className={classes.editLink} href={`/map/${trip._id}`}> <Button size="small">Edit this Trip</Button></a>
                             </CardActions>
 
-                        </Card>
-                    </div>
+                        </div>
+                    </Card>
 
 
                 )

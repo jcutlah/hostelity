@@ -164,14 +164,14 @@ const MapFunctions = {
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
                     // console.log(globalArray)
-                    let newRequest = {...request, location: newLocation}
-                    Axios.post(`/api/google/text-search`, newRequest)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                    // let newRequest = {...request, location: newLocation}
+                    // Axios.post(`/api/google/text-search`, newRequest)
+                    // .then(response => {
+                    //     console.log(response);
+                    // })
+                    // .catch(err => {
+                    //     console.log(err);
+                    // })
                     return service.textSearch(request, placesCallback);
                 })
             }

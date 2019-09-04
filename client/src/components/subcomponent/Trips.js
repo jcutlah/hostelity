@@ -42,22 +42,22 @@ const useStyles = makeStyles(theme => ({
 const Trips = (props) => {
     const classes = useStyles();
 
-    const getTripData = async (id) => {
-        console.log(id)
-        await Axios.get(`/api/trips/${id}`)
-            .then(res => {
-                var data = res.data
-                var trip = {
-                    name: data.name,
-                    start: data.waypoints[0].name,
-                    end: data.waypoints[data.waypoints.length - 1].name,
-                    stops: []
-                }
-                console.log(trip)
-                return (trip)
-            })
-            .catch(err => console.log(err))
-    }
+    // const getTripData = async (id) => {
+    //     console.log(id)
+    //     await Axios.get(`/api/trips/${id}`)
+    //         .then(res => {
+    //             var data = res.data
+    //             var trip = {
+    //                 name: data.name,
+    //                 start: data.waypoints[0].name,
+    //                 end: data.waypoints[data.waypoints.length - 1].name,
+    //                 stops: []
+    //             }
+    //             console.log(trip)
+    //             return (trip)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
     return (
         <Paper className={classes.root}>

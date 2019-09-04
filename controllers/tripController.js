@@ -32,6 +32,11 @@ const orm = {
                 sort: {
                     'tripIndex': 1
                 }
+            },
+            populate: {
+                path: 'hostels',
+                model: 'Hostel',
+                select: 'placeId'
             }
         })
         .then(function(trip){

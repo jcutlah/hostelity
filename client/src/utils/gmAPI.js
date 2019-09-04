@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from "axios";
+import Axios from 'axios';
 var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
@@ -38,13 +39,13 @@ const MapFunctions = {
                     console.log(results)
                     //After results are checked on line 76:
                     var logData = (res) => {
-                        console.log(res)
+                        // console.log(res)
                         // Organizing the data for hostel markers:
                         for (var i = 0; i < res.length; i++) {
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    console.log(res[i].photos[0])
+                                    // console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 150, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
@@ -118,12 +119,19 @@ const MapFunctions = {
                         })
                     }
                     //Checking status of response
+                    if(google.maps.places.PlacesServiceStatus.OK){
+                        console.log(results);
+                    }
                     return (status === google.maps.places.PlacesServiceStatus.OK) ? logData(results) : console.log(status);
                 }
                 // REQUESTS LOOP: 
+            
+
                 requests.forEach((req, i) => {
 
                     var latLng = req.location
+                    let newLocation = [req.location.lat(),req.location.lng()]
+                    console.log(latLng);
                     var rad = req.radius
                     var request = {
                         location: latLng,
@@ -134,12 +142,16 @@ const MapFunctions = {
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
                     // console.log(globalArray)
-
                     return service.textSearch(request, placesCallback);
                 })
             }
 
             // CREATE REQUESTS FOR ALL POINTS:
+            
+            
+            
+            
+            
             const createRequest = () => {
                 console.log(legData);
                 var requestsForPoints = []
@@ -151,13 +163,17 @@ const MapFunctions = {
                 requestsForPoints.push({
                     location: endLatLng
                 })
-                for (var i = 0; i < legData.length - 1; i++) {
+                for (var i = 1; i < legData.length-1; i++) {
                     var thisLatLng = new google.maps.LatLng(legData[i].location[0], legData[i].location[1])
                     requestsForPoints.push({
                         location: thisLatLng,
                     })
                 }
                 console.log(requestsForPoints)
+                requestsForPoints.forEach(point => {
+                    console.log(point.location.lat())
+                    console.log(point.location.lng())
+                })
                 return useRequests(requestsForPoints)
             }
             createRequest()
@@ -179,18 +195,18 @@ const MapFunctions = {
             map: map
         })
 
-        if (globalMarkers.length > 1) {
-            console.log(globalMarkers);
-            console.log(routeMarkers);
-            globalMarkers.forEach(function (marker) {
-                marker.setMap(null)
-            })
-            routeMarkers.forEach(function (marker) {
-                marker.setMap(null)
-            })
-            directionsDisplay.setMap(null)
+        // if (globalMarkers.length > 1) {
+        //     console.log(globalMarkers);
+        //     console.log(routeMarkers);
+        //     // globalMarkers.forEach(function (marker) {
+        //     //     marker.setMap(null)
+        //     // })
+        //     routeMarkers.forEach(function (marker) {
+        //         marker.setMap(null)
+        //     })
+        //     directionsDisplay.setMap(null)
 
-        }
+        // }
         var wps = [];
 
 
@@ -211,7 +227,7 @@ const MapFunctions = {
             wps = stops
         }
         console.log('display route meep');
-        console.log(wps);
+        // console.log(wps);
 
 
 
@@ -235,8 +251,8 @@ const MapFunctions = {
 
 
                 // Format Leg Data: 
-                console.log(route.legs)
-                console.log(route.legs[0].start_location.lat());
+                // console.log(route.legs)
+                // console.log(route.legs[0].start_location.lat());
                 for (var i = 0; i < route.legs.length; i++) {
                     console.log(route.legs[i])
                     console.log(route.legs[i])

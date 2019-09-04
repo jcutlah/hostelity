@@ -20,8 +20,9 @@ const Hostels = (props) => {
         <div className="tripList section">
             {props.hostels.map((hostel, i) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
+                var thisHostelSearch = 'https://www.google.com/search?q=' + hostel.title.replace(' ', '+')
                 const classes = useStyles()
-
+                console.log(hostel)
                 return (
                     <div key={`hostel-${i}`}>
 

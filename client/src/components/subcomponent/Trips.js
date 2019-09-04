@@ -42,33 +42,35 @@ const useStyles = makeStyles(theme => ({
 const Trips = (props) => {
     const classes = useStyles();
 
-    const getTripData = async (id) => {
-        console.log(id)
-        await Axios.get(`/api/trips/${id}`)
-            .then(res => {
-                var data = res.data
-                var trip = {
-                    name: data.name,
-                    start: data.waypoints[0].name,
-                    end: data.waypoints[data.waypoints.length - 1].name,
-                    stops: []
-                }
-                console.log(trip)
-                return (trip)
-            })
-            .catch(err => console.log(err))
-    }
+    // const getTripData = async (id) => {
+    //     console.log(id)
+    //     await Axios.get(`/api/trips/${id}`)
+    //         .then(res => {
+    //             var data = res.data
+    //             var trip = {
+    //                 name: data.name,
+    //                 start: data.waypoints[0].name,
+    //                 end: data.waypoints[data.waypoints.length - 1].name,
+    //                 stops: []
+    //             }
+    //             console.log(trip)
+    //             return (trip)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}
             {props.trips.map(trip => {
                 console.log(trip)
+
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>
                             <CardContent>
                                 <Grid container spacing={3}>
+
                                     <Grid item xs={12}>
                                         <Typography variant="h5" component="h3" align="center">
                                             {trip.name}
@@ -91,12 +93,12 @@ const Trips = (props) => {
                                     <Grid item xs={12}>
                                         <Typography align="right" variant="h6">
                                             Your Lodging Situation...
-                        </Typography>
+                                        </Typography>
                                         <Waypoints
                                             waypoints={trip.waypoints}
                                         />
-
                                     </Grid>
+
                                 </Grid>
                             </CardContent>
                             <CardActions>

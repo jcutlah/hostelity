@@ -36,11 +36,11 @@ const Waypoints = (props) => {
                 var newStr1 = str1.toString().substring(0, 5)
                 var thisLat = parseFloat(newStr)
                 var thisLng = parseFloat(newStr1)
-
+                console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={3}>
 
-                        <Grid item xs={8}>
+                        <Grid item xs={6}>
                             <div key={waypoint._id} className="tripSummary">
                                 <hr></hr>
                                 <Typography align="left" variant="h6" gutterBottom>
@@ -58,7 +58,7 @@ const Waypoints = (props) => {
 
                             </div>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={6}>
 
                             <span align="center"><Hostels hostels={waypoint.hostels} /></span>
                         </Grid>

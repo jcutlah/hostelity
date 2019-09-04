@@ -181,7 +181,7 @@ export default function SignIn() {
                     <div className={loginError.username ?
                         classes.formErrorMessage :
                         classes.formNonErrorMessage}
-                    >Wrong fucking username</div>
+                    >Incorrect username</div>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -198,11 +198,11 @@ export default function SignIn() {
                     <div className={loginError.password ?
                         classes.formErrorMessage :
                         classes.formNonErrorMessage}
-                    >Wrong fucking password</div>
+                    >Incorrect password</div>
                     <div className={loginError.missingCred ?
                         classes.formErrorMessage :
                         classes.formNonErrorMessage}
-                    >You are missing fucking credentials!!!</div>
+                    >You are missing credentials!!</div>
                     <Button
                         type="submit"
                         fullWidth
@@ -218,7 +218,7 @@ export default function SignIn() {
                                 Forgot password?
                             </Link> */}
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={12} align="center">
                             <Link href="/signup" variant="body2">
                                 {"Don't have an account? Sign Up"}
                             </Link>

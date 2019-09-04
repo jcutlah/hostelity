@@ -76,7 +76,8 @@ function LoadMap(props) {
 
         return () => {
             document.addEventListener('click', function (event) {
-                if (event.target.getAttribute('classname') === "hostelButton") {
+                let buttonClass = event.target.getAttribute('classname');
+                if ( buttonClass === "hostelButton" || buttonClass === "removeHostel") {
                     let data = {
                         title: event.target.getAttribute('data-title'),
                         location: event.target.getAttribute('data-location'),
@@ -110,82 +111,6 @@ function LoadMap(props) {
         inputId: 0
     });
 
-    // // const handleChange = event => {
-    //     // console.log(state);
-    //     const { name, value } = event.target;
-    //     var usedThisStop = false;
-    //     var oldStops = state.stops;
-    //     var newStops;
-    //     var thisStop = {
-    //         [name]: value,
-
-    //     }
-    //     if (name === "start" || name === "end") {
-    //         setState({ ...state, [name]: value });
-    //         return;
-    //     }
-    //     if (state.stops.length) {
-    //         oldStops.forEach((stop, i) => {
-    //             if (stop[name]) {
-    //                 oldStops[i] = thisStop;
-    //                 usedThisStop = true;
-    //             }
-    //         });
-    //         if (!usedThisStop) {
-    //             newStops = [...oldStops, thisStop];
-    //             setState({ ...state, stops: newStops });
-    //         } else {
-    //             setState({ ...state, stops: oldStops });
-    //         }
-    //     } else {
-    //         newStops = [thisStop];
-    //         setState({ ...state, stops: newStops });
-    //     }
-    // }
-    // const addInput = () => {
-    //     // console.log(state);
-    //     // console.log("addInput running");
-    //     var newId = state.inputId + 1;
-    //     setState({ ...state, inputId: newId });
-
-    // }
-    // function infoWindowOpen(event) {
-    //     if (!event.target.closest('.hostelButton')) {
-    //         // console.log(state.waypoints)
-    //         var data = {
-    //             title: event.target.getAttribute('data-title'),
-    //             location: event.target.getAttribute('data-location'),
-    //             address: event.target.getAttribute('data-address'),
-    //             placeId: event.target.id,
-    //             imageUrl: event.target.getAttribute('data-imageUrl')
-    //         }
-
-    //         // return console.log(data)
-    //     } else {
-    //         return console.log("nah dude")
-    //     }
-
-    // }
-
-    // document.addEventListener('click', function (event) {
-    //     infoWindowOpen(event)
-    // })
-    // const saveTrip = (event) => {
-    //     event.preventDefault();
-    //     Axios.post('/api/trips', state.trip).then(function (res) {
-    //         console.log(res)
-    //     })
-    //     // var waypoints = state.trip.waypoints
-    //     // console.log(waypoints)
-    //     // var saveData = {
-    //     //     waypoints: waypoints,
-    //     //     start: state.start,
-    //     //     end: state.end,
-    //     //     name: 'My *Super FUCKING* Trip!'
-    //     // }
-    //     // console.log(saveData)
-    // }
-    // console.log(state);
     var trip = {}
 
     const getTripData = (map) => {
@@ -193,6 +118,7 @@ function LoadMap(props) {
             .then(res => {
                 var data = res.data
                 console.log(res.data);
+                const hostelIds = [];
                 trip = {
                     start: data.waypoints[0].name,
                     end: data.waypoints[data.waypoints.length - 1].name,
@@ -205,9 +131,12 @@ function LoadMap(props) {
                             stopover: true
                         })
                     }
+                    wp.hostels.forEach(hostel => {
+                        hostelIds.push(hostel.placeId);
+                    })
                 })
                 console.log(trip)
-                MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, function (data, startAddress, endAddress) {
+                MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, hostelIds, function (data, startAddress, endAddress) {
                     console.log(data, startAddress, endAddress)
                 })
             })

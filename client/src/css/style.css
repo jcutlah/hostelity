@@ -4,6 +4,7 @@
     height: 4%;
     width: 100%;
     padding-top: .5vh;
+    padding-bottom: .75vh;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 

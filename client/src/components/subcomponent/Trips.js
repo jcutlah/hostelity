@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
+
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
@@ -36,6 +37,17 @@ const useStyles = makeStyles(theme => ({
     editLink: {
         textDecoration: 'none',
         border: '1px black'
+    },
+    travelArrow: {
+        height: '4vh !important',
+        width: 'auto'
+    },
+    cardContent: {
+        background: 'url(/assets/images/paper-background.jpg)',
+
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
     }
 }));
 
@@ -68,7 +80,8 @@ const Trips = (props) => {
                 return (
                     <div key={trip._id} className="tripSummary">
                         <Card className={classes.card}>
-                            <CardContent>
+
+                            <CardContent className={classes.cardContent}>
                                 <Grid container spacing={3}>
 
                                     <Grid item xs={12}>
@@ -80,17 +93,21 @@ const Trips = (props) => {
                                     </Grid>
 
                                     <Grid align="center" item xs={12}>
+
                                         <Typography align="center" className="stat" variant="h6" gutterBottom>
 
                                             {trip.waypoints[0].name}
                                             <br />
-                                            <span className={classes.pos}>...</span>
+
+                                            <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
+                                            <span className={classes.pos}></span>
                                             <br />
                                             {trip.waypoints[trip.waypoints.length - 1].name}
                                         </Typography>
                                     </Grid>
 
                                     <Grid item xs={12}>
+                                        <hr></hr>
                                         <Typography align="right" variant="h6">
                                             Your Lodging Situation...
                                         </Typography>
@@ -106,8 +123,8 @@ const Trips = (props) => {
                             </CardActions>
 
                         </Card>
-
                     </div>
+
 
                 )
             })}

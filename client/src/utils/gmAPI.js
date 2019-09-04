@@ -68,7 +68,7 @@ const MapFunctions = {
                             var checkPhotos = () => {
                                 if (res[i].photos) {
                                     // console.log(res[i].photos[0])
-                                    var thisImg = (res[i].photos[0].getUrl({ maxWidth: 150, maxHeight: 'auto' }))
+                                    var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
                                     return null

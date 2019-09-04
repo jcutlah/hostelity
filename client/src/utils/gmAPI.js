@@ -29,7 +29,7 @@ const MapFunctions = {
                         `<div>${markerData.rating} out of 5</div>` +
                         `<div class="buttonWrapper"><button type="button" className="${!saved ? 'hostelButton' : 'removeHostel'}" 
                             data-title="${markerData.title}"
-                            data-location="${[markerData.position.lat(),markerData.position.lng()]}"
+                            data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
                             data-imageUrl="${markerData.photoUrl ? markerData.photoUrl : ''}"
                             id=${markerData.place_id}>${!saved ? 'Add to Trip' : 'Remove from Trip'}</button></div>`;
@@ -38,28 +38,29 @@ const MapFunctions = {
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
                     console.log(results)
+
                     //After results are checked on line 76:
                     var logData = (res) => {
                         // console.log(res)
                         // Organizing the data for hostel markers:
-                        const distanceFormula = (x1,y1,x2,y2) => {
-                            let sq1 = Math.pow((x1-y1),2);
-                            let sq2 = Math.pow((x2-y2),2);
-                            return Math.sqrt(sq1+sq2);
+                        const distanceFormula = (x1, y1, x2, y2) => {
+                            let sq1 = Math.pow((x1 - y1), 2);
+                            let sq2 = Math.pow((x2 - y2), 2);
+                            return Math.sqrt(sq1 + sq2);
                         }
                         for (var i = 0; i < res.length; i++) {
                             let result = res[i];
                             let tooFar = true;
-                            const resultLatLng = [result.geometry.location.lat(),result.geometry.location.lng()];
+                            const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];
                             waypoints.forEach(pnt => {
                                 // console.log(pnt.location);
                                 // console.log(resultLatLng);
-                                let degrees = distanceFormula(pnt.location[0],resultLatLng[0],pnt.location[1],resultLatLng[1])
+                                let degrees = distanceFormula(pnt.location[0], resultLatLng[0], pnt.location[1], resultLatLng[1])
                                 // console.log(degrees);
                                 degrees > 1 && tooFar ? tooFar = true : tooFar = false
                                 // console.log("should be number of degrees, since those are the decimal units of lat/long.")
                             })
-                            if (tooFar){
+                            if (tooFar) {
                                 // console.log(result)
                                 continue
                             }
@@ -100,59 +101,57 @@ const MapFunctions = {
                                 // console.log(hostelIds);
                                 isSaved = true;
                             }
-                                //SPECIAL MARKER
-                            //  else {
-                                //If marker is not in database, make sure there's a photo in the marker's object of data:
-                                var checkPhotoAgain = () => {
-                                    if (markerData.photoUrl) {
-                                        return markerData.photoUrl
-                                    } else {
-                                        return ' '
-                                    }
-                                }
+                            //SPECIAL MARKER
 
-                                //Add content to information window for each marker:
-                                var infowindow = new google.maps.InfoWindow({
-                                    // content: contentString
-                                    content: makeMarkerHTML(markerData, isSaved)
-                                });
-                                // console.log(isSaved);
-                                //Create marker with all data
-                                var marker = new google.maps.Marker({
-                                    position: markerData.position,
-                                    map: markerData.map,
-                                    title: markerData.title,
-                                    icon: isSaved? "/assets/images/hostelIconBlack.png" : "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"
-                                });
-                                if (isSaved){
-                                    console.log(marker);
-                                }
-                                
-                                // Adding marker to global array of finished markers:
-                                globalMarkers.push(marker)
 
-                                return marker.addListener('click', function () {
-                                    infowindow.open(map, marker);
-                                });
-                            
+                            //Add content to information window for each marker:
+                            var infowindow = new google.maps.InfoWindow({
+                                // content: contentString
+                                content: makeMarkerHTML(markerData, isSaved)
+                            });
+                            // console.log(isSaved);
+                            //Create marker with all data
+                            var marker = new google.maps.Marker({
+                                position: markerData.position,
+                                map: markerData.map,
+                                title: markerData.title,
+                                icon: isSaved ? "/assets/images/hostelIconBlack.png" : "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"
+                            });
+                            if (isSaved) {
+                                console.log(marker);
+                            }
+
+                            // Adding marker to global array of finished markers:
+                            globalMarkers.push(marker)
+
+                            return marker.addListener('click', function () {
+                                infowindow.open(map, marker);
+                            });
+
 
 
                         })
                     }
                     //Checking status of response
-                    if(google.maps.places.PlacesServiceStatus.OK){
+                    if (google.maps.places.PlacesServiceStatus.OK) {
                         console.log(results);
                     }
-                    
+
                     return (status === google.maps.places.PlacesServiceStatus.OK) ? logData(results) : console.log(status);
                 }
                 // REQUESTS LOOP: 
-            
+
 
                 requests.forEach((req, i) => {
-
+                    var lat = req.location.lat()
+                    var lng = req.location.lng()
+                    var sw = (lat - 5, lng - 5)
+                    var ne = (lat + 5, lng + 5)
+                    var bounds = new google.maps.LatLngBounds()
+                    bounds.extend(req.location)
+                    console.log(bounds)
                     var latLng = req.location
-                    let newLocation = [req.location.lat(),req.location.lng()]
+                    let newLocation = [req.location.lat(), req.location.lng()]
                     console.log(latLng);
                     var rad = req.radius
                     var request = {
@@ -164,24 +163,24 @@ const MapFunctions = {
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
                     // console.log(globalArray)
-                    let newRequest = {...request, location: newLocation}
+                    let newRequest = { ...request, location: newLocation }
                     Axios.post(`/api/google/text-search`, newRequest)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
                     return service.textSearch(request, placesCallback);
                 })
             }
 
             // CREATE REQUESTS FOR ALL POINTS:
-            
-            
-            
-            
-            
+
+
+
+
+
             const createRequest = () => {
                 console.log(legData);
                 var requestsForPoints = []
@@ -193,7 +192,7 @@ const MapFunctions = {
                 requestsForPoints.push({
                     location: endLatLng
                 })
-                for (var i = 1; i < legData.length-1; i++) {
+                for (var i = 1; i < legData.length - 1; i++) {
                     var thisLatLng = new google.maps.LatLng(legData[i].location[0], legData[i].location[1])
                     requestsForPoints.push({
                         location: thisLatLng,
@@ -225,23 +224,9 @@ const MapFunctions = {
             map: map
         })
 
-        // if (globalMarkers.length > 1) {
-        //     console.log(globalMarkers);
-        //     console.log(routeMarkers);
-        //     // globalMarkers.forEach(function (marker) {
-        //     //     marker.setMap(null)
-        //     // })
-        //     routeMarkers.forEach(function (marker) {
-        //         marker.setMap(null)
-        //     })
-        //     directionsDisplay.setMap(null)
 
-        // }
         var wps = [];
 
-
-        console.log(stops);
-        console.log(start);
         if (!waypointsKnown) {
             wps = stops.map(stop => {
                 for (let key in stop) {
@@ -271,7 +256,7 @@ const MapFunctions = {
             travelMode: 'DRIVING'
         }, await function (response, status) {
             // Checking Status of response //
-            console.log(response);
+
             if (status === 'OK') {
                 for (var i = 0; i < response.geocoded_waypoints.length; i++) {
                     routeMarkers.push(response.geocoded_waypoints[i])
@@ -281,11 +266,8 @@ const MapFunctions = {
 
 
                 // Format Leg Data: 
-                // console.log(route.legs)
-                // console.log(route.legs[0].start_location.lat());
                 for (var i = 0; i < route.legs.length; i++) {
-                    console.log(route.legs[i])
-                    console.log(route.legs[i])
+
                     var startPoint;
                     var endPoint;
 
@@ -294,20 +276,20 @@ const MapFunctions = {
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()
                         var time1 = route.legs[i].duration.text;
-                        var distance1 = route.legs[i].distance.text;
+                        var distance1 = parseFloat(route.legs[i].distance.value / 1609);
                         startPoint = {
                             name: name1,
                             location: [lat1, lng1],
                             time: i === 0 ? "0 hours" : time1,
-                            distance: i === 0 ? "0 mi" : distance1
+                            distance: i === 0 ? 0 : distance1
                         }
                         console.log(startPoint);
                         legData.push(startPoint);
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
-                        var time = route.legs[i].duration.text;
-                        var distance = route.legs[i].distance.text;
+                        var time = route.legs[i].duration.value;
+                        var distance = parseFloat(route.legs[i].distance.value / 1609);
                         endPoint = {
                             name: name,
                             location: [lat, lng],
@@ -319,8 +301,9 @@ const MapFunctions = {
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
-                        var time = route.legs[i].duration.text;
-                        var distance = route.legs[i].distance.text;
+                        var time = route.legs[i].duration.value;
+                        var distance = parseFloat(route.legs[i].distance.value / 1609);
+
                         legData.push({
                             name: name,
                             location: [lat, lng],

@@ -80,12 +80,12 @@ const waypointSeed = [
     }
 ]
 const tripSeed = [
-    {
-        name: "The Trip That I'll Really Want To Forget, But Will Never Forget",
-        start: "Yellowstone, NP, USA",
-        end: "Big Sur, CA, USA",
-        totalMileage: 789
-    }
+    // {
+    //     name: "The Trip That I'll Really Want To Forget, But Will Never Forget",
+    //     start: "Yellowstone, NP, USA",
+    //     end: "Big Sur, CA, USA",
+    //     totalMileage: 789
+    // }
     // {
     //     name: "My Spiritual Journey Trip",
     //     startDest: {

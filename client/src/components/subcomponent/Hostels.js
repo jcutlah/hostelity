@@ -36,8 +36,8 @@ const Hostels = (props) => {
                             <div key={hostel._id} className="tripSummary">
 
                                 <Typography align="center" variant="h6" gutterBottom>
-                                    <Typography align="center" component="p">
-                                        <Button><a target='_blank' className="hostelLink" href={thisHostelSearch}>{hostel.title}</a></Button>
+                                    <Typography align="center" component="span">
+                                        <Button><a target='_blank' href={thisAddressSearch}>{hostel.title}</a></Button>
                                         <br />
                                         <Typography>{hostel.address}</Typography>
                                         <br />

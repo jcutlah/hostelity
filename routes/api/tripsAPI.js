@@ -74,7 +74,7 @@ router.route("/")
                         hostelController.addHostel(hostel, function (result) {
                             console.log('newly added hostel shiz:');
                             console.log(result);
-                            waypointController.findClosestWaypointToHostel(tripId, result.location.coordinates, 10000, function (closestWaypoint) {
+                            waypointController.findClosestWaypointToHostel(tripId, result.location.coordinates, 100000, function (closestWaypoint) {
                                 console.log('closest waypoint found?');
                                 console.log(closestWaypoint);
                                 hostelController.associateHostelToWaypoint(closestWaypoint._id, result._id, function (response) {
@@ -85,6 +85,7 @@ router.route("/")
                         })
                     })
                 }
+
             })
             tripController.associateTripToUser(req.user, tripId, function (user) {
                 console.log(user);

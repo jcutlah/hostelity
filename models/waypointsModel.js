@@ -28,6 +28,10 @@ const wpSchema = new Schema({
         type: String,
         required: false
     },
+    timeToWaypoint: {
+        type: String
+        // required: true
+    },
     location: {
         type: {
             type: String,

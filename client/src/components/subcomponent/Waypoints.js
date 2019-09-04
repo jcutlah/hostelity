@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Hostels from './Hostels';
 import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles';
 const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
 var wptLatLng = []
 var calculateDistanceInMiles = (i) => {
@@ -21,11 +22,22 @@ var calculateDistanceInMiles = (i) => {
         return null;
     }
 }
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(3, 2),
+    },
+    tripSummary: {
+        padding: '10px',
+        backgroundColor: 'white',
+        borderRadius: '10px',
+        border: '1px ridge grey'
+
+    }
+}));
 const Waypoints = (props) => {
     // console.log(props.waypoints);
-
-
-
+    const classes = useStyles()
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
@@ -34,32 +46,28 @@ const Waypoints = (props) => {
                 var str1 = waypoint.location.coordinates[1]
                 var newStr = str.toString().substring(0, 5)
                 var newStr1 = str1.toString().substring(0, 5)
-                var thisLat = parseFloat(newStr)
-                var thisLng = parseFloat(newStr1)
                 console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={3}>
-
                         <Grid item xs={6}>
-                            <div key={waypoint._id} className="tripSummary">
-                                <hr></hr>
+                            <div key={waypoint._id} className={classes.tripSummary}>
+
                                 <Typography align="left" variant="h6" gutterBottom>
                                     {wpIndex[i]}
                                 </Typography>
-                                <Typography align="left" component="p">
+                                <Typography align="left" component="p" className={classes.informationBox}>
                                     {waypoint.name}
                                     <br />
                                     <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
                                     <br />
+                                    <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
+                                    <br />
                                     <span className='locationData'>{newStr}, {newStr1}</span>
                                     <br />
-
                                 </Typography>
-
                             </div>
                         </Grid>
                         <Grid item xs={6}>
-
                             <span align="center"><Hostels hostels={waypoint.hostels} /></span>
                         </Grid>
                     </Grid>

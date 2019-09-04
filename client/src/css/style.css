@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
+body {
+  font-family: 'Amatic SC', cursive;
+}
 @media (max-width: 767px) {
   .navBottom {
     bottom: 0;
@@ -16,6 +20,7 @@
   .navLinks {
       width: 100%;
   }
+  
   .loadmap-container .MuiPaper-root {
     position: relative;
     top: calc(18vw);

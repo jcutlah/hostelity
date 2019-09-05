@@ -93,6 +93,7 @@ function Map(props) {
                     console.log(data)
                     setHostels([...hostels, data]);
                     event.target.setAttribute('style', 'display: none');
+                    event.target.parentNode.childNodes[1].setAttribute('style','display:block');
                 }
             });
         }

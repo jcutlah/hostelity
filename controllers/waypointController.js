@@ -2,6 +2,16 @@ const db = require('../models/index');
 
 
 const orm = {
+    removeOneWaypoint: function(waypointId, callback) {
+        console.log(`removing hostel with id ${waypointId}`);
+        db.Waypoint.deleteOne({ _id: waypointId })
+        .then(function(deletedPoint){
+            callback(deletedPoint);
+        })
+        .catch(err => {
+            callback(err);
+        });
+    },
     addWaypoint: function(waypoint, callback){
         console.log('running addWaypoint()');
         console.log(waypoint);

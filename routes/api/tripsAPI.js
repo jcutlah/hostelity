@@ -19,11 +19,34 @@ router.route("/:id")
         })
     })
     .delete(function (req, res) {
-        console.log('delete request made to /api/trips/:id');
-        tripController.deleteTrip(req.params.id, function(trip){
+        console.log(`delete request made to /api/trips/${req.params.id}`);
+        let response = []
+        tripController.getTripById(req.params.id, function(trip){
             console.log(trip);
-            res.json(trip);
+            trip.waypoints.forEach(waypoint => {
+                console.log(waypoint);
+                waypoint.hostels.forEach(hostel => {
+                    hostelController.removeOneHostel(hostel._id, function(deletedHostelResult) {
+                        console.log(deletedHostelResult);
+                        response.push(deletedHostelResult);
+                    });
+                })
+                waypointController.removeOneWaypoint(waypoint, function(deletedWPResult){
+                    console.log(deletedWPResult);
+                    response.push(deletedWPResult);
+                });
+            })
+            tripController.deleteTrip(trip._id, function(deletedTripResult){
+                response.push(deletedTripResult);
+                res.json(response);
+
+            })
         })
+        // tripController.deleteTrip(req.params.id, function(trip){
+        //     console.log(trip);
+        //     res.json(trip);
+
+        // })
     })
 
 router.route("/")

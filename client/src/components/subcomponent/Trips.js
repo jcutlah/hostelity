@@ -100,8 +100,9 @@ const Trips = (props) => {
 
     const deleteTrip = (event) => {
         event.preventDefault();
-        console.log(event.target)
-        let tripId = event.target.parentNode.getAttribute('data-id');
+        console.log(event.target);
+        console.log(event.currentTarget);
+        let tripId = event.currentTarget.getAttribute('data-id');
 
         Axios.delete(`/api/trips/${tripId}`)
             .then(res => {

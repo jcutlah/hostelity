@@ -53,7 +53,9 @@ const useStyles = makeStyles(theme => ({
     },
     formErrorMessage: {
         display: 'block',
-        color: 'red'
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: '12'
     },
     formNonErrorMessage: {
         display: 'none'

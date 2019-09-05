@@ -153,7 +153,7 @@ export default function SignIn() {
                             return false;
                     }
                 } else {
-                    window.location = '/home';
+                    window.location = '/my-trips';
                 }
             }).catch(function (err) {
                 console.log(err);

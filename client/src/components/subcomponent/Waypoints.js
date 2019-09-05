@@ -41,12 +41,12 @@ const Waypoints = (props) => {
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
-                console.log(waypoint.distanceToWaypoint);
+                // console.log(waypoint.distanceToWaypoint);
                 var str = waypoint.location.coordinates[0]
                 var str1 = waypoint.location.coordinates[1]
                 var newStr = str.toString().substring(0, 5)
                 var newStr1 = str1.toString().substring(0, 5)
-                console.log(waypoint)
+                // console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={3}>
                         <Grid item xs={6}>

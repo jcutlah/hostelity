@@ -79,10 +79,9 @@ function App() {
           <Route exact path="/map" component={Map} />
           <Route exact path="/map/:id" component={LoadMap} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
           <Route exact path="/new-search" component={Redir} />
           <Route exact path="/search" component={Search} />
-          <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
+          <Route exact path="/my-trips" render={(props) => <Home {...props} userId={userId} />} />
           <Route component={NoMatch} />
         </Switch>
 

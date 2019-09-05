@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
             backgroundImage: 'url(/assets/images/mountain-large.jpg)',
-            backgroundSize: 'cover',
-            backgroundRepear: 'none'
+            backgroundSize: 'auto',
+            backgroundRepeat: 'no-repeat'
         },
     },
     paper: {

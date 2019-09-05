@@ -6,7 +6,8 @@ import CardContent from '@material-ui/core/CardContent'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import CardActions from '@material-ui/core/CardActions';
-import Grid from '@material-ui/core/Grid'
+import Grid from '@material-ui/core/Grid';
+import Axios from 'axios';
 var useStyles = makeStyles(theme => ({
     media: {
         height: 0,
@@ -26,9 +27,29 @@ var useStyles = makeStyles(theme => ({
 }));
 var thisUrl;
 
+
 const Hostels = (props) => {
     // console.log(props);
+    const [lastDeleted, setLastDeleted] = React.useState("");
 
+    const deleteHostel = (event) => {
+        event.preventDefault();
+        console.log(event);
+        let hostel = event.target;
+        let hostelId = event.target.getAttribute('data-id');
+        Axios.delete(`/api/waypoints/hostel/${hostelId}`)
+            .then(response => {
+                console.log(response);
+                console.log(hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove());
+                if (response.status === 200 ){
+                    // hostel.parentNode
+                    hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     return (
         <div className="tripList section">
             {props.hostels.map((hostel, i) => {
@@ -37,7 +58,7 @@ const Hostels = (props) => {
                 const classes = useStyles()
                 // console.log(hostel)
                 return (
-                    <div key={`hostel-${i}`}>
+                    <div key={`hostel-${i}`} className="hostel-wrapper">
 
 
                         <Card className={classes.cardContainer}>
@@ -66,7 +87,7 @@ const Hostels = (props) => {
                                     <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
                                 </Grid>
                                 <Grid item xs={6} align='right'>
-                                    <Button className={classes.removeHostel} align='right' size="small"><a align='right' className="hostelLink" href={'https://www.google.com/search?q=How+to+remove+this+shit+from+the+API'}>Remove From Trip</a></Button>
+                                    <Button className={classes.removeHostel} align='right' size="small"><span align='right' className="hostelLink" href={'#'} data-id={hostel._id} onClick={deleteHostel}>Remove From Trip</span></Button>
                                 </Grid>
                             </CardActions>
                         </Card>

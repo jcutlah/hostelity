@@ -6,8 +6,11 @@ import CardContent from '@material-ui/core/CardContent'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import CardActions from '@material-ui/core/CardActions';
-import Grid from '@material-ui/core/Grid';
 import Axios from 'axios';
+import Grid from '@material-ui/core/Grid'
+import "../../css/style.css";
+import Box from '@material-ui/core/Box'
+
 var useStyles = makeStyles(theme => ({
     media: {
         height: 0,
@@ -21,7 +24,10 @@ var useStyles = makeStyles(theme => ({
     removeHostel: {
         backgroundColor: 'red !important',
         color: 'white !important',
-        textDecoration: 'none'
+        textDecoration: 'none',
+        fontFamily: 'Amatic SC, cursive',
+        fontWeight: 'bold',
+        fontSize: '15'
     }
 
 }));
@@ -84,10 +90,23 @@ const Hostels = (props) => {
                             </CardContent>
                             <CardActions>
                                 <Grid item xs={6} align='left'>
-                                    <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
+                                    <Typography>
+                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+                                            <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
+                                        </Box>
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={6} align='right'>
+<<<<<<< HEAD
                                     <Button className={classes.removeHostel} align='right' size="small"><span align='right' className="hostelLink" href={'#'} data-id={hostel._id} onClick={deleteHostel}>Remove From Trip</span></Button>
+=======
+                                    <Typography>
+                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+
+                                            <Button className={classes.removeHostel} align='right' size="small"><a align='right' className="hostelLink" href={'https://www.google.com/search?q=How+to+remove+this+shit+from+the+API'}>Remove From Trip</a></Button>
+                                        </Box>
+                                    </Typography>
+>>>>>>> 7631a58f8344a29e007f992adba75e6ed59060bb
                                 </Grid>
                             </CardActions>
                         </Card>

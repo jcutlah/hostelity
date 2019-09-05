@@ -81,15 +81,23 @@ const Trips = (props) => {
     //         })
     //         .catch(err => console.log(err))
     // }
+    if (props.trips.length === 0) {
+        return(
+            <div style={{textAlign: "center", fontSize: "30px"}}>
+            No trips. What the fuck do you do, anyway?
+            </div>
+        )
+    } 
+    
 
     return (
         <Paper className={classes.root}>
             {/* {console.log(typeof props.trips)} */}
-            {props.trips.map(trip => {
+            {props.trips.map((trip, i) => {
                 console.log(trip)
 
                 return (
-                    <Card className={classes.card}>
+                    <Card key={i} className={classes.card}>
                         <div key={trip._id} className="tripSummary">
                             <CardContent className={classes.cardContent}>
                                 <Grid container spacing={3}>
@@ -137,5 +145,6 @@ const Trips = (props) => {
         </Paper>
     )
 }
+
 
 export default Trips;

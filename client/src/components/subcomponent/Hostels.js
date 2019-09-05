@@ -35,7 +35,7 @@ const Hostels = (props) => {
                 var thisAddressSearch = 'http://www.google.com/maps?q=' + hostel.address
                 var thisHostelSearch = 'https://www.google.com/search?q=' + hostel.title.replace(' ', '+')
                 const classes = useStyles()
-                console.log(hostel)
+                // console.log(hostel)
                 return (
                     <div key={`hostel-${i}`}>
 

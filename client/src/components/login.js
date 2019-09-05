@@ -29,11 +29,13 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
-            backgroundColor: theme.palette.common.white,
+            backgroundImage: 'url(/assets/images/mountain-large.jpg)',
+            backgroundSize: 'cover',
+            backgroundRepear: 'none'
         },
     },
     paper: {
-        marginTop: theme.spacing(11),
+        marginTop: theme.spacing(0),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -55,6 +57,15 @@ const useStyles = makeStyles(theme => ({
     },
     formNonErrorMessage: {
         display: 'none'
+    },
+    loginContainer: {
+        paddingTop: 'none !important',
+        position: 'relative !important',
+        top: '15vh',
+        backgroundColor: 'rgba(220,220,220,0.8)',
+        borderRadius: '15px',
+        boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
+        border: '1px solid black'
     }
 }));
 
@@ -154,7 +165,7 @@ export default function SignIn() {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" className={classes.loginContainer}>
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

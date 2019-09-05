@@ -179,8 +179,13 @@ function Map(props) {
     })
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', {trip: state.trip, hostels: hostels}).then(function (res) {
+        Axios.post('/api/trips', {trip: state.trip, hostels: hostels})
+        .then(function (res) {
             console.log(res)
+            res.data.message === "success" ? window.location = "/home" : alert('An error occurred')
+        })
+        .catch(err => {
+            console.log(err);
         })
         // var waypoints = state.trip.waypoints
         // console.log(waypoints)

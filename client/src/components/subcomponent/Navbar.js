@@ -24,31 +24,31 @@ const Navbar = (props) => {
     }
     return (
         <Grid container>
-        <Grid item xs={3}>
-        <nav className="nav navTop navBottom">
-            <div className="navLinks">
-                {props.userId
-                    ? <ul className="nav">
+            <Grid item xs={3}>
+                <nav className="nav navTop navBottom">
+                    <div className="navLinks">
+                        {props.userId
+                            ? <ul className="nav">
+                                {/* <i className="material-icons" style={{ fontSize: 30 }}>home</i> */}
+                                <li key="home"><Link to='/home'>Home</Link></li>
+                                {/* <i className="material-icons" style={{ fontSize: 30 }}>search</i> */}
+                                <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'}>CREATE A TRIP</Link></li>
 
-                        <li key="home"><Link to='/home'><i className="material-icons" style={{ fontSize: 30 }}>home</i></Link></li>
+                                {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 
-                        <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'}><i className="material-icons" style={{ fontSize: 30 }}>search</i></Link></li>
-
-                        {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
-
-                        <li key="logOut"><Link to='javascript:;' onClick={logOut}><i className="material-icons" style={{ fontSize: 30 }}>exit_to_app</i></Link></li>
+                                <li key="logOut"><Link to='javascript:;' onClick={logOut}><i className="material-icons" style={{ fontSize: 30 }}>exit_to_app</i></Link></li>
 
 
-                    </ul>
+                            </ul>
 
-                    : <ul className="loggedOutLinks">
-                        <li key="signIn"><Link to='/login'>Log In</Link> </li>
-                    </ul>
+                            : <ul className="loggedOutLinks">
+                                <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 ? '' : 'Log in'}</Link> </li>
+                            </ul>
 
-                }
-            </div>
-        </nav>
-        </Grid>
+                        }
+                    </div>
+                </nav>
+            </Grid>
         </Grid>
     )
 }

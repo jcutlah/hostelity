@@ -225,7 +225,7 @@ const MapFunctions = {
             map: map
         })
 
-
+        console.log(map)
         var wps = [];
 
         if (!waypointsKnown) {

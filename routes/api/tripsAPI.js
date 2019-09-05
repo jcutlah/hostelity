@@ -18,6 +18,13 @@ router.route("/:id")
             res.json(trip);
         })
     })
+    .delete(function (req, res) {
+        console.log('delete request made to /api/trips/:id');
+        tripController.deleteTrip(req.params.id, function(trip){
+            console.log(trip);
+            res.json(trip);
+        })
+    })
 
 router.route("/")
     .get(function (req, res) {

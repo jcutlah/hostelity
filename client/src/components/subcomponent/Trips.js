@@ -98,22 +98,18 @@ const useStyles = makeStyles(theme => ({
 const Trips = (props) => {
     const classes = useStyles();
 
-    // const getTripData = async (id) => {
-    //     console.log(id)
-    //     await Axios.get(`/api/trips/${id}`)
-    //         .then(res => {
-    //             var data = res.data
-    //             var trip = {
-    //                 name: data.name,
-    //                 start: data.waypoints[0].name,
-    //                 end: data.waypoints[data.waypoints.length - 1].name,
-    //                 stops: []
-    //             }
-    //             console.log(trip)
-    //             return (trip)
-    //         })
-    //         .catch(err => console.log(err))
-    // }
+    const deleteTrip = (event) => {
+        event.preventDefault();
+        console.log(event.target)
+        let tripId = event.target.parentNode.getAttribute('data-id');
+
+        Axios.delete(`/api/trips/${tripId}`)
+            .then(res => {
+                console.log(res);
+                props.delTripCallback(tripId);
+            })
+            .catch(err => console.log(err))
+    }
     if (props.trips.length === 0) {
         return (
             <div style={{ textAlign: "center", fontSize: "30px" }}>
@@ -186,7 +182,9 @@ const Trips = (props) => {
                                         <Grid item xs={6} align="right">
                                             <Typography>
                                                 <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                    <a style={{ textDecoration: 'none' }} /*href={ enter useful route here }*/> <Button className={classes.removeTrip} size="small">Delete this Trip</Button></a>
+                                                    <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
+                                                    data-id={trip._id}
+                                                    onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
                                                 </Box>
                                             </Typography>
                                         </Grid>

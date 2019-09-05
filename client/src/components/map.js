@@ -63,7 +63,7 @@ function Map(props) {
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
-    
+
     // const setHostels = (hostel) => {
     //     let hostels = [...state.hostels, hostel];
     //     // console.log(hostels);
@@ -83,7 +83,7 @@ function Map(props) {
                         title: event.target.getAttribute('data-title'),
                         location: {
                             type: "Point",
-                            coordinates: [parseFloat(coords[1]),parseFloat(coords[0])]
+                            coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
                         },
                         address: event.target.getAttribute('data-address'),
                         placeId: event.target.id,
@@ -92,6 +92,9 @@ function Map(props) {
                     console.log(data)
                     setHostels([...hostels, data]);
                     event.target.setAttribute('style', 'display: none');
+                    console.log(event.target.parentNode.childNodes)
+                    var children = event.target.parentNode.childNodes
+                    children[2].setAttribute('style', 'display: block !important')
                 }
             });
         }
@@ -177,7 +180,7 @@ function Map(props) {
     })
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', {trip: state.trip, hostels: hostels}).then(function (res) {
+        Axios.post('/api/trips', { trip: state.trip, hostels: hostels }).then(function (res) {
             console.log(res)
         })
         // var waypoints = state.trip.waypoints

@@ -10,11 +10,15 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
+import "../../css/style.css";
 
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
-        fontFamily: 'Amatic SC, cursive'
+        fontFamily: 'Amatic SC, cursive',
+    },
+    fontSet: {
+        fontFamily: 'Amatic SC, cursive',
     },
     card: {
         minWidth: 275,
@@ -87,10 +91,8 @@ const Trips = (props) => {
                 return (
                     <Card className={classes.card}>
                         <div key={trip._id} className="tripSummary">
-
                             <CardContent className={classes.cardContent}>
                                 <Grid container spacing={3}>
-
                                     <Grid item xs={12}>
                                         <Typography variant="h5" component="h3" align="center">
                                             {trip.name}
@@ -100,12 +102,9 @@ const Trips = (props) => {
                                     </Grid>
 
                                     <Grid align="center" item xs={12}>
-
                                         <Typography align="center" className="stat" variant="h6" gutterBottom>
-
                                             {trip.waypoints[0].name}
                                             <br />
-
                                             <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
                                             <span className={classes.pos}></span>
                                             <br />

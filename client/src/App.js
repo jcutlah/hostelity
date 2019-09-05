@@ -12,6 +12,7 @@ import Axios from 'axios';
 import NoMatch from './components/noMatch';
 import Header from './components/subcomponent/Header';
 import LoadMap from './components/loadMap';
+import Redir from './components/subcomponent/Redir';
 function App() {
   // Define hooks (state) variables
   const [loggedIn, setLoggedIn] = useState(false);
@@ -79,6 +80,7 @@ function App() {
           <Route exact path="/map/:id" component={LoadMap} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/home" render={(props) => <Home {...props} userId={userId} />} />
+          <Route exact path="/new-search" component={Redir} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/my-trips" render={(props) => <MyTrips {...props} userId={userId} />} />
           <Route component={NoMatch} />

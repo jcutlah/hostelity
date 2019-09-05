@@ -59,13 +59,13 @@ const useStyles = makeStyles(theme => ({
         display: 'none'
     },
     loginContainer: {
-        paddingTop: 'none !important',
+        padding: '1vh !important',
         position: 'relative !important',
         top: '15vh',
         backgroundColor: 'rgba(220,220,220,0.8)',
         borderRadius: '15px',
         boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
-        border: '1px solid black'
+        border: '1px solid grey'
     }
 }));
 

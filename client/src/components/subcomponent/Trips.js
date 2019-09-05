@@ -97,13 +97,13 @@ const Trips = (props) => {
     //         .catch(err => console.log(err))
     // }
     if (props.trips.length === 0) {
-        return(
-            <div style={{textAlign: "center", fontSize: "30px"}}>
-            No trips. What the fuck do you do, anyway?
+        return (
+            <div style={{ textAlign: "center", fontSize: "30px" }}>
+                No trips. What the fuck do you do, anyway?
             </div>
         )
-    } 
-    
+    }
+
 
     return (
         <Paper className={classes.root}>

@@ -30,8 +30,8 @@ const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
             backgroundImage: 'url(/assets/images/mountain-large.jpg)',
-            backgroundSize: 'cover',
-            backgroundRepear: 'none'
+            backgroundSize: 'auto',
+            backgroundRepeat: 'no-repeat'
         },
     },
     paper: {
@@ -117,8 +117,8 @@ export default function SignIn() {
                 // console.log(res.data);
                 if (res.data.passport) {
                     res.data.passport.user ?
-                        window.location = '/home' :
-                        console.log('User not found');
+                        window.location = '/my-trips' :
+                        window.location = '/login';
                 }
                 if (res.data.flash) {
                     // console.log(res.data.flash);

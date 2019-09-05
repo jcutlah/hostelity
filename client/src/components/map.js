@@ -62,6 +62,7 @@ function Map(props) {
 
     useEffect(function () {
         return () => {
+            window.scrollTo(0,0);
             document.addEventListener('click', function (event) {
                 if (event.target.getAttribute('classname') === "hostelButton") {
                     let coords = event.target.getAttribute('data-location').split(',');
@@ -178,7 +179,7 @@ function Map(props) {
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels })
             .then(function (res) {
                 //console.log(res)
-                res.data.message === "success" ? window.location = "/home" : alert('An error occurred')
+                res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
             })
             .catch(err => {
                 //console.log(err);

@@ -60,19 +60,6 @@ const useStyles = makeStyles(theme => ({
 
 function Map(props) {
 
-    // useEffect(function () {
-    //     return <GoogleMapReact />
-    // }, [GoogleMapReact])
-
-    // const setHostels = (hostel) => {
-    //     let hostels = [...state.hostels, hostel];
-    //     // console.log(hostels);
-    //     console.log(state);
-    //     setState({
-    //         ...state, hostels
-    //     })
-    // }
-
     useEffect(function () {
         return () => {
             document.addEventListener('click', function (event) {
@@ -89,16 +76,20 @@ function Map(props) {
                         placeId: event.target.id,
                         imageUrl: event.target.getAttribute('data-imageUrl')
                     }
-                    console.log(data)
+                    //console.log(data)
                     setHostels([...hostels, data]);
                     event.target.setAttribute('style', 'display: none');
-<<<<<<< HEAD
-                    event.target.parentNode.childNodes[1].setAttribute('style','display:block');
-=======
-                    console.log(event.target.parentNode.childNodes)
+                    //console.log(event.target.parentNode.childNodes)
                     var children = event.target.parentNode.childNodes
-                    children[2].setAttribute('style', 'display: block !important')
->>>>>>> bf80243fb959bc12d789e114cc64cda720f1ab68
+                    //console.log(children);
+                    children.forEach(child => {
+                        //console.log(child.nodeName);
+                        if (child.nodeName === "BUTTON"){
+                            if (child.getAttribute('class') === "disabledButton") {
+                                child.setAttribute('style', 'display: block !important');
+                            }
+                        }
+                    })
                 }
             });
         }
@@ -123,7 +114,7 @@ function Map(props) {
     const [hostels, setHostels] = React.useState([])
 
     const handleChange = event => {
-        // console.log(state);
+        // //console.log(state);
         const { name, value } = event.target;
         var usedThisStop = false;
         var oldStops = state.stops;
@@ -155,15 +146,15 @@ function Map(props) {
         }
     }
     const addInput = () => {
-        // console.log(state);
-        // console.log("addInput running");
+        // //console.log(state);
+        // //console.log("addInput running");
         var newId = state.inputId + 1;
         setState({ ...state, inputId: newId });
 
     }
     function infoWindowOpen(event) {
         if (!event.target.closest('.hostelButton')) {
-            // console.log(state.waypoints)
+            // //console.log(state.waypoints)
             var data = {
                 title: event.target.getAttribute('data-title'),
                 location: event.target.getAttribute('data-location'),
@@ -172,9 +163,9 @@ function Map(props) {
                 imageUrl: event.target.getAttribute('data-imageUrl')
             }
 
-            // return console.log(data)
+            // return //console.log(data)
         } else {
-            return console.log("nah dude")
+            return //console.log("nah dude")
         }
 
     }
@@ -186,23 +177,23 @@ function Map(props) {
         event.preventDefault();
         Axios.post('/api/trips', {trip: state.trip, hostels: hostels})
         .then(function (res) {
-            console.log(res)
+            //console.log(res)
             res.data.message === "success" ? window.location = "/home" : alert('An error occurred')
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
         })
         // var waypoints = state.trip.waypoints
-        // console.log(waypoints)
+        // //console.log(waypoints)
         // var saveData = {
         //     waypoints: waypoints,
         //     start: state.start,
         //     end: state.end,
         //     name: 'My *Super FUCKING* Trip!'
         // }
-        // console.log(saveData)
+        // //console.log(saveData)
     }
-    // console.log(state);
+    // //console.log(state);
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
@@ -360,7 +351,7 @@ function Map(props) {
 
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
                                                 await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end) {
-                                                    console.log(routeLegs);
+                                                    //console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,
                                                         start: start,
@@ -372,7 +363,7 @@ function Map(props) {
 
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
-                                                    // console.log(state.waypoints)
+                                                    // //console.log(state.waypoints)
                                                 })
 
                                             }
@@ -399,10 +390,11 @@ function Map(props) {
                             defaultCenter={defaultview.center}
                             defaultZoom={defaultview.zoom}
                             yesIWantToUseGoogleMapApiInternals={true}
-                            onGoogleApiLoaded={({ map, maps }) => {
-
-                                MapFunctions.handleApiLoaded(map, maps)
-                                setState({ ...state, map: map })
+                            // onGoogleApiLoaded={({ map, maps }) => {
+                            onGoogleApiLoaded={(mapper) => {
+                                console.log(mapper);
+                                MapFunctions.handleApiLoaded(mapper.map, mapper.maps)
+                                setState({ ...state, map: mapper.map })
                             }}
                             id="myMap"
 

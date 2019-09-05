@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
         fontFamily: 'Amatic SC, cursive',
+        marginBottom: '30px'
     },
     fontSet: {
         fontFamily: 'Amatic SC, cursive',
@@ -106,12 +107,12 @@ const Trips = (props) => {
     
 
     return (
-        <Paper className={classes.root}>
-            {/* {console.log(typeof props.trips)} */}
+        <div>
             {props.trips.map((trip, i) => {
                 console.log(trip)
-
+                
                 return (
+                    <Paper className={classes.root}>
                     <Card key={i} className={classes.card}>
                         <div key={trip._id} className="tripSummary">
                             <CardContent className={classes.cardContent}>
@@ -155,9 +156,10 @@ const Trips = (props) => {
                     </Card>
 
 
+                    </Paper>
                 )
             })}
-        </Paper>
+        </div>
     )
 }
 

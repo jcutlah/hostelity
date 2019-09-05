@@ -13,7 +13,6 @@ import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
 import ReactDOM from 'react-dom';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 
@@ -64,7 +63,7 @@ function Map(props) {
     // useEffect(function () {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
-    
+
     // const setHostels = (hostel) => {
     //     let hostels = [...state.hostels, hostel];
     //     // console.log(hostels);
@@ -84,7 +83,7 @@ function Map(props) {
                         title: event.target.getAttribute('data-title'),
                         location: {
                             type: "Point",
-                            coordinates: [parseFloat(coords[1]),parseFloat(coords[0])]
+                            coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
                         },
                         address: event.target.getAttribute('data-address'),
                         placeId: event.target.id,
@@ -93,7 +92,13 @@ function Map(props) {
                     console.log(data)
                     setHostels([...hostels, data]);
                     event.target.setAttribute('style', 'display: none');
+<<<<<<< HEAD
                     event.target.parentNode.childNodes[1].setAttribute('style','display:block');
+=======
+                    console.log(event.target.parentNode.childNodes)
+                    var children = event.target.parentNode.childNodes
+                    children[2].setAttribute('style', 'display: block !important')
+>>>>>>> bf80243fb959bc12d789e114cc64cda720f1ab68
                 }
             });
         }
@@ -201,7 +206,6 @@ function Map(props) {
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
-            <Paper className={classes.root}>
                 <Container fixed>
                     <div className={classes.searchDiv}>
                         <div id="form-top">
@@ -414,7 +418,6 @@ function Map(props) {
 
                 </Container>
 
-            </Paper>
         </div>
     );
 

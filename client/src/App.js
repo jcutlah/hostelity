@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./css/style.css";
 import Login from './components/login';
 import Map from './components/map';
 import Signup from './components/signup';
 import Home from './components/Home';
 import Navbar from './components/subcomponent/Navbar';
-import "./css/style.css";
 import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/my-trips";
 import Axios from 'axios';

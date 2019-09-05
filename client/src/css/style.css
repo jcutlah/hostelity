@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
-body {
+
+body, html {
   font-family: 'Amatic SC', cursive;
 }
 @media (max-width: 767px) {
@@ -59,6 +60,13 @@ body {
     position: relative;
     top: calc(7vw);
     padding-bottom: 5vh;
+}
+
+.disabledButton {
+  display: none;
+}
+.showBtn {
+  display: block !important;
 }
 .header {
   height: 5.5rem;

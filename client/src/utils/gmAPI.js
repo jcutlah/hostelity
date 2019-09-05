@@ -32,7 +32,9 @@ const MapFunctions = {
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
                             data-imageUrl="${markerData.photoUrl ? markerData.photoUrl : ''}"
-                            id=${markerData.place_id}>${!saved ? 'Add to Trip' : 'Remove from Trip'}</button></div>`;
+                            id=${markerData.place_id}>${!saved ? 'Add to Trip' : 'Remove from Trip'}</button>
+                            <button disabled type="button" class="disabledButton"> ${!saved ? 'Added' : 'Removed'} </button>
+                            </div>`;
                     return contentString;
                 }
                 // Defining Calback function; what to do with data: 
@@ -49,6 +51,7 @@ const MapFunctions = {
                             return Math.sqrt(sq1 + sq2);
                         }
                         for (var i = 0; i < res.length; i++) {
+                            console.log(res[i])
                             let result = res[i];
                             let tooFar = true;
                             const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];

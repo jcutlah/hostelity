@@ -62,8 +62,7 @@ const Waypoints = (props) => {
                                     <br />
                                     <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
                                     <br />
-                                    <span className='locationData'>{newStr}, {newStr1}</span>
-                                    <br />
+
                                 </Typography>
                             </div>
                         </Grid>

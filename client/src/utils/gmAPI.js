@@ -39,7 +39,7 @@ const MapFunctions = {
                 }
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-                    console.log(results)
+                    // console.log(results)
 
                     //After results are checked on line 76:
                     var logData = (res) => {
@@ -51,7 +51,7 @@ const MapFunctions = {
                             return Math.sqrt(sq1 + sq2);
                         }
                         for (var i = 0; i < res.length; i++) {
-                            console.log(res[i])
+                            // console.log(res[i])
                             let result = res[i];
                             let tooFar = true;
                             const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];
@@ -227,7 +227,7 @@ const MapFunctions = {
             map: map
         })
 
-
+        console.log(map)
         var wps = [];
 
         if (!waypointsKnown) {

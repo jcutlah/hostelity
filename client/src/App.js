@@ -12,6 +12,7 @@ import Axios from 'axios';
 import NoMatch from './components/noMatch';
 import Header from './components/subcomponent/Header';
 import LoadMap from './components/loadMap';
+// import AmaticTff from './css/fonts/AmaticSC-Regular'
 function App() {
   // Define hooks (state) variables
   const [loggedIn, setLoggedIn] = useState(false);

@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import "../../css/style.css";
 
+
 const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
@@ -25,38 +26,52 @@ const useStyles = makeStyles(theme => ({
         boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
         paddingTop: '30px',
         marginBottom: '20px',
+        fontFamily: 'Amatic SC, cursive',
+
 
     },
     bullet: {
         display: 'inline-block',
         margin: '0 2px',
         transform: 'scale(0.8)',
+        fontFamily: 'Amatic SC, cursive',
+
 
     },
     title: {
         fontSize: 14,
+        fontFamily: 'Amatic SC, cursive',
+
 
     },
     pos: {
         marginBottom: 12,
         fontSize: 14,
+        fontFamily: 'Amatic SC, cursive',
+
 
 
     },
     editLink: {
         textDecoration: 'none',
-        border: '1px black'
+        border: '1px black',
+        fontFamily: 'Amatic SC, cursive',
+
     },
     travelArrow: {
         height: '4vh !important',
-        width: 'auto'
+        width: 'auto',
+        fontFamily: 'Amatic SC, cursive',
+
     },
     card: {
         background: 'url(/assets/images/paper-background.jpg)',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        fontFamily: 'Amatic SC, cursive'
+        fontFamily: 'Amatic SC, cursive',
+
+
 
 
     }

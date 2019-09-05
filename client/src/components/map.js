@@ -15,7 +15,7 @@ import MapFunctions from '../utils/gmAPI'
 import ReactDOM from 'react-dom';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
-
+import Paper from '@material-ui/core/Paper'
 
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -197,6 +197,7 @@ function Map(props) {
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
+            <Paper className={classes.root}>
                 <Container fixed>
                     <div className={classes.searchDiv}>
                         <div id="form-top">
@@ -386,15 +387,20 @@ function Map(props) {
                 <Container className={classes.mapContainer}>
                     <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
                         <GoogleMapReact
+
                             bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
                             defaultCenter={defaultview.center}
                             defaultZoom={defaultview.zoom}
                             yesIWantToUseGoogleMapApiInternals={true}
                             onGoogleApiLoaded={({ map, maps }) => {
-
+                                const google = window.google
+                                var resetRenderer = new google.maps.DirectionsRenderer()
+                                resetRenderer.setDirections(null)
+                                resetRenderer.setMap(null)
                                 MapFunctions.handleApiLoaded(map, maps)
                                 setState({ ...state, map: map })
                             }}
+                            onChange={console.log('change')}
                             id="myMap"
 
                         >
@@ -408,8 +414,8 @@ function Map(props) {
                     </div>
 
                 </Container>
-
-        </div>
+            </Paper>
+        </div >
     );
 
 }

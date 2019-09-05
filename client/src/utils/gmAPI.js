@@ -1,6 +1,4 @@
-import React from 'react'
-import axios from "axios";
-import Axios from 'axios';
+// import React from 'react'
 var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
@@ -11,12 +9,12 @@ const MapFunctions = {
         return (legData.length) ? legData : 'No waypoints'
     },
     handleTripSearch: (map, hostelIds, waypoints) => {
-        console.log(waypoints);
+        //console.log(waypoints);
         const google = window.google
         try {
             //USING REQUESTS DEFINED BELOW: 
             const useRequests = (requests) => {
-                console.log(requests)
+                //console.log(requests)
                 var markers = []
                 var service = new google.maps.places.PlacesService(map);
 
@@ -27,23 +25,23 @@ const MapFunctions = {
                         `<img src=${markerData.photoUrl ? markerData.photoUrl : ''}/>` +
                         `<br>` +
                         `<div>${markerData.rating} out of 5</div>` +
-                        `<div class="buttonWrapper"><button type="button" className="${!saved ? 'hostelButton' : 'removeHostel'}" 
+                        `<div class="buttonWrapper"><button type="button" className="hostelButton" ${saved ? "style='display: none;'" : "style"}
                             data-title="${markerData.title}"
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
                             data-imageUrl="${markerData.photoUrl ? markerData.photoUrl : ''}"
-                            id=${markerData.place_id}>${!saved ? 'Add to Trip' : 'Remove from Trip'}</button>
-                            <button disabled type="button" class="disabledButton"> ${!saved ? 'Added' : 'Removed'} </button>
+                            id=${markerData.place_id}>Add to Trip</button>
+                            <button disabled type="button" class="disabledButton">Added</button>
                             </div>`;
                     return contentString;
                 }
                 // Defining Calback function; what to do with data: 
                 var placesCallback = (results, status) => {
-                    // console.log(results)
+                    //console.log(results)
 
                     //After results are checked on line 76:
                     var logData = (res) => {
-                        // console.log(res)
+                        // //console.log(res)
                         // Organizing the data for hostel markers:
                         const distanceFormula = (x1, y1, x2, y2) => {
                             let sq1 = Math.pow((x1 - y1), 2);
@@ -51,26 +49,26 @@ const MapFunctions = {
                             return Math.sqrt(sq1 + sq2);
                         }
                         for (var i = 0; i < res.length; i++) {
-                            // console.log(res[i])
+                            // //console.log(res[i])
                             let result = res[i];
                             let tooFar = true;
                             const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];
                             waypoints.forEach(pnt => {
-                                // console.log(pnt.location);
-                                // console.log(resultLatLng);
+                                // //console.log(pnt.location);
+                                // //console.log(resultLatLng);
                                 let degrees = distanceFormula(pnt.location[0], resultLatLng[0], pnt.location[1], resultLatLng[1])
-                                // console.log(degrees);
+                                // //console.log(degrees);
                                 degrees > 1 && tooFar ? tooFar = true : tooFar = false
-                                // console.log("should be number of degrees, since those are the decimal units of lat/long.")
+                                // //console.log("should be number of degrees, since those are the decimal units of lat/long.")
                             })
                             if (tooFar) {
-                                // console.log(result)
+                                // //console.log(result)
                                 continue
                             }
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
-                                    // console.log(res[i].photos[0])
+                                    // //console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
@@ -88,20 +86,20 @@ const MapFunctions = {
                                 place_id: res[i].place_id,
                                 photoUrl: checkPhotos()
                             }
-                            // console.log(res[i].name)
+                            // //console.log(res[i].name)
                             //Sending marker data from response to array of marker data for further processing:
                             markers.push(data)
                         }
                         //Looping through markers[] to collect/apply Information Window Content:
                         let isSaved = false;
                         markers.forEach(function (markerData) {
-                            // console.log(markerData);
+                            // //console.log(markerData);
                             // var databaseHostel = '2'
                             isSaved = false;
                             //Checking if marker exists in database (pseudocoded rn):
                             if (hostelIds.indexOf(markerData.id) !== -1) {
-                                console.log(markerData);
-                                // console.log(hostelIds);
+                                //console.log(markerData);
+                                // //console.log(hostelIds);
                                 isSaved = true;
                             }
                             //SPECIAL MARKER
@@ -112,7 +110,7 @@ const MapFunctions = {
                                 // content: contentString
                                 content: makeMarkerHTML(markerData, isSaved)
                             });
-                            // console.log(isSaved);
+                            // //console.log(isSaved);
                             //Create marker with all data
                             var marker = new google.maps.Marker({
                                 position: markerData.position,
@@ -121,7 +119,7 @@ const MapFunctions = {
                                 icon: isSaved ? "/assets/images/hostelIconBlack.png" : "https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"
                             });
                             if (isSaved) {
-                                console.log(marker);
+                                //console.log(marker);
                             }
 
                             // Adding marker to global array of finished markers:
@@ -137,7 +135,7 @@ const MapFunctions = {
                     }
                     //Checking status of response
                     if (google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(results);
+                        //console.log(results);
                     }
 
                     return (status === google.maps.places.PlacesServiceStatus.OK) ? logData(results) : console.log(status);
@@ -152,10 +150,10 @@ const MapFunctions = {
                     var ne = (lat + 5, lng + 5)
                     var bounds = new google.maps.LatLngBounds()
                     bounds.extend(req.location)
-                    console.log(bounds)
+                    //console.log(bounds)
                     var latLng = req.location
                     let newLocation = [req.location.lat(), req.location.lng()]
-                    console.log(latLng);
+                    //console.log(latLng);
                     var rad = req.radius
                     var request = {
                         location: latLng,
@@ -165,15 +163,15 @@ const MapFunctions = {
                     }
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
-                    // console.log(globalArray)
-                    let newRequest = { ...request, location: newLocation }
-                    Axios.post(`/api/google/text-search`, newRequest)
-                        .then(response => {
-                            console.log(response);
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        })
+                    // //console.log(globalArray)
+                    // let newRequest = {...request, location: newLocation}
+                    // Axios.post(`/api/google/text-search`, newRequest)
+                    // .then(response => {
+                    //     //console.log(response);
+                    // })
+                    // .catch(err => {
+                    //     //console.log(err);
+                    // })
                     return service.textSearch(request, placesCallback);
                 })
             }
@@ -185,7 +183,7 @@ const MapFunctions = {
 
 
             const createRequest = () => {
-                console.log(legData);
+                //console.log(legData);
                 var requestsForPoints = []
                 var startLatLng = new google.maps.LatLng(legData[0].location[0], legData[0].location[1])
                 var endLatLng = new google.maps.LatLng(legData[legData.length - 1].location[0], legData[legData.length - 1].location[1])
@@ -201,21 +199,21 @@ const MapFunctions = {
                         location: thisLatLng,
                     })
                 }
-                console.log(requestsForPoints)
+                //console.log(requestsForPoints)
                 requestsForPoints.forEach(point => {
-                    console.log(point.location.lat())
-                    console.log(point.location.lng())
+                    //console.log(point.location.lat())
+                    //console.log(point.location.lng())
                 })
                 return useRequests(requestsForPoints)
             }
             createRequest()
 
         } catch (error) {
-            console.log('meep start error');
-            console.log(error)
+            //console.log('meep start error');
+            //console.log(error)
         }
-        // console.log(start, end)
-        console.log("done")
+        // //console.log(start, end)
+        //console.log("done")
     },
 
     //Make and display Routes//
@@ -244,21 +242,23 @@ const MapFunctions = {
         } else {
             wps = stops
         }
-        console.log('display route meep');
-        // console.log(wps);
+        //console.log('display route meep');
+        // //console.log(wps);
 
 
 
         // Actual Route/Directions Service Rendering: //
-
-        directionsService.route({
+        let dirOptions = {
             origin: start,
             destination: end,
             waypoints: wps,
             optimizeWaypoints: true,
             travelMode: 'DRIVING'
-        }, await function (response, status) {
+        }
+        //console.log(dirOptions);
+        directionsService.route(dirOptions, await function (response, status) {
             // Checking Status of response //
+            //console.log('directions service routing')
 
             if (status === 'OK') {
                 for (var i = 0; i < response.geocoded_waypoints.length; i++) {
@@ -286,7 +286,7 @@ const MapFunctions = {
                             time: i === 0 ? "0 hours" : time1,
                             distance: i === 0 ? 0 : distance1
                         }
-                        console.log(startPoint);
+                        //console.log(startPoint);
                         legData.push(startPoint);
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
@@ -321,7 +321,7 @@ const MapFunctions = {
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setMap(map);
 
-                console.log(legData)
+                //console.log(legData)
                 MapFunctions.handleTripSearch(map, hostelIds, legData)
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
@@ -333,7 +333,7 @@ const MapFunctions = {
         // use map and maps objects
 
 
-        return console.log("API Loaded")
+        return //console.log("API Loaded")
     },
     loadATrip: () => {
 

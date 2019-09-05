@@ -91,7 +91,7 @@ router.route("/")
                 console.log(user);
             })
         })
-        res.json({ message: "success, boyyyeeeee!!!" });
+        res.json({ message: "success" });
         // tripController.addTrip(req.body, function(trip){
         //     tripController.associateTripToUser(req.params.id, trip._id, function(user){
         //         res.json(trip);

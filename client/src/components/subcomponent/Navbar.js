@@ -32,7 +32,7 @@ const Navbar = (props) => {
                                 {/* <i className="material-icons" style={{ fontSize: 30 }}>home</i> */}
                                 <li key="home"><Link to='/home'>Home</Link></li>
                                 {/* <i className="material-icons" style={{ fontSize: 30 }}>search</i> */}
-                                <li key="newTrip"><Link to='/map'>Create a Trip</Link></li>
+                                <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'}>CREATE A TRIP</Link></li>
 
                                 {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 
@@ -42,7 +42,7 @@ const Navbar = (props) => {
                             </ul>
 
                             : <ul className="loggedOutLinks">
-                                <li key="signIn"><Link to='/login'>Log In</Link> </li>
+                                <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 ? '' : 'Log in'}</Link> </li>
                             </ul>
 
                         }

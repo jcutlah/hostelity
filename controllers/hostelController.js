@@ -8,7 +8,7 @@ const orm = {
         // console.log(waypointId);
         db.Hostel.create(hostel)
         .then(function(result) {
-            console.log(result._id);
+            console.log(result);
             console.log('hostel meep');
             // return db.Waypoint.findOneAndUpdate({
             //     _id: waypointId

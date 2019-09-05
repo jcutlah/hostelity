@@ -45,6 +45,13 @@ body, html {
   }
 }
 
+.disabledButton {
+    display: none;
+  }
+  .showBtn {
+    display: block !important;
+  }
+
 @media (min-width: 767px) {
   .header {
     background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);

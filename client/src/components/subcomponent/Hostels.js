@@ -46,7 +46,7 @@ const Hostels = (props) => {
         Axios.delete(`/api/waypoints/hostel/${hostelId}`)
             .then(response => {
                 console.log(response);
-                console.log(hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove());
+                console.log(hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove());
                 if (response.status === 200 ){
                     // hostel.parentNode
                     hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
@@ -97,16 +97,12 @@ const Hostels = (props) => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6} align='right'>
-<<<<<<< HEAD
-                                    <Button className={classes.removeHostel} align='right' size="small"><span align='right' className="hostelLink" href={'#'} data-id={hostel._id} onClick={deleteHostel}>Remove From Trip</span></Button>
-=======
                                     <Typography>
                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
 
-                                            <Button className={classes.removeHostel} align='right' size="small"><a align='right' className="hostelLink" href={'https://www.google.com/search?q=How+to+remove+this+shit+from+the+API'}>Remove From Trip</a></Button>
+                                            <Button className={classes.removeHostel} align='right' size="small"><a align='right' className="hostelLink" href={'#'} data-id={hostel._id} onClick={deleteHostel}>Remove From Trip</a></Button>
                                         </Box>
                                     </Typography>
->>>>>>> 7631a58f8344a29e007f992adba75e6ed59060bb
                                 </Grid>
                             </CardActions>
                         </Card>

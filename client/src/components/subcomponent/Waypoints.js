@@ -3,6 +3,9 @@ import Typography from '@material-ui/core/Typography';
 import Hostels from './Hostels';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
+import "../../css/style.css";
+import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
 const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
 var wptLatLng = []
 var calculateDistanceInMiles = (i) => {
@@ -33,6 +36,16 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '10px',
         border: '1px ridge grey'
 
+    },
+    removeWaypoint: {
+        backgroundColor: 'red',
+        textAlign: 'center',
+        borderRadius: '5px',
+        color: 'white',
+        border: '1px solid black',
+        fontFamily: 'Amatic SC, cursive',
+        position: 'static',
+        bottom: "0 !important"
     }
 }));
 const Waypoints = (props) => {
@@ -53,18 +66,29 @@ const Waypoints = (props) => {
                             <div key={waypoint._id} className={classes.tripSummary}>
 
                                 <Typography align="left" variant="h6" gutterBottom>
-                                    {wpIndex[i]}
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+                                        {wpIndex[i]}
+                                    </Box>
                                 </Typography>
                                 <Typography align="left" component="p" className={classes.informationBox}>
-                                    {waypoint.name}
-                                    <br />
-                                    <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
-                                    <br />
-                                    <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
-                                    <br />
-
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+                                        {waypoint.name}
+                                        <br />
+                                        <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
+                                        <br />
+                                        <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
+                                        <br />
+                                    </Box>
                                 </Typography>
+                                <Grid item xs={12} align="right">
+                                    <Typography>
+                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+                                            <a /*href={ enter useful route here }*/><Button className={classes.removeWaypoint}>Delete Waypoint</Button></a>
+                                        </Box>
+                                    </Typography>
+                                </Grid>
                             </div>
+
                         </Grid>
                         <Grid item xs={6}>
                             <span align="center"><Hostels hostels={waypoint.hostels} /></span>

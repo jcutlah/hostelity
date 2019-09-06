@@ -49,7 +49,8 @@ const useStyles = makeStyles(theme => ({
     cardContent: {
         borderBox: 'content',
         height: 'fit-content !important',
-        padding: '0 !important'
+        padding: '0 !important',
+        color: 'whitesmoke'
     },
     bullet: {
         display: 'inline-block',

@@ -160,7 +160,7 @@ const Trips = (props) => {
                                                     </Box>
                                                     <br />
                                                 </Typography>
-                                                <hr></hr>
+                                               
                                             </Grid>
 
                                             <Grid align="center" item xs={12}>
@@ -178,7 +178,7 @@ const Trips = (props) => {
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <hr></hr>
+                                               
                                                 <Waypoints
                                                     waypoints={trip.waypoints}
                                                 />

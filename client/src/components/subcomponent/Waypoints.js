@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import "../../css/style.css";
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
-const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
+// const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
 var wptLatLng = []
 var calculateDistanceInMiles = (i) => {
 
@@ -48,11 +48,20 @@ const Waypoints = (props) => {
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
                 // console.log(waypoint.distanceToWaypoint);
+                let wpIndex = "";
+                let wpLength = props.waypoints.length;
+                if (i === 0) {
+                    wpIndex = "Starting Point";
+                } else if (wpLength > 2 && i !== wpLength -1) {
+                    wpIndex = "Waypoint"
+                } else {
+                    wpIndex = "Destination"
+                }
                 var str = waypoint.location.coordinates[0]
                 var str1 = waypoint.location.coordinates[1]
                 var newStr = str.toString().substring(0, 5)
                 var newStr1 = str1.toString().substring(0, 5)
-                // console.log(waypoint)
+                console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={2}>
                         <Grid item xs={8}>
@@ -60,7 +69,7 @@ const Waypoints = (props) => {
 
                                 <Typography align="center" variant="h6" gutterBottom>
                                     <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
-                                        {wpIndex[i]}
+                                        {wpIndex}
                                     </Box>
                                 </Typography>
                                 <Typography align="center" component="p" className={classes.informationBox}>

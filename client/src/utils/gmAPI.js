@@ -30,7 +30,8 @@ const MapFunctions = {
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
                             data-imageUrl="${markerData.bigPhotoUrl ? markerData.bigPhotoUrl : ''}"
-                            id=${markerData.place_id}>Add to Trip</button>
+                            id=${markerData.place_id}>
+                            Add to Trip</button>
                             <button disabled type="button" class="disabledButton">Added</button>
                             </div>`;
                     return contentString;
@@ -91,7 +92,7 @@ const MapFunctions = {
                             }
                             // //console.log(res[i].name)
                             //Sending marker data from response to array of marker data for further processing:
-                            console.log(data)
+                            // console.log(data)
                             markers.push(data)
                         }
                         //Looping through markers[] to collect/apply Information Window Content:
@@ -271,14 +272,16 @@ const MapFunctions = {
                 var route = response.routes[0];
                 //Grab waypoint data and save to state:
 
-
+                console.log(route);
                 // Format Leg Data: 
                 for (var i = 0; i < route.legs.length; i++) {
 
                     var startPoint;
                     var endPoint;
 
-                    if (i === 0 || i !== (route.legs.length - 1) && route.legs.length > 1) {
+                    if (i === 0) {
+                        // beginning of route legs. 
+                        // add the leg's start and endpoint to leg data
                         var name1 = route.legs[i].start_address
                         var lat1 = route.legs[i].start_location.lat()
                         var lng1 = route.legs[i].start_location.lng()
@@ -304,28 +307,30 @@ const MapFunctions = {
                             distance: distance,
                         }
                         legData.push(endPoint)
-                    } else {
+                     } else {
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
                         var time = route.legs[i].duration.value;
                         var distance = parseFloat(route.legs[i].distance.value / 1609);
-
-                        legData.push({
+                        endPoint = {
                             name: name,
                             location: [lat, lng],
                             time: time,
-                            distance: distance
-                        })
+                            distance: distance,
+                        }
+                        legData.push(endPoint)
+                        // i is not at the beginning, nor middle, so must be the end of the leg data.
+                        // add only leg's endpoint to leg data
                     }
-                    // Push data to legData array:
-                    // ADD IMAGE GRAB - RC
+
+                    
                 }
 
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setMap(map);
 
-                //console.log(legData)
+                console.log(legData)
                 MapFunctions.handleTripSearch(map, hostelIds, legData)
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {

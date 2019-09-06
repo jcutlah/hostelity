@@ -64,7 +64,7 @@ const Hostels = (props) => {
         Axios.delete(`/api/waypoints/hostel/${hostelId}`)
             .then(response => {
                 console.log(response);
-                console.log(hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove());
+                console.log(hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove());
                 if (response.status === 200) {
                     // hostel.parentNode
                     hostel.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()

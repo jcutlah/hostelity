@@ -65,11 +65,33 @@ function LoadMap(props) {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
     const setHostels = (hostel) => {
-        let hostels = [...state.hostels, hostel];
-        // console.log(hostels);
-        setState({
-            ...state, hostels
+        let hostelz = state.hostels;
+        console.log(hostelz)
+        let alreadyAdded = false;
+        hostelz.forEach(hst => {
+            if (hst.placeId === hostel.placeId) {
+                alreadyAdded = true;
+            }
         })
+        if (!alreadyAdded) {
+            hostelz.push(hostel);
+        }
+        console.log(hostelz);
+        setState({
+            ...state, hostels: hostelz
+        })
+    }
+
+    const saveTrip = (event) => {
+        event.preventDefault();
+        Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
+            .then(function (res) {
+                //console.log(res)
+                res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
+            })
+            .catch(err => {
+                //console.log(err);
+            })
     }
 
     useEffect(function () {
@@ -144,7 +166,19 @@ function LoadMap(props) {
     }
     return (
         // Important! Always set the container height explicitly
-        <div className="loadmap-container">
+        <div className="load-map-wrapper">
+            <div id="save-link">
+            <Link
+                href={""} 
+                onClick={saveTrip} 
+                // className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+            >
+                <Fab
+                    variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
+                </Fab>
+            </Link>
+            </div>
+            <div className="loadmap-container">
             <Paper className={classes.root}>
                 <Container className={classes.mapContainer}>
                     <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
@@ -165,6 +199,7 @@ function LoadMap(props) {
                 </Container>
 
             </Paper>
+        </div>
         </div>
     );
 

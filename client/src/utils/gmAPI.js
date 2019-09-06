@@ -71,7 +71,7 @@ const MapFunctions = {
                                 if (res[i].photos) {
                                     // //console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
-                                    bigPic = (res[i].photos[0].getUrl({ maxWidth: 800, maxHeight: 'auto' }))
+                                    bigPic = (res[i].photos[0].getUrl({ maxWidth: 1200, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
                                     return null

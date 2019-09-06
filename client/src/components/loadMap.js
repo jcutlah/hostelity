@@ -65,10 +65,20 @@ function LoadMap(props) {
     //     return <GoogleMapReact />
     // }, [GoogleMapReact])
     const setHostels = (hostel) => {
-        let hostels = [...state.hostels, hostel];
-        // console.log(hostels);
+        let hostelz = state.hostels;
+        console.log(hostelz)
+        let alreadyAdded = false;
+        hostelz.forEach(hst => {
+            if (hst.placeId === hostel.placeId) {
+                alreadyAdded = true;
+            }
+        })
+        if (!alreadyAdded) {
+            hostelz.push(hostel);
+        }
+        console.log(hostelz);
         setState({
-            ...state, hostels
+            ...state, hostels: hostelz
         })
     }
 

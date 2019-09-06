@@ -12,12 +12,16 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import "../../css/style.css";
 import Box from '@material-ui/core/Box'
+import { callbackify } from 'util';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(3, 2),
+
+        padding: 'none',
         fontFamily: 'Amatic SC, cursive',
-        margin: '0 auto 30px auto',
+        margin: '0',
+        width: '100%',
+        borderTop: '4px ridge rgb(20,100,50)'
 
     },
     fontSet: {
@@ -25,12 +29,25 @@ const useStyles = makeStyles(theme => ({
     },
     card: {
         minWidth: 275,
-        boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
         paddingTop: '30px',
         marginBottom: '20px',
         fontFamily: 'Amatic SC, cursive',
 
 
+    },
+    card: {
+        boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
+        background: 'url(/assets/images/paper-background.jpg)',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        fontFamily: 'Amatic SC, cursive',
+        borderRadius: '0',
+    },
+    cardContent: {
+        borderBox: 'content',
+        height: 'fit-content !important',
+        padding: '0 !important'
     },
     bullet: {
         display: 'inline-block',
@@ -61,13 +78,6 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Amatic SC, cursive',
 
     },
-    card: {
-        background: 'url(/assets/images/paper-background.jpg)',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        fontFamily: 'Amatic SC, cursive',
-    },
     removeTrip: {
         borderRadius: '5px',
         textAlign: 'center',
@@ -92,6 +102,12 @@ const useStyles = makeStyles(theme => ({
     },
     buttonContainer: {
         backgroundColor: 'rgba(200,200,200,0.8)'
+    },
+    cardContainer: {
+        borderRadius: '0 !important',
+        alignItems: 'center',
+        alignSelf: 'center',
+        alignContent: 'center !important'
     }
 }));
 
@@ -127,76 +143,73 @@ const Trips = (props) => {
 
                 return (
                     <Paper className={classes.root}>
-                        <Card key={i} className={classes.card}>
-                            <div key={trip._id} className="tripSummary">
-                                <CardContent className={classes.cardContent}>
-                                    <Grid container spacing={3}>
-                                        <Grid item xs={12}>
-                                            <Typography variant="h5" component="h3" align="center">
-                                                <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
+                        <Grid className={classes.cardContainer} container spacing={3}>
+                            <Grid item xs={12} align='center'>
+                                <Card key={i} className={classes.card}>
+                                    <div key={trip._id} className='high-order-card'>
+                                        <CardContent className={classes.cardContent}>
+                                            <Grid item xs={12}>
+                                                <Typography variant="h5" component="h3" align="center">
+                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={80}>
 
-                                                    {trip.name}
-                                                </Box>
-                                                <br />
-                                            </Typography>
-                                            <hr></hr>
-                                        </Grid>
-
-                                        <Grid align="center" item xs={12}>
-                                            <Typography align="center" className="stat" variant="h6" gutterBottom>
-                                                <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h5.fontSize'}>
-
-                                                    {trip.waypoints[0].name}
+                                                        {trip.name}
+                                                    </Box>
                                                     <br />
-                                                    <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
-                                                    <span className={classes.pos}></span>
-                                                    <br />
-                                                    {trip.waypoints[trip.waypoints.length - 1].name}
-                                                </Box>
-                                            </Typography>
-                                        </Grid>
+                                                </Typography>
+                                                <hr></hr>
+                                            </Grid>
 
-                                        <Grid item xs={12}>
+                                            <Grid align="center" item xs={12}>
+                                                <Typography align="center" className="stat" variant="h6" gutterBottom>
+                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h5.fontSize'}>
+
+                                                        {trip.waypoints[0].name}
+                                                        <br />
+                                                        <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
+                                                        <span className={classes.pos}></span>
+                                                        <br />
+                                                        {trip.waypoints[trip.waypoints.length - 1].name}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+
+                                            <Grid item xs={12}>
+                                                <hr></hr>
+                                                <Waypoints
+                                                    waypoints={trip.waypoints}
+                                                />
+                                            </Grid>
+
+
+                                        </CardContent>
+                                        <CardActions className={classes.buttonContainer}>
                                             <hr></hr>
-                                            <Typography align="right" variant="h6">
-                                                <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                    Your Lodging Situation...
-                                                </Box>
-                                            </Typography>
-                                            <Waypoints
-                                                waypoints={trip.waypoints}
-                                            />
-                                        </Grid>
+                                            <Grid container>
+                                                <Grid item xs={6} align="left">
+                                                    <Typography>
+                                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
+                                                            <a className={classes.editTrip} href={`/map/${trip._id}`}> <Button className={classes.editTrip} size="small">Edit this Trip</Button></a>
+                                                        </Box>
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={6} align="right">
+                                                    <Typography>
+                                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
+                                                            <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
+                                                                data-id={trip._id}
+                                                                onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
+                                                        </Box>
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
 
-                                    </Grid>
-                                </CardContent>
-                                <CardActions className={classes.buttonContainer}>
-                                    <hr></hr>
-                                    <Grid container>
-                                        <Grid item xs={6} align="left">
-                                            <Typography>
-                                                <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                    <a className={classes.editTrip} href={`/map/${trip._id}`}> <Button className={classes.editTrip} size="small">Edit this Trip</Button></a>
-                                                </Box>
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={6} align="right">
-                                            <Typography>
-                                                <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                    <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
-                                                    data-id={trip._id}
-                                                    onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
-                                                </Box>
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
+                                        </CardActions>
 
-                                </CardActions>
+                                    </div>
+                                </Card>
 
-                            </div>
-                        </Card>
-
-
+                            </Grid>
+                        </Grid>
                     </Paper>
                 )
             })}

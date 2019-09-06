@@ -36,7 +36,7 @@ const Navbar = (props) => {
 
                                 {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 
-                                <li key="logOut"><Link to='javascript:;' onClick={logOut}><i className="material-icons" style={{ fontSize: 30 }}>exit_to_app</i></Link></li>
+                                <li key="logOut"><Link to='javascript:;' onClick={logOut}>Sign Out</Link></li>
 
 
                             </ul>

@@ -36,23 +36,23 @@ const Home = (props) => {
     };
     // console.log(user);
     return (
-            <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
-                <Grid item xs={12}>
-                    <Profile
-                        user={user ? user : {}}
-                    />
-                </Grid>
-                <Grid item xs={10}>
-                    <div className="tripz container">
-                        <div className="col s12">
-                            <Trips
-                                trips={user ? user.trips : []}
-                                delTripCallback={delTripInc}
-                            />
-                        </div>
-                    </div>
-                </Grid>
+        <Grid container direction="row" justify="center" alignItems="center" spacing={5}>
+            <Grid item xs={12} align='center'>
+                <Profile
+                    user={user ? user : {}}
+                />
             </Grid>
+            <Grid item xs={10} align="center">
+                <div className="tripz container">
+
+                    <Trips
+                        trips={user ? user.trips : []}
+                        delTripCallback={delTripInc}
+                    />
+
+                </div>
+            </Grid>
+        </Grid>
     )
 }
 

@@ -30,13 +30,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(3, 2),
     },
-    tripSummary: {
-        padding: '10px',
-        backgroundColor: 'white',
-        borderRadius: '10px',
-        border: '1px ridge grey'
-
-    },
     removeWaypoint: {
         backgroundColor: 'red',
         textAlign: 'center',
@@ -61,16 +54,16 @@ const Waypoints = (props) => {
                 var newStr1 = str1.toString().substring(0, 5)
                 // console.log(waypoint)
                 return (
-                    <Grid key={`waypoint-${i}`} container spacing={3}>
-                        <Grid item xs={6}>
-                            <div key={waypoint._id} className={classes.tripSummary}>
+                    <Grid key={`waypoint-${i}`} container spacing={2}>
+                        <Grid item xs={8}>
+                            <div key={waypoint._id} className='tripSummary'>
 
-                                <Typography align="left" variant="h6" gutterBottom>
+                                <Typography align="center" variant="h6" gutterBottom>
                                     <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
                                         {wpIndex[i]}
                                     </Box>
                                 </Typography>
-                                <Typography align="left" component="p" className={classes.informationBox}>
+                                <Typography align="center" component="p" className={classes.informationBox}>
                                     <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
                                         {waypoint.name}
                                         <br />
@@ -81,18 +74,20 @@ const Waypoints = (props) => {
                                     </Box>
                                 </Typography>
                                 <Grid item xs={12} align="right">
-                                    <Typography>
+                                    {/* <Typography>
                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
-                                            <a /*href={ enter useful route here }*/><Button className={classes.removeWaypoint}>Delete Waypoint</Button></a>
+                                            <a ><Button className={classes.removeWaypoint}>Delete Waypoint</Button></a>
                                         </Box>
-                                    </Typography>
+                                    </Typography> */}
+                                </Grid>
+                                <br />
+                                <Grid item xs={12}>
+                                    <span align="center"><Hostels hostels={waypoint.hostels} /></span>
                                 </Grid>
                             </div>
 
                         </Grid>
-                        <Grid item xs={6}>
-                            <span align="center"><Hostels hostels={waypoint.hostels} /></span>
-                        </Grid>
+
                     </Grid>
                 )
             })}

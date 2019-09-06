@@ -12,8 +12,9 @@ import Box from '@material-ui/core/Box'
 
 var useStyles = makeStyles(theme => ({
     media: {
-        height: 0,
-        paddingTop: '30%', // 16:9
+        height: '33vh',
+        width: 'stretch'
+        // 16:9
     },
     cardContainer: {
 
@@ -26,7 +27,24 @@ var useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         fontFamily: 'Amatic SC, cursive',
         fontWeight: 'bold',
-        fontSize: '15'
+        fontSize: '20',
+        border: '1px solid black'
+    },
+    getDirections: {
+        backgroundColor: 'white !important',
+        color: 'black !important',
+        textDecoration: 'none',
+        fontFamily: 'Amatic SC, cursive',
+        fontWeight: 'bold',
+        fontSize: '20',
+        border: '1px solid black'
+
+    },
+    hostelCard: {
+
+    },
+    cardContent: {
+        padding: '0 !important'
     }
 
 }));
@@ -44,17 +62,17 @@ const Hostels = (props) => {
                 // console.log(hostel)
                 return (
                     <div key={`hostel-${i}`}>
-
-
                         <Card className={classes.cardContainer}>
-                            <CardContent>
-                                <CardMedia
-                                    className={classes.media}
-                                    image={hostel.imageUrl}
-                                    title={hostel.title}
-                                />
+                            <CardMedia
+                                // className={classes.media}
+                                // image={hostel.imageUrl}
+                                title={hostel.title}
+                            >
+                                <img src={hostel.imageUrl} className={classes.media} />
+                            </CardMedia>
+                            <CardContent className={classes.cardContent}>
 
-                                <div key={hostel._id} className="tripSummary">
+                                <div key={hostel._id} className={classes.hostelCard}>
 
                                     <Typography align="center" variant="h6" gutterBottom>
                                         <Typography align="center" component="span">
@@ -62,7 +80,6 @@ const Hostels = (props) => {
                                             <br />
                                             <Typography>{hostel.address}</Typography>
                                             <br />
-
                                         </Typography>
                                     </Typography>
                                 </div>
@@ -71,15 +88,14 @@ const Hostels = (props) => {
                                 <Grid item xs={6} align='left'>
                                     <Typography>
                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
-                                            <Button><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
+                                            <Button className={classes.getDirections} align='left' size='medium'><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
                                         </Box>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={6} align='right'>
                                     <Typography>
-                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
-
-                                            <Button className={classes.removeHostel} align='right' size="small"><a align='right' className="hostelLink" href={'https://www.google.com/search?q=How+to+remove+this+shit+from+the+API'}>Remove From Trip</a></Button>
+                                        <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h3.fontSize'}>
+                                            <Button className={classes.removeHostel} align='right' size="medium"><a align='right' className="hostelLink" href={'https://www.google.com/search?q=How+to+remove+this+shit+from+the+API'}>Remove From Trip</a></Button>
                                         </Box>
                                     </Typography>
                                 </Grid>

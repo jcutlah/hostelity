@@ -29,7 +29,7 @@ const MapFunctions = {
                             data-title="${markerData.title}"
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
-                            data-imageUrl="${markerData.photoUrl ? markerData.photoUrl : ''}"
+                            data-imageUrl="${markerData.bigPhotoUrl ? markerData.bigPhotoUrl : ''}"
                             id=${markerData.place_id}>Add to Trip</button>
                             <button disabled type="button" class="disabledButton">Added</button>
                             </div>`;
@@ -65,11 +65,13 @@ const MapFunctions = {
                                 // //console.log(result)
                                 continue
                             }
+                            var bigPic;
                             //Checking if theres a photo for each res:
                             var checkPhotos = () => {
                                 if (res[i].photos) {
                                     // //console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
+                                    bigPic = (res[i].photos[0].getUrl({ maxWidth: 800, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
                                     return null
@@ -84,10 +86,12 @@ const MapFunctions = {
                                 title: (res[i].name),
                                 rating: res[i].rating,
                                 place_id: res[i].place_id,
-                                photoUrl: checkPhotos()
+                                photoUrl: checkPhotos(),
+                                bigPhotoUrl: bigPic
                             }
                             // //console.log(res[i].name)
                             //Sending marker data from response to array of marker data for further processing:
+                            console.log(data)
                             markers.push(data)
                         }
                         //Looping through markers[] to collect/apply Information Window Content:

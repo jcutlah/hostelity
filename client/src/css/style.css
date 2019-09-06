@@ -117,6 +117,12 @@ body, html {
     left: 10%;
   
   }
+  .hostel-wrapper {
+    width: 100%;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 15px;
+    margin: 0 auto !important;
+  }
 }
 
 .disabledButton {
@@ -129,6 +135,7 @@ body, html {
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
+  
   .mapView {
     height: 75vh;
      width: 100%;
@@ -238,11 +245,19 @@ body, html {
     left: 10%;
   
   }
+  .hostel-wrapper {
+    width: 60vw;
+    margin: 0 auto !important;
+  }
 }
 
 /* MEDIA QUERY LARGE SIZE */
 
-@media (min-width: 1382px) {
+@media (min-width: 1282px) {
+  .hostel-wrapper {
+    width: 40vw;
+    margin: 0 auto !important;
+  }
   .mapView {
     height: 75vh;
      width: 100%;
@@ -464,10 +479,7 @@ ul {
  
 }
 #save-link {
-    position: fixed;
-    top: 10px;
-    z-index: 999;
-    right: 9px;
+   
 }
 
 li a {

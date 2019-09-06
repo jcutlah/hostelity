@@ -245,6 +245,10 @@ body, html {
   -webkit-animation-duration:1s, 9999s;
   -webkit-animation-delay: 0s, .5s;
   -webkit-animation-iteration-count:1;
+  animation-name:glow, hold;
+  animation-duration:1s, 9999s;
+  animation-delay: 0s, .5s;
+  animation-iteration-count:1;
   
 }
 @keyframes glow {

@@ -8,7 +8,16 @@ import Grid from '@material-ui/core/Grid';
 
 const Home = (props) => {
     const [user, setUser] = useState(null);
+    const [tripUpdated, setTripUpdated] = useState(0)
     console.log(`Home component w/ user id ${props.userId}`);
+    const delTripInc = (num) => {
+        setTripUpdated(tripUpdated + 1);
+        let newTrips = user.trips.filter(trip => trip._id !== num)
+        setUser({
+            ...user,
+            trips: newTrips
+        })
+    }
     const getUserData = (userId) => {
         if (!user) {
             Axios.get(`/api/trips`)
@@ -38,6 +47,7 @@ const Home = (props) => {
 
                     <Trips
                         trips={user ? user.trips : []}
+                        delTripCallback={delTripInc}
                     />
 
                 </div>

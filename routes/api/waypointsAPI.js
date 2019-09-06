@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const waypointController = require("../../controllers/waypointController");
+const hostelController = require('../../controllers/hostelController');
 
 
 // Matches with "/api/waypoints/:tripId"
@@ -12,5 +13,14 @@ router.route("/:tripId")
         res.json(waypoints);
     });
   });
+
+router.route('/hostel/:id')
+  .delete(function(req, res){
+    console.log('delete request made to /api/waypoints/hostel/:id')
+    hostelController.removeOneHostel(req.params.id, function(response){
+        console.log(response);
+        res.json(response);
+    })
+  })
 
 module.exports = router;

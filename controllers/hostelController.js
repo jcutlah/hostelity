@@ -44,6 +44,16 @@ const orm = {
         .catch(err => {
             console.log(err);
         })
+    },
+    removeOneHostel: function(hostelId, callback) {
+        console.log(`removing hostel with id ${hostelId}`);
+        db.Hostel.deleteOne({ _id: hostelId })
+        .then(function(deletedHostel){
+            callback(deletedHostel);
+        })
+        .catch(err => {
+            callback(err);
+        });
     }
 };
 

@@ -2,6 +2,18 @@ const db = require('../models/index');
 
 
 const orm = {
+    deleteTrip: function(tripId, callback){
+        console.log(`deleting trip with id ${tripId}`);
+        db.Trip.deleteOne({_id: tripId})
+            .then(result => {
+                console.log(result);
+                callback(result);
+            })
+            .catch(err => {
+                console.log(err)
+                callback(err);
+            })
+    },
     addTrip: function(trip, callback){
         console.log('running trip()');
         console.log(trip);

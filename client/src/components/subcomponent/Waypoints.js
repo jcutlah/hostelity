@@ -52,7 +52,7 @@ const Waypoints = (props) => {
                 let wpLength = props.waypoints.length;
                 if (i === 0) {
                     wpIndex = "Starting Point";
-                } else if (wpLength > 2 && i !== wpLength -1) {
+                } else if (wpLength > 2 && i !== wpLength - 1) {
                     wpIndex = "Waypoint"
                 } else {
                     wpIndex = "Destination"
@@ -64,17 +64,17 @@ const Waypoints = (props) => {
                 console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={2}>
-                        <Grid item xs={8}>
+                        <Grid item xs={8} >
                             <div key={waypoint._id} className='tripSummary'>
 
                                 <Typography align="center" variant="h6" gutterBottom>
-                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h3.fontSize'}>
                                         {wpIndex}
                                     </Box>
                                 </Typography>
-                                <Typography align="center" component="p" className={classes.informationBox}>
-                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
-                                        {waypoint.name}
+                                <Typography align="center" component="p" >
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h5.fontSize'}>
+                                        <span className="waypointName">{waypoint.name}</span>
                                         <br />
                                         <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
                                         <br />

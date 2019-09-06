@@ -72,7 +72,7 @@ const MapFunctions = {
                                 if (res[i].photos) {
                                     // //console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))
-                                    bigPic = (res[i].photos[0].getUrl({ maxWidth: 1200, maxHeight: 'auto' }))
+                                    bigPic = (res[i].photos[0].getUrl({ maxWidth: 2000, maxHeight: 'auto' }))
                                     return thisImg
                                 } else {
                                     return null
@@ -307,7 +307,7 @@ const MapFunctions = {
                             distance: distance,
                         }
                         legData.push(endPoint)
-                     } else {
+                    } else {
                         var name = route.legs[i].end_address
                         var lat = route.legs[i].end_location.lat()
                         var lng = route.legs[i].end_location.lng()
@@ -324,7 +324,7 @@ const MapFunctions = {
                         // add only leg's endpoint to leg data
                     }
 
-                    
+
                 }
 
                 directionsDisplay.setDirections(response);

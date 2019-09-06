@@ -160,8 +160,8 @@ const Trips = (props) => {
                                             </Grid>
 
                                             <Grid align="center" item xs={12}>
-                                                <Typography align="center" className="stat" variant="h6" gutterBottom>
-                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h5.fontSize'}>
+                                                <Typography align="center" className="startEnd" variant="h6" gutterBottom>
+                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} className='startEndText' fontSize={'h5.fontSize'}>
 
                                                         {trip.waypoints[0].name}
                                                         <br />

@@ -7,6 +7,15 @@ body, html {
 
 /* MEDIA QUERY SML SIZE */
 @media (max-width: 767px) {
+  .mapView {
+    height: 75vh;
+     width: 100%;
+      margin-top: 4vh; 
+      margin-bottom: 5%; 
+      border: 1px solid orange; 
+      border-radius: 3px; 
+      position: relative 
+  }
   .BioPic {
     border-radius: 2px;
     max-width: 220px;
@@ -20,12 +29,13 @@ body, html {
     transform: translate(-4%, 0%)
   }
   .tripSummary {
+    background: url('../cork.jpg');
     transform: translate(4%, 0%);
     width: 83vw;
     padding: none;
     background-color: white;
     border-radius: 10px;
-    border: 1px ridge grey;
+    border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;
   }
   .high-order-card {
@@ -89,6 +99,24 @@ body, html {
   .Profile {
     width: 105vw !important;
   }
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 80%;
+    height: 13%;
+    padding-right: 0px;
+    padding-top: 12%;
+    transform: translate(-10%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+  }
+  .startEndText {
+    position: relative;
+    left: 10%;
+  
+  }
 }
 
 .disabledButton {
@@ -101,6 +129,15 @@ body, html {
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
+  .mapView {
+    height: 75vh;
+     width: 100%;
+      margin-top: 0vh; 
+      margin-bottom: 5%; 
+      border: 1px solid orange; 
+      border-radius: 3px; 
+      position: relative 
+  }
   .BioPic {
     border-radius: 2px;
     max-width: 220px;
@@ -115,12 +152,14 @@ body, html {
   }
  
   .tripSummary {
+    background: url('../cork.jpg');
+
     transform: translate(2%, 0%);
     width: 83vw;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
-    border: 1px ridge grey;
+    border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;
 
   
@@ -181,11 +220,38 @@ body, html {
     margin-right: 55%;
     
   }
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 29%;
+    height: 10%;
+    padding-right: 0px;
+    padding-top: 5%;
+    transform: translate(-10%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+  }
+  .startEndText {
+    position: relative;
+    left: 10%;
+  
+  }
 }
 
 /* MEDIA QUERY LARGE SIZE */
 
 @media (min-width: 1382px) {
+  .mapView {
+    height: 75vh;
+     width: 100%;
+      margin-top: -1vh; 
+      margin-bottom: 5%; 
+      border: 1px solid orange; 
+      border-radius: 3px; 
+      position: relative 
+  }
   .BioPic {
     border-radius: 2px;
     max-width: 220px;
@@ -199,15 +265,17 @@ body, html {
     transform: translate(-5%, 0%)
   }
   .tripSummary {
+    background: url('../cork.jpg');
+
     /* position: relative; */
     /* -webkit-transform: translate(50%, 50%);
     -moz-transform: translate(50%, 50%); */
-    transform: translate(12.5%, 0%);
-    width: 70vw;
+    transform: translate(22%, 0%);
+    width: 60vw;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
-    border: 1px ridge grey;
+    border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;
 
   
@@ -227,6 +295,41 @@ body, html {
   ul {
     padding-right: 25% !important;
     position: relative;
+  }
+  li a {
+    width: 200px !important;
+  }
+  .navItems {
+    
+    font-size: 1.5em;
+    text-align: center;
+    margin-right: 55%;
+    
+  }
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 27%;
+    height: 10%;
+    padding-right: 5px;
+    padding-top: 10vh;
+    transform: translate(5%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+  }
+  .startEndText {
+    position: relative;
+    left: -2vw;
+  
+  }
+}
+@media (min-width: 1700px){
+  ul {
+    padding-right: 25% !important;
+    position: relative;
+    top: -2vh !important
   }
   li a {
     width: 200px !important;
@@ -294,6 +397,14 @@ body, html {
   height: auto;
   text-align: center;  
 }
+.waypointName {
+  background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+  background-size: stretch;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  width: fit-content;
+}
+
 
 
 

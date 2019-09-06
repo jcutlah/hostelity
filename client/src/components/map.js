@@ -71,37 +71,6 @@ function Map(props) {
     useEffect(function () {
         return () => {
             window.scrollTo(0, 0);
-            
-            // document.addEventListener('click', function (event) {
-            //     if (event.target.getAttribute('class') === "hostelButton") {
-            //         let coords = event.target.getAttribute('data-location').split(',');
-
-            //         let data = {
-            //             title: event.target.getAttribute('data-title'),
-            //             location: {
-            //                 type: "Point",
-            //                 coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
-            //             },
-            //             address: event.target.getAttribute('data-address'),
-            //             placeId: event.target.id,
-            //             imageUrl: event.target.getAttribute('data-imageUrl')
-            //         }
-            //         //console.log(data)
-            //         setHostels([...hostels, data]);
-            //         event.target.setAttribute('style', 'display: none');
-            //         //console.log(event.target.parentNode.childNodes)
-            //         var children = event.target.parentNode.childNodes
-            //         //console.log(children);
-            //         children.forEach(child => {
-            //             //console.log(child.nodeName);
-            //             if (child.nodeName === "BUTTON") {
-            //                 if (child.getAttribute('class') === "disabledButton") {
-            //                     child.setAttribute('style', 'display: block !important');
-            //                 }
-            //             }
-            //         })
-            //     }
-            // });
         }
     })
     const defaultview = {
@@ -123,17 +92,6 @@ function Map(props) {
         hostels: []
     });
     const [hostels, setHostels] = React.useState([])
-
-    // const setHostels = (hostel) => {
-    //     let hostelz = state.hostels;
-    //     console.log(hostelz)
-    //     let alreadyAdded = false;
-    //     hostelz.push(hostel);
-    //     console.log(hostelz);
-    //     setState({
-    //         ...state, hostels: hostelz
-    //     })
-    // }
 
     const addHostelHandler = (event) => {
         let hostelData = event.target.dataset;
@@ -218,27 +176,6 @@ function Map(props) {
         setState({ ...state, inputId: newId });
 
     }
-    // function infoWindowOpen(event) {
-    //     if (!event.target.closest('.hostelButton')) {
-    //         // //console.log(state.waypoints)
-    //         var data = {
-    //             title: event.target.getAttribute('data-title'),
-    //             location: event.target.getAttribute('data-location'),
-    //             address: event.target.getAttribute('data-address'),
-    //             placeId: event.target.id,
-    //             imageUrl: event.target.getAttribute('data-imageUrl')
-    //         }
-
-    //         // return //console.log(data)
-    //     } else {
-    //         return //console.log("nah dude")
-    //     }
-
-    // }
-
-    // document.addEventListener('click', function (event) {
-    //     infoWindowOpen(event)
-    // })
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels })
@@ -249,15 +186,7 @@ function Map(props) {
             .catch(err => {
                 //console.log(err);
             })
-        // var waypoints = state.trip.waypoints
-        // //console.log(waypoints)
-        // var saveData = {
-        //     waypoints: waypoints,
-        //     start: state.start,
-        //     end: state.end,
-        //     name: 'My *Super FUCKING* Trip!'
-        // }
-        // //console.log(saveData)
+        
     }
     // //console.log(state);
     return (
@@ -267,31 +196,6 @@ function Map(props) {
                 <Container fixed>
                     <div className={classes.searchDiv}>
                         <div id="form-top">
-                            {/* <Grid container>
-                                <Grid item xs={6} align="left">
-                                    <Link
-                                        href={""}
-                                        className={classes.link}
-                                    >
-                                        <Fab
-                                            variant="extended" aria-label="delete" className={classes.fabAfter}>
-                                            New Search
-                                </Fab>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={6} align="right">
-
-                                    <Link
-                                        href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
-                                    >
-                                        <Fab
-                                            variant="extended" aria-label="delete" className={classes.fabAfter}>Save your Trip!
-                                </Fab>
-
-
-                                    </Link>
-                                </Grid>
-                            </Grid> */}
 
                         </div>
                         <form

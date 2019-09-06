@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     mapContainer: {
-        paddingTop: '1%'
+        paddingTop: '2%'
     },
     link: {
         margin: theme.spacing(1),

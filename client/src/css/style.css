@@ -4,7 +4,9 @@
 body, html {
   font-family: 'Amatic SC', cursive !important;
 }
-
+.map-container {
+  width: 100vw;
+}
 /* MEDIA QUERY SML SIZE */
 @media (max-width: 767px) {
   .mapView {

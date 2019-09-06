@@ -146,7 +146,6 @@ const Trips = (props) => {
 
                 return (
                     <>
-                    {/* <Paper className={classes.root}> */}
                         <Grid className={classes.cardContainer} container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <Card key={i} className={classes.card}>
@@ -216,7 +215,6 @@ const Trips = (props) => {
                         </Grid>
                         <br />
                         <br />
-                    {/* </Paper> */}
                     </>
 
                 )

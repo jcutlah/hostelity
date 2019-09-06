@@ -4,6 +4,39 @@ const waypointController = require("../../controllers/waypointController");
 const hostelController = require("../../controllers/hostelController");
 
 // Matches with "/api/trips/:id"
+router.route("/edit/:id")
+    .put(function (req, res) {
+        console.log(`put requst made to /api/trips/edit/${req.params.id}`)
+
+        let hostels = req.body;
+        let tripId = req.params.id;
+        tripController.getTripById(tripId, function(trip){
+            hostels.forEach(hostel => {
+                let coords = hostel.location.split(',');
+                let host = {
+                    title: hostel.title,
+                    location: {
+                        type: "Point",
+                        coordinates: [coords[1],coords[0]]
+                    },
+                    address: hostel.address,
+                    placeId: hostel.placeId,
+                    imageUrl: hostel.imageUrl
+                }
+                console.log(hostel.location)
+                hostelController.addHostel(host, function(newHostel){
+                    console.log(newHostel);
+                    waypointController.findClosestWaypointToHostel(tripId, host.location.coordinates, 50000, function(waypoint){
+                        hostelController.associateHostelToWaypoint(waypoint._id, newHostel._id, function(result){
+                            console.log(result)
+                            res.json({message: 'success'})
+                        })
+                    })
+                })
+            })
+            
+        })
+    })
 router.route("/:id")
     .get(function (req, res) {
         console.log(`get request made to /api/trips/:id`)

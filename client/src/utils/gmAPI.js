@@ -30,7 +30,8 @@ const MapFunctions = {
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
                             data-imageUrl="${markerData.bigPhotoUrl ? markerData.bigPhotoUrl : ''}"
-                            id=${markerData.place_id}>Add to Trip</button>
+                            id=${markerData.place_id}>
+                            Add to Trip</button>
                             <button disabled type="button" class="disabledButton">Added</button>
                             </div>`;
                     return contentString;
@@ -91,7 +92,7 @@ const MapFunctions = {
                             }
                             // //console.log(res[i].name)
                             //Sending marker data from response to array of marker data for further processing:
-                            console.log(data)
+                            // console.log(data)
                             markers.push(data)
                         }
                         //Looping through markers[] to collect/apply Information Window Content:

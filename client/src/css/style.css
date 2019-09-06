@@ -6,7 +6,6 @@ body, html {
 }
 
 /* MEDIA QUERY SML SIZE */
-
 @media (max-width: 767px) {
   .BioPic {
     border-radius: 2px;
@@ -16,10 +15,13 @@ body, html {
     border-style: solid;
     margin-top: 3%;
   }
-  
+  .tripz.container {
+    width: 90vw !important;
+    transform: translate(-4%, 0%)
+  }
   .tripSummary {
-    transform: translate(23%, 0%);
-    width: 100%;
+    transform: translate(4%, 0%);
+    width: 83vw;
     padding: none;
     background-color: white;
     border-radius: 10px;
@@ -34,7 +36,7 @@ body, html {
     height: 4%;
     width: 100%;
     padding-top: .7vh;
-    padding-bottom: .8vh;
+    padding-bottom: 1.5vh;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 
@@ -44,8 +46,24 @@ body, html {
       justify-content: center;
   }
   .navLinks {
-    padding: 1vh;
+    padding: 0;
       width: 100%;
+  }
+  ul {
+    padding-right: 25% !important;
+    position: relative;
+    top: 1vh;
+    left: 9vw;
+  }
+  li a {
+    width: 100px !important;
+  }
+  .navItems {
+    
+    font-size: 1.5em;
+    text-align: center;
+    margin-right: 50%;
+    
   }
   
   .loadmap-container .MuiPaper-root {
@@ -66,7 +84,10 @@ body, html {
   } 
   .header {
     background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 68%, rgb(41, 53, 43) 68%);
-
+    padding-left: 3%;
+  }
+  .Profile {
+    width: 105vw !important;
   }
 }
 
@@ -88,9 +109,14 @@ body, html {
     border-style: solid;
     margin-top: 25%;
   }
+  .tripz.container {
+    width: 90vw !important;
+    transform: translate(-5%, 0%)
+  }
+ 
   .tripSummary {
-    transform: translate(21%, 0%);
-    width: 100%;
+    transform: translate(2%, 0%);
+    width: 83vw;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
@@ -129,12 +155,31 @@ body, html {
     height: 5.5rem;
   }
   .navLinks {
-    padding-top: 2vh;
+    padding-top: 0vh;
+    
   }
+  
   .map-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(-12.5vw);
+  }
+  ul {
+    width: 100%;
+    position: relative;
+    top: 1.5vh;
+    right: 3vw;
+  }
+  li a {
+    width: 180px !important;
+    margin-left: 20px
+  }
+  .navItems {
+    
+    font-size: 1.5em;
+    text-align: center;
+    margin-right: 55%;
+    
   }
 }
 
@@ -149,12 +194,16 @@ body, html {
     border-style: solid;
     margin-top: 25%;
   }
+  .tripz.container {
+    width: 90vw !important;
+    transform: translate(-5%, 0%)
+  }
   .tripSummary {
     /* position: relative; */
     /* -webkit-transform: translate(50%, 50%);
     -moz-transform: translate(50%, 50%); */
-    transform: translate(23%, 0%);
-    width: 100%;
+    transform: translate(12.5%, 0%);
+    width: 70vw;
     padding: 10px;
     background-color: white;
     border-radius: 10px;
@@ -175,8 +224,39 @@ body, html {
     top: calc(7vw);
     padding-bottom: 10vh;
   }
+  ul {
+    padding-right: 25% !important;
+    position: relative;
+  }
+  li a {
+    width: 200px !important;
+  }
+  .navItems {
+    
+    font-size: 1.5em;
+    text-align: center;
+    margin-right: 55%;
+    
+  }
 }
 
+.navItems:hover {
+  -webkit-animation-name:glow, hold;
+  -webkit-animation-duration:1s, 9999s;
+  -webkit-animation-delay: 0s, .5s;
+  -webkit-animation-iteration-count:1;
+  
+}
+@keyframes glow {
+  30%  { color: orange;
+  font-size: 1.505em }
+}
+@keyframes hold {
+  0% {
+    color: orange;
+    font-size: 1.505em
+  }
+}
 /* .tripz {
   text-align: center;
 }
@@ -267,12 +347,12 @@ li a {
 }
 
 li a:hover {
-  background-color: orange;
+  animation: glow 2s ease-in;
   color: white;
 }
 
 li {
-  width: 100px;
+  width: 150px;
 }
 
 

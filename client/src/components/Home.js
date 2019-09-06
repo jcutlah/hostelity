@@ -52,6 +52,7 @@ const Home = (props) => {
 
                 </div>
             </Grid>
+
         </Grid>
     )
 }

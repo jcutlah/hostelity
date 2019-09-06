@@ -210,7 +210,10 @@ const Trips = (props) => {
 
                             </Grid>
                         </Grid>
+                        <br />
+                        <br />
                     </Paper>
+
                 )
             })}
         </div>

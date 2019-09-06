@@ -13,11 +13,11 @@ const returnDate = (date) => {
 const Profile = (props) => {
     // console.log(props.user);
     return (
-        <div className="Profile">
-            <div className="ProfileContent">
+        <div className="profile">
+            <div className="profileContainer">
                 <img src={props.user.avatar} alt="userPic" className="BioPic" />
-                <p className="userName"> {props.user.firstName} {props.user.lastName} </p>
-                <p className="memberSince white-text"> Member since: {props.user.dateAdded ? returnDate(props.user.dateAdded) : ""} </p>
+                <div className="userName"> {props.user.firstName} {props.user.lastName} </div>
+                <div className="memberSince white-text"> Member since: {props.user.dateAdded ? returnDate(props.user.dateAdded) : ""} </div>
             </div>
         </div>
     )

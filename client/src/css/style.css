@@ -31,12 +31,12 @@ body, html {
     justify-content: center;
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 3%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
     width: 90vw !important;
@@ -55,11 +55,7 @@ body, html {
   .high-order-card {
     align-content: center;
   }
- 
- 
- 
-  
-  
+
   .loadmap-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
@@ -77,9 +73,6 @@ body, html {
     width: 125px;
   } 
 
-  .Profile {
-    width: 105vw !important;
-  }
   .startEnd {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
@@ -142,6 +135,36 @@ body, html {
     display: block !important;
   }
 
+  .profileContainer {
+    margin-top: 100px;
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1%;
+  }
+
+  .profile {
+    background-image: url("/assets/images/bench.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    -moz-box-shadow: 3px 10px 30px black;
+    -webkit-box-shadow: 3px 10px 30px black;
+    box-shadow: 3px 10px 30px black;
+  }
+
+  .userName {
+    position: absolute;
+    bottom: 20%;
+    left: 45%;
+  }
+  
+  .memberSince {
+    position: absolute;
+    bottom: 10%;
+    left: 45%;
+  }
+
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
@@ -156,12 +179,12 @@ body, html {
       position: relative 
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
     width: 90vw !important;
@@ -246,14 +269,7 @@ body, html {
       border-radius: 3px; 
       position: relative 
   }
-  .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
-  }
+  
   .tripz.container {
     width: 90vw !important;
     transform: translate(-5%, 0%)
@@ -395,35 +411,6 @@ body {
     display: none;
 }
 
-
-.ProfileContent {
-  height: 99.5%;
-  width: fit-content;
-  padding: 1px 10px 1px 10px;
-  border: 1px 1px 0px 1px ridge black;
-  box-shadow: 0px 1px 4px white;
-  border-bottom: 1px solid rgba(83, 211, 204, 0.945);;
-  background-color: rgba(43, 46, 43, 0.6)
-}
-.Profile {
-  background-image: url("/assets/images/bench.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 40vh;
-  padding: none;
-  margin-top: 5.5em;
-  border-bottom: 0.1rem solid rgba(83, 211, 204, 0.945);;
-  width: 100%;
-}
-
-/* @media (min-width: 767px) {
-  .Profile {
-    margin-top:7.5em;
-  }
-} */
-
-
-
 .userName {
   font-size: 24px;
   font-weight: bold;
@@ -434,7 +421,7 @@ body {
 
 .memberSince {
   font-size: 16px;
-  color: white;
+  color: #418762;
   font-weight: bold;
   padding: 0;
   margin: 0;

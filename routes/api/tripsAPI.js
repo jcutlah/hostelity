@@ -98,6 +98,7 @@ router.route("/")
         const waypoints = req.body.trip.waypoints;
         const trip = req.body.trip;
         const hostels = req.body.hostels;
+        const tripName = req.body.tripName;
 
         waypoints.forEach(point => {
             totalDistance += point.distance;
@@ -106,7 +107,7 @@ router.route("/")
         const tripObject = {
             start: trip.start.name,
             end: trip.end.name,
-            name: "My Journey",
+            name: tripName,
             totalMileage: totalDistance
         }
         tripController.addTrip(tripObject, function (trip) {

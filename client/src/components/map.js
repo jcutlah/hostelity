@@ -65,41 +65,43 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
 function Map(props) {
 
     useEffect(function () {
         return () => {
             window.scrollTo(0, 0);
-            document.addEventListener('click', function (event) {
-                if (event.target.getAttribute('classname') === "hostelButton") {
-                    let coords = event.target.getAttribute('data-location').split(',');
+            
+            // document.addEventListener('click', function (event) {
+            //     if (event.target.getAttribute('class') === "hostelButton") {
+            //         let coords = event.target.getAttribute('data-location').split(',');
 
-                    let data = {
-                        title: event.target.getAttribute('data-title'),
-                        location: {
-                            type: "Point",
-                            coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
-                        },
-                        address: event.target.getAttribute('data-address'),
-                        placeId: event.target.id,
-                        imageUrl: event.target.getAttribute('data-imageUrl')
-                    }
-                    //console.log(data)
-                    setHostels([...hostels, data]);
-                    event.target.setAttribute('style', 'display: none');
-                    //console.log(event.target.parentNode.childNodes)
-                    var children = event.target.parentNode.childNodes
-                    //console.log(children);
-                    children.forEach(child => {
-                        //console.log(child.nodeName);
-                        if (child.nodeName === "BUTTON") {
-                            if (child.getAttribute('class') === "disabledButton") {
-                                child.setAttribute('style', 'display: block !important');
-                            }
-                        }
-                    })
-                }
-            });
+            //         let data = {
+            //             title: event.target.getAttribute('data-title'),
+            //             location: {
+            //                 type: "Point",
+            //                 coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
+            //             },
+            //             address: event.target.getAttribute('data-address'),
+            //             placeId: event.target.id,
+            //             imageUrl: event.target.getAttribute('data-imageUrl')
+            //         }
+            //         //console.log(data)
+            //         setHostels([...hostels, data]);
+            //         event.target.setAttribute('style', 'display: none');
+            //         //console.log(event.target.parentNode.childNodes)
+            //         var children = event.target.parentNode.childNodes
+            //         //console.log(children);
+            //         children.forEach(child => {
+            //             //console.log(child.nodeName);
+            //             if (child.nodeName === "BUTTON") {
+            //                 if (child.getAttribute('class') === "disabledButton") {
+            //                     child.setAttribute('style', 'display: block !important');
+            //                 }
+            //             }
+            //         })
+            //     }
+            // });
         }
     })
     const defaultview = {
@@ -117,9 +119,65 @@ function Map(props) {
         start: '',
         end: '',
         stops: [],
-        inputId: 0
+        inputId: 0,
+        hostels: []
     });
     const [hostels, setHostels] = React.useState([])
+
+    // const setHostels = (hostel) => {
+    //     let hostelz = state.hostels;
+    //     console.log(hostelz)
+    //     let alreadyAdded = false;
+    //     hostelz.push(hostel);
+    //     console.log(hostelz);
+    //     setState({
+    //         ...state, hostels: hostelz
+    //     })
+    // }
+
+    const addHostelHandler = (event) => {
+        let hostelData = event.target.dataset;
+        let coords = hostelData.location.split(',');
+        let data = {
+            title: hostelData.title,
+            location: {
+                type: "Point",
+                coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
+            },
+            address: hostelData.address,
+            placeId: event.target.id,
+            imageUrl: hostelData.imageurl
+        }
+        //console.log(data)
+        let hostelz = hostels;
+        hostelz.push(data)
+        let tripz = state.trip;
+        setHostels(hostelz)
+        event.target.setAttribute('style', 'display: none');
+        event.target.setAttribute('data-clicked','true');
+        var children = event.target.parentNode.childNodes
+        children.forEach(child => {
+            //console.log(child.nodeName);
+            if (child.nodeName === "BUTTON") {
+                if (child.getAttribute('class') === "disabledButton") {
+                    child.setAttribute('style', 'display: block !important');
+                }
+            }
+        })
+    }
+    const infoWindowListener = () => {
+        setTimeout(() => {
+            let infoWindowButtons = document.querySelectorAll('.hostelButton');
+            console.log(infoWindowButtons);
+            infoWindowButtons.forEach(butt => {
+                console.log(butt.dataset);
+                if (butt.dataset.clicked !== "true") {
+                    butt.addEventListener("click", addHostelHandler, false);
+                }
+            })
+            
+        }, 500)
+    }
 
     const handleChange = event => {
         // //console.log(state);
@@ -160,27 +218,27 @@ function Map(props) {
         setState({ ...state, inputId: newId });
 
     }
-    function infoWindowOpen(event) {
-        if (!event.target.closest('.hostelButton')) {
-            // //console.log(state.waypoints)
-            var data = {
-                title: event.target.getAttribute('data-title'),
-                location: event.target.getAttribute('data-location'),
-                address: event.target.getAttribute('data-address'),
-                placeId: event.target.id,
-                imageUrl: event.target.getAttribute('data-imageUrl')
-            }
+    // function infoWindowOpen(event) {
+    //     if (!event.target.closest('.hostelButton')) {
+    //         // //console.log(state.waypoints)
+    //         var data = {
+    //             title: event.target.getAttribute('data-title'),
+    //             location: event.target.getAttribute('data-location'),
+    //             address: event.target.getAttribute('data-address'),
+    //             placeId: event.target.id,
+    //             imageUrl: event.target.getAttribute('data-imageUrl')
+    //         }
 
-            // return //console.log(data)
-        } else {
-            return //console.log("nah dude")
-        }
+    //         // return //console.log(data)
+    //     } else {
+    //         return //console.log("nah dude")
+    //     }
 
-    }
+    // }
 
-    document.addEventListener('click', function (event) {
-        infoWindowOpen(event)
-    })
+    // document.addEventListener('click', function (event) {
+    //     infoWindowOpen(event)
+    // })
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels })
@@ -378,7 +436,7 @@ function Map(props) {
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
                                                     // //console.log(state.waypoints)
-                                                })
+                                                }, infoWindowListener)
 
                                             }
 

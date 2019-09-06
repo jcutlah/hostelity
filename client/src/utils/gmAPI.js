@@ -3,12 +3,13 @@ var globalMarkers = []
 var routeMarkers = []
 var globalArray = []
 var legData = []
+var infoWindows = []
 
 const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
-    handleTripSearch: (map, hostelIds, waypoints) => {
+    handleTripSearch: (map, hostelIds, waypoints, markerCallback) => {
         //console.log(waypoints);
         const google = window.google
         try {
@@ -25,7 +26,7 @@ const MapFunctions = {
                         `<img src=${markerData.photoUrl ? markerData.photoUrl : ''}/>` +
                         `<br>` +
                         `<div>${markerData.rating} out of 5</div>` +
-                        `<div class="buttonWrapper"><button type="button" className="hostelButton" ${saved ? "style='display: none;'" : "style"}
+                        `<div class="buttonWrapper"><button type="button" class="hostelButton" ${saved ? "style='display: none;'" : "style"}
                             data-title="${markerData.title}"
                             data-location="${[markerData.position.lat(), markerData.position.lng()]}"
                             data-address="${markerData.address}"
@@ -115,6 +116,7 @@ const MapFunctions = {
                                 // content: contentString
                                 content: makeMarkerHTML(markerData, isSaved)
                             });
+                            infoWindows.push(infowindow);
                             // //console.log(isSaved);
                             //Create marker with all data
                             var marker = new google.maps.Marker({
@@ -131,7 +133,11 @@ const MapFunctions = {
                             globalMarkers.push(marker)
 
                             return marker.addListener('click', function () {
+                                infoWindows.forEach(win => {
+                                    win.close()
+                                })
                                 infowindow.open(map, marker);
+                                markerCallback(true)
                             });
 
 
@@ -222,7 +228,7 @@ const MapFunctions = {
     },
 
     //Make and display Routes//
-    calculateAndDisplayRoute: async (map, start, end, waypointsKnown, stops, hostelIds, callback) => {
+    calculateAndDisplayRoute: async (map, start, end, waypointsKnown, stops, hostelIds, callback, markerCallback) => {
         const google = window.google
         var directionsService = new google.maps.DirectionsService()
         var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -331,7 +337,9 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, hostelIds, legData)
+                MapFunctions.handleTripSearch(map, hostelIds, legData, function(){
+                    markerCallback(true);
+                })
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
             } else {
                 window.alert('Directions request failed due to ' + status);

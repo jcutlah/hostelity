@@ -97,21 +97,21 @@ function LoadMap(props) {
     useEffect(function () {
 
         return () => {
-            document.addEventListener('click', function (event) {
-                let buttonClass = event.target.getAttribute('classname');
-                if (buttonClass === "hostelButton" || buttonClass === "removeHostel") {
-                    let data = {
-                        title: event.target.getAttribute('data-title'),
-                        location: event.target.getAttribute('data-location'),
-                        address: event.target.getAttribute('data-address'),
-                        placeId: event.target.id,
-                        imageUrl: event.target.getAttribute('data-imageUrl')
-                    }
-                    // console.log(data)
-                    setHostels(data);
-                    event.target.setAttribute('style', 'display: none');
-                }
-            });
+            // document.addEventListener('click', function (event) {
+            //     let buttonClass = event.target.getAttribute('classname');
+            //     if (buttonClass === "hostelButton" || buttonClass === "removeHostel") {
+            //         let data = {
+            //             title: event.target.getAttribute('data-title'),
+            //             location: event.target.getAttribute('data-location'),
+            //             address: event.target.getAttribute('data-address'),
+            //             placeId: event.target.id,
+            //             imageUrl: event.target.getAttribute('data-imageUrl')
+            //         }
+            //         // console.log(data)
+            //         setHostels(data);
+            //         event.target.setAttribute('style', 'display: none');
+            //     }
+            // });
         }
     })
     const defaultview = {
@@ -132,6 +132,50 @@ function LoadMap(props) {
         hostels: [],
         inputId: 0
     });
+
+    const addHostelHandler = (event) => {
+        let hostelData = event.target.dataset;
+        let coords = hostelData.location.split(',');
+        let data = {
+            title: hostelData.title,
+            location: {
+                type: "Point",
+                coordinates: [parseFloat(coords[1]), parseFloat(coords[0])]
+            },
+            address: hostelData.address,
+            placeId: event.target.id,
+            imageUrl: hostelData.imageurl
+        }
+        //console.log(data)
+        // let hostelz = hostels;
+        // hostelz.push(data)
+        // let tripz = state.trip;
+        setHostels(data)
+        event.target.setAttribute('style', 'display: none');
+        event.target.setAttribute('data-clicked','true');
+        var children = event.target.parentNode.childNodes
+        children.forEach(child => {
+            //console.log(child.nodeName);
+            if (child.nodeName === "BUTTON") {
+                if (child.getAttribute('class') === "disabledButton") {
+                    child.setAttribute('style', 'display: block !important');
+                }
+            }
+        })
+    }
+    const infoWindowListener = () => {
+        setTimeout(() => {
+            let infoWindowButtons = document.querySelectorAll('.hostelButton');
+            console.log(infoWindowButtons);
+            infoWindowButtons.forEach(butt => {
+                console.log(butt.dataset);
+                if (butt.dataset.clicked !== "true") {
+                    butt.addEventListener("click", addHostelHandler, false);
+                }
+            })
+            
+        }, 500)
+    }
 
     var trip = {}
 
@@ -160,7 +204,7 @@ function LoadMap(props) {
                 console.log(trip)
                 MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, hostelIds, function (data, startAddress, endAddress) {
                     console.log(data, startAddress, endAddress)
-                })
+                }, infoWindowListener)
             })
             .catch(err => console.log(err))
     }

@@ -30,13 +30,13 @@ const Navbar = (props) => {
                         {props.userId
                             ? <ul className="nav">
                                 {/* <i className="material-icons" style={{ fontSize: 30 }}>home</i> */}
-                                <li key="home"><Link to='/my-trips'>My Trips</Link></li>
+                                <li key="home"><Link to='/my-trips' className='navItems'>My Trips</Link></li>
                                 {/* <i className="material-icons" style={{ fontSize: 30 }}>search</i> */}
-                                <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'}>CREATE A TRIP</Link></li>
+                                <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'} className='navItems'>CREATE A TRIP</Link></li>
 
                                 {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 
-                                <li key="logOut"><Link to='javascript:;' onClick={logOut}>Sign Out</Link></li>
+                                <li key="logOut"><Link to='javascript:;' onClick={logOut} className='navItems'>Sign Out</Link></li>
 
 
                             </ul>

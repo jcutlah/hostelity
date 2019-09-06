@@ -43,11 +43,11 @@ body, html {
     transform: translate(-4%, 0%)
   }
   .tripSummary {
-    background: url('../cork.jpg');
+    /* background: url('../cork.jpg'); */
     transform: translate(4%, 0%);
     width: 83vw;
     padding: none;
-    background-color: white;
+    background-color:rgba(220,220,220,0.8);
     border-radius: 10px;
     border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;
@@ -192,12 +192,12 @@ body, html {
   }
  
   .tripSummary {
-    background: url('../cork.jpg');
+    /* background: url('../cork.jpg'); */
 
     transform: translate(2%, 0%);
     width: 83vw;
     padding: 10px;
-    background-color: white;
+    background-color: rgba(220,220,220,0.8);
     border-radius: 10px;
     border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;
@@ -275,15 +275,14 @@ body, html {
     transform: translate(-5%, 0%)
   }
   .tripSummary {
-    background: url('../cork.jpg');
-
+    /* background: url('../cork.jpg'); */
     /* position: relative; */
     /* -webkit-transform: translate(50%, 50%);
     -moz-transform: translate(50%, 50%); */
     transform: translate(22%, 0%);
     width: 60vw;
     padding: 10px;
-    background-color: white;
+    background-color:rgba(220,220,220,0.8);
     border-radius: 10px;
     border: 2px ridge rgb(82, 53, 26);
     margin: 0 auto !important;

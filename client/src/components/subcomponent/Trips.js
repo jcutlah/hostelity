@@ -36,8 +36,10 @@ const useStyles = makeStyles(theme => ({
 
     },
     card: {
-        boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
-        background: 'url(/assets/images/paper-background.jpg)',
+        boxShadow:'3px 10px 30px black',
+        // background: 'url(/assets/images/paper-background.jpg)',
+        background: 'url(/assets/images/cork.jpg)',
+        // backgroundColor: 'rgba(220,220,220,0.8)',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -142,7 +144,8 @@ const Trips = (props) => {
                 console.log(trip)
 
                 return (
-                    <Paper className={classes.root}>
+                    <>
+                    {/* <Paper className={classes.root}> */}
                         <Grid className={classes.cardContainer} container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <Card key={i} className={classes.card}>
@@ -212,7 +215,8 @@ const Trips = (props) => {
                         </Grid>
                         <br />
                         <br />
-                    </Paper>
+                    {/* </Paper> */}
+                    </>
 
                 )
             })}

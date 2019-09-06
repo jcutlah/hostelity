@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Paper from '@material-ui/core/Paper'
-
+import Grid from '@material-ui/core/Grid'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     mapContainer: {
-
+        paddingTop: '1%'
     },
     link: {
         margin: theme.spacing(1),
@@ -55,6 +55,13 @@ const useStyles = makeStyles(theme => ({
     },
     showForm: {
         display: 'block'
+    },
+    fabAfter: {
+        marginTop: '1%',
+        fontSize: '.75em',
+        paddingLeft: '1vw',
+        paddingRight: '1vw',
+        textAlign: 'center'
     }
 }));
 
@@ -62,7 +69,7 @@ function Map(props) {
 
     useEffect(function () {
         return () => {
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
             document.addEventListener('click', function (event) {
                 if (event.target.getAttribute('classname') === "hostelButton") {
                     let coords = event.target.getAttribute('data-location').split(',');
@@ -202,26 +209,31 @@ function Map(props) {
                 <Container fixed>
                     <div className={classes.searchDiv}>
                         <div id="form-top">
-                            <Link
-                                href={""}
-                                className={classes.link}
-                            >
-                                <Fab
-                                    variant="extended" aria-label="delete" className={classes.fab}>
-                                    New Search
+                            {/* <Grid container>
+                                <Grid item xs={6} align="left">
+                                    <Link
+                                        href={""}
+                                        className={classes.link}
+                                    >
+                                        <Fab
+                                            variant="extended" aria-label="delete" className={classes.fabAfter}>
+                                            New Search
                                 </Fab>
-                            </Link>
-                            <br />
+                                    </Link>
+                                </Grid>
+                                <Grid item xs={6} align="right">
 
-                            <Link
-                                href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
-                            >
-                                <Fab
-                                    variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
+                                    <Link
+                                        href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                                    >
+                                        <Fab
+                                            variant="extended" aria-label="delete" className={classes.fabAfter}>Save your Trip!
                                 </Fab>
 
 
-                            </Link>
+                                    </Link>
+                                </Grid>
+                            </Grid> */}
 
                         </div>
                         <form
@@ -386,7 +398,7 @@ function Map(props) {
                     </div>
                 </Container>
                 <Container className={classes.mapContainer}>
-                    <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
+                    <div className="mapView">
                         <GoogleMapReact
 
                             bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
@@ -410,9 +422,35 @@ function Map(props) {
                                 text="My Marker"
                             />
                         </GoogleMapReact>
-                    </div>
+                        <br />
+                        <Grid container>
+                            <Grid item xs={6} align="left">
+                                <Link
+                                    href={""}
+                                    className={classes.link}
+                                >
+                                    <Fab
+                                        variant="extended" aria-label="delete" className={classes.fabAfter}>
+                                        New Search
+                                </Fab>
+                                </Link>
+                            </Grid>
+                            <Grid item xs={6} align="right">
 
+                                <Link
+                                    href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                                >
+                                    <Fab
+                                        variant="extended" aria-label="delete" className={classes.fabAfter}>Save your Trip!
+                                </Fab>
+
+
+                                </Link>
+                            </Grid>
+                        </Grid>
+                    </div>
                 </Container>
+
             </Paper>
         </div >
     );

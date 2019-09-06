@@ -16,6 +16,20 @@ body, html {
       border-radius: 3px; 
       position: relative 
   }
+
+  .AppBar {
+    display: block;
+  }
+  .navLinks {
+    position: fixed;
+    bottom: 0;
+    background: #418762;
+  }
+  .navLinks ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .BioPic {
     border-radius: 2px;
     max-width: 220px;
@@ -41,40 +55,10 @@ body, html {
   .high-order-card {
     align-content: center;
   }
-  .navBottom {
-    bottom: 0;
-    height: 4%;
-    width: 100%;
-    padding-top: .7vh;
-    padding-bottom: 1.5vh;
-    border-top: 0.1rem solid orange;
-    display: flex;
-    background-color: rgb(41, 53, 43); 
-    justify-content: space-between;
-  }
-  ul.nav {
-      justify-content: center;
-  }
-  .navLinks {
-    padding: 0;
-      width: 100%;
-  }
-  ul {
-    padding-right: 25% !important;
-    position: relative;
-    top: 1vh;
-    left: 9vw;
-  }
-  li a {
-    width: 100px !important;
-  }
-  .navItems {
-    
-    font-size: 1.5em;
-    text-align: center;
-    margin-right: 50%;
-    
-  }
+ 
+ 
+ 
+  
   
   .loadmap-container .MuiPaper-root {
     padding-top: 5vh;
@@ -92,10 +76,7 @@ body, html {
     margin-left: -7%;
     width: 125px;
   } 
-  .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 68%, rgb(41, 53, 43) 68%);
-    padding-left: 3%;
-  }
+
   .Profile {
     width: 105vw !important;
   }
@@ -123,6 +104,34 @@ body, html {
     border-bottom-right-radius: 15px;
     margin: 0 auto !important;
   }
+}
+
+.AppBar {
+  background: #418762;
+  -moz-box-shadow: 3px 10px 30px black;
+  -webkit-box-shadow: 3px 10px 30px black;
+  box-shadow: 3px 10px 30px black;
+  display: flex;
+  align-items: center;
+}
+
+.navLinks {
+  width: 100%;
+}
+
+.navLinks ul {
+  text-align: right;
+  margin-right: 1%;
+  padding: 0;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+}
+
+.navLinks li {
+  display: inline;
 }
 
 .disabledButton {
@@ -171,20 +180,12 @@ body, html {
 
   
   }
-  .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
 
-  }
   .brand-logo img {
     margin-left: 40%;
     width: 180px;
   }
-  .navTop {
-    top: 0;
-    right: 0;
-    width: 50%;
-    margin-top: 3%;
-  }
+
   .map-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
@@ -197,36 +198,13 @@ body, html {
     padding-bottom: 5vh;
     padding-bottom: 10vh;
   }
-  .header {
-    height: 5.5rem;
-  }
-  .navLinks {
-    padding-top: 0vh;
-    
-  }
-  
+
   .map-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(-12.5vw);
   }
-  ul {
-    width: 100%;
-    position: relative;
-    top: 1.5vh;
-    right: 3vw;
-  }
-  li a {
-    width: 180px !important;
-    margin-left: 20px
-  }
-  .navItems {
-    
-    font-size: 1.5em;
-    text-align: center;
-    margin-right: 55%;
-    
-  }
+  
   .startEnd {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
@@ -307,20 +285,7 @@ body, html {
     top: calc(7vw);
     padding-bottom: 10vh;
   }
-  ul {
-    padding-right: 25% !important;
-    position: relative;
-  }
-  li a {
-    width: 200px !important;
-  }
-  .navItems {
-    
-    font-size: 1.5em;
-    text-align: center;
-    margin-right: 55%;
-    
-  }
+
   .startEnd {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
@@ -338,23 +303,6 @@ body, html {
     position: relative;
     left: -2vw;
   
-  }
-}
-@media (min-width: 1700px){
-  ul {
-    padding-right: 25% !important;
-    position: relative;
-    top: -2vh !important
-  }
-  li a {
-    width: 200px !important;
-  }
-  .navItems {
-    
-    font-size: 1.5em;
-    text-align: center;
-    margin-right: 55%;
-    
   }
 }
 
@@ -379,13 +327,7 @@ body, html {
     font-size: 1.505em
   }
 }
-/* .tripz {
-  text-align: center;
-}
 
-.makeStyles-card-106 {
-  width: 100%
-} */
 .showBtn {
    display: block !important;
 }
@@ -413,7 +355,6 @@ body, html {
   text-align: center;  
 }
 .waypointName {
-  
   background-size: stretch;
   background-position-x: center;
   background-repeat: no-repeat;
@@ -444,60 +385,6 @@ body {
   /* background: rgba(63, 63, 63, 0.295); */
  
 }
-
-.header {
-  display: flex;
-  /* background: #465964; */
-  position: fixed;
-  z-index: 1;
-  /* height: 4.5rem; */
-  border-bottom: 0.2rem solid orange;
-  align-items: center;
-  width: 100%;
-  z-index: 2
-}
-
-
-
-nav {
-  position: fixed;
-  z-index: 1;
-  padding: 0;
-  margin: 0;
-  z-index: 3 !important
-}
-
-ul {
-  
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  justify-content: flex-end;
-  background: transparent;
- 
-}
-#save-link {
-   
-}
-
-li a {
-  display: block;
-  color: rgba(255, 255, 255, 0.945);
-  text-decoration: none;
-}
-
-li a:hover {
-  animation: glow 2s ease-in;
-  color: white;
-}
-
-li {
-  width: 150px;
-}
-
-
 
 .MuiFormControl-root {
     width: 100%;

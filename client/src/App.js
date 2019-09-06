@@ -10,7 +10,6 @@ import Search from "./components/subcomponent/Search";
 import MyTrips from "./components/my-trips";
 import Axios from 'axios';
 import NoMatch from './components/noMatch';
-import Header from './components/subcomponent/Header';
 import LoadMap from './components/loadMap';
 import Redir from './components/subcomponent/Redir';
 function App() {
@@ -66,7 +65,6 @@ function App() {
   return (
     <Router>
       <>
-        <Header />
         <Navbar
           loginCallback={loginCallback}
           isLoggedIn={loggedIn}

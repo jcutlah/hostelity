@@ -16,7 +16,7 @@ import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
-
+import Grid from '@material-ui/core/Grid'
 
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
@@ -99,7 +99,7 @@ function LoadMap(props) {
         return () => {
             document.addEventListener('click', function (event) {
                 let buttonClass = event.target.getAttribute('classname');
-                if ( buttonClass === "hostelButton" || buttonClass === "removeHostel") {
+                if (buttonClass === "hostelButton" || buttonClass === "removeHostel") {
                     let data = {
                         title: event.target.getAttribute('data-title'),
                         location: event.target.getAttribute('data-location'),
@@ -147,7 +147,7 @@ function LoadMap(props) {
                     stops: []
                 }
                 res.data.waypoints.forEach((wp, i) => {
-                    if (i !== 0 && i !== res.data.waypoints.length -1){
+                    if (i !== 0 && i !== res.data.waypoints.length - 1) {
                         trip.stops.push({
                             location: wp.name,
                             stopover: true
@@ -167,39 +167,44 @@ function LoadMap(props) {
     return (
         // Important! Always set the container height explicitly
         <div className="load-map-wrapper">
-            <div id="save-link">
-            <Link
-                href={""} 
-                onClick={saveTrip} 
-                // className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
-            >
-                <Fab
-                    variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
-                </Fab>
-            </Link>
-            </div>
+
             <div className="loadmap-container">
-            <Paper className={classes.root}>
-                <Container className={classes.mapContainer}>
-                    <div style={{ height: '75vh', width: '100%', marginTop: '5vh', marginBottom: '20vh', border: '1px solid orange', borderRadius: '3px', position: 'relative' }}>
-                        <GoogleMapReact
-                            bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
-                            defaultCenter={defaultview.center}
-                            defaultZoom={defaultview.zoom}
-                            yesIWantToUseGoogleMapApiInternals={true}
-                            onGoogleApiLoaded={({ map, maps }) => {
-                                getTripData(map)
-                            }}
-                            id="myMap"
-                        >
-                        </GoogleMapReact>
+                <Paper className={classes.root}>
+                    <Container className={classes.mapContainer}>
+                        <div className='mapView'>
+                            <GoogleMapReact
+                                bootstrapURLKeys='AIzaSyCiZ-jsILS_LD8OOFCvlybQvnvyjb1jtaQ'
+                                defaultCenter={defaultview.center}
+                                defaultZoom={defaultview.zoom}
+                                yesIWantToUseGoogleMapApiInternals={true}
+                                onGoogleApiLoaded={({ map, maps }) => {
+                                    getTripData(map)
+                                }}
+                                id="myMap"
+                            >
+                            </GoogleMapReact>
 
-                    </div>
+                        </div>
+                        <Grid container>
+                            <Grid item xs={12} align='right'>
 
-                </Container>
+                                <div id="save-link">
+                                    <Link
+                                        href={""}
+                                        onClick={saveTrip}
+                                    // className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}
+                                    >
+                                        <Fab
+                                            variant="extended" aria-label="delete" className={classes.fab}>Save your Trip!
+                            </Fab>
+                                    </Link>
+                                </div>
+                            </Grid>
+                        </Grid>
 
-            </Paper>
-        </div>
+                    </Container>
+                </Paper>
+            </div>
         </div>
     );
 

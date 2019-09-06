@@ -337,10 +337,10 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, hostelIds, legData, function(){
+                MapFunctions.handleTripSearch(map, hostelIds, legData, function () {
                     markerCallback(true);
                 })
-                callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
+                callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address, map)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

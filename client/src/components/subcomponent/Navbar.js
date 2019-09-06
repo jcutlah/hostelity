@@ -2,7 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-
+import Button from '@material-ui/core/Button'
 
 const Navbar = (props) => {
     const logOut = event => {
@@ -42,6 +42,7 @@ const Navbar = (props) => {
                             </ul>
 
                             : <ul className="loggedOutLinks">
+                                <li><Button className='infoButton' style={{ backgroundColor: 'transparent' }}><i className="material-icons" style={{ fontSize: 30, color: 'white' }}>information</i></Button></li>
                                 <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 ? '' : 'Log in'}</Link> </li>
                             </ul>
 

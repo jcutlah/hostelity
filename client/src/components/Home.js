@@ -42,7 +42,7 @@ const Home = (props) => {
                     user={user ? user : {}}
                 />
             </Grid>
-            <Grid item xs={10} align="center">
+            <Grid item xs={12} align="center">
                 <div className="tripz container">
 
                     <Trips

@@ -71,7 +71,7 @@ function Map(props) {
     useEffect(function () {
         return () => {
             window.scrollTo(0, 0);
-            
+
             // document.addEventListener('click', function (event) {
             //     if (event.target.getAttribute('class') === "hostelButton") {
             //         let coords = event.target.getAttribute('data-location').split(',');
@@ -154,7 +154,7 @@ function Map(props) {
         let tripz = state.trip;
         setHostels(hostelz)
         event.target.setAttribute('style', 'display: none');
-        event.target.setAttribute('data-clicked','true');
+        event.target.setAttribute('data-clicked', 'true');
         var children = event.target.parentNode.childNodes
         children.forEach(child => {
             //console.log(child.nodeName);
@@ -175,7 +175,7 @@ function Map(props) {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
             })
-            
+
         }, 500)
     }
 
@@ -422,7 +422,7 @@ function Map(props) {
                                             onClick={async () => {
 
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end) {
+                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end, map) {
                                                     //console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,
@@ -430,12 +430,16 @@ function Map(props) {
                                                         end: end,
                                                         name: 'My Super Trip!'
                                                     }
+                                                    var center = {
+                                                        lat: routeLegs[0].location
+                                                    }
+                                                    console.log(center)
 
                                                     ///loop through leg data, use logic to add waypoints to state.waypoints, and add leg data to state.trip
-
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
                                                     // //console.log(state.waypoints)
+                                                    return map.setCenter(center)
                                                 }, infoWindowListener)
 
                                             }

@@ -13,7 +13,7 @@ import Box from '@material-ui/core/Box'
 
 var useStyles = makeStyles(theme => ({
     media: {
-        height: '33vh',
+        height: 'auto',
         width: '100%'
         // 16:9
     },

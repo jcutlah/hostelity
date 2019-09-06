@@ -1,8 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 
 const Navbar = (props) => {
     const logOut = event => {
@@ -22,34 +22,36 @@ const Navbar = (props) => {
                 console.log(err);
             })
     }
+
     return (
-        <Grid container>
-            <Grid item xs={3}>
-                <nav className="nav navTop navBottom">
+        <>
+            <AppBar position="fixed">
+                <div className="AppBar">
+                    <div className="brandLogo">
+                        <Link to='/home'>
+                            <img src='/assets/images/switchBakLogo.png' alt="logo" />
+                        </Link>
+                    </div>
+
                     <div className="navLinks">
                         {props.userId
-                            ? <ul className="nav">
-                                {/* <i className="material-icons" style={{ fontSize: 30 }}>home</i> */}
-                                <li key="home"><Link to='/my-trips' className='navItems'>My Trips</Link></li>
-                                {/* <i className="material-icons" style={{ fontSize: 30 }}>search</i> */}
-                                <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'} className='navItems'>CREATE A TRIP</Link></li>
-
-                                {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
-
-                                <li key="logOut"><Link to='javascript:;' onClick={logOut} className='navItems'>Sign Out</Link></li>
-
-
+                            ? <ul>
+                                <Button variant="outlined"><li key="home"><Link to='/home'>My Trips</Link></li></Button>
+                                <Button variant="outlined"><li key="newTrip"><Link to='/map'>Plan trip</Link></li></Button>
+                                <Button variant="outlined"><li key="logOut"><Link to='javascript:;' onClick={logOut}>Log out</Link></li></Button>
                             </ul>
 
                             : <ul className="loggedOutLinks">
-                                <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 ? '' : 'Log in'}</Link> </li>
+                                {/* <li key="signIn"><Link to='/login'>Log In</Link> </li> */}
                             </ul>
-
                         }
                     </div>
-                </nav>
-            </Grid>
-        </Grid>
+                </div>
+
+            </AppBar>
+            <div className="clearNav"></div>
+        </>
+      
     )
 }
 

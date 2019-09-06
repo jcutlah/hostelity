@@ -32,12 +32,10 @@ const useStyles = makeStyles(theme => ({
         paddingTop: '30px',
         marginBottom: '20px',
         fontFamily: 'Amatic SC, cursive',
-
-
     },
     card: {
         boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
-        background: 'url(/assets/images/paper-background.jpg)',
+        background: 'url(/assets/images/cork.jpg)',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

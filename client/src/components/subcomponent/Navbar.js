@@ -36,7 +36,7 @@ const Navbar = (props) => {
                     <div className="navLinks">
                         {props.userId
                             ? <ul>
-                                <Button variant="outlined"><li key="home"><Link to='/home'>My Trips</Link></li></Button>
+                                <Button variant="outlined"><li key="my-trips"><Link to='/my-trips'>My Trips</Link></li></Button>
                                 <Button variant="outlined"><li key="newTrip"><Link to='/map'>Plan trip</Link></li></Button>
                                 <Button variant="outlined"><li key="logOut"><Link to='javascript:;' onClick={logOut}>Log out</Link></li></Button>
                             </ul>

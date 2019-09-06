@@ -68,18 +68,18 @@ const Waypoints = (props) => {
                             <div key={waypoint._id} className='tripSummary'>
 
                                 <Typography align="center" variant="h6" gutterBottom>
-                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h3.fontSize'}>
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h3.fontSize'} className='shadowedText'>
                                         {wpIndex}
                                     </Box>
                                 </Typography>
                                 <Typography align="center" component="p" >
-                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h5.fontSize'}>
+                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h4.fontSize'} className='shadowedTextBox'>
                                         <span className="waypointName">{waypoint.name}</span>
                                         <br />
-                                        <span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} </span>
-                                        <br />
-                                        <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} </span>
-                                        <br />
+                                        {waypoint.distanceToWaypoint ? (<span className="distanceData">{waypoint.distanceToWaypoint ? waypoint.distanceToWaypoint + ' miles' : ' '} <br /></span>) : ''}
+                                        {waypoint.timeToWaypoint ? <span className='distanceData'>{waypoint.timeToWaypoint === "0 hours" ? ' ' : 'Travel Time = ' + parseInt(waypoint.timeToWaypoint / 3600) + ' hours'} <br /></span>
+                                            : ' '}
+
                                     </Box>
                                 </Typography>
                                 <Grid item xs={12} align="right">

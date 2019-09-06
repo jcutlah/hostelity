@@ -398,14 +398,24 @@ body, html {
   text-align: center;  
 }
 .waypointName {
-  background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+  
   background-size: stretch;
   background-position-x: center;
   background-repeat: no-repeat;
   width: fit-content;
 }
 
-
+.shadowedText { 
+  text-shadow: 0px 0px 5px rgb(173, 173, 173), 1px 1px white;
+}
+.shadowedTextBox { 
+  color: rgb(0, 0, 0);
+  text-shadow: 0px 0px 5px rgb(173, 173, 173), 2px 1px white;
+  height: fit-content !important;
+  background: linear-gradient(to right, transparent 0%, rgba(43, 26, 1, 0.25) 50%, transparent 80%); 
+  border-top: 1px solid rgba(43, 46, 43, 0.8);
+  border-bottom: 1px solid rgba(43, 46, 43, 0.8)
+}
 
 
 html {

@@ -128,7 +128,8 @@ const Trips = (props) => {
     if (props.trips.length === 0) {
         return (
             <div style={{ textAlign: "center", fontSize: "30px" }}>
-                No trips. What the fuck do you do, anyway?
+                Looks like someone needs a vacation??<br></br>
+                Treat yo self!!!
             </div>
         )
     }

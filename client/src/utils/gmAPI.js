@@ -4,6 +4,7 @@ var routeMarkers = []
 var globalArray = []
 var legData = []
 var infoWindows = []
+let defaultImage = '/assets/images/clicheHostel.jpg';
 
 const MapFunctions = {
     checkLegs: () => {
@@ -20,21 +21,34 @@ const MapFunctions = {
                 var service = new google.maps.places.PlacesService(map);
 
                 const makeMarkerHTML = (markerData, saved) => {
+                    // console.log(markerData)
+                    let defaultImage = 'https://q-cf.bstatic.com/images/hotel/max1024x768/103/103907246.jpg?'
                     let contentString =
-                        `<div>${markerData.title}</div>` +
+                    `<div class="infowindow-wrapper">` + 
+                        `<div class="hostel-title">` + 
+                            `<a target='_blank' className="hostelLink" href="https://www.google.com/search?q=${markerData.title}%20${markerData.address}">${markerData.title}</a>` + 
+                        `</div>` +
                         `<br>` +
-                        `<img src=${markerData.photoUrl ? markerData.photoUrl : ''}/>` +
+                        `<div class="image-wrapper">` +
+                            `<a target='_blank' className="hostelLink" href="https://www.google.com/search?q=${markerData.title}%20${markerData.address}">` + 
+                                `<img src=${markerData.photoUrl ? markerData.photoUrl : defaultImage }/>` +
+                            `</a>` +
+                            `<div class="address">${markerData.address}</div>` +
+                        `</div>` +
                         `<br>` +
-                        `<div>${markerData.rating} out of 5</div>` +
-                        `<div class="buttonWrapper"><button type="button" class="hostelButton" ${saved ? "style='display: none;'" : "style"}
-                            data-title="${markerData.title}"
-                            data-location="${[markerData.position.lat(), markerData.position.lng()]}"
-                            data-address="${markerData.address}"
-                            data-imageUrl="${markerData.bigPhotoUrl ? markerData.bigPhotoUrl : ''}"
-                            id=${markerData.place_id}>
-                            Add to Trip</button>
-                            <button disabled type="button" class="disabledButton">Added</button>
-                            </div>`;
+                        `<div class="hostel-rating">${markerData.rating} out of 5</div>` +
+                        `<div class="buttonWrapper">` + 
+                            `<button type="button" class="hostelButton" ${saved ? "style='display: none;'" : "style"}
+                                data-title="${markerData.title}"
+                                data-location="${[markerData.position.lat(), markerData.position.lng()]}"
+                                data-address="${markerData.address}"
+                                data-imageUrl="${markerData.bigPhotoUrl ? markerData.bigPhotoUrl : ''}"
+                                id=${markerData.place_id}>
+                                Add to Trip` + 
+                            `</button>
+                            <button disabled type="button" class="disabledButton">${'Added'}</button>
+                        </div>` + 
+                    `</div>`;
                     return contentString;
                 }
                 // Defining Calback function; what to do with data: 
@@ -51,23 +65,23 @@ const MapFunctions = {
                             return Math.sqrt(sq1 + sq2);
                         }
                         for (var i = 0; i < res.length; i++) {
-                            // //console.log(res[i])
+                            // console.log(res[i])
                             let result = res[i];
                             let tooFar = true;
                             const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];
-                            console.log('looping over waypoints...')
+                            // console.log('looping over waypoints...')
                             waypoints.forEach(pnt => {
                                 // //console.log(pnt.location);
                                 // //console.log(resultLatLng);
                                 if (tooFar) {
                                     let degrees = distanceFormula(pnt.location[0], resultLatLng[0], pnt.location[1], resultLatLng[1])
-                                    console.log(degrees);
+                                    // console.log(degrees);
                                     degrees > .5 && tooFar ? tooFar = true : tooFar = false
                                 }
                                 // //console.log("should be number of degrees, since those are the decimal units of lat/long.")
                             })
                             if (tooFar) {
-                                console.log(result)
+                                // console.log(result)
                                 continue
                             }
                             var bigPic;
@@ -177,7 +191,7 @@ const MapFunctions = {
                         location: latLng,
                         radius: '2000',
                         query: 'hotel hostel lodging',
-                        fields: ['geometry', 'name']
+                        fields: ['geometry', 'name', 'url', 'website', 'price_level']
                     }
                     // service.findPlaceFromQuery(request, placesCallback)
                     // globalArray.push(service.textSearch(request, placesCallback))
@@ -285,7 +299,7 @@ const MapFunctions = {
                 var route = response.routes[0];
                 //Grab waypoint data and save to state:
 
-                console.log(route);
+                // console.log(route);
                 // Format Leg Data: 
                 for (var i = 0; i < route.legs.length; i++) {
 
@@ -343,7 +357,7 @@ const MapFunctions = {
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setMap(map);
 
-                console.log(legData)
+                // console.log(legData)
                 MapFunctions.handleTripSearch(map, hostelIds, legData, function () {
                     markerCallback(true);
                 })

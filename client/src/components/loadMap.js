@@ -17,7 +17,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid'
-
+import HostelModal from './subcomponent/infoModals/HostelModal'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -132,7 +132,7 @@ function LoadMap(props) {
         // let tripz = state.trip;
         setHostels(data)
         event.target.setAttribute('style', 'display: none');
-        event.target.setAttribute('data-clicked','true');
+        event.target.setAttribute('data-clicked', 'true');
         var children = event.target.parentNode.childNodes
         children.forEach(child => {
             //console.log(child.nodeName);
@@ -153,7 +153,7 @@ function LoadMap(props) {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
             })
-            
+
         }, 500)
     }
 
@@ -210,7 +210,10 @@ function LoadMap(props) {
 
                         </div>
                         <Grid container>
-                            <Grid item xs={12} align='right'>
+                            <Grid item xs={6} align="left">
+                                <HostelModal style={{ height: 'fit-content !important' }}></HostelModal>
+                            </Grid>
+                            <Grid item xs={6} align='right'>
 
                                 <div id="save-link">
                                     <Link

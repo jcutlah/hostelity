@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import { Modal, Backdrop, Fade, Fab, Grid, Paper } from '@material-ui/core'
+import Info from '@material-ui/icons/Info'
 
+// import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles(theme => ({
     modal: {
         display: 'flex',
@@ -32,9 +32,10 @@ export default function TransitionsModal() {
 
     return (
         <div>
-            <button type="button" onClick={handleOpen}>
-                react-transition-group
-      </button>
+            <br></br>
+            <Fab size='small' type="button" onClick={handleOpen}>
+                <Info />
+            </Fab>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -48,10 +49,18 @@ export default function TransitionsModal() {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">react-transiton-group animates me.</p>
-                    </div>
+                    <Paper>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} align='center'>
+                                <h2 id="transition-modal-title">SwitchBak: Map Search</h2>
+                            </Grid>
+                            <Grid item xs={12} align="center">
+                                <p id="transition-modal-description">react-transiton-group animates me.</p>
+
+                            </Grid>
+
+                        </Grid>
+                    </Paper>
                 </Fade>
             </Modal>
         </div>

@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
 import Info from '@material-ui/icons/Info'
 import Fab from '@material-ui/core/Fab'
+
 const Navbar = (props) => {
     const logOut = event => {
         event.preventDefault();
@@ -53,11 +54,11 @@ const Navbar = (props) => {
                 </Grid>
                 :
 
-
-                <Fab className='infoButton' align="center" size="small">
-                    <Info fontSize={'large'} className='infoIcon'></Info>
-                    {/* <i className="material-icons" style={{ fontSize: 30 }}>information</i> */}
-                </Fab>
+                <></>
+                // <Fab className='infoButton' align="center" size="small">
+                //     <Info fontSize={'large'} className='infoIcon'></Info>
+                //     {/* <i className="material-icons" style={{ fontSize: 30 }}>information</i> */}
+                // </Fab>
 
 
             }

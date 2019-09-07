@@ -19,6 +19,9 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import CityList from './subcomponent/CityList'
 import '../css/style.css'
+import MapModal from './subcomponent/infoModals/MapModal'
+import HostelModal from './subcomponent/infoModals/HostelModal'
+import SummaryModal from './subcomponent/infoModals/SummaryModal'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -64,6 +67,12 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '1vw',
         paddingRight: '1vw',
         textAlign: 'center'
+    },
+    infoFab: {
+        height: '3vh !important',
+        position: 'relative !important',
+        marginTop: '1vh',
+        right: '10px',
     }
 }));
 
@@ -204,7 +213,13 @@ function Map(props) {
                             className={state.trip.waypoints ? classes.hiddenForm : classes.showForm}
                             onSubmit={(e) => { e.preventDefault() }} >
                             <FormControl fullWidth={true} component="fieldset">
-                                <FormLabel component="legend" align='center'>Plan Your Trip</FormLabel>
+                                <FormLabel component="legend" align='center'>Plan Your Trip
+                                <br />
+                                    <MapModal align='center' className={classes.infoFab}></MapModal>
+                                    <br />
+                                </FormLabel>
+
+
                                 <Divider variant="middle" className={classes.darkDivider} />
 
                                 <FormGroup>
@@ -402,7 +417,7 @@ function Map(props) {
                         </GoogleMapReact>
                         <br />
                         <Grid container>
-                            <Grid item xs={6} align="left">
+                            <Grid item xs={4} align="left">
                                 <Link
                                     href={""}
                                     className={classes.link}
@@ -413,7 +428,12 @@ function Map(props) {
                                 </Fab>
                                 </Link>
                             </Grid>
-                            <Grid item xs={6} align="right">
+
+                            <Grid item xs={4} align="center">
+                                <HostelModal></HostelModal>
+                            </Grid>
+
+                            <Grid item xs={4} align="right">
 
                                 <Link
                                     href={""} onClick={saveTrip} className={state.trip.waypoints ? classes.showForm : classes.hiddenForm}

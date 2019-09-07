@@ -27,7 +27,7 @@ router.route("/edit/:id")
                 console.log(hostel.location)
                 hostelController.addHostel(hostel, function(newHostel){
                     console.log(newHostel);
-                    waypointController.findClosestWaypointToHostel(tripId, hostel.location.coordinates, 20000, function(waypoint){
+                    waypointController.findClosestWaypointToHostel(tripId, hostel.location.coordinates, 500000, function(waypoint){
                         hostelController.associateHostelToWaypoint(waypoint._id, newHostel._id, function(result){
                             console.log(result)
                             res.json({message: 'success'})

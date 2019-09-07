@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
             backgroundImage: 'url(/assets/images/mountain-large.jpg)',
             backgroundSize: 'auto',
             backgroundRepeat: 'no-repeat',
-            margin: '0 auto'
+            margin: '0 auto',
+            height: 'fit-content'
         },
     },
     paper: {

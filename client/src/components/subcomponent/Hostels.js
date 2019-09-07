@@ -99,7 +99,7 @@ const Hostels = (props) => {
 
                                     <Typography align="center" variant="h6" gutterBottom>
                                         <Typography align="center" component="span">
-                                            <Button><a target='_blank' className="hostelLink" href={thisHostelSearch}>{hostel.title}</a></Button>
+                                            <Button><a target='_blank' id="hostelName" className="hostelLink" label={hostel.title} href={thisHostelSearch}>{hostel.title}</a></Button>
                                             <br />
                                             <Typography>{hostel.address}</Typography>
                                             <br />

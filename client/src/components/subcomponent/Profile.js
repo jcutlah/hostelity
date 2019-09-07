@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Grid from '@material-ui/core/Grid'
 const returnDate = (date) => {
     console.log(typeof date);
     const dateAdded = new Date(parseInt(date));
@@ -13,13 +13,15 @@ const returnDate = (date) => {
 const Profile = (props) => {
     // console.log(props.user);
     return (
-        <div className="Profile">
-            <div className="ProfileContent">
-                <img src={props.user.avatar} alt="userPic" className="BioPic" />
-                <p className="userName"> {props.user.firstName} {props.user.lastName} </p>
-                <p className="memberSince white-text"> Member since: {props.user.dateAdded ? returnDate(props.user.dateAdded) : ""} </p>
+        <Grid container>
+            <div className="Profile">
+                <div className="ProfileContent">
+                    <img src={props.user.avatar} alt="userPic" className="BioPic" />
+                    <p className="userName"> {props.user.firstName} {props.user.lastName} </p>
+                    <p className="memberSince white-text"> Member since: {props.user.dateAdded ? returnDate(props.user.dateAdded) : ""} </p>
+                </div>
             </div>
-        </div>
+        </Grid>
     )
 }
 

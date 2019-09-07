@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         fontFamily: 'Amatic SC, cursive',
     },
     card: {
-        boxShadow: '0px 1px 3px rgb(20,20,20), inset 0px 0px 2px black',
+        boxShadow: '3px 10px 30px black',
         background: 'url(/assets/images/cork.jpg)',
         backgroundPosition: 'center',
         backgroundSize: 'stretch',

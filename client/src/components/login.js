@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
         body: {
             backgroundImage: 'url(/assets/images/mountain-large.jpg)',
             backgroundSize: 'auto',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            margin: '0 auto'
         },
     },
     paper: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(2, 0, 2),
     },
     formErrorMessage: {
         display: 'block',
@@ -63,6 +64,7 @@ const useStyles = makeStyles(theme => ({
     loginContainer: {
         padding: '1vh !important',
         position: 'relative !important',
+        margin: '0 auto !important',
         top: '15vh',
         backgroundColor: 'rgba(220,220,220,0.8)',
         borderRadius: '15px',

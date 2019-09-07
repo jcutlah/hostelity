@@ -29,11 +29,14 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
-            backgroundColor: theme.palette.common.white,
+            backgroundImage: 'url(/assets/images/mountain-large.jpg)',
+            backgroundSize: 'auto',
+            backgroundRepeat: 'no-repeat',
+            margin: '0 auto'
         },
     },
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(0),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -47,8 +50,27 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(2, 0, 2),
     },
+    formErrorMessage: {
+        display: 'block',
+        color: 'red',
+        fontWeight: 'bold',
+        fontSize: '12'
+    },
+    formNonErrorMessage: {
+        display: 'none'
+    },
+    signupContainer: {
+        padding: '1vh !important',
+        position: 'relative !important',
+        margin: '0 auto !important',
+        top: '15vh',
+        backgroundColor: 'rgba(220,220,220,0.8)',
+        borderRadius: '15px',
+        boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
+        border: '1px solid grey'
+    }
 }));
 
 
@@ -94,7 +116,7 @@ export default function Signup(props) {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" className={classes.signupContainer}>
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

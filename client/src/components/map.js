@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1
     },
     mapContainer: {
-        paddingTop: '1%'
+        paddingTop: '2%'
     },
     link: {
         margin: theme.spacing(1),
@@ -112,7 +112,7 @@ function Map(props) {
         let tripz = state.trip;
         setHostels(hostelz)
         event.target.setAttribute('style', 'display: none');
-        event.target.setAttribute('data-clicked','true');
+        event.target.setAttribute('data-clicked', 'true');
         var children = event.target.parentNode.childNodes
         children.forEach(child => {
             //console.log(child.nodeName);
@@ -133,7 +133,7 @@ function Map(props) {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
             })
-            
+
         }, 500)
     }
 
@@ -147,10 +147,10 @@ function Map(props) {
             [name]: value,
 
         }
-        if (name === "start" || name === "end") {
+        if (name === "start" || name === "end" || name === "name") {
             setState({ ...state, [name]: value });
             return;
-        }
+        } 
         if (state.stops.length) {
             oldStops.forEach((stop, i) => {
                 if (stop[name]) {
@@ -178,7 +178,7 @@ function Map(props) {
     }
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', { trip: state.trip, hostels: hostels })
+        Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
                 //console.log(res)
                 res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
@@ -207,6 +207,15 @@ function Map(props) {
 
                                 <FormGroup>
                                     <div className="form-inputs">
+                                        <TextField
+                                            id="outlined-start"
+                                            label="Trip Name"
+                                            className={classes.textField}
+                                            name='name'
+                                            onChange={handleChange}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
                                         <TextField
                                             id="outlined-start"
                                             label="Starting Point"
@@ -326,7 +335,7 @@ function Map(props) {
                                             onClick={async () => {
 
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
-                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end) {
+                                                await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end, map) {
                                                     //console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,
@@ -334,12 +343,16 @@ function Map(props) {
                                                         end: end,
                                                         name: 'My Super Trip!'
                                                     }
+                                                    var center = {
+                                                        lat: routeLegs[0].location
+                                                    }
+                                                    console.log(center)
 
                                                     ///loop through leg data, use logic to add waypoints to state.waypoints, and add leg data to state.trip
-
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
                                                     // //console.log(state.waypoints)
+                                                    return map.setCenter(center)
                                                 }, infoWindowListener)
 
                                             }

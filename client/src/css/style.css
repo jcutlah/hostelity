@@ -4,32 +4,41 @@
 body, html {
   font-family: 'Amatic SC', cursive !important;
 }
-
+.map-container {
+  width: 100vw;
+}
 /* MEDIA QUERY SML SIZE */
 @media (max-width: 767px) {
+  .infoButton {
+    top: 1vh !important;
+    right: 1.5vw !important;
+  }
   .mapView {
     height: 75vh;
      width: 100%;
-      margin-top: 4vh; 
-      margin-bottom: 5%; 
+      margin: 0 auto !important;
       border: 1px solid orange; 
       border-radius: 3px; 
       position: relative 
   }
-  .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 3%;
-  }
+.MuiPaper-root.MuiPaper-elevation1.makeStyles-root-259.MuiPaper-rounded {
+  width: 100vw;
+}
+.BioPic {
+  -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+  -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+  box-shadow: 3px 11px 40px rgb(43, 42, 42);
+  border: 5px solid white;
+  border-bottom: 60px solid white;
+  max-width: 250px;
+}
   .tripz.container {
+    transform: translate(5.5%, 0%);
     width: 90vw !important;
-    transform: translate(-4%, 0%)
+    /* transform: translate(-4%, 0%) */
   }
   .tripSummary {
-    background: url('../cork.jpg');
+    background: url('../paper-background.jpg');
     transform: translate(4%, 0%);
     width: 83vw;
     padding: none;
@@ -45,6 +54,7 @@ body, html {
     bottom: 0;
     height: 4%;
     width: 100%;
+    left: 0;
     padding-top: .7vh;
     padding-bottom: 1.5vh;
     border-top: 0.1rem solid orange;
@@ -93,8 +103,8 @@ body, html {
     width: 125px;
   } 
   .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 68%, rgb(41, 53, 43) 68%);
-    padding-left: 3%;
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 72.5%, rgb(41, 53, 43) 72.5%);
+    padding-left: 4%
   }
   .Profile {
     width: 105vw !important;
@@ -103,7 +113,7 @@ body, html {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
     background-repeat: no-repeat;
-    width: 80%;
+    width: 60%;
     height: 13%;
     padding-right: 0px;
     padding-top: 12%;
@@ -111,6 +121,7 @@ body, html {
     margin-top: -1% !important;
     margin-bottom: 0px !important;
     text-align: center;  
+    position: relative;
   }
   .startEndText {
     position: relative;
@@ -124,7 +135,74 @@ body, html {
     margin: 0 auto !important;
   }
 }
+@media (max-width: 460px){
+  .header {
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 55%, rgb(41, 53, 43) 55%);
 
+  }
+  .infoButton {
+    top: 1vh !important;
+    right: 1.5vw !important;
+  }
+  .navBottom {
+    bottom: 0;
+    height: 4%;
+    width: 100%;
+    left: 0;
+    padding-top: .7vh;
+    padding-bottom: 1.5vh;
+    border-top: 0.1rem solid orange;
+    display: flex;
+    background-color: rgb(41, 53, 43); 
+    justify-content: space-between;
+  }
+  ul.nav {
+      justify-content: center;
+  }
+  .navItems {
+    position: relative;
+    font-size: 1.4em;
+    text-align: center;
+    margin-right: 45%;
+    padding-bottom: 10% !important;
+    
+  }
+  .navLinks {
+    width: 110vw;
+    
+    
+  }
+  .navBottom {
+    bottom: 0;
+    height: 4%;
+    width: 100%;
+    padding-top: .3vh;
+    padding-bottom: 1.8vh;
+    border-top: 0.1rem solid orange;
+    display: flex;
+    background-color: rgb(41, 53, 43); 
+    justify-content: space-between;
+  }
+  .startEnd {
+   background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+   background-size: stretch;
+   background-repeat: no-repeat;
+   width: 75%;
+   height: 13%;
+   padding-right: 0px;
+   padding-top: 12%;
+   transform: translate(-10%, 0%);
+   margin-top: -1% !important;
+   margin-bottom: 0px !important;
+   text-align: center;  
+   position: relative;
+ }
+ .startEndText {
+   position: relative;
+   left: 10%;
+ 
+ }
+}
 .disabledButton {
     display: none;
   }
@@ -135,7 +213,12 @@ body, html {
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
-  
+  .infoButton {
+    right: 47vw !important;
+  }
+  .MuiPaper-root.MuiPaper-elevation1.makeStyles-root-259.MuiPaper-rounded {
+    width: 100vw;
+  }
   .mapView {
     height: 75vh;
      width: 100%;
@@ -146,20 +229,22 @@ body, html {
       position: relative 
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
+    transform: translate(5.5%, 0%);
     width: 90vw !important;
-    transform: translate(-5%, 0%)
+    /* transform: translate(-5%, 0%) */
   }
  
   .tripSummary {
-    background: url('../cork.jpg');
+    background: url('../paper-background.jpg');
+
 
     transform: translate(2%, 0%);
     width: 83vw;
@@ -172,7 +257,7 @@ body, html {
   
   }
   .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 65%, rgb(41, 53, 43) 65%);
 
   }
   .brand-logo img {
@@ -231,7 +316,7 @@ body, html {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
     background-repeat: no-repeat;
-    width: 29%;
+    width: 30%;
     height: 10%;
     padding-right: 0px;
     padding-top: 5%;
@@ -239,6 +324,7 @@ body, html {
     margin-top: -1% !important;
     margin-bottom: 0px !important;
     text-align: center;  
+    position: relative;
   }
   .startEndText {
     position: relative;
@@ -254,6 +340,16 @@ body, html {
 /* MEDIA QUERY LARGE SIZE */
 
 @media (min-width: 1282px) {
+  .header {
+    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
+
+  }
+  .infoButton {
+    right: 47.5vw !important;
+  }
+  .MuiPaper-root.MuiPaper-elevation1.makeStyles-root-259.MuiPaper-rounded {
+    width: 100vw;
+  }
   .hostel-wrapper {
     width: 40vw;
     margin: 0 auto !important;
@@ -268,20 +364,23 @@ body, html {
       position: relative 
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
     width: 90vw !important;
-    transform: translate(-5%, 0%)
+    margin: 0 auto !important;
+    transform: translate(5.5%, 0%);
+
+    /* transform: translate(-5%, 0%) */
   }
   .tripSummary {
-    background: url('../cork.jpg');
-
+    background: url('../paper-background.jpg');
+    background-size: cover;
     /* position: relative; */
     /* -webkit-transform: translate(50%, 50%);
     -moz-transform: translate(50%, 50%); */
@@ -340,7 +439,11 @@ body, html {
   
   }
 }
-@media (min-width: 1700px){
+/* MEDIA QUERY XL */
+@media (min-width: 1270px){
+  .infoButton {
+    right: 47.5vw !important;
+  }
   ul {
     padding-right: 25% !important;
     position: relative;
@@ -355,6 +458,51 @@ body, html {
     text-align: center;
     margin-right: 55%;
     
+  }
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 27%;
+    height: 10%;
+    padding-right: 1vw;
+    padding-top: 5vh;
+    transform: translate(3%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+    position: static;
+  }
+  .startEndText {
+    position: relative;
+    left: -1vw;
+  
+  }
+}
+
+/* MEDIA QUERY XX: */
+@media (min-width: 1570px) {
+  .infoButton {
+    right: 46.5vw;
+  }
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 20%;
+    height: 10%;
+    padding-right: 1vw;
+    padding-top: 5vh;
+    transform: translate(-1%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+    position: relative;
+  }
+  .startEndText {
+    position: relative;
+    left: 0vw;
+  
   }
 }
 
@@ -386,6 +534,23 @@ body, html {
 .makeStyles-card-106 {
   width: 100%
 } */
+.infoButton {
+  position: absolute !important;
+  height: 50px;
+  color: white;
+  width: fit-content;
+  z-index: 100;
+  float: right !important;
+  top: 3vh;
+  right: 46.5vw;
+  background: transparent !important;
+  
+}
+.infoIcon {
+  color: white;
+  border-radius: 50%;
+  border: 1px solid black
+}
 .showBtn {
    display: block !important;
 }
@@ -439,6 +604,8 @@ html {
 }
 
 body {
+  
+  width: 90% !important;
   padding: 0;
   margin: 0;
   /* background: rgba(63, 63, 63, 0.295); */
@@ -446,9 +613,11 @@ body {
 }
 
 .header {
+  width: 100vw;
   display: flex;
   /* background: #465964; */
   position: fixed;
+  left: 0;
   z-index: 1;
   /* height: 4.5rem; */
   border-bottom: 0.2rem solid orange;
@@ -523,10 +692,10 @@ li {
   background-size: cover;
   height: 40vh;
   padding: none;
-  margin-top: 5.5em;
   border-bottom: 0.1rem solid rgba(83, 211, 204, 0.945);;
-  width: 100%;
-}
+  width: 100vw !important;
+  position: relative;
+margin: 4em auto !important;}
 
 /* @media (min-width: 767px) {
   .Profile {

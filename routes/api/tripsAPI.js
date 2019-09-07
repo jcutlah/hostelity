@@ -27,7 +27,7 @@ router.route("/edit/:id")
                 console.log(hostel.location)
                 hostelController.addHostel(hostel, function(newHostel){
                     console.log(newHostel);
-                    waypointController.findClosestWaypointToHostel(tripId, hostel.location.coordinates, 50000, function(waypoint){
+                    waypointController.findClosestWaypointToHostel(tripId, hostel.location.coordinates, 500000, function(waypoint){
                         hostelController.associateHostelToWaypoint(waypoint._id, newHostel._id, function(result){
                             console.log(result)
                             res.json({message: 'success'})
@@ -98,6 +98,7 @@ router.route("/")
         const waypoints = req.body.trip.waypoints;
         const trip = req.body.trip;
         const hostels = req.body.hostels;
+        const tripName = req.body.tripName;
 
         waypoints.forEach(point => {
             totalDistance += point.distance;
@@ -106,7 +107,7 @@ router.route("/")
         const tripObject = {
             start: trip.start.name,
             end: trip.end.name,
-            name: "My Journey",
+            name: tripName,
             totalMileage: totalDistance
         }
         tripController.addTrip(tripObject, function (trip) {

@@ -55,16 +55,19 @@ const MapFunctions = {
                             let result = res[i];
                             let tooFar = true;
                             const resultLatLng = [result.geometry.location.lat(), result.geometry.location.lng()];
+                            console.log('looping over waypoints...')
                             waypoints.forEach(pnt => {
                                 // //console.log(pnt.location);
                                 // //console.log(resultLatLng);
-                                let degrees = distanceFormula(pnt.location[0], resultLatLng[0], pnt.location[1], resultLatLng[1])
-                                // //console.log(degrees);
-                                degrees > 1 && tooFar ? tooFar = true : tooFar = false
+                                if (tooFar) {
+                                    let degrees = distanceFormula(pnt.location[0], resultLatLng[0], pnt.location[1], resultLatLng[1])
+                                    console.log(degrees);
+                                    degrees > .5 && tooFar ? tooFar = true : tooFar = false
+                                }
                                 // //console.log("should be number of degrees, since those are the decimal units of lat/long.")
                             })
                             if (tooFar) {
-                                // //console.log(result)
+                                console.log(result)
                                 continue
                             }
                             var bigPic;
@@ -337,10 +340,10 @@ const MapFunctions = {
                 directionsDisplay.setMap(map);
 
                 console.log(legData)
-                MapFunctions.handleTripSearch(map, hostelIds, legData, function(){
+                MapFunctions.handleTripSearch(map, hostelIds, legData, function () {
                     markerCallback(true);
                 })
-                callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address)
+                callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address, map)
             } else {
                 window.alert('Directions request failed due to ' + status);
             }

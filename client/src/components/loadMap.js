@@ -94,26 +94,6 @@ function LoadMap(props) {
             })
     }
 
-    useEffect(function () {
-
-        return () => {
-            // document.addEventListener('click', function (event) {
-            //     let buttonClass = event.target.getAttribute('classname');
-            //     if (buttonClass === "hostelButton" || buttonClass === "removeHostel") {
-            //         let data = {
-            //             title: event.target.getAttribute('data-title'),
-            //             location: event.target.getAttribute('data-location'),
-            //             address: event.target.getAttribute('data-address'),
-            //             placeId: event.target.id,
-            //             imageUrl: event.target.getAttribute('data-imageUrl')
-            //         }
-            //         // console.log(data)
-            //         setHostels(data);
-            //         event.target.setAttribute('style', 'display: none');
-            //     }
-            // });
-        }
-    })
     const defaultview = {
         center: {
             lat: 37,

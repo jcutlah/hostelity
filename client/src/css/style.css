@@ -703,7 +703,29 @@ margin: 4em auto !important;}
   }
 } */
 
-
+/* InfoWindow Styles */
+.infowindow-wrapper {
+    max-width: 220px;
+}
+.address {
+    max-width: 150px;
+    text-align: center;
+    margin: 0 auto;
+}
+.buttonWrapper, .hostel-rating {
+    text-align: center;
+}
+.hostel-title {
+    font-weight: bold;
+    font-size: 19px;
+    text-align: center;
+}
+.hostel-title a {
+    color: inherit;
+}
+.infowindow-wrapper .image-wrapper img {
+    width: 100%;
+}
 
 .userName {
   font-size: 24px;

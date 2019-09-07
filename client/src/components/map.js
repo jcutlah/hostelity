@@ -189,10 +189,10 @@ function Map(props) {
             [name]: value,
 
         }
-        if (name === "start" || name === "end") {
+        if (name === "start" || name === "end" || name === "name") {
             setState({ ...state, [name]: value });
             return;
-        }
+        } 
         if (state.stops.length) {
             oldStops.forEach((stop, i) => {
                 if (stop[name]) {
@@ -241,7 +241,7 @@ function Map(props) {
     // })
     const saveTrip = (event) => {
         event.preventDefault();
-        Axios.post('/api/trips', { trip: state.trip, hostels: hostels })
+        Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
                 //console.log(res)
                 res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
@@ -303,6 +303,15 @@ function Map(props) {
 
                                 <FormGroup>
                                     <div className="form-inputs">
+                                        <TextField
+                                            id="outlined-start"
+                                            label="Trip Name"
+                                            className={classes.textField}
+                                            name='name'
+                                            onChange={handleChange}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
                                         <TextField
                                             id="outlined-start"
                                             label="Starting Point"

@@ -140,9 +140,9 @@ export default function Signup(props) {
                     }
                 }
                 document.getElementById('error-message').innerText = errorText;
+            } else {
+                window.location = '/login';
             }
-            // if (res.data.name)
-            // window.location = '/login';
         }).catch(function(err){
             //console.log(err);
         })

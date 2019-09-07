@@ -225,7 +225,8 @@ body, html {
 
 @media (min-width: 767px) {
   .infoButton {
-    right: 47vw !important;
+    top: 1.5vh !important;
+    right: 1.5vw !important;
   }
   .MuiPaper-root.MuiPaper-elevation1.makeStyles-root-259.MuiPaper-rounded {
     width: 100vw;
@@ -358,7 +359,8 @@ body, html {
 
   }
   .infoButton {
-    right: 47.5vw !important;
+    top: 1.5vh !important;
+    right: 1.5vw !important;
   }
   .MuiPaper-root.MuiPaper-elevation1.makeStyles-root-259.MuiPaper-rounded {
     width: 100vw;
@@ -457,7 +459,8 @@ body, html {
 /* MEDIA QUERY XL */
 @media (min-width: 1270px){
   .infoButton {
-    right: 47.5vw !important;
+    top: 1.5vh !important;
+    right: 1.5vw !important;
   }
   ul {
     padding-right: 25% !important;
@@ -498,7 +501,8 @@ body, html {
 /* MEDIA QUERY XX: */
 @media (min-width: 1570px) {
   .infoButton {
-    right: 46.5vw;
+    top: 3vh !important;
+    right: 1.5vw !important;
   }
   .startEnd {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
@@ -558,13 +562,12 @@ body, html {
   float: right !important;
   top: 3vh;
   right: 46.5vw;
-  background: transparent !important;
+  background: white !important;
   
 }
 .infoIcon {
-  color: white;
+  color: rgb(41, 53, 43);
   border-radius: 50%;
-  border: 1px solid black
 }
 .showBtn {
    display: block !important;

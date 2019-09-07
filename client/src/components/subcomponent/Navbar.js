@@ -3,8 +3,8 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
-import Info from '@material-ui/icons/InfoOutlined'
-
+import Info from '@material-ui/icons/Info'
+import Fab from '@material-ui/core/Fab'
 const Navbar = (props) => {
     const logOut = event => {
         event.preventDefault();
@@ -54,10 +54,10 @@ const Navbar = (props) => {
                 :
 
 
-                <Button className='infoButton' align="center">
+                <Fab className='infoButton' align="center" size="small">
                     <Info fontSize={'large'} className='infoIcon'></Info>
                     {/* <i className="material-icons" style={{ fontSize: 30 }}>information</i> */}
-                </Button>
+                </Fab>
 
 
             }

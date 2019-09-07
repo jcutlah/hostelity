@@ -18,6 +18,7 @@ import Axios from 'axios';
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import CityList from './subcomponent/CityList'
+import '../css/style.css'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;

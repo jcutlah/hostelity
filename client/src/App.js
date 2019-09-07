@@ -13,6 +13,7 @@ import NoMatch from './components/noMatch';
 import Header from './components/subcomponent/Header';
 import LoadMap from './components/loadMap';
 import Redir from './components/subcomponent/Redir';
+import LandingPage from './components/LandingPage'
 function App() {
   // Define hooks (state) variables
   const [loggedIn, setLoggedIn] = useState(false);
@@ -75,6 +76,7 @@ function App() {
 
 
         <Switch>
+          <Route exact path='/welcome' component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/map/:id" component={LoadMap} />

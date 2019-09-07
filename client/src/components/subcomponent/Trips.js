@@ -149,13 +149,13 @@ const Trips = (props) => {
                                         <CardContent className={classes.cardContent}>
                                             <Grid item xs={12}>
                                                 <Typography variant="h5" component="h3" align="center">
-                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={80}>
+                                                    <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} className="shadowedText" fontSize={80}>
 
                                                         {trip.name}
                                                     </Box>
                                                     <br />
                                                 </Typography>
-                                                <hr></hr>
+                                                {/* <hr></hr> */}
                                             </Grid>
 
                                             <Grid align="center" item xs={12}>
@@ -173,7 +173,7 @@ const Trips = (props) => {
                                             </Grid>
 
                                             <Grid item xs={12}>
-                                                <hr></hr>
+                                                <br></br>
                                                 <Waypoints
                                                     waypoints={trip.waypoints}
                                                 />

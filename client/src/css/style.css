@@ -30,14 +30,14 @@ body, html {
   width: 100vw;
   margin: 0 !important;
 }
-  .BioPic {
-    border-radius: 2px;
-    max-width: 40vw;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 40%;
-  }
+.BioPic {
+  -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+  -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+  box-shadow: 3px 11px 40px rgb(43, 42, 42);
+  border: 5px solid white;
+  border-bottom: 60px solid white;
+  max-width: 250px;
+}
   .tripz.container {
     transform: translate(0, 0%);
     width: 90vw !important;
@@ -235,12 +235,12 @@ body, html {
       position: relative 
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
     transform: translate(0%, 0%);
@@ -370,12 +370,12 @@ body, html {
       position: relative 
   }
   .BioPic {
-    border-radius: 2px;
-    max-width: 220px;
-    border-color: white;
-    border-width: 5px;
-    border-style: solid;
-    margin-top: 25%;
+    -moz-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    -webkit-box-shadow: 3px 10px 40px rgb(43, 42, 42);
+    box-shadow: 3px 11px 40px rgb(43, 42, 42);
+    border: 5px solid white;
+    border-bottom: 60px solid white;
+    max-width: 250px;
   }
   .tripz.container {
     width: 90vw !important;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import Trips from './subcomponent/Trips';
-
+import Grid from '@material-ui/core/Grid';
 const MyTrips = (props) => {
     console.log(`MyTrips component w/ user id ${props.userId}`);
     const [user, setUser] = useState(null);
@@ -23,19 +23,19 @@ const MyTrips = (props) => {
     }
 
     return (
-        <>
-        <div className="myTrip container">
-            <Trips 
-                trips={user ? user.trips : []}
-            />
-        </div>
+        <Grid container>
+            <Grid item xs={12} className="myTrip container">
+                <Trips
+                    trips={user ? user.trips : []}
+                />
+            </Grid>
 
-        <div className="myTrip container">
-            <Trips 
-                trips={user ? user.trips : []}
-            />
-        </div>
-        </>
+            <Grid item xs={12} className="myTrip container">
+                <Trips
+                    trips={user ? user.trips : []}
+                />
+            </Grid>
+        </Grid>
     )
 }
 

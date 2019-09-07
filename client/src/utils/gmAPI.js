@@ -141,6 +141,10 @@ const MapFunctions = {
                                 })
                                 infowindow.open(map, marker);
                                 markerCallback(true)
+                                console.log(marker.position)
+                                map.setCenter(marker.position)
+                                console.log(map.getZoom())
+                                map.setZoom(12)
                             });
 
 

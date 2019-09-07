@@ -192,7 +192,7 @@ function Map(props) {
         if (name === "start" || name === "end" || name === "name") {
             setState({ ...state, [name]: value });
             return;
-        } 
+        }
         if (state.stops.length) {
             oldStops.forEach((stop, i) => {
                 if (stop[name]) {
@@ -239,6 +239,9 @@ function Map(props) {
     // document.addEventListener('click', function (event) {
     //     infoWindowOpen(event)
     // })
+    const centerMap = (map, loc) => {
+        map.setCenter(loc)
+    }
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
@@ -429,7 +432,7 @@ function Map(props) {
                                         <Fab
                                             type="submit"
                                             onClick={async () => {
-
+                                                const google = window.google
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
                                                 await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end, map) {
                                                     //console.log(routeLegs);
@@ -440,15 +443,16 @@ function Map(props) {
                                                         name: 'My Super Trip!'
                                                     }
                                                     var center = {
-                                                        lat: routeLegs[0].location
+                                                        lat: routeLegs[0].location[0],
+                                                        lng: routeLegs[0].location[1]
                                                     }
                                                     console.log(center)
-
+                                                    var loc = new google.maps.LatLng(center.lat, center.lng)
                                                     ///loop through leg data, use logic to add waypoints to state.waypoints, and add leg data to state.trip
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
                                                     // //console.log(state.waypoints)
-                                                    return map.setCenter(center)
+                                                    return centerMap(map, loc)
                                                 }, infoWindowListener)
 
                                             }

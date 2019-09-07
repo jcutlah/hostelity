@@ -99,7 +99,7 @@ body, html {
     width: 125px;
   } 
   .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 68%, rgb(41, 53, 43) 68%);
+    background: #418762;
     padding-left: 3%;
   }
   .Profile {
@@ -242,7 +242,7 @@ body, html {
   
   }
   .header {
-    background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
+    background: #418762;
 
   }
   .brand-logo img {
@@ -551,7 +551,7 @@ body, html {
   color: rgb(0, 0, 0);
   text-shadow: 0px 0px 5px rgb(173, 173, 173), 2px 1px white;
   height: fit-content !important;
-  background: linear-gradient(to right, transparent 0%, rgba(43, 26, 1, 0.25) 50%, transparent 80%); 
+  background: #418762;
   border-top: 1px solid rgba(43, 46, 43, 0.8);
   border-bottom: 1px solid rgba(43, 46, 43, 0.8)
 }

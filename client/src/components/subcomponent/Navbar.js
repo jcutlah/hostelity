@@ -25,7 +25,7 @@ const Navbar = (props) => {
     }
     return (
         <Grid container>
-            {window.location.pathname.indexOf('/login') != 0 ?
+            {window.location.pathname.indexOf('/login') !== 0 && window.location.pathname.indexOf('signup') === -1 ?
                 <Grid item xs={3}>
                     < nav className="nav navTop navBottom">
                         <div className="navLinks">
@@ -44,7 +44,7 @@ const Navbar = (props) => {
                                 </ul>
 
                                 : <ul className="loggedOutLinks">
-                                    <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 ? '' : 'Log in'}</Link> </li>
+                                    <li key="signIn"><Link to='/login'>{window.location.pathname.indexOf('/login') === 0 || window.location.pathname.indexOf('/signup') === 0 ? '' : 'Log in'}</Link> </li>
                                 </ul>
 
                             }

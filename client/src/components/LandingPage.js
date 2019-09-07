@@ -30,31 +30,19 @@ const LandingPage = (props) => {
                 </div>
             </Grid>
             <Grid item xs={12} align='left'>
-                <h2> Simply enter where you want to go</h2>
-                <img src='/assets/images/tripInput.png' width='500px'></img>
-                <h2> then click begin to get started on your next adventure</h2>
-                <img src='/assets/images/tripInputMap.png' width='500px'></img>
+                <h2> Simply enter where you want to go then click begin!</h2>
+                <img src='/assets/images/tripPlot.gif' width='500px'></img>
             </Grid>
             <br />
 
             <Grid item align='right'>
-                <h2> Click on a waypoint see the best hostels in that area </h2>
-                <img src='/assets/images/tripWaypointZoomed.png' width='500px'></img>
+                <h2> Clicking on a waypoint will show you best hostels in that area. </h2>
+                <img src='/assets/images/tripWaypointZoom.gif' width='500px'></img>
             </Grid>
             <Grid item align="left">
                 <div className="landingText">
-                    I once knew a man from a town they called Began, And He tried to throw a fit
-                    he did it, he did, but lost the liquid - that runs through his veins and flows red
-                </div>
-            </Grid>
-            <br />
-            <Grid item align='left'>
-                <img src='/assets/images/switchBakLogo.png'></img>
-            </Grid>
-            <Grid item align="right">
-                <div className="landingText">
-                    I once knew a man from a town they called Began, And He tried to throw a fit
-                    he did it, he did, but lost the liquid - that runs through his veins and flows red
+                <h2> Clicking save will add your trip to your My Trips page where you can review and edit it. </h2>
+                <img src='/assets/images/saveTrip.gif' width='500px'></img>
                 </div>
             </Grid>
         </Grid>

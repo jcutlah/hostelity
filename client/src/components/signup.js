@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
+import randomImage from './subcomponent/randomImages';
 
 function Copyright() {
     return (
@@ -29,8 +30,8 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
-            backgroundImage: 'url(/assets/images/mountain-large.jpg)',
-            backgroundSize: 'auto',
+            backgroundImage: `url(${randomImage})`,
+            backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             margin: '0 auto'
         },

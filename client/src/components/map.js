@@ -17,6 +17,7 @@ import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import CityList from './subcomponent/CityList'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 const Marker = ({ text }) => <div>{text}</div>;
@@ -239,9 +240,12 @@ function Map(props) {
     // document.addEventListener('click', function (event) {
     //     infoWindowOpen(event)
     // })
-    const centerMap = (map, loc) => {
-        map.setCenter(loc)
-    }
+    // const suggestions = CityList.map(suggestion => ({
+    //     value: suggestion.label,
+    //     label: suggestion.label
+    // }));
+
+
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
@@ -452,7 +456,7 @@ function Map(props) {
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
                                                     // //console.log(state.waypoints)
-                                                    return centerMap(map, loc)
+                                                    return
                                                 }, infoWindowListener)
 
                                             }

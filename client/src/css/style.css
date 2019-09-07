@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
 
+#root {
+  height: 100vh !important;
 
+}
 body, html {
   overflow-x: hidden !important;
   font-family: 'Amatic SC', cursive !important;

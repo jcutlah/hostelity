@@ -106,11 +106,24 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         alignSelf: 'center',
         alignContent: 'center !important'
+    },
+    createTrip: {
+        margin: theme.spacing(3),
+        padding: theme.spacing(2),
+        background: '-webkit-gradient(linear, right top, left top, from(rgb(41, 53, 43)), color-stop(20%, rgb(49, 75, 48)), color-stop(65%, rgb(164, 197, 160)), color-stop(65%, rgb(41, 53, 43)))',
+        background: '-webkit-linear-gradient(right, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 65%, rgb(41, 53, 43) 65%)',
+        background: 'linear-gradient(90deg, rgb(164, 197, 160), rgb(64, 105, 71));'
+    },
+    treatYoSelfArrow: {
+        maxWidth: '65px',
+        transform: "rotate(45deg)",
+        marginTop: "20px"
     }
 }));
 
 const Trips = (props) => {
     const classes = useStyles();
+    const [userChecked, setUserChecked] = React.useState(false);
 
     const deleteTrip = (event) => {
         event.preventDefault();
@@ -126,12 +139,17 @@ const Trips = (props) => {
             .catch(err => console.log(err))
     }
     if (props.trips.length === 0) {
-        return (
-            <div style={{ textAlign: "center", fontSize: "30px" }}>
-                Looks like someone needs a vacation??<br></br>
-                Treat yo self!!!
-            </div>
-        )
+            return (
+                <div className={`trip-prompt ${props.hasInfo ? "no-trips" : "unchecked"}`} style={{ textAlign: "center", fontSize: "30px" }}>
+                    Need a vacation??<br></br>
+                    Treat yo self!!!
+                    <br></br>
+                    <div className="map-arrow-wrapper">
+                        <img className={classes.treatYoSelfArrow} src="/assets/images/DottedLine.png" />
+                    </div>
+                    <Button variant="contained" className={classes.createTrip} href="/map" align='right' size="medium">Create a Trip</Button>
+                </div>
+            )
     }
 
 

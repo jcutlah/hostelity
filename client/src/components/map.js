@@ -129,7 +129,7 @@ function Map(props) {
             //console.log(child.nodeName);
             if (child.nodeName === "BUTTON") {
                 if (child.getAttribute('class') === "disabledButton") {
-                    child.setAttribute('style', 'display: block !important');
+                    child.setAttribute('style', 'display: inline-block !important');
                 }
             }
         })

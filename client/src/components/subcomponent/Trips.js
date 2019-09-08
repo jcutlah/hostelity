@@ -111,6 +111,7 @@ const useStyles = makeStyles(theme => ({
 
 const Trips = (props) => {
     const classes = useStyles();
+    const [userChecked, setUserChecked] = React.useState(false);
 
     const deleteTrip = (event) => {
         event.preventDefault();
@@ -126,12 +127,12 @@ const Trips = (props) => {
             .catch(err => console.log(err))
     }
     if (props.trips.length === 0) {
-        return (
-            <div style={{ textAlign: "center", fontSize: "30px" }}>
-                Looks like someone needs a vacation??<br></br>
-                Treat yo self!!!
-            </div>
-        )
+            return (
+                <div className={`trip-prompt ${props.hasInfo ? "no-trips" : "unchecked"}`} style={{ textAlign: "center", fontSize: "30px" }}>
+                    Looks like someone needs a vacation??<br></br>
+                    Treat yo self!!!
+                </div>
+            )
     }
 
 

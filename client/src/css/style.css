@@ -806,3 +806,6 @@ input[type="text"] {
 .trip-prompt.no-trips {
     display: block;
 }
+.tripz.container {
+    margin-bottom: 50px;
+}

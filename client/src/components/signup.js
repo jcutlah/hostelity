@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
             backgroundImage: `url(${randomImage})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
             margin: '0 auto'
         },
     },

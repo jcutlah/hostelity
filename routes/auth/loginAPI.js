@@ -77,9 +77,11 @@ router.route('/login')
 router.route('/login/meep')
 .get(function(req, res){
     // console.log(req);
-    // console.log('success redirect...')
-    // console.log(req.session);
-    res.json(req.session);
+    console.log('success redirect...')
+    console.log(req.session);
+    const successObj = {cookie: req.session.cookie, passport: req.session.passport};
+    console.log(successObj);
+    res.json(successObj);
 })
 router.route('/login/derp')
 .get(function(req, res){

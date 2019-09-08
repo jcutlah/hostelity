@@ -18,7 +18,7 @@ const Home = (props) => {
             trips: newTrips
         })
     }
-    const getUserData = (userId) => {
+    const getUserData = () => {
         if (!user) {
             Axios.get(`/api/trips`)
                 .then(userInfo => {
@@ -47,6 +47,7 @@ const Home = (props) => {
 
                     <Trips
                         trips={user ? user.trips : []}
+                        hasInfo={user ? true : false }
                         delTripCallback={delTripInc}
                     />
 

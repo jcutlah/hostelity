@@ -820,3 +820,13 @@ input[type="text"] {
   border: 1px solid black;
   box-shadow: 0px 1px 4px grey;
 }
+
+.trip-prompt {
+    display: none;
+}
+.trip-prompt.no-trips {
+    display: block;
+}
+.tripz.container {
+    margin-bottom: 50px;
+}

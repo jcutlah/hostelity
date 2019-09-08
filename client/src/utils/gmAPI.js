@@ -10,6 +10,22 @@ const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
+    animateMapZoomTo: function (map, targetZoom, markerPos) {
+        const google = window.google;
+        console.log(map.getZoom());
+        console.log()
+        var currentZoom = arguments[3] || map.getZoom();
+        console.log(currentZoom, targetZoom);
+        if (currentZoom != targetZoom) {
+            google.maps.event.addListenerOnce(map, 'zoom_changed', function (event) {
+                MapFunctions.animateMapZoomTo(map, targetZoom, markerPos, currentZoom + (targetZoom > currentZoom ? 1 : -1));
+            });
+            setTimeout(function(){ 
+                map.setZoom(currentZoom);
+                map.setCenter(markerPos);
+            }, 100);
+        }
+    },
     handleTripSearch: (map, hostelIds, waypoints, markerCallback) => {
         //console.log(waypoints);
         const google = window.google
@@ -156,9 +172,10 @@ const MapFunctions = {
                                 infowindow.open(map, marker);
                                 markerCallback(true)
                                 console.log(marker.position)
-                                map.setCenter(marker.position)
-                                console.log(map.getZoom())
-                                map.setZoom(12)
+                                // map.setCenter(marker.position)
+                                // console.log(map.getZoom())
+                                // map.setZoom(12)
+                                MapFunctions.animateMapZoomTo(map, 12, marker.position)
                             });
 
 

@@ -13,7 +13,6 @@ const MapFunctions = {
     animateMapZoomTo: function (map, targetZoom, markerPos) {
         const google = window.google;
         console.log(map.getZoom());
-        console.log()
         var currentZoom = arguments[3] || map.getZoom();
         console.log(currentZoom, targetZoom);
         if (currentZoom != targetZoom) {
@@ -172,9 +171,7 @@ const MapFunctions = {
                                 infowindow.open(map, marker);
                                 markerCallback(true)
                                 console.log(marker.position)
-                                // map.setCenter(marker.position)
-                                // console.log(map.getZoom())
-                                // map.setZoom(12)
+                                map.panTo(marker.position);
                                 MapFunctions.animateMapZoomTo(map, 12, marker.position)
                             });
 

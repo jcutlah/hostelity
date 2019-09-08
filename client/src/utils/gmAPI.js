@@ -30,9 +30,11 @@ const MapFunctions = {
                         `</div>` +
                         `<br>` +
                         `<div class="image-wrapper">` +
-                            `<a target='_blank' className="hostelLink" href="https://www.google.com/search?q=${markerData.title}%20${markerData.address}">` + 
-                                `<img src=${markerData.photoUrl ? markerData.photoUrl : defaultImage }/>` +
-                            `</a>` +
+                            `<div class="image-wrapper-inner">` +
+                                `<a target='_blank' className="hostelLink" href="https://www.google.com/search?q=${markerData.title}%20${markerData.address}">` + 
+                                    `<img src=${markerData.photoUrl ? markerData.photoUrl : defaultImage }/>` +
+                                `</a>` +
+                            `</div>` +
                             `<div class="address">${markerData.address}</div>` +
                         `</div>` +
                         `<br>` +

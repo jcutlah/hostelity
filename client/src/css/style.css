@@ -722,6 +722,7 @@ margin: 4em auto 0 auto !important;
 /* InfoWindow Styles */
 .infowindow-wrapper {
     max-width: 220px;
+    margin: 20px auto;
 }
 .address {
     max-width: 150px;
@@ -730,6 +731,19 @@ margin: 4em auto 0 auto !important;
 }
 .buttonWrapper, .hostel-rating {
     text-align: center;
+}
+.buttonWrapper button {
+    border: 1px solid gray;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px #ccc;
+    margin: 10px auto;
+}
+button:hover {
+    cursor: pointer;
+}
+.gm-style-iw-t button[title="Close"] {
+    margin: 9px!important;
 }
 .hostel-title {
     font-weight: bold;
@@ -740,9 +754,16 @@ margin: 4em auto 0 auto !important;
     color: inherit;
 }
 .infowindow-wrapper .image-wrapper img {
-    width: 100%;
+    width: auto;
+    max-height: 125px;
 }
-
+.infowindow-wrapper .image-wrapper a {
+    width: 100%;
+    text-align: center;
+}
+.image-wrapper .image-wrapper-inner {
+    display: flex;
+}
 .userName {
   font-size: 24px;
   font-weight: bold;

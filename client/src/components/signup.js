@@ -84,6 +84,12 @@ export default function Signup(props) {
     const [lastName, updateLastName] = useState('');
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
+    const [repassword, updateRepassword] = useState('');
+    const [loginError, updateLoginError] = useState({
+        emailFormat: false,
+        passwordMatch: false,
+        missingCred: false
+    });
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -97,9 +103,18 @@ export default function Signup(props) {
             break;
             case 'password': updatePassword(value);
             break;
+            case 'repassword': updateRepassword(value);
             default: return;
         }
       };
+    const passwordsMatch = (p1, p2) => {
+        if (p1 === p2) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
 
     const handleFormSubmit = event => {
         event.preventDefault();
@@ -108,7 +123,11 @@ export default function Signup(props) {
             firstName,
             lastName,
             email,
-            password
+            password,
+            repassword
+        }
+        if (!passwordsMatch(user.password, user.repassword)){
+            return console.log('nah guy');
         }
         Axios.post("/auth/users/signup", user)
         .then(function(res){
@@ -121,6 +140,10 @@ export default function Signup(props) {
                         case 'firstName':
                             // //console.log('first name required')
                             errorText = "You are missing required fields"
+                            updateLoginError({
+                                ...loginError,
+                                missingCred: true
+                            });
                             break;
                         case 'lastName':
                             // //console.log('last name required')
@@ -201,6 +224,18 @@ export default function Signup(props) {
                         label="Password"
                         type="password"
                         id="password"
+                        autoComplete="current-password"
+                        onChange={handleInputChange}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="repassword"
+                        label="Re-Enter Password"
+                        type="password"
+                        id="repassword"
                         autoComplete="current-password"
                         onChange={handleInputChange}
                     />

@@ -69,7 +69,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative !important',
         margin: '0 auto !important',
         top: '15vh',
-        backgroundColor: 'rgba(220,220,220,0.8)',
+        backgroundColor: 'rgba(220,220,220,.9)',
         borderRadius: '15px',
         boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
         border: '1px solid grey'
@@ -84,22 +84,151 @@ export default function Signup(props) {
     const [lastName, updateLastName] = useState('');
     const [email, updateEmail] = useState('');
     const [password, updatePassword] = useState('');
+    const [repassword, updateRepassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [validSubmission, setValidSubmission] = useState(true);
+    const [missingCreds, setMissingCreds] = useState(false);
+    const [loginError, updateLoginError] = useState({
+        emailFormat: false,
+        passwordMatch: false,
+        missingFirstName: false,
+        missingLastName: false,
+        missingEmail: false,
+        missingPassword: false,
+
+    });
 
     const handleInputChange = event => {
         const { name, value } = event.target;
+        setErrorMessage('');
         document.getElementById('error-message').innerText = "";
         switch (name) {
-            case 'firstname': updateFirstName(value);
+            case 'firstname': 
+            updateLoginError({
+                ...loginError,
+                missingFirstName: false,
+            })
+            updateFirstName(value);
+            // setValidSubmission(true);
             break;
-            case 'lastname': updateLastName(value);
+            case 'lastname': 
+            updateLoginError({
+                ...loginError,
+                missingLastName: false
+            })
+            updateLastName(value);
+            // setValidSubmission(true);
             break;
-            case 'email': updateEmail(value);
+            case 'email': 
+            updateLoginError({
+                ...loginError,
+                missingEmail: false,
+                emailFormat: false
+            })
+            updateEmail(value);
+            // setValidSubmission(true);
             break;
-            case 'password': updatePassword(value);
+            case 'password': 
+            updateLoginError({
+                ...loginError,
+                missingPassword: false,
+                passwordMatch: false
+            })
+            updatePassword(value);
+            // setValidSubmission(true);
             break;
+            case 'repassword': 
+            updateLoginError({
+                ...loginError,
+                passwordMatch: false
+            })
+            updateRepassword(value);
+            // setValidSubmission(true);
             default: return;
         }
       };
+    const isMissingCreds = (user) => {
+        console.log(missingCreds);
+        let missingCred = false;
+        let errors = {}
+        for (let key in user) {
+            console.log(user[key]);
+            console.log(key)
+            console.log(typeof key)
+            if (!user[key].length){
+                console.log('zero length, setting missing creds to true')
+                // setMissingCreds(true);
+                missingCred = true;
+                switch(key) {
+                    case 'email':
+                        console.log('email missing');
+                        errors.missingEmail = true
+                        setValidSubmission(false);
+                        break;
+                    case 'firstName':
+                            console.log('fn missing');
+                        errors.missingFirstName = true;
+                        setValidSubmission(false);
+                        break;
+                    case 'lastName':
+                            console.log('ln missing');
+                        errors.missingLastName = true;
+                        setValidSubmission(false);
+                        break;
+                    case 'password':
+                        console.log('pw missing');
+                        errors.missingPassword = true;
+                        setValidSubmission(false);
+                        break;
+                    default:
+                        break;
+                }
+                console.log(errors);
+                updateLoginError({
+                    ...loginError,
+                    ...errors
+                })
+            } else {
+                setValidSubmission(true);
+            }
+        }
+        console.log(missingCred)
+        if (missingCred) {
+            setErrorMessage("You are missing required fields")
+        }
+        return missingCred;
+    }
+    const passwordsMatch = (p1, p2) => {
+        if (p1 !== p2) {
+            updateLoginError({
+                ...loginError,
+                passwordMatch: true
+            });
+            setErrorMessage("Passwords do not match");
+            setValidSubmission(false);
+            return false;
+        } else {
+            return true;
+        }
+        
+    }
+    const isEmailFormat = (email) => {
+        const emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        if (emailValid) {
+            console.log(emailValid);
+            return true;
+        } else {
+            updateLoginError({
+                ...loginError,
+                emailFormat: true
+            })
+            setErrorMessage('Incorrectly formatted email')
+            // setEmailFormat(false);
+            setValidSubmission(false);
+            return false;
+        }
+    }
+
 
     const handleFormSubmit = event => {
         event.preventDefault();
@@ -110,41 +239,58 @@ export default function Signup(props) {
             email,
             password
         }
+        console.log(user);
+        if (isMissingCreds(user)){
+            return;
+        };
+        if (!isEmailFormat(user.email)) {
+            return
+        }
+        if (!passwordsMatch(user.password, repassword)){
+            return;
+        }
+        // console.log("let 'em through, boys");
+        // return
+
         Axios.post("/auth/users/signup", user)
         .then(function(res){
             //console.log(res.data.errors);
             if (res.data.errors) {
                 let errorText;
-                for (let key in res.data.errors){
-                    //console.log(typeof key)
-                    switch (key) {
-                        case 'firstName':
-                            // //console.log('first name required')
-                            errorText = "You are missing required fields"
-                            break;
-                        case 'lastName':
-                            // //console.log('last name required')
-                            errorText = "You are missing required fields"
-                            break;
-                        case 'email':
-                            // //console.log('email required')
-                            errorText = "You are missing required fields"
-                            break;
-                        case 'password':
-                            // //console.log('password required')
-                            errorText = "You are missing required fields"
-                            break;
-                        default:
-                            errorText = "An unknown error occurred. Please refresh the page and try again."
-                            break;
-                    }
-                }
-                document.getElementById('error-message').innerText = errorText;
+                console.log(res.data.errors);
+                // for (let key in res.data.errors){
+                //     //console.log(typeof key)
+                //     switch (key) {
+                //         case 'firstName':
+                //             // //console.log('first name required')
+                //             errorText = "You are missing required fields"
+                //             updateLoginError({
+                //                 ...loginError,
+                //                 missingCred: true
+                //             });
+                //             break;
+                //         case 'lastName':
+                //             // //console.log('last name required')
+                //             errorText = "You are missing required fields"
+                //             break;
+                //         case 'email':
+                //             // //console.log('email required')
+                //             errorText = "You are missing required fields"
+                //             break;
+                //         case 'password':
+                //             // //console.log('password required')
+                //             errorText = "You are missing required fields"
+                //             break;
+                //         default:
+                //             errorText = "An unknown error occurred. Please refresh the page and try again."
+                //             break;
+                //     }
+                // }
             } else {
                 window.location = '/login';
             }
         }).catch(function(err){
-            //console.log(err);
+            console.log(err);
         })
     }
 
@@ -169,6 +315,7 @@ export default function Signup(props) {
                         name="firstname"
                         autoComplete="firstname"
                         onChange={handleInputChange}
+                        error={loginError.missingFirstName}
                     />
                     <TextField
                         variant="outlined"
@@ -180,6 +327,7 @@ export default function Signup(props) {
                         name="lastname"
                         autoComplete="lastname"
                         onChange={handleInputChange}
+                        error={loginError.missingLastName}
                     />
                     <TextField
                         variant="outlined"
@@ -191,6 +339,7 @@ export default function Signup(props) {
                         name="email"
                         autoComplete="email"
                         onChange={handleInputChange}
+                        error={loginError.emailFormat || loginError.missingEmail}
                     />
                     <TextField
                         variant="outlined"
@@ -203,8 +352,29 @@ export default function Signup(props) {
                         id="password"
                         autoComplete="current-password"
                         onChange={handleInputChange}
+                        error={loginError.missingPassword || loginError.passwordMatch}
                     />
-                    <div id="error-message" className={classes.formErrorMessage}></div>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="repassword"
+                        label="Re-Enter Password"
+                        type="password"
+                        id="repassword"
+                        autoComplete="current-password"
+                        onChange={handleInputChange}
+                        error={loginError.missingPassword || loginError.passwordMatch}
+                    />
+                    <div id="error-message" 
+                        className={
+                            !validSubmission ? 
+                            classes.formErrorMessage :
+                            classes.formNonErrorMessage
+                        }>
+                        {errorMessage}
+                    </div>
                     <Button
                         type="submit"
                         fullWidth

@@ -89,7 +89,7 @@ export default function SignIn() {
 
     const handleInputChange = event => {
         const { name, value } = event.target;
-        console.log(name, value);
+        // console.log(name, value);
         switch (name) {
             case 'email':
                 updateEmail(value);
@@ -121,12 +121,7 @@ export default function SignIn() {
         Axios.post("/auth/users/login", user)
             .then(function (res) {
                 // console.log('Not an error!!!!!')
-                // console.log(res.data);
-                if (res.data.passport) {
-                    res.data.passport.user ?
-                        window.location = '/my-trips' :
-                        window.location = '/login';
-                }
+                // console.log(res.data.passport);
                 if (res.data.flash) {
                     // console.log(res.data.flash);
                     // console.log(typeof res.data.flash.error);
@@ -163,7 +158,7 @@ export default function SignIn() {
                     window.location = '/my-trips';
                 }
             }).catch(function (err) {
-                console.log(err);
+                // console.log(err);
                 updateLoginError({
                     username: false,
                     password: false

@@ -141,7 +141,7 @@ const Trips = (props) => {
     if (props.trips.length === 0) {
             return (
                 <div className={`trip-prompt ${props.hasInfo ? "no-trips" : "unchecked"}`} style={{ textAlign: "center", fontSize: "30px" }}>
-                    Needs a vacation??<br></br>
+                    Need a vacation??<br></br>
                     Treat yo self!!!
                     <br></br>
                     <div className="map-arrow-wrapper">

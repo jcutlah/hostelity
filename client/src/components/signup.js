@@ -58,7 +58,8 @@ const useStyles = makeStyles(theme => ({
         display: 'block',
         color: 'red',
         fontWeight: 'bold',
-        fontSize: '12'
+        fontSize: '32px',
+        textAlign: 'center'
     },
     formNonErrorMessage: {
         display: 'none'
@@ -86,6 +87,7 @@ export default function Signup(props) {
 
     const handleInputChange = event => {
         const { name, value } = event.target;
+        document.getElementById('error-message').innerText = "";
         switch (name) {
             case 'firstname': updateFirstName(value);
             break;
@@ -101,7 +103,7 @@ export default function Signup(props) {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        console.log(event);
+        //console.log(event);
         const user = {
             firstName,
             lastName,
@@ -110,10 +112,39 @@ export default function Signup(props) {
         }
         Axios.post("/auth/users/signup", user)
         .then(function(res){
-            console.log(res.data);
-            window.location = '/login';
+            //console.log(res.data.errors);
+            if (res.data.errors) {
+                let errorText;
+                for (let key in res.data.errors){
+                    //console.log(typeof key)
+                    switch (key) {
+                        case 'firstName':
+                            // //console.log('first name required')
+                            errorText = "You are missing required fields"
+                            break;
+                        case 'lastName':
+                            // //console.log('last name required')
+                            errorText = "You are missing required fields"
+                            break;
+                        case 'email':
+                            // //console.log('email required')
+                            errorText = "You are missing required fields"
+                            break;
+                        case 'password':
+                            // //console.log('password required')
+                            errorText = "You are missing required fields"
+                            break;
+                        default:
+                            errorText = "An unknown error occurred. Please refresh the page and try again."
+                            break;
+                    }
+                }
+                document.getElementById('error-message').innerText = errorText;
+            } else {
+                window.location = '/login';
+            }
         }).catch(function(err){
-            console.log(err);
+            //console.log(err);
         })
     }
 
@@ -173,6 +204,7 @@ export default function Signup(props) {
                         autoComplete="current-password"
                         onChange={handleInputChange}
                     />
+                    <div id="error-message" className={classes.formErrorMessage}></div>
                     <Button
                         type="submit"
                         fullWidth
@@ -181,7 +213,7 @@ export default function Signup(props) {
                         className={classes.submit}
                     >
                         Create Account
-          </Button>
+                    </Button>
                     <Grid container>
                         {/* <Grid item xs>
                             <Link href="#" variant="body2">

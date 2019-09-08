@@ -17,7 +17,7 @@ const orm = {
                         let newUser = {
                             ...userInfo, 
                             email: userInfo.email.toLowerCase(),
-                            password: hash
+                            password: userInfo.password.length ? hash : null
                         }
                         db.User.create(newUser, function(err, response){
         

@@ -35,7 +35,7 @@ const Navbar = (props) => {
                                     {/* <i className="material-icons" style={{ fontSize: 30 }}>home</i> */}
                                     <li key="home"><Link to='/my-trips' className='navItems'>My Trips</Link></li>
                                     {/* <i className="material-icons" style={{ fontSize: 30 }}>search</i> */}
-                                    <li key="newTrip"><Link to={window.location.pathname.indexOf('/map') > -1 ? "/new-search" : '/map'} className='navItems'>CREATE A TRIP</Link></li>
+                                    <li key="newTrip"><Link to="/new-search" className='navItems'>CREATE A TRIP</Link></li>
 
                                     {/* <li key="my-trips"><Link to='/my-trips'><i className="material-icons" style={{ fontSize: 30 }}>airport_shuttle</i></Link></li> */}
 

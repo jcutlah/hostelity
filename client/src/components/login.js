@@ -233,7 +233,8 @@ export default function SignIn() {
                         </Grid>
                         <Grid item xs={12} align="center">
                             <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
+
+                                {"Don't have one? Create a New Account!"}
                             </Link>
                         </Grid>
                     </Grid>

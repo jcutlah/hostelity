@@ -101,13 +101,13 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: calc(12vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .map-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(-15vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .brand-logo img {
     margin-left: -7%;
@@ -288,13 +288,13 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: calc(-15vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .loadmap-container .MuiPaper-root {
     position: relative;
     top: calc(7vw);
-    padding-bottom: 5vh;
-    padding-bottom: 10vh;
+    /* padding-bottom: 5vh; */
+    padding-bottom: 15vh;
   }
   .header {
     height: 5.5rem;
@@ -415,13 +415,13 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: -18vw;
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .loadmap-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(7vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   ul {
     padding-right: 25% !important;

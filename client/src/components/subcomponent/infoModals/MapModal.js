@@ -53,9 +53,13 @@ export default function TransitionsModal() {
                         <Grid container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <h2 id="transition-modal-title">SwitchBak: Map Search</h2>
+                                {/*Add User Helper Information within this grid */}
+
                             </Grid>
                             <Grid item xs={12} align="center">
+
                                 <p id="transition-modal-description">react-transiton-group animates me.</p>
+                                {/*Add User Helper Information within this grid */}
 
                             </Grid>
 

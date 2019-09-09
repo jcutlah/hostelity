@@ -53,10 +53,15 @@ export default function TransitionsModal() {
                     <Paper>
                         <Grid container spacing={3}>
                             <Grid item xs={12} align='center'>
+
                                 <h2 id="transition-modal-title">SwitchBak: Hostel Selection</h2>
+                                {/*Add User Helper Information within this grid */}
+
                             </Grid>
                             <Grid item xs={12} align="center">
+
                                 <p id="transition-modal-description">This is how you pick a hostel hurr durr</p>
+                                {/*Add User Helper Information within this grid */}
 
                             </Grid>
 

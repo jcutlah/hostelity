@@ -6,10 +6,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
     container: {
-
-        marginTop: '8.5%',
         fontFamily: 'Amatic SC, cursive',
-        margin: '0 auto !important',
+        margin: '10% auto 0 auto !important',
         width: '100%',
         fontSize: '2em',
         overflowX: 'wrap',

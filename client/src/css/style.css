@@ -444,7 +444,7 @@ body, html {
     width: 27%;
     height: 10%;
     padding-right: 5px;
-    padding-top: 10vh;
+    padding-top: 5%;
     transform: translate(5%, 0%);
     margin-top: -1% !important;
     margin-bottom: 0px !important;
@@ -481,15 +481,15 @@ body, html {
     background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
     background-size: stretch;
     background-repeat: no-repeat;
-    width: 27%;
+    width: 28%;
     height: 10%;
     padding-right: 1vw;
-    padding-top: 5vh;
+    padding-top: 5%;
     transform: translate(3%, 0%);
     margin-top: -1% !important;
     margin-bottom: 0px !important;
     text-align: center;  
-    position: static;
+    position: relative;
   }
   .startEndText {
     position: relative;
@@ -511,6 +511,29 @@ body, html {
     width: 20%;
     height: 10%;
     padding-right: 1vw;
+    padding-top: 5%;
+    transform: translate(-1%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+    position: relative;
+  }
+  .startEndText {
+    position: relative;
+    left: 0vw;
+    bottom: 2vh;
+  
+  }
+}
+
+@media (min-width: 2470px) {
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 16%;
+    height: 10%;
+    padding-right: 1vw;
     padding-top: 5vh;
     transform: translate(-1%, 0%);
     margin-top: -1% !important;
@@ -524,7 +547,47 @@ body, html {
   
   }
 }
-
+@media (min-width: 2900px) {
+  .startEnd {
+    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
+    background-size: stretch;
+    background-repeat: no-repeat;
+    width: 11%;
+    height: fit-content !important;
+    padding-right: 1vw;
+    padding-top: 5vh;
+    transform: translate(-1%, 0%);
+    margin-top: -1% !important;
+    margin-bottom: 0px !important;
+    text-align: center;  
+    position: relative;
+  }
+  .startEndText {
+    position: relative;
+    left: 0vw;
+    bottom: 2vh
+  
+  }
+  ul {
+    padding-right: 25% !important;
+    position: relative;
+    top: -4vh !important;
+    right: 15vw;
+  }
+  li {
+    padding: 0 6% 0 6%;
+  }
+  li a {
+    width: 900px !important;
+  }
+  .navItems {
+    padding: 0 10% 0 10%;
+    font-size: 3em;
+    text-align: center;
+    margin-right: 85%;
+    
+  }
+}
 .navItems:hover {
   -webkit-animation-name:glow, hold;
   -webkit-animation-duration:1s, 9999s;
@@ -698,7 +761,7 @@ li {
   padding: 1px 10px 1px 10px;
   border: 1px 1px 0px 1px ridge black;
   box-shadow: 0px 1px 4px white;
-  border-bottom: 1px solid rgba(83, 211, 204, 0.945);;
+  border-bottom: 1px solid rgb(49, 75, 48);;
   background-color: rgba(43, 46, 43, 0.6)
 }
 .Profile {
@@ -707,7 +770,7 @@ li {
   background-size: cover;
   height: 100%;
   padding-top: 1em;
-  border-bottom: 0.1rem solid rgba(83, 211, 204, 0.945);;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
   width: 100vw !important;
   position: relative;
 margin: 4em auto 0 auto !important;

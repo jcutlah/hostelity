@@ -8,20 +8,25 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = makeStyles(theme => ({
-   
+    root: {
+        width: '100%',
+    },
     container: {
         fontFamily: 'Amatic SC, cursive',
-        margin: '10% auto 0 auto !important',
+        margin: '5% auto 0 auto !important',
         width: '100%',
         fontSize: '2em',
         overflowX: 'wrap',
         maxWidth: '1299px',
-        
+        background:'url(/assets/images/wall.jpg)',
     },
     card: {
         minWidth: 275,
-        backgroundColor: 'rgba(220,220,220,0.8)',
-        boxShadow: '3px 3px 3px',
+        // backgroundColor: 'rgba(220,220,220,0.8)',
+        boxShadow: '3px 3px 15px black',
+        borderRadius: '3px',
+        padding: '10%',
+        // color: 'white',
     },
     bullet: {
         display: 'inline-block',
@@ -43,41 +48,46 @@ const LandingPage = (props) => {
     return (
         <Grid container direction="row" justify="center" alignItems="center" spacing={7} className={classes.container}>
 
-            <Grid item xs={10} spacing={8}>
-                <Card className={classes.card}>
-                    <CardContent>
-                        <Typography variant="h4">
-                            switchBak is THE app for everyone who dreams about traveling the world, but isn’t sure where to start or how to afford it.  switchBak takes the guesswork out of economical travel planning by providing an easy way to find the world’s best hostels and to keep track of trip itineraries.
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-
-            <Grid item xs={6} md={6} lg={6}>
-
-                <Card className={classes.card}>
-                    <CardContent>
-                        <Typography variant="h5">
-                            The switchBak app makes it easy to get started quickly by keeping things simple.
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-
-            <Grid item xs={10} md={6} lg={6} align='center'>
-                <img src='/assets/images/tripPlot.gif' width='90%'></img>
-                <Typography variant="h6">
-                <hr></hr>
-                    Just enter where you want to go then click begin!
-                    <hr></hr>
+            <Grid item xs={12} lg={12} spacing={2} className="landingHeader">
+                <Typography variant align="center">
+                    <h1> Welcome to switchBak! </h1>
                 </Typography>
+                <Card className={classes.card}> 
+                    <Typography variant>
+                        <p>
+                            switchBak is THE app for everyone who dreams about traveling the world, but isn’t sure where to start or how to afford it.  switchBak takes the guesswork out of economical travel planning by providing an easy way to find the world’s best hostels and to keep track of trip itineraries.
+                        </p>
+                    </Typography>
+                </Card>
             </Grid>
 
             <Grid item xs={12} md={6} lg={6}>
-                <Card>
+
+                <Card className={classes.card}>
                     <CardContent>
-                        <Typography variant="h5">
-                            switchBak incorporates some of the world's most powerful APIs in order to locate the best hostels on the planet just for you.
+                        <Typography variant>
+                            <p>
+                                The switchBak app makes it easy to get started quickly by keeping things simple.
+                            </p>
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={6} align='center'>
+                <img src='/assets/images/tripPlot.gif' width='90%'></img>
+                <Typography variant="h6">  
+                     Just enter where you want to go then click begin!   
+                </Typography>
+            </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+                <Card className={classes.card}>
+                    <CardContent>
+                        <Typography variant>
+                            <p>
+                                switchBak incorporates some of the world's most powerful APIs in order to locate the best hostels on the planet just for you.
+                            </p>
+                            
                          </Typography>
                     </CardContent>
                 </Card>
@@ -91,22 +101,23 @@ const LandingPage = (props) => {
             </Grid>
 
             <Grid item xs={12} md={6} lg={6}>
-                <Card>
+                <Card className={classes.card}>
                     <CardContent>
-                        <Typography variant="h5">
-                             switchBak keeps track of the adventure you've planned and saves the trip to your user profile in My Trips for quick and easy future reference.
+                        <Typography variant>
+                            <p>
+                               switchBak keeps track of the adventure you've planned and saves the trip to your user profile in My Trips for quick and easy future reference.
+                            </p>
                         </Typography>
                     </CardContent>
                 </Card>
             </Grid>
 
             <Grid item xs={12} md={6} lg={6} align='center'>
-                <img src='/assets/images/saveTrip.gif' width='500px'></img>
+                <img src='/assets/images/saveTrip.gif' width='90%'></img>
                 <Typography variant="h6">
                     Clicking save will add your trip to your My Trips page where you can review and edit it.
                 </Typography>
             </Grid>
-
         </Grid>
     )
 }

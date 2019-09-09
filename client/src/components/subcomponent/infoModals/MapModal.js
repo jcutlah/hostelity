@@ -53,13 +53,8 @@ export default function TransitionsModal() {
                         <Grid container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <h2 id="transition-modal-title">How to plan a trip:</h2>
-                                {/*Add User Helper Information within this grid */}
-
                             </Grid>
                             <Grid item xs={6} align="center">
-
-                                <p id="transition-modal-description"></p>
-                                {/*Add User Helper Information within this grid */}
                                 <h2> Instructions:</h2>
                                 <ol>
                                     <li>Enter a starting and ending point</li>
@@ -70,9 +65,7 @@ export default function TransitionsModal() {
                             </Grid>
                             <Grid item xs={6} align="center">
                                 <img src='/assets/images/tripPlot.gif' width='90%'></img>
-
                             </Grid>
-
                         </Grid>
                     </Paper>
                 </Fade>

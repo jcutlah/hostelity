@@ -2,10 +2,10 @@ import React from "react";
 
 function NoMatch() {
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center">
-        <div className="col-md-12">
-          <div className="jumbotron text-center">
+    <div className="outer-wrapper">
+      <div className="outer-inner-wrapper">
+        <div className="inner-wrapper">
+          <div className="content">
             <h1>Sorry brewski! I think you're a touch off the beaten path.<br />Go on back the way ya came now!</h1>
             <h1>
               <span role="img" aria-label="Face With Rolling Eyes Emoji">

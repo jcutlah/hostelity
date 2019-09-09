@@ -76,7 +76,7 @@ function App() {
 
 
         <Switch>
-          <Route exact path='/welcome' component={LandingPage} />
+          <Route exact path='/' component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/map/:id" component={LoadMap} />

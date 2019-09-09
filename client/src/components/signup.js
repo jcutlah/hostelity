@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '15px',
         boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
         border: '1px solid grey'
-    }
+    },
 }));
 
 
@@ -393,13 +393,8 @@ export default function Signup(props) {
                     >
                         Create Account
                     </Button>
-                    <Grid container>
-                        {/* <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid> */}
-                        <Grid item>
+                    <Grid container align='right'>
+                        <Grid item xs>
                             <Link href="/login" variant="body2">
                                 {"Back to login page"}
                             </Link>
@@ -407,7 +402,7 @@ export default function Signup(props) {
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
+            <Box mt={2}>
                 <Copyright />
             </Box>
         </Container>

@@ -893,3 +893,18 @@ input[type="text"] {
 .tripz.container {
     margin-bottom: 50px;
 }
+
+.outer-wrapper {
+    margin-top: 150px;
+
+}
+
+.outer-inner-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content {
+    text-align: center;
+}
+

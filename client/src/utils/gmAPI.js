@@ -10,18 +10,23 @@ const MapFunctions = {
     checkLegs: () => {
         return (legData.length) ? legData : 'No waypoints'
     },
-    animateMapZoomTo: function (map, targetZoom, markerPos) {
+    animateMapZoomTo: function (map, targetZoom, marker, infowindow) {
         const google = window.google;
         console.log(map.getZoom());
-        var currentZoom = arguments[3] || map.getZoom();
+        var currentZoom = arguments[4] || map.getZoom();
         console.log(currentZoom, targetZoom);
+        if (currentZoom === targetZoom){
+            console.log('meep');
+            infowindow.open(map, marker)
+        }
         if (currentZoom != targetZoom) {
             google.maps.event.addListenerOnce(map, 'zoom_changed', function (event) {
-                MapFunctions.animateMapZoomTo(map, targetZoom, markerPos, currentZoom + (targetZoom > currentZoom ? 1 : -1));
+                MapFunctions.animateMapZoomTo(map, targetZoom, marker, infowindow, currentZoom + (targetZoom > currentZoom ? 1 : -1));
+                
             });
             setTimeout(function(){ 
                 map.setZoom(currentZoom);
-                map.setCenter(markerPos);
+                map.setCenter(marker.position);
             }, 100);
         }
     },
@@ -173,10 +178,19 @@ const MapFunctions = {
                                 markerCallback(true)
                                 console.log(marker.position)
                                 map.panTo(marker.position);
-                                MapFunctions.animateMapZoomTo(map, 12, marker.position)
-                                setTimeout(function(){
-                                    infowindow.open(map, marker);
-                                }, 3000)
+                                MapFunctions.animateMapZoomTo(map, 12, marker, infowindow)
+                                // if (map.getZoom() === 11){
+                                //     infowindow.open(map, marker);
+                                // }
+                                // if (12 - map.getZoom() < 3) {
+                                //     setTimeout(function(){
+                                //         infowindow.open(map, marker);
+                                //     }, 1000);
+                                // } else {
+                                //     setTimeout(function(){
+                                //         infowindow.open(map, marker);
+                                //     }, 2500)
+                                // }
                             });
 
 
@@ -377,7 +391,7 @@ const MapFunctions = {
 
                 // console.log(legData)
                 MapFunctions.handleTripSearch(map, hostelIds, legData, function () {
-                    markerCallback(true);
+                    markerCallback(map.getZoom());
                 })
                 callback(legData, route.legs[0].start_address, route.legs[route.legs.length - 1].end_address, map)
             } else {

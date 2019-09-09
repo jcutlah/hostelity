@@ -40,14 +40,16 @@ function App() {
             } else {
               console.log('sending user to login page');
               // console.log(window.location.pathname);
-              if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+              if (window.location.pathname !== '/login' && window.location.pathname !== '/signup' &&
+              window.location.pathname !== '/') {
                 window.location = '/login';
               }
             }
             // console.log('meep');
 
           } else {
-            if (window.location.pathname !== '/login' && window.location.pathname !== '/signup') {
+            if (window.location.pathname !== '/login' && window.location.pathname !== '/signup' &&
+            window.location.pathname !== '/') {
               window.location = '/login';
             }
           }
@@ -76,7 +78,7 @@ function App() {
 
 
         <Switch>
-          <Route exact path='/welcome' component={LandingPage} />
+          <Route exact path='/' component={LandingPage} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/map" component={Map} />
           <Route exact path="/map/:id" component={LoadMap} />

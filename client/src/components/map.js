@@ -134,7 +134,17 @@ function Map(props) {
             }
         })
     }
-    const infoWindowListener = () => {
+    
+    const infoWindowListener = (zoom) => {
+        let timeout;
+        console.log(zoom)
+        if (zoom < 6) {
+            console.log('less than 6')
+            timeout = 1500;
+        } else {
+            console.log('not less than 6');
+            timeout = 750;
+        } 
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
             console.log(infoWindowButtons);
@@ -144,8 +154,7 @@ function Map(props) {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
             })
-
-        }, 500)
+        }, timeout)
     }
 
     const handleChange = event => {

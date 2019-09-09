@@ -6,7 +6,7 @@ const Header = (props) => {
     return (
         <Grid container>
             <div className="header">
-                <Link to='/my-trips' className="brand-logo">
+                <Link to='/' className="brand-logo">
                     <img src='/assets/images/switchBakLogo.png' alt="logo" />
                 </Link>
             </div>

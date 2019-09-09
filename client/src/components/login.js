@@ -236,7 +236,7 @@ export default function SignIn() {
                     </Button>
                         <Grid container align="center">
                             <Grid item xs={6} align="center">
-                                <Link href="/signup" variant="body2">
+                                <Link href="/" variant="body2">
                                     {"Learn More"}
                                 </Link>
                             </Grid>

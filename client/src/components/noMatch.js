@@ -9,7 +9,7 @@ function NoMatch() {
             <h1>Sorry brewski! I think you're a touch off the beaten path.<br />Go on back the way ya came now!</h1>
             <h1>
               <span role="img" aria-label="Face With Rolling Eyes Emoji">
-                🙄
+                <img src="/assets/images/brock.jpg" />
               </span>
             </h1>
           </div>

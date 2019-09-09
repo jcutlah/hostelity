@@ -54,14 +54,21 @@ export default function TransitionsModal() {
                         <Grid container spacing={3}>
                             <Grid item xs={12} align='center'>
 
-                                <h2 id="transition-modal-title">SwitchBak: Hostel Selection</h2>
+                                <h2 id="transition-modal-title">How to plan a trip:</h2>
                                 {/*Add User Helper Information within this grid */}
-
+                            
                             </Grid>
                             <Grid item xs={12} align="center">
 
-                                <p id="transition-modal-description">This is how you pick a hostel hurr durr</p>
+                                <p id="transition-modal-description">How you pick a hostel:</p>
                                 {/*Add User Helper Information within this grid */}
+                               
+                        <ol>
+                            <li>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
+                            <li>Click on any lodging marker to view information about it</li>
+                            <li>Click add to trip on a selected lodging marker to add it to your trip</li>
+                            <li>When you are done adding lodging locations click save your trip!! </li>
+                        </ol>
 
                             </Grid>
 

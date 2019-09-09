@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
         padding: '1vh !important',
         position: 'relative !important',
         margin: '0 auto !important',
-        top: '15vh',
+        top: '20vh',
         backgroundColor: 'rgba(220,220,220,0.8)',
         borderRadius: '15px',
         boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
@@ -176,84 +176,84 @@ export default function SignIn() {
 
     return (
         <Grid container direction="row" justify="center" alignItems="center" spacing={5} className={classes.container}>
-        <Container component="main" maxWidth="xs" className={classes.loginContainer}>
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
+            <Container component="main" maxWidth="xs" className={classes.loginContainer}>
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
         </Typography>
-                <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        onChange={handleInputChange}
-                        className={"browser-default"}
-                        error={loginError.username || loginError.missingCred}
-                    />
-                    <div className={loginError.username ?
-                        classes.formErrorMessage :
-                        classes.formNonErrorMessage}
-                    >Incorrect username</div>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        error={loginError.password || loginError.missingCred}
-                        onChange={handleInputChange}
-                    />
-                    <div className={loginError.password ?
-                        classes.formErrorMessage :
-                        classes.formNonErrorMessage}
-                    >Incorrect password</div>
-                    <div className={loginError.missingCred ?
-                        classes.formErrorMessage :
-                        classes.formNonErrorMessage}
-                    >You are missing credentials!!</div>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
+                    <form onSubmit={handleFormSubmit} className={classes.form} noValidate>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            onChange={handleInputChange}
+                            className={"browser-default"}
+                            error={loginError.username || loginError.missingCred}
+                        />
+                        <div className={loginError.username ?
+                            classes.formErrorMessage :
+                            classes.formNonErrorMessage}
+                        >Incorrect username</div>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            error={loginError.password || loginError.missingCred}
+                            onChange={handleInputChange}
+                        />
+                        <div className={loginError.password ?
+                            classes.formErrorMessage :
+                            classes.formNonErrorMessage}
+                        >Incorrect password</div>
+                        <div className={loginError.missingCred ?
+                            classes.formErrorMessage :
+                            classes.formNonErrorMessage}
+                        >You are missing credentials!!</div>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            {/* <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link> */}
+                        <Grid container align="center">
+                            <Grid item xs={6} align="center">
+                                <Link href="/signup" variant="body2">
+                                    {"Learn More"}
+                                </Link>
+                            </Grid>
+                            <Grid item xs={6} align="center">
+                                <Link href="/signup" variant="body2">
+                                    {"Create an Account"}
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} align="center">
-                            <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <div>
-            </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
-        </Container>
+                    </form>
+                </div>
+                <div>
+                </div>
+                <Box mt={2}>
+                    <Copyright />
+                </Box>
+            </Container>
         </Grid>
     );
 }

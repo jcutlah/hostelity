@@ -143,7 +143,17 @@ function LoadMap(props) {
             }
         })
     }
-    const infoWindowListener = () => {
+
+    const infoWindowListener = (zoom) => {
+        let timeout;
+        console.log(zoom)
+        if (zoom < 6) {
+            console.log('less than 6')
+            timeout = 1500;
+        } else {
+            console.log('not less than 6');
+            timeout = 750;
+        } 
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
             console.log(infoWindowButtons);
@@ -154,7 +164,7 @@ function LoadMap(props) {
                 }
             })
 
-        }, 500)
+        }, timeout)
     }
 
     var trip = {}

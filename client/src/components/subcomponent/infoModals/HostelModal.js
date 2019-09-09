@@ -7,16 +7,31 @@ import Help from '@material-ui/icons/Help'
 // import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles(theme => ({
     modal: {
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '90%',
+        height: '50vh !important',
+        margin: '0 auto'
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid black',
+        border: '2px solid #000',
+        maxHeight: 'calc(100vh - 210px)',
+        overflowY: 'auto',
+        marginTop: '5%',
+        marginBottom: '5%',
         boxShadow: theme.shadows[5],
-        padding: '0',
+        padding: theme.spacing(2, 4, 3),
+        overflow: 'scroll'
     },
+    text: {
+        fontSize: '1.25em !important'
+    },
+    instructions: {
+        width: '90%',
+        textAlign: "left",
+        lineHeight: '5vh'
+    }
 }));
 
 export default function TransitionsModal() {
@@ -50,21 +65,22 @@ export default function TransitionsModal() {
                 }}
             >
                 <Fade in={open}>
-                    <Paper>
-                        <Grid container spacing={3}>
+                    <Paper className={classes.paper}>
+                        <Grid container spacing={3} className={classes.text}>
                             <Grid item xs={12} align='center'>
                                 <h2 id="transition-modal-title">How to view and add hostels:</h2>
                             </Grid>
-                            <Grid item xs={6} align="center">
+                            <Grid item xs={12} md={6} align="center">
+                                <h2>Instructions:</h2>
                                 <ol>
-                                    <li>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
-                                    <li>Click on any lodging marker to view information about it</li>
-                                    <li>Click add to trip on a selected lodging marker to add it to your trip</li>
-                                    <li>When you are done adding lodging locations click save your trip!! </li>
+                                    <li className={classes.instructions}>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
+                                    <li className={classes.instructions}>Click on any lodging marker to view information about it</li>
+                                    <li className={classes.instructions}>Click add to trip on a selected lodging marker to add it to your trip</li>
+                                    <li className={classes.instructions}>When you are done adding lodging locations click save your trip!! </li>
                                 </ol>
                             </Grid>
-                            <Grid item xs={6} align="center">
-                                <img src='/assets/images/tripWaypointZoom.gif' width='90%'></img>
+                            <Grid item xs={12} md={6} align="center">
+                                <img src='/assets/images/tripWaypointZoom.gif' width='100%' height='90%'></img>
                             </Grid>
                         </Grid>
                     </Paper>

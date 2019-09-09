@@ -3,7 +3,7 @@ import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/typography';
+import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
@@ -49,11 +49,11 @@ const LandingPage = (props) => {
         <Grid container direction="row" justify="center" alignItems="center" spacing={7} className={classes.container}>
 
             <Grid item xs={12} lg={12} spacing={2} className="landingHeader">
-                <Typography variant align="center">
+                <Typography align="center">
                     <h1> Welcome to switchBak! </h1>
                 </Typography>
                 <Card className={classes.card}> 
-                    <Typography variant>
+                    <Typography>
                         <p>
                             switchBak is THE app for everyone who dreams about traveling the world, but isn’t sure where to start or how to afford it.  switchBak takes the guesswork out of economical travel planning by providing an easy way to find the world’s best hostels and to keep track of trip itineraries.
                         </p>

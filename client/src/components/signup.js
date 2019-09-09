@@ -37,6 +37,14 @@ const useStyles = makeStyles(theme => ({
             margin: '0 auto'
         },
     },
+    container: {
+        fontFamily: 'Amatic SC, cursive',
+        margin: '5% auto 0 auto !important',
+        width: '100%',
+        fontSize: '2em',
+        overflowX: 'wrap',
+        maxWidth: '1299px',
+    },
     paper: {
         marginTop: theme.spacing(0),
         display: 'flex',
@@ -68,12 +76,12 @@ const useStyles = makeStyles(theme => ({
         padding: '1vh !important',
         position: 'relative !important',
         margin: '0 auto !important',
-        top: '15vh',
+        top: '10vh',
         backgroundColor: 'rgba(220,220,220,.9)',
         borderRadius: '15px',
         boxShadow: '0px 1px 1px rgba(20, 100, 30, 0.8)',
         border: '1px solid grey'
-    }
+    },
 }));
 
 
@@ -295,6 +303,7 @@ export default function Signup(props) {
     }
 
     return (
+        <Grid container direction="row" justify="center" alignItems="center" spacing={5} className={classes.container}>
         <Container component="main" maxWidth="xs" className={classes.signupContainer}>
             <CssBaseline />
             <div className={classes.paper}>
@@ -384,13 +393,8 @@ export default function Signup(props) {
                     >
                         Create Account
                     </Button>
-                    <Grid container>
-                        {/* <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid> */}
-                        <Grid item>
+                    <Grid container align='right'>
+                        <Grid item xs>
                             <Link href="/login" variant="body2">
                                 {"Back to login page"}
                             </Link>
@@ -398,9 +402,10 @@ export default function Signup(props) {
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
+            <Box mt={2}>
                 <Copyright />
             </Box>
         </Container>
+        </Grid>
     );
 }

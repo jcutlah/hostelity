@@ -174,9 +174,15 @@ const MapFunctions = {
                                 console.log(marker.position)
                                 map.panTo(marker.position);
                                 MapFunctions.animateMapZoomTo(map, 12, marker.position)
-                                setTimeout(function(){
-                                    infowindow.open(map, marker);
-                                }, 3000)
+                                if (12 - map.getZoom() < 3) {
+                                    setTimeout(function(){
+                                        infowindow.open(map, marker);
+                                    }, 1000);
+                                } else {
+                                    setTimeout(function(){
+                                        infowindow.open(map, marker);
+                                    }, 3000)
+                                }
                             });
 
 

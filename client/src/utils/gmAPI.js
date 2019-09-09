@@ -170,11 +170,13 @@ const MapFunctions = {
                                 infoWindows.forEach(win => {
                                     win.close()
                                 })
-                                infowindow.open(map, marker);
                                 markerCallback(true)
                                 console.log(marker.position)
                                 map.panTo(marker.position);
                                 MapFunctions.animateMapZoomTo(map, 12, marker.position)
+                                setTimeout(function(){
+                                    infowindow.open(map, marker);
+                                }, 3000)
                             });
 
 

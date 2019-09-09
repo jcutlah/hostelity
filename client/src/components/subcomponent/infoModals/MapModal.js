@@ -52,17 +52,20 @@ export default function TransitionsModal() {
                     <Paper>
                         <Grid container spacing={3}>
                             <Grid item xs={12} align='center'>
-                                <h2 id="transition-modal-title">SwitchBak: Map Search</h2>
-                                {/*Add User Helper Information within this grid */}
-
+                                <h2 id="transition-modal-title">How to plan a trip:</h2>
                             </Grid>
-                            <Grid item xs={12} align="center">
-
-                                <p id="transition-modal-description">react-transiton-group animates me.</p>
-                                {/*Add User Helper Information within this grid */}
-
+                            <Grid item xs={6} align="center">
+                                <h2> Instructions:</h2>
+                                <ol>
+                                    <li>Enter a starting and ending point</li>
+                                    <li>Press add waypoint if you would like to add locations between your starting and ending points </li>
+                                    <li>Press begin once you have entered all of the locations you want to include on your trip</li>
+                                    <li>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
+                                </ol>
                             </Grid>
-
+                            <Grid item xs={6} align="center">
+                                <img src='/assets/images/tripPlot.gif' width='90%'></img>
+                            </Grid>
                         </Grid>
                     </Paper>
                 </Fade>

@@ -38,6 +38,14 @@ const useStyles = makeStyles(theme => ({
             height: 'fit-content'
         },
     },
+    container: {
+        fontFamily: 'Amatic SC, cursive',
+        margin: '5% auto 0 auto !important',
+        width: '100%',
+        fontSize: '2em',
+        overflowX: 'wrap',
+        maxWidth: '1299px',
+    },
     paper: {
         marginTop: theme.spacing(0),
         display: 'flex',
@@ -167,6 +175,7 @@ export default function SignIn() {
     }
 
     return (
+        <Grid container direction="row" justify="center" alignItems="center" spacing={5} className={classes.container}>
         <Container component="main" maxWidth="xs" className={classes.loginContainer}>
             <CssBaseline />
             <div className={classes.paper}>
@@ -245,5 +254,6 @@ export default function SignIn() {
                 <Copyright />
             </Box>
         </Container>
+        </Grid>
     );
 }

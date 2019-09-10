@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box'
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-    },
+        },
     container: {
         fontFamily: 'Amatic SC, cursive',
         margin: '5% auto 0 auto !important',
@@ -22,7 +22,8 @@ const useStyles = makeStyles(theme => ({
         boxShadow: '0px 0px 10px black'
     },
     card: {
-        minWidth: 275,
+        width: 'auto',
+        margin: '0 auto !important',
         // backgroundColor: 'rgba(220,220,220,0.8)',
         boxShadow: '3px 3px 15px black',
         borderRadius: '3px',

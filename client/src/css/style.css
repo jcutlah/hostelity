@@ -202,11 +202,11 @@ margin: 0 auto 0 auto !important;
   }
   .navBottom {
     bottom: 0;
-    height: 4%;
+    height: 5%;
     width: 100%;
     left: 0;
-    padding-top: .7vh;
-    padding-bottom: 2.25vh !important;
+    padding-top: .75vh;
+    padding-bottom: 2vh !important;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 
@@ -228,17 +228,7 @@ margin: 0 auto 0 auto !important;
     
     
   }
-  .navBottom {
-    bottom: 0;
-    height: 4%;
-    width: 100%;
-    padding-top: .3vh;
-    padding-bottom: 1.8vh;
-    border-top: 0.1rem solid orange;
-    display: flex;
-    background-color: rgb(41, 53, 43); 
-    justify-content: space-between;
-  }
+ 
   .startEnd {
    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
    background-size: stretch;

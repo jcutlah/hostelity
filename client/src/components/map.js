@@ -202,6 +202,8 @@ function Map(props) {
         MySwal.fire({
             title: <p>Successfully Saved Trip!</p>,
             footer: 'switchBak 2019',
+            confirmButtonText:
+                'Go to My Trips!',
             onOpen: () => {
                 // `MySwal` is a subclass of `Swal`
                 //   with all the same instance & static methods

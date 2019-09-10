@@ -74,8 +74,10 @@ function LoadMap(props) {
 
     const saved = () => {
         MySwal.fire({
-            title: <p>Successfully Saved Trip!</p>,
+            title: <h2>Saving your Trip!</h2>,
             footer: 'switchBak 2019',
+            confirmButtonText:
+                'Go to My Trips!',
             onOpen: () => {
                 // `MySwal` is a subclass of `Swal`
                 //   with all the same instance & static methods
@@ -90,7 +92,6 @@ function LoadMap(props) {
         event.preventDefault();
         Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
             .then(function (res) {
-
                 //// console.log(res)
                 res.data.message === "success" ? saved() : alert('An error occurred')
             })

@@ -50,16 +50,17 @@ export default function TransitionsModal() {
             >
                 <Fade in={open}>
                     <Paper>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} align='center'>
-                                <h2 id="transition-modal-title">SwitchBak: Map Search</h2>
+                        <div className="modal-inner-wrapper">
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} align='center'>
+                                    <h2 id="transition-modal-title">SwitchBak: Map Search</h2>
+                                </Grid>
+                                <Grid item xs={12} align="center">
+                                    <p id="transition-modal-description">react-transiton-group animates me.</p>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} align="center">
-                                <p id="transition-modal-description">react-transiton-group animates me.</p>
-
-                            </Grid>
-
-                        </Grid>
+                            <div onClick={handleClose} className='modal-close'>X</div>
+                        </div>
                     </Paper>
                 </Fade>
             </Modal>

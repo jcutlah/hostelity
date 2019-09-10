@@ -2,25 +2,13 @@ import React, { useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Button from "@material-ui/core/Button";
-import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import TextField from '@material-ui/core/TextField'
-import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
-import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
-import ReactDOM from 'react-dom';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid'
 import HostelModal from './subcomponent/infoModals/HostelModal'
-// const google = window.google;
-// import { makeStyles } from '@material-ui/core/styles';
-const Marker = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles(theme => ({
     map: {
@@ -66,7 +54,7 @@ function LoadMap(props) {
     // }, [GoogleMapReact])
     const setHostels = (hostel) => {
         let hostelz = state.hostels;
-        console.log(hostelz)
+        // console.log(hostelz)
         let alreadyAdded = false;
         hostelz.forEach(hst => {
             if (hst.placeId === hostel.placeId) {
@@ -76,7 +64,7 @@ function LoadMap(props) {
         if (!alreadyAdded) {
             hostelz.push(hostel);
         }
-        console.log(hostelz);
+        // console.log(hostelz);
         setState({
             ...state, hostels: hostelz
         })
@@ -86,18 +74,18 @@ function LoadMap(props) {
         event.preventDefault();
         Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
             .then(function (res) {
-                //console.log(res)
+                //// console.log(res)
                 res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
             })
             .catch(err => {
-                //console.log(err);
+                //// console.log(err);
             })
     }
 
     const defaultview = {
         center: {
-            lat: 37,
-            lng: -90
+            lat: 30,
+            lng: -30
         },
         zoom: 1
     };
@@ -126,7 +114,7 @@ function LoadMap(props) {
             placeId: event.target.id,
             imageUrl: hostelData.imageurl
         }
-        //console.log(data)
+        //// console.log(data)
         // let hostelz = hostels;
         // hostelz.push(data)
         // let tripz = state.trip;
@@ -135,7 +123,7 @@ function LoadMap(props) {
         event.target.setAttribute('data-clicked', 'true');
         var children = event.target.parentNode.childNodes
         children.forEach(child => {
-            //console.log(child.nodeName);
+            //// console.log(child.nodeName);
             if (child.nodeName === "BUTTON") {
                 if (child.getAttribute('class') === "disabledButton") {
                     child.setAttribute('style', 'display: inline-block !important');
@@ -146,19 +134,19 @@ function LoadMap(props) {
 
     const infoWindowListener = (zoom) => {
         let timeout;
-        console.log(zoom)
+        // console.log(zoom)
         if (zoom < 6) {
-            console.log('less than 6')
+            // console.log('less than 6')
             timeout = 1500;
         } else {
-            console.log('not less than 6');
+            // console.log('not less than 6');
             timeout = 750;
         } 
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
-            console.log(infoWindowButtons);
+            // console.log(infoWindowButtons);
             infoWindowButtons.forEach(butt => {
-                console.log(butt.dataset);
+                // console.log(butt.dataset);
                 if (butt.dataset.clicked !== "true") {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
@@ -173,7 +161,7 @@ function LoadMap(props) {
         Axios.get(`/api/trips/${props.match.params.id}`)
             .then(res => {
                 var data = res.data
-                console.log(res.data);
+                // console.log(res.data);
                 const hostelIds = [];
                 trip = {
                     start: data.waypoints[0].name,
@@ -191,9 +179,9 @@ function LoadMap(props) {
                         hostelIds.push(hostel.placeId);
                     })
                 })
-                console.log(trip)
+                // console.log(trip)
                 MapFunctions.calculateAndDisplayRoute(map, trip.start, trip.end, true, trip.stops, hostelIds, function (data, startAddress, endAddress) {
-                    console.log(data, startAddress, endAddress)
+                    // console.log(data, startAddress, endAddress)
                 }, infoWindowListener)
             })
             .catch(err => console.log(err))

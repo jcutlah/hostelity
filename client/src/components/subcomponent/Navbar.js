@@ -9,10 +9,10 @@ import Fab from '@material-ui/core/Fab'
 const Navbar = (props) => {
     const logOut = event => {
         event.preventDefault();
-        console.log('logging out');
+        // console.log('logging out');
         Axios.get('/auth/users/logout')
             .then(function (res) {
-                console.log(res);
+                // console.log(res);
                 // setLoggedIn(false);
                 props.loginCallback({
                     isLoggedIn: false,

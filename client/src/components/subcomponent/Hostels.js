@@ -109,19 +109,19 @@ const Hostels = (props) => {
                             </CardContent>
                             <CardActions>
                                 <Grid item xs={6} align='left'>
-                                    <Typography>
+                                    {/* <Typography> */}
                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h6.fontSize'}>
                                             <Button className={classes.getDirections} align='left' size='medium'><a target='_blank' href={thisAddressSearch} className="hostelLink" align="center">Get Directions</a></Button>
                                         </Box>
-                                    </Typography>
+                                    {/* </Typography> */}
                                 </Grid>
                                 <Grid item xs={6} align='right'>
-                                    <Typography>
+                                    {/* <Typography> */}
                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'} fontSize={'h3.fontSize'}>
 
                                             <Button className={classes.removeHostel} align='right' size="medium"><a align='right' className="hostelLink" href={'#'} data-id={hostel._id} onClick={deleteHostel}>Remove From Trip</a></Button>
                                         </Box>
-                                    </Typography>
+                                    {/* </Typography> */}
                                 </Grid>
                             </CardActions>
                         </Card>

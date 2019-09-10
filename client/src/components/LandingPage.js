@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Trips from './subcomponent/Trips';
-import Axios from 'axios';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';

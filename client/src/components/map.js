@@ -12,19 +12,15 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import Divider from '@material-ui/core/Divider';
 import MapFunctions from '../utils/gmAPI'
-import ReactDOM from 'react-dom';
 import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import CityList from './subcomponent/CityList'
 import '../css/style.css'
 import MapModal from './subcomponent/infoModals/MapModal'
 import HostelModal from './subcomponent/infoModals/HostelModal'
-import SummaryModal from './subcomponent/infoModals/SummaryModal'
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
-const Marker = ({ text }) => <div>{text}</div>;
 
 const useStyles = makeStyles(theme => ({
     map: {
@@ -90,8 +86,8 @@ function Map(props) {
     })
     const defaultview = {
         center: {
-            lat: 37,
-            lng: -90
+            lat: 30,
+            lng: -30
         },
         zoom: 1
     };
@@ -121,7 +117,7 @@ function Map(props) {
             placeId: event.target.id,
             imageUrl: hostelData.imageurl
         }
-        //console.log(data)
+        //// console.log(data)
         let hostelz = hostels;
         hostelz.push(data)
         let tripz = state.trip;
@@ -130,7 +126,7 @@ function Map(props) {
         event.target.setAttribute('data-clicked', 'true');
         var children = event.target.parentNode.childNodes
         children.forEach(child => {
-            //console.log(child.nodeName);
+            //// console.log(child.nodeName);
             if (child.nodeName === "BUTTON") {
                 if (child.getAttribute('class') === "disabledButton") {
                     child.setAttribute('style', 'display: inline-block !important');
@@ -141,19 +137,19 @@ function Map(props) {
 
     const infoWindowListener = (zoom) => {
         let timeout;
-        console.log(zoom)
+        // console.log(zoom)
         if (zoom < 6) {
-            console.log('less than 6')
+            // console.log('less than 6')
             timeout = 1500;
         } else {
-            console.log('not less than 6');
+            // console.log('not less than 6');
             timeout = 750;
         }
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
-            console.log(infoWindowButtons);
+            // console.log(infoWindowButtons);
             infoWindowButtons.forEach(butt => {
-                console.log(butt.dataset);
+                // console.log(butt.dataset);
                 if (butt.dataset.clicked !== "true") {
                     butt.addEventListener("click", addHostelHandler, false);
                 }
@@ -162,7 +158,7 @@ function Map(props) {
     }
 
     const handleChange = event => {
-        // //console.log(state);
+        // //// console.log(state);
         const { name, value } = event.target;
         var usedThisStop = false;
         var oldStops = state.stops;
@@ -194,8 +190,8 @@ function Map(props) {
         }
     }
     const addInput = () => {
-        // //console.log(state);
-        // //console.log("addInput running");
+        // //// console.log(state);
+        // //// console.log("addInput running");
         var newId = state.inputId + 1;
         setState({ ...state, inputId: newId });
 
@@ -204,15 +200,15 @@ function Map(props) {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
-                //console.log(res)
+                //// console.log(res)
                 res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
             })
             .catch(err => {
-                //console.log(err);
+                //// console.log(err);
             })
 
     }
-    // //console.log(state);
+    // //// console.log(state);
     return (
         // Important! Always set the container height explicitly
         <div className="map-container">
@@ -367,7 +363,7 @@ function Map(props) {
                                                 const google = window.google
                                                 document.querySelector('#form-top').setAttribute('style', 'display:block');
                                                 await MapFunctions.calculateAndDisplayRoute(state.map, state.start, state.end, false, state.stops, [], function (routeLegs, start, end, map) {
-                                                    //console.log(routeLegs);
+                                                    //// console.log(routeLegs);
                                                     var newTrip = {
                                                         waypoints: routeLegs,
                                                         start: start,
@@ -378,12 +374,12 @@ function Map(props) {
                                                         lat: routeLegs[0].location[0],
                                                         lng: routeLegs[0].location[1]
                                                     }
-                                                    console.log(center)
+                                                    // console.log(center)
                                                     var loc = new google.maps.LatLng(center.lat, center.lng)
                                                     ///loop through leg data, use logic to add waypoints to state.waypoints, and add leg data to state.trip
                                                     //ADDING WAYPOINT INFO TO STATE.WAYPOINTS
                                                     setState({ ...state, trip: newTrip })
-                                                    // //console.log(state.waypoints)
+                                                    // //// console.log(state.waypoints)
                                                     return
                                                 }, infoWindowListener)
 
@@ -414,20 +410,19 @@ function Map(props) {
                             yesIWantToUseGoogleMapApiInternals={true}
                             // onGoogleApiLoaded={({ map, maps }) => {
                             onGoogleApiLoaded={(mapper) => {
-                                console.log(mapper);
+                                // console.log(mapper);
                                 MapFunctions.handleApiLoaded(mapper.map, mapper.maps)
                                 setState({ ...state, map: mapper.map })
                             }}
-                            onChange={console.log('change')}
                             id="myMap"
 
                         >
 
-                            <Marker
+                            {/* <Marker
                                 lat={69.955413}
                                 lng={30.337844}
                                 text="My Marker"
-                            />
+                            /> */}
                         </GoogleMapReact>
                         <br />
                         <Grid container>

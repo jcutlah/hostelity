@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Waypoints from './Waypoints';
 import Axios from 'axios'
-import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import "../../css/style.css";
 import Box from '@material-ui/core/Box'
-import { callbackify } from 'util';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -127,13 +125,13 @@ const Trips = (props) => {
 
     const deleteTrip = (event) => {
         event.preventDefault();
-        console.log(event.target);
-        console.log(event.currentTarget);
+        // console.log(event.target);
+        // console.log(event.currentTarget);
         let tripId = event.currentTarget.getAttribute('data-id');
 
         Axios.delete(`/api/trips/${tripId}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 props.delTripCallback(tripId);
             })
             .catch(err => console.log(err))
@@ -156,10 +154,10 @@ const Trips = (props) => {
     return (
         <div>
             {props.trips.map((trip, i) => {
-                console.log(trip)
+                // console.log(trip)
 
                 return (
-                    <Paper className={classes.root}>
+                    <Paper key={i} className={classes.root}>
                         <Grid className={classes.cardContainer} container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <Card key={i} className={classes.card}>
@@ -203,20 +201,20 @@ const Trips = (props) => {
                                             <hr></hr>
                                             <Grid container>
                                                 <Grid item xs={6} align="left">
-                                                    <Typography>
+                                                    {/* <Typography> */}
                                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
                                                             <a className={classes.editTrip} href={`/map/${trip._id}`}> <Button className={classes.editTrip} size="small">Edit this Trip</Button></a>
                                                         </Box>
-                                                    </Typography>
+                                                    {/* </Typography> */}
                                                 </Grid>
                                                 <Grid item xs={6} align="right">
-                                                    <Typography>
+                                                    {/* <Typography> */}
                                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
                                                             <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
                                                                 data-id={trip._id}
                                                                 onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
                                                         </Box>
-                                                    </Typography>
+                                                    {/* </Typography> */}
                                                 </Grid>
                                             </Grid>
 

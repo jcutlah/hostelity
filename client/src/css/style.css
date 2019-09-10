@@ -15,6 +15,26 @@ body, html {
   box-shadow:3px 5px 30px black
 
 }
+
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+}
+
 /* MEDIA QUERY SML SIZE */
 @media (max-width: 767px) {
   .infoButton {
@@ -150,6 +170,28 @@ body, html {
   }
 }
 @media (max-width: 460px){
+  
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+  position: relative;
+margin: 0 auto 0 auto !important;
+}
+
   .header {
     background-color:  rgb(41, 53, 43) !important;
 
@@ -227,6 +269,28 @@ body, html {
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
+  
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+  position: relative;
+margin: 4em auto 0 auto !important;
+}
+
   .infoButton {
     top: 1.5vh !important;
     right: 1.5vw !important;
@@ -757,27 +821,6 @@ li {
     display: none;
 }
 
-
-.ProfileContent {
-  height: 99.5%;
-  width: fit-content;
-  padding: 1px 10px 1px 10px;
-  border: 1px 1px 0px 1px ridge black;
-  box-shadow: 0px 1px 4px white;
-  border-bottom: 1px solid rgb(49, 75, 48);;
-  background-color: rgba(43, 46, 43, 0.6)
-}
-.Profile {
-  background-image: url("/assets/images/bench.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  padding-top: 0em;
-  border-bottom: 0.1rem solid rgb(49, 75, 48);;
-  width: 100vw !important;
-  position: relative;
-margin: 0 auto 0 auto !important;
-}
 
 /* @media (min-width: 767px) {
   .Profile {

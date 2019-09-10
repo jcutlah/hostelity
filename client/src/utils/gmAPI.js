@@ -1,7 +1,7 @@
 // import React from 'react'
 var globalMarkers = []
 var routeMarkers = []
-var globalArray = []
+
 var legData = []
 var infoWindows = []
 let defaultImage = '/assets/images/clicheHostel.jpg';
@@ -19,7 +19,7 @@ const MapFunctions = {
             // console.log('meep');
             infowindow.open(map, marker)
         }
-        if (currentZoom != targetZoom) {
+        if (currentZoom !== targetZoom) {
             google.maps.event.addListenerOnce(map, 'zoom_changed', function (event) {
                 MapFunctions.animateMapZoomTo(map, targetZoom, marker, infowindow, currentZoom + (targetZoom > currentZoom ? 1 : -1));
                 
@@ -42,7 +42,7 @@ const MapFunctions = {
 
                 const makeMarkerHTML = (markerData, saved) => {
                     // // console.log(markerData)
-                    let defaultImage = 'https://q-cf.bstatic.com/images/hotel/max1024x768/103/103907246.jpg?'
+                    // let defaultImage = 'https://q-cf.bstatic.com/images/hotel/max1024x768/103/103907246.jpg?'
                     let contentString =
                     `<div class="infowindow-wrapper">` + 
                         `<div class="hostel-title">` + 
@@ -108,7 +108,7 @@ const MapFunctions = {
                             }
                             var bigPic;
                             //Checking if theres a photo for each res:
-                            var checkPhotos = () => {
+                            var checkPhotos = (index) => {
                                 if (res[i].photos) {
                                     // //// console.log(res[i].photos[0])
                                     var thisImg = (res[i].photos[0].getUrl({ maxWidth: 200, maxHeight: 'auto' }))

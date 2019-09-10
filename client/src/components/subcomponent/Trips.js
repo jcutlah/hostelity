@@ -29,9 +29,6 @@ const useStyles = makeStyles(theme => ({
         minWidth: 275,
         paddingTop: '30px',
         marginBottom: '20px',
-        fontFamily: 'Amatic SC, cursive',
-    },
-    card: {
         boxShadow: '3px 10px 30px black',
         background: 'url(/assets/images/cork.jpg)',
         backgroundPosition: 'center',
@@ -108,8 +105,6 @@ const useStyles = makeStyles(theme => ({
     createTrip: {
         margin: theme.spacing(3),
         padding: theme.spacing(2),
-        background: '-webkit-gradient(linear, right top, left top, from(rgb(41, 53, 43)), color-stop(20%, rgb(49, 75, 48)), color-stop(65%, rgb(164, 197, 160)), color-stop(65%, rgb(41, 53, 43)))',
-        background: '-webkit-linear-gradient(right, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 65%, rgb(41, 53, 43) 65%)',
         background: 'linear-gradient(90deg, rgb(164, 197, 160), rgb(64, 105, 71));'
     },
     treatYoSelfArrow: {
@@ -121,7 +116,6 @@ const useStyles = makeStyles(theme => ({
 
 const Trips = (props) => {
     const classes = useStyles();
-    const [userChecked, setUserChecked] = React.useState(false);
 
     const deleteTrip = (event) => {
         event.preventDefault();
@@ -143,7 +137,7 @@ const Trips = (props) => {
                     Treat yo self!!!
                     <br></br>
                     <div className="map-arrow-wrapper">
-                        <img className={classes.treatYoSelfArrow} src="/assets/images/DottedLine.png" />
+                        <img alt="map-arrow" className={classes.treatYoSelfArrow} src="/assets/images/DottedLine.png" />
                     </div>
                     <Button variant="contained" className={classes.createTrip} href="/map" align='right' size="medium">Create a Trip</Button>
                 </div>
@@ -180,7 +174,7 @@ const Trips = (props) => {
 
                                                         {trip.waypoints[0].name}
                                                         <br />
-                                                        <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
+                                                        <img alt="map-arrow" className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
                                                         <span className={classes.pos}></span>
                                                         <br />
                                                         {trip.waypoints[trip.waypoints.length - 1].name}
@@ -210,9 +204,9 @@ const Trips = (props) => {
                                                 <Grid item xs={6} align="right">
                                                     {/* <Typography> */}
                                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                            <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
+                                                            <Button className={classes.removeTrip} size="small"
                                                                 data-id={trip._id}
-                                                                onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
+                                                                onClick={deleteTrip}>{'Delete this Trip'}</Button>
                                                         </Box>
                                                     {/* </Typography> */}
                                                 </Grid>

@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Hostels from './Hostels';
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles';
 import "../../css/style.css";
 import Box from '@material-ui/core/Box'
 // const wpIndex = ["Starting point:", "Waypoint:", "Ending point:"]
@@ -25,24 +24,9 @@ import Box from '@material-ui/core/Box'
 //     }
 // }
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(3, 2),
-    },
-    removeWaypoint: {
-        backgroundColor: 'red',
-        textAlign: 'center',
-        borderRadius: '5px',
-        color: 'white',
-        border: '1px solid black',
-        fontFamily: 'Amatic SC, cursive',
-        position: 'static',
-        bottom: "0 !important"
-    }
-}));
+
 const Waypoints = (props) => {
     // // console.log(props.waypoints);
-    const classes = useStyles()
     return (
         <div className="tripList section">
             {props.waypoints.map((waypoint, i) => {
@@ -56,10 +40,6 @@ const Waypoints = (props) => {
                 } else {
                     wpIndex = "Destination"
                 }
-                var str = waypoint.location.coordinates[0]
-                var str1 = waypoint.location.coordinates[1]
-                var newStr = str.toString().substring(0, 5)
-                var newStr1 = str1.toString().substring(0, 5)
                 // console.log(waypoint)
                 return (
                     <Grid key={`waypoint-${i}`} container spacing={2}>

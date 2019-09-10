@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Trips from './subcomponent/Trips';
 import Axios from 'axios';
 import Profile from './subcomponent/Profile';

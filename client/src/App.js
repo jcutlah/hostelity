@@ -15,7 +15,6 @@ import Redir from './components/subcomponent/Redir';
 import LandingPage from './components/LandingPage'
 function App() {
   // Define hooks (state) variables
-  const [loggedIn, setLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   // Define callback 
   const loginCallback = (user) => {
@@ -55,7 +54,7 @@ function App() {
 
         })
         .catch(err => {
-          // console.log(err);
+          console.log(err);
         })
     } else {
       // console.log(`User signed in with id ${userId}`);
@@ -71,7 +70,6 @@ function App() {
         <Header />
         <Navbar
           loginCallback={loginCallback}
-          isLoggedIn={loggedIn}
           userId={userId}
         />
 

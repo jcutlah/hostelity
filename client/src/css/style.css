@@ -943,4 +943,19 @@ input[type="text"] {
 .content {
     text-align: center;
 }
+.modal-header {
+    margin: 10px 0 0 0;
+}
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 33px;
+}
+.modal-close:hover {
+    cursor: pointer;
+}
+.modal-inner-wrapper {
+    position: relative;
+}
 

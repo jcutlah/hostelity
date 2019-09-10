@@ -67,21 +67,24 @@ export default function TransitionsModal() {
                 <Fade in={open}>
                     <Paper className={classes.paper}>
                         <Grid container spacing={3} className={classes.text}>
-                            <Grid item xs={12} align='center'>
-                                <h2 id="transition-modal-title">How to view and add hostels:</h2>
-                            </Grid>
-                            <Grid item xs={12} md={6} align="center">
-                                <h2>Instructions:</h2>
-                                <ol>
-                                    <li className={classes.instructions}>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
-                                    <li className={classes.instructions}>Click on any lodging marker to view information about it</li>
-                                    <li className={classes.instructions}>Click add to trip on a selected lodging marker to add it to your trip</li>
-                                    <li className={classes.instructions}>When you are done adding lodging locations click save your trip!! </li>
-                                </ol>
-                            </Grid>
-                            <Grid item xs={12} md={6} align="center">
-                                <img src='/assets/images/tripWaypointZoom.gif' width='100%' height='90%'></img>
-                            </Grid>
+                            <div className="modal-inner-wrapper">
+                                <Grid item xs={12} align='center'>
+                                    <h2 id="transition-modal-title">How to view and add hostels:</h2>
+                                </Grid>
+                                <Grid item xs={12} md={6} align="center">
+                                    <h2>Instructions:</h2>
+                                    <ol>
+                                        <li className={classes.instructions}>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
+                                        <li className={classes.instructions}>Click on any lodging marker to view information about it</li>
+                                        <li className={classes.instructions}>Click add to trip on a selected lodging marker to add it to your trip</li>
+                                        <li className={classes.instructions}>When you are done adding lodging locations click save your trip!! </li>
+                                    </ol>
+                                </Grid>
+                                <Grid item xs={12} md={6} align="center">
+                                    <img src='/assets/images/tripWaypointZoom.gif' width='100%' height='90%'></img>
+                                </Grid>
+                                <div onClick={handleClose} className='modal-close'>X</div>
+                            </div>
                         </Grid>
                     </Paper>
                 </Fade>

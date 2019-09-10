@@ -156,42 +156,42 @@ export default function Signup(props) {
         }
       };
     const isMissingCreds = (user) => {
-        console.log(missingCreds);
+        // console.log(missingCreds);
         let missingCred = false;
         let errors = {}
         for (let key in user) {
-            console.log(user[key]);
-            console.log(key)
-            console.log(typeof key)
+            // console.log(user[key]);
+            // console.log(key)
+            // console.log(typeof key)
             if (!user[key].length){
-                console.log('zero length, setting missing creds to true')
+                // console.log('zero length, setting missing creds to true')
                 // setMissingCreds(true);
                 missingCred = true;
                 switch(key) {
                     case 'email':
-                        console.log('email missing');
+                        // console.log('email missing');
                         errors.missingEmail = true
                         setValidSubmission(false);
                         break;
                     case 'firstName':
-                            console.log('fn missing');
+                            // console.log('fn missing');
                         errors.missingFirstName = true;
                         setValidSubmission(false);
                         break;
                     case 'lastName':
-                            console.log('ln missing');
+                            // console.log('ln missing');
                         errors.missingLastName = true;
                         setValidSubmission(false);
                         break;
                     case 'password':
-                        console.log('pw missing');
+                        // console.log('pw missing');
                         errors.missingPassword = true;
                         setValidSubmission(false);
                         break;
                     default:
                         break;
                 }
-                console.log(errors);
+                // console.log(errors);
                 updateLoginError({
                     ...loginError,
                     ...errors
@@ -200,7 +200,7 @@ export default function Signup(props) {
                 setValidSubmission(true);
             }
         }
-        console.log(missingCred)
+        // console.log(missingCred)
         if (missingCred) {
             setErrorMessage("You are missing required fields")
         }
@@ -223,7 +223,7 @@ export default function Signup(props) {
     const isEmailFormat = (email) => {
         const emailValid = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         if (emailValid) {
-            console.log(emailValid);
+            // console.log(emailValid);
             return true;
         } else {
             updateLoginError({
@@ -240,14 +240,14 @@ export default function Signup(props) {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        //console.log(event);
+        //// console.log(event);
         const user = {
-            firstName,
-            lastName,
-            email,
-            password
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            email: email.trim(),
+            password: password.trim()
         }
-        console.log(user);
+        // console.log(user);
         if (isMissingCreds(user)){
             return;
         };
@@ -257,20 +257,20 @@ export default function Signup(props) {
         if (!passwordsMatch(user.password, repassword)){
             return;
         }
-        // console.log("let 'em through, boys");
+        // // console.log("let 'em through, boys");
         // return
 
         Axios.post("/auth/users/signup", user)
         .then(function(res){
-            //console.log(res.data.errors);
+            //// console.log(res.data.errors);
             if (res.data.errors) {
                 let errorText;
-                console.log(res.data.errors);
+                // console.log(res.data.errors);
                 // for (let key in res.data.errors){
-                //     //console.log(typeof key)
+                //     //// console.log(typeof key)
                 //     switch (key) {
                 //         case 'firstName':
-                //             // //console.log('first name required')
+                //             // //// console.log('first name required')
                 //             errorText = "You are missing required fields"
                 //             updateLoginError({
                 //                 ...loginError,
@@ -278,15 +278,15 @@ export default function Signup(props) {
                 //             });
                 //             break;
                 //         case 'lastName':
-                //             // //console.log('last name required')
+                //             // //// console.log('last name required')
                 //             errorText = "You are missing required fields"
                 //             break;
                 //         case 'email':
-                //             // //console.log('email required')
+                //             // //// console.log('email required')
                 //             errorText = "You are missing required fields"
                 //             break;
                 //         case 'password':
-                //             // //console.log('password required')
+                //             // //// console.log('password required')
                 //             errorText = "You are missing required fields"
                 //             break;
                 //         default:
@@ -298,7 +298,7 @@ export default function Signup(props) {
                 window.location = '/login';
             }
         }).catch(function(err){
-            console.log(err);
+            // console.log(err);
         })
     }
 

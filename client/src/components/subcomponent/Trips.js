@@ -4,7 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Waypoints from './Waypoints';
 import Axios from 'axios'
-import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import "../../css/style.css";
 import Box from '@material-ui/core/Box'
-import { callbackify } from 'util';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,9 +29,6 @@ const useStyles = makeStyles(theme => ({
         minWidth: 275,
         paddingTop: '30px',
         marginBottom: '20px',
-        fontFamily: 'Amatic SC, cursive',
-    },
-    card: {
         boxShadow: '3px 10px 30px black',
         background: 'url(/assets/images/cork.jpg)',
         backgroundPosition: 'center',
@@ -110,8 +105,6 @@ const useStyles = makeStyles(theme => ({
     createTrip: {
         margin: theme.spacing(3),
         padding: theme.spacing(2),
-        background: '-webkit-gradient(linear, right top, left top, from(rgb(41, 53, 43)), color-stop(20%, rgb(49, 75, 48)), color-stop(65%, rgb(164, 197, 160)), color-stop(65%, rgb(41, 53, 43)))',
-        background: '-webkit-linear-gradient(right, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 65%, rgb(41, 53, 43) 65%)',
         background: 'linear-gradient(90deg, rgb(164, 197, 160), rgb(64, 105, 71));'
     },
     treatYoSelfArrow: {
@@ -123,17 +116,16 @@ const useStyles = makeStyles(theme => ({
 
 const Trips = (props) => {
     const classes = useStyles();
-    const [userChecked, setUserChecked] = React.useState(false);
 
     const deleteTrip = (event) => {
         event.preventDefault();
-        console.log(event.target);
-        console.log(event.currentTarget);
+        // console.log(event.target);
+        // console.log(event.currentTarget);
         let tripId = event.currentTarget.getAttribute('data-id');
 
         Axios.delete(`/api/trips/${tripId}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 props.delTripCallback(tripId);
             })
             .catch(err => console.log(err))
@@ -145,7 +137,7 @@ const Trips = (props) => {
                     Treat yo self!!!
                     <br></br>
                     <div className="map-arrow-wrapper">
-                        <img className={classes.treatYoSelfArrow} src="/assets/images/DottedLine.png" />
+                        <img alt="map-arrow" className={classes.treatYoSelfArrow} src="/assets/images/DottedLine.png" />
                     </div>
                     <Button variant="contained" className={classes.createTrip} href="/map" align='right' size="medium">Create a Trip</Button>
                 </div>
@@ -156,10 +148,10 @@ const Trips = (props) => {
     return (
         <div>
             {props.trips.map((trip, i) => {
-                console.log(trip)
+                // console.log(trip)
 
                 return (
-                    <Paper className={classes.root}>
+                    <Paper key={i} className={classes.root}>
                         <Grid className={classes.cardContainer} container spacing={3}>
                             <Grid item xs={12} align='center'>
                                 <Card key={i} className={classes.card}>
@@ -182,7 +174,7 @@ const Trips = (props) => {
 
                                                         {trip.waypoints[0].name}
                                                         <br />
-                                                        <img className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
+                                                        <img alt="map-arrow" className={classes.travelArrow} src={"/assets/images/DottedLine.png"}></img>
                                                         <span className={classes.pos}></span>
                                                         <br />
                                                         {trip.waypoints[trip.waypoints.length - 1].name}
@@ -203,20 +195,20 @@ const Trips = (props) => {
                                             <hr></hr>
                                             <Grid container>
                                                 <Grid item xs={6} align="left">
-                                                    <Typography>
+                                                    {/* <Typography> */}
                                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
                                                             <a className={classes.editTrip} href={`/map/${trip._id}`}> <Button className={classes.editTrip} size="small">Edit this Trip</Button></a>
                                                         </Box>
-                                                    </Typography>
+                                                    {/* </Typography> */}
                                                 </Grid>
                                                 <Grid item xs={6} align="right">
-                                                    <Typography>
+                                                    {/* <Typography> */}
                                                         <Box fontFamily={'Amatic SC, cursive'} fontWeight={'fontWeightBold'}>
-                                                            <a style={{ textDecoration: 'none' }} href="#" > <Button className={classes.removeTrip} size="small"
+                                                            <Button className={classes.removeTrip} size="small"
                                                                 data-id={trip._id}
-                                                                onClick={deleteTrip}>{'Delete this Trip'}</Button></a>
+                                                                onClick={deleteTrip}>{'Delete this Trip'}</Button>
                                                         </Box>
-                                                    </Typography>
+                                                    {/* </Typography> */}
                                                 </Grid>
                                             </Grid>
 

@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     },
     text: {
         fontSize: '1.25em !important',
-        position: "relative"
+        width: 'fit-content',
+        position: 'relative'
     },
     instructions: {
         width: '90%',
@@ -70,21 +71,21 @@ export default function TransitionsModal() {
                     <Paper className={classes.paper}>
                         <Grid container spacing={0} className={classes.text}>
                             {/* <div className="modal-inner-wrapper"> */}
-                                <Grid item xs={12} align='center'>
-                                    <h2 className="modal-header" id="transition-modal-title">How to plan a trip:</h2>
-                                </Grid>
-                                <Grid item xs={12} md={6} align="center">
-                                    <ol>
-                                        <li className={classes.instructions}>Enter a starting and ending point</li>
-                                        <li className={classes.instructions}>Press add waypoint if you would like to add locations between your starting and ending points </li>
-                                        <li className={classes.instructions}>Press begin once you have entered all of the locations you want to include on your trip</li>
-                                        <li className={classes.instructions}>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
-                                    </ol>
-                                </Grid>
-                                <Grid item xs={12} md={6} align="center">
-                                    <img src='/assets/images/tripPlot.gif' width='100%' height="90%"></img>
-                                </Grid>
-                                <div onClick={handleClose} className='modal-close'>X</div>
+                            <Grid item xs={12} align='center'>
+                                <h2 className="modal-header" id="transition-modal-title">How to plan a trip:</h2>
+                            </Grid>
+                            <Grid item xs={12} md={6} align="center">
+                                <ol>
+                                    <li className={classes.instructions}>Enter a starting and ending point</li>
+                                    <li className={classes.instructions}>Press add waypoint if you would like to add locations between your starting and ending points </li>
+                                    <li className={classes.instructions}>Press begin once you have entered all of the locations you want to include on your trip</li>
+                                    <li className={classes.instructions}>Use the map to zoom in around each waypoint to see the available lodging options near that location </li>
+                                </ol>
+                            </Grid>
+                            <Grid item xs={12} md={6} align="center">
+                                <img src='/assets/images/tripPlot.gif' width='100%' height="90%"></img>
+                            </Grid>
+                            <div onClick={handleClose} className='modal-close'>X</div>
                             {/* </div> */}
                         </Grid>
                     </Paper>

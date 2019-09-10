@@ -6,11 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-
+import Box from '@material-ui/core/Box'
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-    },
+        },
     container: {
         fontFamily: 'Amatic SC, cursive',
         margin: '5% auto 0 auto !important',
@@ -18,10 +18,12 @@ const useStyles = makeStyles(theme => ({
         fontSize: '2em',
         overflowX: 'wrap',
         maxWidth: '1299px',
-        background:'url(/assets/images/wall.jpg)',
+        background: 'url(/assets/images/wall.jpg)',
+        boxShadow: '0px 0px 10px black'
     },
     card: {
-        minWidth: 275,
+        width: 'auto',
+        margin: '0 auto !important',
         // backgroundColor: 'rgba(220,220,220,0.8)',
         boxShadow: '3px 3px 15px black',
         borderRadius: '3px',
@@ -35,10 +37,23 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         fontSize: 14,
+
     },
     pos: {
         marginBottom: 12,
     },
+    images: {
+        borderRadius: '3px 0px 0px 3px',
+
+    },
+    imageText: {
+        textShadow: '1px 1px white'
+
+    },
+    imageCard: {
+        width: 'fit-content !important',
+
+    }
 
 }));
 
@@ -49,14 +64,14 @@ const LandingPage = (props) => {
         <Grid container direction="row" justify="center" alignItems="center" spacing={7} className={classes.container}>
 
             <Grid item xs={12} lg={12} spacing={2} className="landingHeader">
-                <Typography align="center">
+                <Typography style={{ textShadow: '0px 0px 5px rgb(173, 173, 173), 1px 1px white' }} variant align="center">
                     <h1> Welcome to switchBak! </h1>
                 </Typography>
-                <Card className={classes.card}> 
-                    <Typography>
-                        <p>
+                <Card className={classes.card}>
+                    <Typography variant>
+                        
                             switchBak is THE app for everyone who dreams about traveling the world, but isn’t sure where to start or how to afford it.  switchBak takes the guesswork out of economical travel planning by providing an easy way to find the world’s best hostels and to keep track of trip itineraries.
-                        </p>
+                        
                     </Typography>
                 </Card>
             </Grid>
@@ -75,10 +90,17 @@ const LandingPage = (props) => {
             </Grid>
 
             <Grid item xs={12} md={6} lg={6} align='center'>
-                <img src='/assets/images/tripPlot.gif' width='90%'></img>
-                <Typography variant="h6">  
-                     Just enter where you want to go then click begin!   
-                </Typography>
+                <Card className={classes.imageCard}>
+
+                    <img className={classes.images} src='/assets/images/tripPlot.gif' width='100%'></img>
+                    <Typography variant="h4" className={classes.imageText}>
+                        <Box fontFamily={'Amatic SC, cursive'}>
+                            Just enter where you want to go then click begin!
+                    </Box>
+                    </Typography>
+
+
+                </Card>
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
                 <Card className={classes.card}>
@@ -87,17 +109,22 @@ const LandingPage = (props) => {
                             <p>
                                 switchBak incorporates some of the world's most powerful APIs in order to locate the best hostels on the planet just for you.
                             </p>
-                            
-                         </Typography>
+
+                        </Typography>
                     </CardContent>
                 </Card>
             </Grid>
 
             <Grid item xs={12} md={6} lg={6} align='center'>
-                <img src='/assets/images/tripWaypointZoom.gif' width='90%'></img>
-                <Typography variant="h6">
-                    Zoom in on a waypoint and click any marker for hostel info.
-                </Typography>
+                <Card className={classes.imageCard}>
+                    <img className={classes.images} src='/assets/images/tripWaypointZoom.gif' width='100%'></img>
+                    <Typography variant="h4" className={classes.imageText}>
+                        <Box fontFamily={'Amatic SC, cursive'}>
+
+                            Zoom in on a waypoint and click any marker for hostel info.
+                    </Box>
+                    </Typography>
+                </Card>
             </Grid>
 
             <Grid item xs={12} md={6} lg={6}>
@@ -105,7 +132,7 @@ const LandingPage = (props) => {
                     <CardContent>
                         <Typography variant>
                             <p>
-                               switchBak keeps track of the adventure you've planned and saves the trip to your user profile in My Trips for quick and easy future reference.
+                                switchBak keeps track of the adventure you've planned and saves the trip to your user profile in My Trips for quick and easy future reference.
                             </p>
                         </Typography>
                     </CardContent>
@@ -113,10 +140,18 @@ const LandingPage = (props) => {
             </Grid>
 
             <Grid item xs={12} md={6} lg={6} align='center'>
-                <img src='/assets/images/saveTrip.gif' width='90%'></img>
-                <Typography variant="h6">
-                    Clicking save will add your trip to your My Trips page where you can review and edit it.
-                </Typography>
+                <Card className={classes.imageCard}>
+                    <img className={classes.images} src='/assets/images/saveTrip.gif' width='100%'></img>
+
+                    <Typography variant="h4">
+                        <Box fontFamily={'Amatic SC, cursive'}>
+                            Clicking save will add your trip to your My Trips page where you can review, edit and get information on your hostels!
+                </Box>
+                    </Typography>
+
+                </Card>
+                <br />
+                <br />
             </Grid>
         </Grid>
     )

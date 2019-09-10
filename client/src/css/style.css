@@ -15,6 +15,26 @@ body, html {
   box-shadow:3px 5px 30px black
 
 }
+
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+}
+
 /* MEDIA QUERY SML SIZE */
 @media (max-width: 767px) {
   .infoButton {
@@ -63,11 +83,11 @@ body, html {
   }
   .navBottom {
     bottom: 0;
-    height: 4%;
+    height: 6%;
     width: 100%;
     left: 0;
-    padding-top: .7vh;
-    padding-bottom: 1.5vh;
+    padding-top: 1.5vh;
+    padding-bottom: 2vh;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 
@@ -101,19 +121,22 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: calc(12vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .map-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(-15vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .brand-logo img {
     margin-left: -7%;
     width: 125px;
   } 
   .header {
+    position: static !important;
+    margin-bottom: 0 !important;
+    top: 0;
     background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 72.5%, rgb(41, 53, 43) 72.5%);
     padding-left: 4%
   }
@@ -147,6 +170,28 @@ body, html {
   }
 }
 @media (max-width: 460px){
+  
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+  position: relative;
+margin: 0 auto 0 auto !important;
+}
+
   .header {
     background-color:  rgb(41, 53, 43) !important;
 
@@ -157,11 +202,11 @@ body, html {
   }
   .navBottom {
     bottom: 0;
-    height: 4%;
+    height: 5%;
     width: 100%;
     left: 0;
-    padding-top: .7vh;
-    padding-bottom: 1.5vh;
+    padding-top: .75vh;
+    padding-bottom: 2vh !important;
     border-top: 0.1rem solid orange;
     display: flex;
     background-color: rgb(41, 53, 43); 
@@ -183,17 +228,7 @@ body, html {
     
     
   }
-  .navBottom {
-    bottom: 0;
-    height: 4%;
-    width: 100%;
-    padding-top: .3vh;
-    padding-bottom: 1.8vh;
-    border-top: 0.1rem solid orange;
-    display: flex;
-    background-color: rgb(41, 53, 43); 
-    justify-content: space-between;
-  }
+ 
   .startEnd {
    background: url('../recycling-brown-lined-paper-scrap-260nw-132870251-removebg-preview.png');
    background-size: stretch;
@@ -224,6 +259,28 @@ body, html {
 /* MEDIA QUERY MID SIZE */
 
 @media (min-width: 767px) {
+  
+.ProfileContent {
+  height: 99.5%;
+  width: fit-content;
+  padding: 1px 10px 1px 10px;
+  border: 1px 1px 0px 1px ridge black;
+  box-shadow: 0px 1px 4px white;
+  border-bottom: 1px solid rgb(49, 75, 48);;
+  background-color: rgba(43, 46, 43, 0.6)
+}
+.Profile {
+  background-image: url("/assets/images/bench.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  padding-top: 0em;
+  border-bottom: 0.1rem solid rgb(49, 75, 48);;
+  width: 100vw !important;
+  position: relative;
+margin: 4em auto 0 auto !important;
+}
+
   .infoButton {
     top: 1.5vh !important;
     right: 1.5vw !important;
@@ -288,13 +345,13 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: calc(-15vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .loadmap-container .MuiPaper-root {
     position: relative;
     top: calc(7vw);
-    padding-bottom: 5vh;
-    padding-bottom: 10vh;
+    /* padding-bottom: 5vh; */
+    padding-bottom: 15vh;
   }
   .header {
     height: 5.5rem;
@@ -356,7 +413,7 @@ body, html {
 @media (min-width: 1282px) {
   .header {
     background: linear-gradient(to left, rgb(41, 53, 43), rgb(49, 75, 48) 20%, rgb(164, 197, 160) 80%, rgb(41, 53, 43) 80%);
-
+    position: absolute !important;
   }
   .infoButton {
     top: 1.5vh !important;
@@ -415,13 +472,13 @@ body, html {
     padding-top: 5vh;
     position: relative;
     top: -18vw;
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   .loadmap-container .MuiPaper-root {
     padding-top: 5vh;
     position: relative;
     top: calc(7vw);
-    padding-bottom: 10vh;
+    padding-bottom: 15vh;
   }
   ul {
     padding-right: 25% !important;
@@ -754,27 +811,6 @@ li {
     display: none;
 }
 
-
-.ProfileContent {
-  height: 99.5%;
-  width: fit-content;
-  padding: 1px 10px 1px 10px;
-  border: 1px 1px 0px 1px ridge black;
-  box-shadow: 0px 1px 4px white;
-  border-bottom: 1px solid rgb(49, 75, 48);;
-  background-color: rgba(43, 46, 43, 0.6)
-}
-.Profile {
-  background-image: url("/assets/images/bench.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  padding-top: 1em;
-  border-bottom: 0.1rem solid rgb(49, 75, 48);;
-  width: 100vw !important;
-  position: relative;
-margin: 4em auto 0 auto !important;
-}
 
 /* @media (min-width: 767px) {
   .Profile {

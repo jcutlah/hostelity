@@ -73,6 +73,10 @@ const useStyles = makeStyles(theme => ({
         position: 'relative !important',
         marginTop: '1vh',
         right: '10px',
+    },
+    beginFab: {
+        position: 'absolute',
+        alignSelf: 'center'
     }
 }));
 
@@ -134,7 +138,7 @@ function Map(props) {
             }
         })
     }
-    
+
     const infoWindowListener = (zoom) => {
         let timeout;
         console.log(zoom)
@@ -144,7 +148,7 @@ function Map(props) {
         } else {
             console.log('not less than 6');
             timeout = 750;
-        } 
+        }
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
             console.log(infoWindowButtons);
@@ -357,6 +361,7 @@ function Map(props) {
                             </Button>
 
                                         <Fab
+
                                             type="submit"
                                             onClick={async () => {
                                                 const google = window.google
@@ -386,7 +391,7 @@ function Map(props) {
 
                                             }
                                             type="submit"
-                                            variant="extended" aria-label="delete" className={classes.fab}>
+                                            variant="extended" aria-label="delete" className={classes.beginFab}>
                                             <NavigationIcon className={classes.extendedIcon} />
                                             Begin
                         </Fab>

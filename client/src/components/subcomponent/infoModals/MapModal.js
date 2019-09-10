@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
         overflow: 'scroll'
     },
     text: {
-        fontSize: '1.25em !important'
+        fontSize: '1.25em !important',
+        position: "relative"
     },
     instructions: {
         width: '90%',
@@ -68,7 +69,7 @@ export default function TransitionsModal() {
                 <Fade in={open}>
                     <Paper className={classes.paper}>
                         <Grid container spacing={0} className={classes.text}>
-                            <div className="modal-inner-wrapper">
+                            {/* <div className="modal-inner-wrapper"> */}
                                 <Grid item xs={12} align='center'>
                                     <h2 className="modal-header" id="transition-modal-title">How to plan a trip:</h2>
                                 </Grid>
@@ -84,7 +85,7 @@ export default function TransitionsModal() {
                                     <img src='/assets/images/tripPlot.gif' width='100%' height="90%"></img>
                                 </Grid>
                                 <div onClick={handleClose} className='modal-close'>X</div>
-                            </div>
+                            {/* </div> */}
                         </Grid>
                     </Paper>
                 </Fade>

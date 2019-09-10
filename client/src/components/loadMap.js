@@ -82,17 +82,32 @@ function LoadMap(props) {
                 // MySwal.clickConfirm()
             }
         }).then(() => {
-            return window.location = '/my-trips'
-
+            return 
         })
-    };
+    } 
+    const errorMessage = () => {
+        MySwal.fire({
+            title: <p>An error occurred...But your trip may have saved anyway? CLick below to see your trip. Mahalo!</p>,
+            footer: 'switchBak 2019',
+            onOpen: () => {
+                // `MySwal` is a subclass of `Swal`
+                //   with all the same instance & static methods
+                // MySwal.clickConfirm()
+            }
+        }).then(() => {
+            return 
+        })
+    } 
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
             .then(function (res) {
 
                 //// console.log(res)
-                res.data.message === "success" ? saved() : alert('An error occurred')
+                saved();
+                setTimeout(function(){
+                    res.data.message === "success" ? window.location = '/my-trips' : errorMessage()
+                }, 2000)
             })
             .catch(err => {
                 //// console.log(err);

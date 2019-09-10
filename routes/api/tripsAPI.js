@@ -94,7 +94,6 @@ router.route("/")
         console.log("post request made to /api/trips");
         console.log(req.body);
         let totalDistance = 0;
-
         const waypoints = req.body.trip.waypoints;
         const trip = req.body.trip;
         const hostels = req.body.hostels;

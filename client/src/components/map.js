@@ -6,7 +6,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from "@material-ui/core/Button";
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
@@ -199,25 +198,25 @@ function Map(props) {
         setState({ ...state, inputId: newId });
 
     }
+    const saved = () => {
+        MySwal.fire({
+            title: <p>Successfully Saved Trip!</p>,
+            footer: 'switchBak 2019',
+            onOpen: () => {
+                // `MySwal` is a subclass of `Swal`
+                //   with all the same instance & static methods
+                // MySwal.clickConfirm()
+            }
+        }).then(() => {
+            return window.location = '/my-trips'
+
+        })
+    }
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
                 //// console.log(res)
-                var saved = () => {
-                    MySwal.fire({
-                        title: <p>Successfully Saved Trip!</p>,
-                        footer: 'switchBak 2019',
-                        onOpen: () => {
-                            // `MySwal` is a subclass of `Swal`
-                            //   with all the same instance & static methods
-                            // MySwal.clickConfirm()
-                        }
-                    }).then(() => {
-                        return window.location = '/my-trips'
-
-                    })
-                }
                 res.data.message === "success" ? saved() : alert('An error occurred')
             })
             .catch(err => {

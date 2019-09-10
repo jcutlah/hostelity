@@ -72,26 +72,26 @@ function LoadMap(props) {
         })
     }
 
+    const saved = () => {
+        MySwal.fire({
+            title: <p>Successfully Saved Trip!</p>,
+            footer: 'switchBak 2019',
+            onOpen: () => {
+                // `MySwal` is a subclass of `Swal`
+                //   with all the same instance & static methods
+                // MySwal.clickConfirm()
+            }
+        }).then(() => {
+            return window.location = '/my-trips'
+
+        })
+    };
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
             .then(function (res) {
 
                 //// console.log(res)
-                var saved = () => {
-                    MySwal.fire({
-                        title: <p>Successfully Saved Trip!</p>,
-                        footer: 'switchBak 2019',
-                        onOpen: () => {
-                            // `MySwal` is a subclass of `Swal`
-                            //   with all the same instance & static methods
-                            // MySwal.clickConfirm()
-                        }
-                    }).then(() => {
-                        return window.location = '/my-trips'
-
-                    })
-                };
                 res.data.message === "success" ? saved() : alert('An error occurred')
             })
             .catch(err => {

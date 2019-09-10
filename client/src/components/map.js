@@ -200,7 +200,7 @@ function Map(props) {
     }
     const saved = () => {
         MySwal.fire({
-            title: <p>Successfully Saved Trip!</p>,
+            title: <h2>Saving your trip...</h2>,
             footer: 'switchBak 2019',
             confirmButtonText:
                 'Go to My Trips!',

@@ -74,7 +74,7 @@ function LoadMap(props) {
 
     const saved = () => {
         MySwal.fire({
-            title: <h2>Saving your Trip!</h2>,
+            title: <h2>Saving your trip...</h2>,
             footer: 'switchBak 2019',
             confirmButtonText:
                 'Go to My Trips!',

@@ -6,7 +6,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from "@material-ui/core/Button";
 import FormGroup from '@material-ui/core/FormGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import TextField from '@material-ui/core/TextField'
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
@@ -19,6 +18,9 @@ import Grid from '@material-ui/core/Grid'
 import '../css/style.css'
 import MapModal from './subcomponent/infoModals/MapModal'
 import HostelModal from './subcomponent/infoModals/HostelModal'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 
@@ -196,12 +198,26 @@ function Map(props) {
         setState({ ...state, inputId: newId });
 
     }
+    const saved = () => {
+        MySwal.fire({
+            title: <p>Successfully Saved Trip!</p>,
+            footer: 'switchBak 2019',
+            onOpen: () => {
+                // `MySwal` is a subclass of `Swal`
+                //   with all the same instance & static methods
+                // MySwal.clickConfirm()
+            }
+        }).then(() => {
+            return window.location = '/my-trips'
+
+        })
+    }
     const saveTrip = (event) => {
         event.preventDefault();
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
                 //// console.log(res)
-                res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
+                res.data.message === "success" ? saved() : alert('An error occurred')
             })
             .catch(err => {
                 //// console.log(err);

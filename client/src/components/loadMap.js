@@ -9,7 +9,9 @@ import Link from '@material-ui/core/Link';
 import Axios from 'axios';
 import Grid from '@material-ui/core/Grid'
 import HostelModal from './subcomponent/infoModals/HostelModal'
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 const useStyles = makeStyles(theme => ({
     map: {
         marginTop: 'none'
@@ -74,8 +76,23 @@ function LoadMap(props) {
         event.preventDefault();
         Axios.put(`/api/trips/edit/${props.match.url.split('/')[2]}`, state.hostels)
             .then(function (res) {
+
                 //// console.log(res)
-                res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
+                var saved = () => {
+                    MySwal.fire({
+                        title: <p>Successfully Saved Trip!</p>,
+                        footer: 'switchBak 2019',
+                        onOpen: () => {
+                            // `MySwal` is a subclass of `Swal`
+                            //   with all the same instance & static methods
+                            // MySwal.clickConfirm()
+                        }
+                    }).then(() => {
+                        return window.location = '/my-trips'
+
+                    })
+                };
+                res.data.message === "success" ? saved() : alert('An error occurred')
             })
             .catch(err => {
                 //// console.log(err);
@@ -141,7 +158,7 @@ function LoadMap(props) {
         } else {
             // console.log('not less than 6');
             timeout = 750;
-        } 
+        }
         setTimeout(() => {
             let infoWindowButtons = document.querySelectorAll('.hostelButton');
             // console.log(infoWindowButtons);

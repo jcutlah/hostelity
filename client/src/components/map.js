@@ -19,6 +19,9 @@ import Grid from '@material-ui/core/Grid'
 import '../css/style.css'
 import MapModal from './subcomponent/infoModals/MapModal'
 import HostelModal from './subcomponent/infoModals/HostelModal'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
 // const google = window.google;
 // import { makeStyles } from '@material-ui/core/styles';
 
@@ -201,7 +204,21 @@ function Map(props) {
         Axios.post('/api/trips', { trip: state.trip, hostels: hostels, tripName: state.name })
             .then(function (res) {
                 //// console.log(res)
-                res.data.message === "success" ? window.location = "/my-trips" : alert('An error occurred')
+                var saved = () => {
+                    MySwal.fire({
+                        title: <p>Successfully Saved Trip!</p>,
+                        footer: 'switchBak 2019',
+                        onOpen: () => {
+                            // `MySwal` is a subclass of `Swal`
+                            //   with all the same instance & static methods
+                            // MySwal.clickConfirm()
+                        }
+                    }).then(() => {
+                        return window.location = '/my-trips'
+
+                    })
+                }
+                res.data.message === "success" ? saved() : alert('An error occurred')
             })
             .catch(err => {
                 //// console.log(err);

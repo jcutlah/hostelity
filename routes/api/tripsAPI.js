@@ -97,7 +97,7 @@ router.route("/")
         const waypoints = req.body.trip.waypoints;
         const trip = req.body.trip;
         const hostels = req.body.hostels;
-        const tripName = req.body.tripName || `${trip.start} to ${trip.end}${waypoints.length > 2 ? `, with ${waypoints.length} stops` : ''}`;
+        const tripName = req.body.tripName || `${trip.start} to ${trip.end}${waypoints.length > 2 ? : ''}`;
 
         waypoints.forEach(point => {
             totalDistance += point.distance;
